@@ -32,7 +32,7 @@ Screenshots will be added after the interface and bundled artwork are finalized.
 2. Clone the repository:
 
 ```powershell
-git clone https://github.com/YOUR-USERNAME/tower-optimizer.git
+git clone https://github.com/Tankietank/tower-optimizer.git
 cd tower-optimizer
 ```
 
