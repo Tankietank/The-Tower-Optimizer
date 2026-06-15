@@ -1,0 +1,29 @@
+CUSTOM ICON QUICK GUIDE
+=======================
+
+Open Icon Studio inside Tower Optimizer to upload artwork without editing files.
+Custom artwork is stored in data\custom_icons and survives normal upgrades.
+
+Recommended: transparent PNG, 256x256 or 512x512.
+
+Fixed icon examples:
+  resources\coins.png
+  resources\stones.png
+  resources\gems.png
+  ultimate_weapons\golden_tower.png
+  ultimate_weapons\black_hole.png
+  ultimate_weapons\death_wave.png
+  systems\cards.png
+  systems\modules.png
+  systems\relics.png
+
+Collection examples:
+  relics\<relic-name>.png
+  modules\black-hole-digestor.png
+  cards\coins.png
+
+Names are converted to lowercase hyphenated filenames automatically by Icon Studio.
+
+PUBLIC REPOSITORY NOTE
+----------------------
+Runtime overrides under data\custom_icons are ignored by Git. Do not force-add exact game artwork unless you have redistribution permission.

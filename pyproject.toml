@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tower-optimizer"
+version = "2.0.0.dev6"
+description = "Unofficial local-first optimizer and progression planner for The Tower"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+authors = [
+  { name = "Tower Optimizer contributors" }
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Games/Entertainment",
+]
+dependencies = [
+  "streamlit>=1.40",
+  "pandas>=2.0",
+  "openpyxl>=3.1",
+  "Pillow>=10.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "pytest-cov>=5.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/YOUR-USERNAME/tower-optimizer"
+Issues = "https://github.com/YOUR-USERNAME/tower-optimizer/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["tower_optimizer*"]
+
+[tool.setuptools.package-data]
+tower_optimizer = ["game_data/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
