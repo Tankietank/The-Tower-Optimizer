@@ -1,0 +1,35 @@
+name: Build source package
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install test dependencies
+        run: pip install -e ".[dev]"
+      - name: Validate
+        run: |
+          python tools/public_release_audit.py
+          python tools/smoke_test.py
+          python tools/v2_preview_validation.py
+          pytest -q
+      - name: Build sanitized source archive
+        run: python scripts/build_source_release.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tower-optimizer-source
+          path: |
+            dist/*.zip
+            dist/*.sha256

@@ -1,0 +1,53 @@
+name: Bug report
+description: Report reproducible application behavior
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "Remove player IDs, profiles, workbooks, local paths, and copyrighted icon packs before attaching files."
+  - type: input
+    id: version
+    attributes:
+      label: Application version
+      placeholder: 2.0.0-preview.6
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: Installation type
+      options: [Python source, Portable Windows build, Windows installer, Docker, Other]
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+    validations:
+      required: true
+  - type: input
+    id: page
+    attributes:
+      label: Page or feature
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Sanitized logs or traceback
+      render: shell

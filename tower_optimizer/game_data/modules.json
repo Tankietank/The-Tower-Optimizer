@@ -1,0 +1,41 @@
+{
+  "version": "6.1.2",
+  "slots": {
+    "Cannon": [
+      "",
+      "Astral Deliverance",
+      "Being Annihilator",
+      "Death Penalty",
+      "Havoc Bringer",
+      "Shrink Ray",
+      "Amplifying Strike"
+    ],
+    "Armor": [
+      "",
+      "Anti-Cube Portal",
+      "Negative Mass Projector",
+      "Wormhole Redirector",
+      "Space Displacer",
+      "Sharp Fortitude",
+      "Orbital Augment"
+    ],
+    "Generator": [
+      "",
+      "Singularity Harness",
+      "Galaxy Compressor",
+      "Pulsar Harvester",
+      "Black Hole Digestor",
+      "Project Funding",
+      "Restorative Bonus"
+    ],
+    "Core": [
+      "",
+      "Om Chip",
+      "Harmony Conductor",
+      "Dimension Core",
+      "Multiverse Nexus",
+      "Magnetic Hook",
+      "Primordial Collapse"
+    ]
+  }
+}

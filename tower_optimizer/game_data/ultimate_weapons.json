@@ -1,0 +1,158 @@
+{
+  "version": "3.1.2",
+  "weapons": [
+    "Chain Lightning",
+    "Smart Missiles",
+    "Death Wave",
+    "Chrono Field",
+    "Inner Land Mines",
+    "Golden Tower",
+    "Poison Swamp",
+    "Black Hole",
+    "Spotlight"
+  ],
+  "attributes": {
+    "Chain Lightning": {
+      "Damage": {
+        "max": 7961.0,
+        "step": 1.0
+      },
+      "Quantity": {
+        "max": 5,
+        "step": 1
+      },
+      "Chance": {
+        "max": 0.275,
+        "step": 0.005,
+        "display": "percent"
+      }
+    },
+    "Smart Missiles": {
+      "Damage": {
+        "max": 3021.0,
+        "step": 1.0
+      },
+      "Quantity": {
+        "max": 20,
+        "step": 1
+      },
+      "Cooldown": {
+        "max": 20,
+        "step": 1,
+        "lower_is_better": true,
+        "start": 180
+      }
+    },
+    "Death Wave": {
+      "Damage": {
+        "max": 9119.0,
+        "step": 1.0
+      },
+      "Quantity": {
+        "max": 5,
+        "step": 1
+      },
+      "Cooldown": {
+        "max": 50,
+        "step": 10,
+        "lower_is_better": true,
+        "start": 300
+      }
+    },
+    "Chrono Field": {
+      "Duration": {
+        "max": 40,
+        "step": 1
+      },
+      "Speed Reduction": {
+        "max": 0.75,
+        "step": 0.05,
+        "display": "percent"
+      },
+      "Cooldown": {
+        "max": 60,
+        "step": 10,
+        "lower_is_better": true,
+        "start": 180
+      }
+    },
+    "Inner Land Mines": {
+      "Damage": {
+        "max": 3021.0,
+        "step": 1.0
+      },
+      "Quantity": {
+        "max": 6,
+        "step": 1
+      },
+      "Cooldown": {
+        "max": 50,
+        "step": 10,
+        "lower_is_better": true,
+        "start": 200
+      }
+    },
+    "Golden Tower": {
+      "Multiplier": {
+        "max": 21.0,
+        "step": 0.1
+      },
+      "Duration": {
+        "max": 53,
+        "step": 1
+      },
+      "Cooldown": {
+        "max": 100,
+        "step": 10,
+        "lower_is_better": true,
+        "start": 300
+      }
+    },
+    "Poison Swamp": {
+      "Damage": {
+        "max": 3021.0,
+        "step": 1.0
+      },
+      "Duration": {
+        "max": 100,
+        "step": 1
+      },
+      "Cooldown": {
+        "max": 50,
+        "step": 5,
+        "lower_is_better": true,
+        "start": 125
+      }
+    },
+    "Black Hole": {
+      "Size": {
+        "max": 70,
+        "step": 2
+      },
+      "Duration": {
+        "max": 38,
+        "step": 1
+      },
+      "Cooldown": {
+        "max": 50,
+        "step": 10,
+        "lower_is_better": true,
+        "start": 200
+      }
+    },
+    "Spotlight": {
+      "Multiplier": {
+        "max": 43.0,
+        "step": 0.1
+      },
+      "Angle": {
+        "max": 90,
+        "step": 1
+      },
+      "Quantity": {
+        "max": 4,
+        "step": 1
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+name: Game-data issue
+description: Report an outdated name, maximum, cost, or formula
+labels: [game-data]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Game or source version
+    validations:
+      required: true
+  - type: input
+    id: item
+    attributes:
+      label: Item or formula
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: Current app value or behavior
+    validations:
+      required: true
+  - type: textarea
+    id: corrected
+    attributes:
+      label: Proposed correction
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and source
+    validations:
+      required: true

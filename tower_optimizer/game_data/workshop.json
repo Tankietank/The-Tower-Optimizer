@@ -1,0 +1,197 @@
+{
+  "version": "5.06.04.00",
+  "stats": [
+    {
+      "name": "Damage",
+      "max_level": 6000
+    },
+    {
+      "name": "Attack Speed",
+      "max_level": 99
+    },
+    {
+      "name": "Critical Chance",
+      "max_level": 79
+    },
+    {
+      "name": "Critical Factor",
+      "max_level": 150
+    },
+    {
+      "name": "Range",
+      "max_level": 79
+    },
+    {
+      "name": "Damage / Meter",
+      "max_level": 200
+    },
+    {
+      "name": "Multishot Chance",
+      "max_level": 99
+    },
+    {
+      "name": "Multishot Targets",
+      "max_level": 7
+    },
+    {
+      "name": "Rapid Fire Chance",
+      "max_level": 85
+    },
+    {
+      "name": "Rapid Fire Duration",
+      "max_level": 99
+    },
+    {
+      "name": "Bounce Shot Chance",
+      "max_level": 85
+    },
+    {
+      "name": "Bounce Shot Targets",
+      "max_level": 7
+    },
+    {
+      "name": "Bounce Shot Range",
+      "max_level": 60
+    },
+    {
+      "name": "Super Critical Chance",
+      "max_level": 100
+    },
+    {
+      "name": "Super Critical Mult",
+      "max_level": 120
+    },
+    {
+      "name": "Rend Armor Chance",
+      "max_level": 299
+    },
+    {
+      "name": "Rend Armor Mult",
+      "max_level": 299
+    },
+    {
+      "name": "Health",
+      "max_level": 6000
+    },
+    {
+      "name": "Health Regen",
+      "max_level": 6000
+    },
+    {
+      "name": "Defense %",
+      "max_level": 99
+    },
+    {
+      "name": "Defense Absolute",
+      "max_level": 5000
+    },
+    {
+      "name": "Thorn Damage",
+      "max_level": 99
+    },
+    {
+      "name": "Lifesteal",
+      "max_level": 80
+    },
+    {
+      "name": "Knockback Chance",
+      "max_level": 80
+    },
+    {
+      "name": "Knockback Force",
+      "max_level": 40
+    },
+    {
+      "name": "Orb Speed",
+      "max_level": 38
+    },
+    {
+      "name": "Orbs",
+      "max_level": 4
+    },
+    {
+      "name": "Shockwave Size",
+      "max_level": 35
+    },
+    {
+      "name": "Shockwave Frequency",
+      "max_level": 40
+    },
+    {
+      "name": "Land Mine Chance",
+      "max_level": 50
+    },
+    {
+      "name": "Land Mine Damage",
+      "max_level": 200
+    },
+    {
+      "name": "Land Mine Radius",
+      "max_level": 50
+    },
+    {
+      "name": "Death Defy",
+      "max_level": 75
+    },
+    {
+      "name": "Wall Health",
+      "max_level": 1800
+    },
+    {
+      "name": "Wall Rebuild",
+      "max_level": 300
+    },
+    {
+      "name": "Cash Bonus",
+      "max_level": 149
+    },
+    {
+      "name": "Cash / Wave",
+      "max_level": 149
+    },
+    {
+      "name": "Coin / Kill Bonus",
+      "max_level": 149
+    },
+    {
+      "name": "Coin / Wave",
+      "max_level": 149
+    },
+    {
+      "name": "Free Attack Upgrade",
+      "max_level": 99
+    },
+    {
+      "name": "Free Defense Upgrade",
+      "max_level": 99
+    },
+    {
+      "name": "Free Utility Upgrade",
+      "max_level": 99
+    },
+    {
+      "name": "Interest / Wave",
+      "max_level": 99
+    },
+    {
+      "name": "Recovery Amount",
+      "max_level": 300
+    },
+    {
+      "name": "Max Amount",
+      "max_level": 500
+    },
+    {
+      "name": "Package Chance",
+      "max_level": 60
+    },
+    {
+      "name": "Enemy Attack Level Skip",
+      "max_level": 699
+    },
+    {
+      "name": "Enemy Health Level Skip",
+      "max_level": 699
+    }
+  ]
+}

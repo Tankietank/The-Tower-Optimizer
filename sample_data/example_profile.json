@@ -1,0 +1,357 @@
+{
+  "name": "Synthetic Demo",
+  "resources": {
+    "coins": 250000000000.0,
+    "stones": 425,
+    "gems": 1350,
+    "medals": 210,
+    "keys": 4,
+    "bits": 1800,
+    "reroll_shards": 75000,
+    "module_shards": 16000
+  },
+  "player": {
+    "player_id": "",
+    "farming_tier": 8,
+    "tourney_league": "Platinum",
+    "lifetime_coins": 8000000000000.0,
+    "coin_multiplier": "x42.0",
+    "packs": {},
+    "tiers": {
+      "8": {
+        "highest_wave": 4100
+      },
+      "10": {
+        "highest_wave": 850
+      }
+    }
+  },
+  "workshop": {
+    "Damage": 2400,
+    "Attack Speed": 99,
+    "Critical Chance": 79,
+    "Critical Factor": 105,
+    "Health": 2800,
+    "Health Regen": 1600,
+    "Defense %": 75,
+    "Coins / Kill Bonus": 145,
+    "Cash Bonus": 120
+  },
+  "labs": {
+    "Labs Speed": 55,
+    "Attack Speed": 60,
+    "Damage": 45,
+    "Health": 48,
+    "Health Regen": 36,
+    "Coins / Kill Bonus": 51,
+    "Golden Tower Bonus": 12,
+    "Golden Tower Duration": 10,
+    "Black Hole Coin Bonus": 13,
+    "Black Hole Damage": 8,
+    "Death Wave Coin Bonus": 8,
+    "Garlic Thorns": 4
+  },
+  "enhancements": {
+    "Damage": 12,
+    "Health": 16,
+    "Coins / Kill Bonus": 9
+  },
+  "uw": {
+    "Golden Tower": {
+      "owned": true,
+      "attributes": {
+        "Multiplier": 15.0,
+        "Duration": 38,
+        "Cooldown": 200
+      }
+    },
+    "Black Hole": {
+      "owned": true,
+      "attributes": {
+        "Size": 48,
+        "Duration": 26,
+        "Cooldown": 200
+      }
+    },
+    "Death Wave": {
+      "owned": true,
+      "attributes": {
+        "Damage": 75,
+        "Quantity": 2,
+        "Cooldown": 300
+      }
+    },
+    "Spotlight": {
+      "owned": true,
+      "attributes": {
+        "Bonus": 10,
+        "Quantity": 2,
+        "Angle": 38
+      }
+    }
+  },
+  "modules": {
+    "Cannon": {
+      "name": "Astral Deliverance",
+      "rarity": "Legendary",
+      "level": 84
+    },
+    "Armor": {
+      "name": "Wormhole Redirector",
+      "rarity": "Legendary",
+      "level": 82
+    },
+    "Generator": {
+      "name": "Black Hole Digestor",
+      "rarity": "Epic+",
+      "level": 78
+    },
+    "Core": {
+      "name": "Multiverse Nexus",
+      "rarity": "Legendary",
+      "level": 80
+    }
+  },
+  "module_inventory": {
+    "Generator::Black Hole Digestor": {
+      "slot": "Generator",
+      "name": "Black Hole Digestor",
+      "rarity": "Epic+",
+      "level": 78,
+      "copies": 2,
+      "locked": true,
+      "substats": []
+    },
+    "Generator::Galaxy Compressor": {
+      "slot": "Generator",
+      "name": "Galaxy Compressor",
+      "rarity": "Epic",
+      "level": 1,
+      "copies": 1,
+      "locked": true,
+      "substats": []
+    },
+    "Core::Multiverse Nexus": {
+      "slot": "Core",
+      "name": "Multiverse Nexus",
+      "rarity": "Legendary",
+      "level": 80,
+      "copies": 1,
+      "locked": true,
+      "substats": []
+    }
+  },
+  "module_presets": {},
+  "module_forge": {
+    "fodder": {
+      "Generator": {
+        "Epic+": 1
+      },
+      "Core": {
+        "Epic+": 2
+      }
+    }
+  },
+  "cards": {
+    "slots": 14,
+    "slot_target": 16,
+    "items": {
+      "Damage": {
+        "level": 6,
+        "mastery": 0
+      },
+      "Attack Speed": {
+        "level": 7,
+        "mastery": 0
+      },
+      "Health": {
+        "level": 6,
+        "mastery": 0
+      },
+      "Coins": {
+        "level": 7,
+        "mastery": 0
+      },
+      "Enemy Balance": {
+        "level": 7,
+        "mastery": 0
+      },
+      "Wave Skip": {
+        "level": 6,
+        "mastery": 0
+      }
+    },
+    "presets": {
+      "Farming": [
+        "Coins",
+        "Enemy Balance",
+        "Wave Skip",
+        "Attack Speed",
+        "Health"
+      ],
+      "Pushing": [
+        "Damage",
+        "Attack Speed",
+        "Health"
+      ]
+    }
+  },
+  "relics": {
+    "summary": {},
+    "bonuses": {
+      "Coins": 0.05,
+      "Health": 0.03
+    },
+    "items": {
+      "Synthetic Coin Relic": {
+        "owned": true,
+        "rarity": "2-Epic",
+        "bonus_type": "Coins",
+        "value": 0.02
+      },
+      "Synthetic Health Relic": {
+        "owned": true,
+        "rarity": "1-Rare",
+        "bonus_type": "Health",
+        "value": 0.01
+      },
+      "Synthetic Missing Relic": {
+        "owned": false,
+        "rarity": "3-Legendary",
+        "bonus_type": "Damage",
+        "value": 0.05
+      }
+    }
+  },
+  "themes": {
+    "summary": {},
+    "items": {
+      "Synthetic Theme": {
+        "owned": true,
+        "coin_bonus": 0.004
+      }
+    }
+  },
+  "bots": {
+    "Golden Bot": {
+      "owned": true,
+      "attributes": {
+        "Bonus": 2,
+        "Range": 28,
+        "Cooldown": 110,
+        "Duration": 20
+      }
+    }
+  },
+  "guardians": {
+    "Attack": {
+      "owned": true,
+      "attributes": {
+        "Percentage": 10,
+        "Cooldown": 120,
+        "Targets": 1
+      }
+    }
+  },
+  "vault": {
+    "keys_spent": 4,
+    "bonuses": {
+      "Additional Card Slot": {
+        "active": 1,
+        "total": 6
+      }
+    },
+    "unlocks": {}
+  },
+  "runs": [
+    {
+      "id": "sample-run-1",
+      "battle_date": "2026-06-01 20:00",
+      "tier": 8,
+      "wave": 3800,
+      "killed_by": "Vampire",
+      "real_seconds": 16200,
+      "coins_earned": 180000000000.0,
+      "cells_earned": 5200
+    },
+    {
+      "id": "sample-run-2",
+      "battle_date": "2026-06-03 20:00",
+      "tier": 8,
+      "wave": 4010,
+      "killed_by": "Fast",
+      "real_seconds": 16800,
+      "coins_earned": 205000000000.0,
+      "cells_earned": 5700
+    },
+    {
+      "id": "sample-run-3",
+      "battle_date": "2026-06-05 20:00",
+      "tier": 10,
+      "wave": 820,
+      "killed_by": "Boss",
+      "real_seconds": 3900,
+      "coins_earned": 76000000000.0,
+      "cells_earned": 1800
+    }
+  ],
+  "roi_reference": {
+    "source": {},
+    "paths": {},
+    "imported_at": null,
+    "warnings": []
+  },
+  "native_econ": {
+    "settings": {}
+  },
+  "analysis": {
+    "last_updated": null,
+    "notes": [
+      "Synthetic profile for public testing only."
+    ]
+  },
+  "calibration": {
+    "history": [],
+    "last_report": null
+  },
+  "planner": {},
+  "battle_learning": {},
+  "setup_wizard": {
+    "completed": true,
+    "last_step": "Complete"
+  },
+  "maxed": {
+    "workshop": {
+      "Attack Speed": true,
+      "Critical Chance": true
+    },
+    "labs": {},
+    "enhancements": {},
+    "uw": {},
+    "modules": {}
+  },
+  "custom_max": {
+    "workshop": {},
+    "labs": {},
+    "enhancements": {}
+  },
+  "settings": {
+    "auto_gold_at_max": true,
+    "show_only_incomplete": false,
+    "visual_theme": "Void Cyan",
+    "visual_density": "Comfortable",
+    "visual_motion": true
+  },
+  "sources": {
+    "sample": {
+      "version": "1.0",
+      "synthetic": true
+    }
+  },
+  "import_audit": [],
+  "metadata": {
+    "effective_paths_version": "none",
+    "app_version": "2.0.0-preview.6",
+    "last_import": null
+  }
+}

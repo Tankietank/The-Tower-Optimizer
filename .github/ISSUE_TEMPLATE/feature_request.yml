@@ -1,0 +1,26 @@
+name: Feature request
+description: Suggest a player-facing or developer improvement
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+    validations:
+      required: true
+  - type: dropdown
+    id: confidence
+    attributes:
+      label: Calculation confidence needed
+      options: [Verified formula, Reference-aligned, Estimated, Strategic heuristic, Not applicable]
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources or examples

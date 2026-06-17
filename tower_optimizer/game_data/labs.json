@@ -1,0 +1,873 @@
+{
+  "version": "5.06.04.00",
+  "stats": [
+    {
+      "name": "Game Speed",
+      "max_level": 7
+    },
+    {
+      "name": "Starting Cash",
+      "max_level": 99
+    },
+    {
+      "name": "Workshop Attack Discount",
+      "max_level": 99
+    },
+    {
+      "name": "Workshop Defense Discount",
+      "max_level": 99
+    },
+    {
+      "name": "Workshop Utility Discount",
+      "max_level": 99
+    },
+    {
+      "name": "Labs Coin Discount",
+      "max_level": 99
+    },
+    {
+      "name": "Labs Speed",
+      "max_level": 99
+    },
+    {
+      "name": "Buy Multiplier",
+      "max_level": 4
+    },
+    {
+      "name": "More Round Stats",
+      "max_level": 1
+    },
+    {
+      "name": "Target Priority",
+      "max_level": 2
+    },
+    {
+      "name": "Card Presets",
+      "max_level": 1
+    },
+    {
+      "name": "Workshop Respec",
+      "max_level": 1
+    },
+    {
+      "name": "Reroll Daily Mission",
+      "max_level": 1
+    },
+    {
+      "name": "Workshop Enhancements",
+      "max_level": 1
+    },
+    {
+      "name": "Enhancement Attack - Coin Discount",
+      "max_level": 100
+    },
+    {
+      "name": "Enhancement Defense - Coin Discount",
+      "max_level": 100
+    },
+    {
+      "name": "Enhancement Utility - Coin Discount",
+      "max_level": 100
+    },
+    {
+      "name": "Dissonant Echo - Attack",
+      "max_level": 20
+    },
+    {
+      "name": "Dissonant Echo - Defense",
+      "max_level": 20
+    },
+    {
+      "name": "Dissonant Echo - Utility",
+      "max_level": 20
+    },
+    {
+      "name": "Dissonant Echo - Ultimate Weapons",
+      "max_level": 20
+    },
+    {
+      "name": "Damage",
+      "max_level": 100
+    },
+    {
+      "name": "Attack Speed",
+      "max_level": 99
+    },
+    {
+      "name": "Critical Factor",
+      "max_level": 99
+    },
+    {
+      "name": "Range",
+      "max_level": 80
+    },
+    {
+      "name": "Damage / Meter",
+      "max_level": 99
+    },
+    {
+      "name": "Super Crit Chance",
+      "max_level": 50
+    },
+    {
+      "name": "Super Crit Multi",
+      "max_level": 40
+    },
+    {
+      "name": "Max Rend Armor Multiplier",
+      "max_level": 30
+    },
+    {
+      "name": "Light Speed Shots",
+      "max_level": 1
+    },
+    {
+      "name": "Health",
+      "max_level": 100
+    },
+    {
+      "name": "Health Regen",
+      "max_level": 100
+    },
+    {
+      "name": "Defense Absolute",
+      "max_level": 100
+    },
+    {
+      "name": "Defense %",
+      "max_level": 50
+    },
+    {
+      "name": "Orbs Speed",
+      "max_level": 20
+    },
+    {
+      "name": "Land Mine Damage",
+      "max_level": 20
+    },
+    {
+      "name": "Land Mine Decay",
+      "max_level": 35
+    },
+    {
+      "name": "Shockwave Size",
+      "max_level": 20
+    },
+    {
+      "name": "Orb Boss Hit",
+      "max_level": 10
+    },
+    {
+      "name": "Wall Health",
+      "max_level": 50
+    },
+    {
+      "name": "Wall Rebuild",
+      "max_level": 20
+    },
+    {
+      "name": "Wall Regen",
+      "max_level": 30
+    },
+    {
+      "name": "Wall Thorns",
+      "max_level": 20
+    },
+    {
+      "name": "Wall Invincibility",
+      "max_level": 10
+    },
+    {
+      "name": "Wall Fortification",
+      "max_level": 60
+    },
+    {
+      "name": "Garlic Thorns",
+      "max_level": 10
+    },
+    {
+      "name": "Cash Bonus",
+      "max_level": 99
+    },
+    {
+      "name": "Cash / Wave",
+      "max_level": 99
+    },
+    {
+      "name": "Coins / Kill Bonus",
+      "max_level": 99
+    },
+    {
+      "name": "Coins / Wave",
+      "max_level": 99
+    },
+    {
+      "name": "Interest",
+      "max_level": 99
+    },
+    {
+      "name": "Max Interest",
+      "max_level": 15
+    },
+    {
+      "name": "Package After Boss",
+      "max_level": 1
+    },
+    {
+      "name": "Recovery Package Amount",
+      "max_level": 20
+    },
+    {
+      "name": "Recovery Package Max",
+      "max_level": 20
+    },
+    {
+      "name": "Recovery Package Chance",
+      "max_level": 20
+    },
+    {
+      "name": "Enemy Attack Level Skip",
+      "max_level": 20
+    },
+    {
+      "name": "Enemy Health Level Skip",
+      "max_level": 20
+    },
+    {
+      "name": "Missile Despawn Time",
+      "max_level": 20
+    },
+    {
+      "name": "Missiles Explosion",
+      "max_level": 1
+    },
+    {
+      "name": "Missile Radius",
+      "max_level": 20
+    },
+    {
+      "name": "Chrono Field Duration",
+      "max_level": 30
+    },
+    {
+      "name": "Chrono Field Damage Reduction",
+      "max_level": 1
+    },
+    {
+      "name": "Chrono Field Reduction %",
+      "max_level": 30
+    },
+    {
+      "name": "Swamp Radius",
+      "max_level": 30
+    },
+    {
+      "name": "Swamp Stun",
+      "max_level": 1
+    },
+    {
+      "name": "Swamp Stun Chance",
+      "max_level": 30
+    },
+    {
+      "name": "Swamp Stun Time",
+      "max_level": 30
+    },
+    {
+      "name": "Golden Tower Bonus",
+      "max_level": 25
+    },
+    {
+      "name": "Golden Tower Duration",
+      "max_level": 20
+    },
+    {
+      "name": "Chain Lightning Shock",
+      "max_level": 1
+    },
+    {
+      "name": "Shock Chance",
+      "max_level": 30
+    },
+    {
+      "name": "Shock Multiplier",
+      "max_level": 14
+    },
+    {
+      "name": "Death Wave Health",
+      "max_level": 30
+    },
+    {
+      "name": "Death Wave Coin Bonus",
+      "max_level": 20
+    },
+    {
+      "name": "Inner Mine Blast Radius",
+      "max_level": 20
+    },
+    {
+      "name": "Inner Mine Rotation Speed",
+      "max_level": 20
+    },
+    {
+      "name": "Chrono Field Range",
+      "max_level": 20
+    },
+    {
+      "name": "Missile Amplifier",
+      "max_level": 25
+    },
+    {
+      "name": "Missile Barrage",
+      "max_level": 1
+    },
+    {
+      "name": "Missile Barrage Quantity",
+      "max_level": 6
+    },
+    {
+      "name": "Inner Mine Stun",
+      "max_level": 1
+    },
+    {
+      "name": "Black Hole Damage",
+      "max_level": 10
+    },
+    {
+      "name": "Extra Black Hole",
+      "max_level": 1
+    },
+    {
+      "name": "Black Hole Coin Bonus",
+      "max_level": 20
+    },
+    {
+      "name": "Spotlight Coin Bonus",
+      "max_level": 20
+    },
+    {
+      "name": "Spotlight Missiles",
+      "max_level": 18
+    },
+    {
+      "name": "Black Hole Disable Ranged Enemies",
+      "max_level": 1
+    },
+    {
+      "name": "Recharge Missile Barrage",
+      "max_level": 7
+    },
+    {
+      "name": "Swamp Rend",
+      "max_level": 30
+    },
+    {
+      "name": "Swamp Rend - Additional Enemies",
+      "max_level": 6
+    },
+    {
+      "name": "Chain Thunder",
+      "max_level": 30
+    },
+    {
+      "name": "Lightning Amplifier - Scatter",
+      "max_level": 30
+    },
+    {
+      "name": "Death Wave Cells Bonus",
+      "max_level": 20
+    },
+    {
+      "name": "Death Wave Damage Amplifier",
+      "max_level": 30
+    },
+    {
+      "name": "Death Wave Armor Stripping",
+      "max_level": 10
+    },
+    {
+      "name": "Inner Land Mine - Chrono Jump",
+      "max_level": 10
+    },
+    {
+      "name": "Second Wind Blast",
+      "max_level": 4
+    },
+    {
+      "name": "Double Death Ray",
+      "max_level": 30
+    },
+    {
+      "name": "Extra Orb Adjuster",
+      "max_level": 1
+    },
+    {
+      "name": "Extra Extra Orbs",
+      "max_level": 2
+    },
+    {
+      "name": "Energy Shield Extra Hit",
+      "max_level": 2
+    },
+    {
+      "name": "Super Tower Bonus",
+      "max_level": 30
+    },
+    {
+      "name": "Recharge Second Wind",
+      "max_level": 7
+    },
+    {
+      "name": "Recharge Demon Mode",
+      "max_level": 7
+    },
+    {
+      "name": "Recharge Nuke",
+      "max_level": 7
+    },
+    {
+      "name": "Unlock Perks",
+      "max_level": 1
+    },
+    {
+      "name": "Waves Required",
+      "max_level": 100
+    },
+    {
+      "name": "Auto Pick Perks",
+      "max_level": 1
+    },
+    {
+      "name": "Standard Perks Bonus",
+      "max_level": 25
+    },
+    {
+      "name": "Perk Option Quantity",
+      "max_level": 2
+    },
+    {
+      "name": "First Perk Choice",
+      "max_level": 1
+    },
+    {
+      "name": "Ban Perks",
+      "max_level": 8
+    },
+    {
+      "name": "Improve Trade-off Perks",
+      "max_level": 10
+    },
+    {
+      "name": "Auto Pick Ranking",
+      "max_level": 32
+    },
+    {
+      "name": "Flame Bot - Cooldown",
+      "max_level": 25
+    },
+    {
+      "name": "Thunder Bot - Cooldown",
+      "max_level": 25
+    },
+    {
+      "name": "Gold Bot - Cooldown",
+      "max_level": 25
+    },
+    {
+      "name": "Amp Bot - Cooldown",
+      "max_level": 25
+    },
+    {
+      "name": "Bot Bot - Cooldown",
+      "max_level": 25
+    },
+    {
+      "name": "Flame Bot - Burn Stack",
+      "max_level": 5
+    },
+    {
+      "name": "Thunder Bot - Linger Time",
+      "max_level": 20
+    },
+    {
+      "name": "Gold Bot - Duration",
+      "max_level": 20
+    },
+    {
+      "name": "Amp Bot - Duration",
+      "max_level": 20
+    },
+    {
+      "name": "Bot Bot - Duration",
+      "max_level": 20
+    },
+    {
+      "name": "Common Enemy Health",
+      "max_level": 30
+    },
+    {
+      "name": "Common Enemy Attack",
+      "max_level": 30
+    },
+    {
+      "name": "Fast Enemy Health",
+      "max_level": 30
+    },
+    {
+      "name": "Fast Enemy Attack",
+      "max_level": 30
+    },
+    {
+      "name": "Fast Enemy Speed",
+      "max_level": 30
+    },
+    {
+      "name": "Tank Enemy Health",
+      "max_level": 30
+    },
+    {
+      "name": "Tank Enemy Attack",
+      "max_level": 30
+    },
+    {
+      "name": "Ranged Enemy Health",
+      "max_level": 30
+    },
+    {
+      "name": "Ranged Enemy Attack",
+      "max_level": 30
+    },
+    {
+      "name": "Boss Health",
+      "max_level": 30
+    },
+    {
+      "name": "Boss Attack",
+      "max_level": 30
+    },
+    {
+      "name": "Protector Health",
+      "max_level": 30
+    },
+    {
+      "name": "Protector Radius",
+      "max_level": 30
+    },
+    {
+      "name": "Protector Damage Reduction",
+      "max_level": 20
+    },
+    {
+      "name": "Ray Enemy Attack",
+      "max_level": 30
+    },
+    {
+      "name": "Ray Enemy Health",
+      "max_level": 30
+    },
+    {
+      "name": "Vampire Enemy Attack",
+      "max_level": 30
+    },
+    {
+      "name": "Vampire Enemy Health",
+      "max_level": 30
+    },
+    {
+      "name": "Scatter Enemy Attack",
+      "max_level": 30
+    },
+    {
+      "name": "Scatter Enemy Health",
+      "max_level": 30
+    },
+    {
+      "name": "Ranged Enemy Range",
+      "max_level": 30
+    },
+    {
+      "name": "Common Drop Chance",
+      "max_level": 10
+    },
+    {
+      "name": "Reroll Shards",
+      "max_level": 100
+    },
+    {
+      "name": "Daily Mission Shards",
+      "max_level": 50
+    },
+    {
+      "name": "Module Shards Cost",
+      "max_level": 30
+    },
+    {
+      "name": "Module Coin Cost",
+      "max_level": 30
+    },
+    {
+      "name": "Rare Drop Chance",
+      "max_level": 10
+    },
+    {
+      "name": "Unmerge Module",
+      "max_level": 1
+    },
+    {
+      "name": "Shatter Shards",
+      "max_level": 5
+    },
+    {
+      "name": "Cannon Effect Bans",
+      "max_level": 4
+    },
+    {
+      "name": "Armor Effect Bans",
+      "max_level": 4
+    },
+    {
+      "name": "Generator Effect Bans",
+      "max_level": 3
+    },
+    {
+      "name": "Core Effect Bans",
+      "max_level": 7
+    },
+    {
+      "name": "Assist Module Substats - Cannon",
+      "max_level": 30
+    },
+    {
+      "name": "Assist Module Substats - Armor",
+      "max_level": 30
+    },
+    {
+      "name": "Assist Module Substats - Generator",
+      "max_level": 30
+    },
+    {
+      "name": "Assist Module Substats - Core",
+      "max_level": 30
+    },
+    {
+      "name": "Assist Module Bonus - Cannon",
+      "max_level": 30
+    },
+    {
+      "name": "Assist Module Bonus - Armor",
+      "max_level": 30
+    },
+    {
+      "name": "Assist Module Bonus - Generator",
+      "max_level": 30
+    },
+    {
+      "name": "Assist Module Bonus - Core",
+      "max_level": 30
+    },
+    {
+      "name": "Damage Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Attack Speed Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Health Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Health Regen Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Range Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Cash Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Coins Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Slow Aura Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Critical Chance Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Enemy Balance Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Extra Defense Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Fortress Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Free Upgrades Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Extra Orb Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Plasma Cannon Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Critical Coin Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Wave Skip Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Intro Sprint Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Land Mine Stun Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Recovery Package Chance Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Death Ray Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Energy Net Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Super Tower Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Second Wind Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Demon Mode Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Energy Shield Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Wave Accelerator Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Berserker Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Ultimate Crit Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Nuke Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Area of Effect Mastery",
+      "max_level": 9
+    },
+    {
+      "name": "Battle Condition Reduction",
+      "max_level": 10
+    },
+    {
+      "name": "Knockback Resistance",
+      "max_level": 20
+    },
+    {
+      "name": "Thorns Resistance",
+      "max_level": 20
+    },
+    {
+      "name": "Orb Resistance",
+      "max_level": 20
+    },
+    {
+      "name": "Plasma Cannon Resistance",
+      "max_level": 20
+    },
+    {
+      "name": "Death Ray Resistance",
+      "max_level": 20
+    },
+    {
+      "name": "Armored Enemies",
+      "max_level": 20
+    },
+    {
+      "name": "Enemy Speed",
+      "max_level": 20
+    },
+    {
+      "name": "More Enemies",
+      "max_level": 20
+    },
+    {
+      "name": "Enemy Attack Speed",
+      "max_level": 20
+    },
+    {
+      "name": "Fast's Ultimate",
+      "max_level": 10
+    },
+    {
+      "name": "Ranged Ultimate",
+      "max_level": 10
+    },
+    {
+      "name": "Boss's Ultimate",
+      "max_level": 10
+    },
+    {
+      "name": "Basic's Ultimate",
+      "max_level": 10
+    },
+    {
+      "name": "Tank's Ultimate",
+      "max_level": 10
+    },
+    {
+      "name": "Protector's Ultimate",
+      "max_level": 10
+    },
+    {
+      "name": "Ultimate Weapon Durations",
+      "max_level": 10
+    },
+    {
+      "name": "Death Defy Down",
+      "max_level": 10
+    },
+    {
+      "name": "Energy Shields Down",
+      "max_level": 10
+    },
+    {
+      "name": "Enemy Level Skip Reduction",
+      "max_level": 10
+    }
+  ]
+}

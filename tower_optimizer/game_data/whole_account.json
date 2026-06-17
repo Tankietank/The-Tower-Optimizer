@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "bundle_version": "1.8.0",
+  "source": "Tower Optimizer transparent strategic benchmarks",
+  "systems": [
+    "Cards",
+    "Modules",
+    "Relics",
+    "Themes & Songs",
+    "Bots",
+    "Guardians",
+    "Vault"
+  ],
+  "model_limit": "These benchmarks rank opportunity cost where an exact verified cost curve is not bundled. They are not exact ROI formulas."
+}
