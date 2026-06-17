@@ -7642,7 +7642,7 @@ from .visual_ui import (
     render_sync_center_page, render_visual_sidebar, render_grouped_navigation,
 )
 from .visual_models import build_card_report, build_module_forge_report, build_relic_report, build_sync_report
-from .icon_manager import custom_icon_count, fixed_icon_status
+from .save_import_ui import render_player_save_import
 
 profile = st.session_state.profile
 ensure_planner_state(profile)
@@ -7779,6 +7779,14 @@ elif page == "Setup Wizard":
                 bump_revision(); st.rerun()
 
         st.divider()
+        render_player_save_import(
+            profile,
+            save_profile=save_profile,
+            bump_revision=bump_revision,
+            key_prefix="wizard_save",
+        )
+
+        st.divider()
         st.markdown("**Optional Effective Paths import**")
         st.caption("Use this to fill Master Sheet inputs and/or save a regression reference. The standalone engines do not require it.")
         wizard_ep = st.file_uploader("Filled Effective Paths workbook", type=["xlsx", "csv"], key="wizard_ep_upload")
@@ -7889,7 +7897,9 @@ elif page == "Profile Setup":
 
 elif page == "Import / Export":
     st.header("Import / Export")
-    bundle_tab, ep_tab, roi_tab, profile_tab = st.tabs(["IDS Companion Bundle", "Effective Paths Inputs", "ROI Reference", "Profile JSON"])
+    bundle_tab, save_tab, ep_tab, roi_tab, profile_tab = st.tabs(
+        ["IDS Companion Bundle", "Game Save", "Effective Paths Inputs", "ROI Reference", "Profile JSON"]
+    )
 
     with bundle_tab:
         st.write("Upload any combination of the IDS companion `.xlsx` workbooks. The app identifies each file from its EXPORT signature and merges it into the canonical profile.")
@@ -7913,6 +7923,14 @@ elif page == "Import / Export":
                 save_profile(profile["name"], profile)
                 st.session_state.pop("bundle_preview", None)
                 bump_revision(); st.rerun()
+
+    with save_tab:
+        render_player_save_import(
+            profile,
+            save_profile=save_profile,
+            bump_revision=bump_revision,
+            key_prefix="import_save",
+        )
 
     with ep_tab:
         st.write("Upload a filled Effective Paths workbook or a CSV export of its **Master Sheet**. This fills the optimizer-focused fields only.")

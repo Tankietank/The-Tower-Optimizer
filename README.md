@@ -18,6 +18,7 @@ Tower Optimizer combines account data, upgrade paths, battle reports, resource b
 - Conservative module inventory and merge-readiness review
 - Relic gallery and custom icon overrides
 - IDS companion-workbook and optional Effective Paths imports
+- In-game `playerInfo.dat` save import (local tower backup)
 - Local backups, diagnostics, update staging, and rollback
 - Expandable navigation designed for desktop and smaller displays
 
@@ -73,6 +74,7 @@ python -m streamlit run app.py
 Users can build a profile through:
 
 - Manual entry
+- In-game tower backup (`playerInfo.dat`)
 - IDS companion workbook bundle
 - Optional Effective Paths workbook reference
 - Tower Optimizer profile JSON
