@@ -27,7 +27,7 @@ jobs:
           pytest -q
       - name: Build sanitized source archive
         run: python scripts/build_source_release.py
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: tower-optimizer-source
           path: |
