@@ -1,0 +1,21 @@
+{
+  "version": "1.0.0",
+  "source": "Tower Optimizer bundled catalog derived from authorized TowerSmith reference data (see NOTICE.md).",
+  "chip_index": {
+    "Bounty": 0,
+    "Attack": 2,
+    "Ally": 5,
+    "Fetch": 6,
+    "Summon": 7,
+    "Scout": 8
+  },
+  "tracks": {
+    "Attack": ["Percentage", "Cooldown", "Targets"],
+    "Ally": ["Recovery Amount", "Max Recovery", "Cooldown"],
+    "Bounty": ["Multiplier", "Cooldown", "Targets"],
+    "Fetch": ["Cooldown", "Find Chance", "Double Find Chance"],
+    "Summon": ["Cooldown", "Duration", "Cash Bonus"],
+    "Scout": ["Cooldown", "Range Bonus", "Duration"]
+  },
+  "upgrades_per_chip": 3
+}

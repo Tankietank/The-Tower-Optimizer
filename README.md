@@ -18,7 +18,7 @@ Tower Optimizer combines account data, upgrade paths, battle reports, resource b
 - Conservative module inventory and merge-readiness review
 - Relic gallery and custom icon overrides
 - IDS companion-workbook and optional Effective Paths imports
-- In-game `playerInfo.dat` save import (local tower backup)
+- In-game `playerInfo.dat` save import with module names, relic catalog, and UW normalization
 - Local backups, diagnostics, update staging, and rollback
 - Expandable navigation designed for desktop and smaller displays
 
@@ -104,6 +104,12 @@ Never include real profiles, player IDs, imported spreadsheets, diagnostics, or 
 This is an unofficial fan project and is not affiliated with or endorsed by Tech Tree Games. The Tower and its game assets belong to their respective rights holders.
 
 The repository ships only original fallback artwork. Users may install local icon overrides containing images they are permitted to use. Do not submit extracted game artwork unless redistribution permission is clear. See [Assets](docs/ASSETS.md).
+
+## Related community tools
+
+**[TowerSmith](https://github.com/AngryBrit/tower-smith)** (AngryBrit) is a complementary fan tool focused on save decoding, workshop simulation, and in-browser lab/workshop UI. Its author granted permission for Tower Optimizer to use TowerSmith reference code and data for save import and local artwork paths — see [NOTICE.md](NOTICE.md).
+
+Tower Optimizer remains a separate project: native recommendation engines, Streamlit planning UI, IDS imports, battle learning, and progression planner.
 
 ## Development
 

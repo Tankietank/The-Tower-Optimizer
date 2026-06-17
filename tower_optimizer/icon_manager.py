@@ -16,6 +16,20 @@ from typing import Any, Dict, Iterable, List, Mapping, Optional
 
 ASSET_ROOT = Path(__file__).resolve().parents[1] / "assets"
 SUPPORTED_EXTENSIONS = (".png", ".webp", ".jpg", ".jpeg", ".svg")
+MODULE_SLOT_FOLDERS = {
+    "cannon": "cannon",
+    "armor": "armor",
+    "generator": "generator",
+    "core": "core",
+}
+RELIC_RARITY_FOLDERS = {
+    "1-rare": "rare",
+    "2-epic": "epic",
+    "3-legendary": "legendary",
+    "rare": "rare",
+    "epic": "epic",
+    "legendary": "legendary",
+}
 UPLOAD_EXTENSIONS = (".png", ".webp", ".jpg", ".jpeg")
 MAX_ICON_BYTES = 8 * 1024 * 1024
 MAX_PACK_BYTES = 64 * 1024 * 1024
@@ -38,6 +52,57 @@ FIXED_ICON_SPECS: tuple[dict[str, str], ...] = (
 def custom_icon_root() -> Path:
     override = os.environ.get("TOWER_CUSTOM_ICON_DIR", "").strip()
     return Path(override) if override else Path("data") / "custom_icons"
+
+
+def configured_game_asset_roots() -> List[Path]:
+    """Optional local artwork folders configured explicitly by the user."""
+    roots: List[Path] = []
+    seen: set[str] = set()
+    for raw in (
+        os.environ.get("TOWER_GAME_ASSETS_DIR", "").strip(),
+        os.environ.get("TOWER_SMITH_PUBLIC_DIR", "").strip(),
+    ):
+        if not raw:
+            continue
+        path = Path(raw).expanduser()
+        key = str(path.resolve()) if path.exists() else str(path)
+        if key in seen:
+            continue
+        seen.add(key)
+        if path.is_dir():
+            roots.append(path)
+    return roots
+
+
+def _first_existing(paths: Iterable[Path]) -> Optional[Path]:
+    for path in paths:
+        if path.is_file():
+            return path
+    return None
+
+
+def _game_asset_candidates(category: str, name: str, *, relic_rarity: str = "", module_slot: str = "") -> Iterable[Path]:
+    slug = _slug(name)
+    title = str(name).strip()
+    roots = configured_game_asset_roots()
+    if category in {"modules", "module"} and module_slot:
+        folder = MODULE_SLOT_FOLDERS.get(_slug(module_slot), _slug(module_slot))
+        for root in roots:
+            base = root / "modules" / folder
+            yield from _candidate_paths(base, title)
+            yield from _candidate_paths(base, title.replace(" ", "_"))
+            yield from _candidate_paths(base, title.replace("-", " "))
+    if category in {"relics", "relic"}:
+        rarity_folder = RELIC_RARITY_FOLDERS.get(_slug(relic_rarity), "")
+        for root in roots:
+            if rarity_folder:
+                yield from _candidate_paths(root / "relics" / rarity_folder, slug)
+                yield from _candidate_paths(root / "relics" / rarity_folder, title)
+            yield from _candidate_paths(root / "relics" / "unmapped", slug)
+            yield from _candidate_paths(root / "relics", slug)
+    for root in roots:
+        yield from _candidate_paths(root / category, slug)
+        yield from _candidate_paths(root / category, title)
 
 
 def _slug(value: str) -> str:
@@ -97,11 +162,27 @@ def resolve_icon_path(
     default_relative: str,
     custom_key: Optional[str] = None,
     fallback_relative: Optional[str] = None,
+    *,
+    game_category: Optional[str] = None,
+    game_name: Optional[str] = None,
+    relic_rarity: str = "",
+    module_slot: str = "",
 ) -> Optional[Path]:
     key = normalize_icon_key(custom_key or default_relative)
     custom = custom_icon_path(key)
     if custom:
         return custom
+    if game_category and game_name:
+        external = _first_existing(
+            _game_asset_candidates(
+                game_category,
+                game_name,
+                relic_rarity=relic_rarity,
+                module_slot=module_slot,
+            )
+        )
+        if external:
+            return external
     for path in _candidate_paths(ASSET_ROOT, default_relative):
         if path.is_file():
             return path
@@ -260,9 +341,9 @@ def custom_icon_count() -> int:
 
 __all__ = [
     "ASSET_ROOT", "CUSTOM_ICON_ROOT", "FIXED_ICON_SPECS", "SUPPORTED_EXTENSIONS", "UPLOAD_EXTENSIONS",
-    "custom_icon_count", "custom_icon_path", "custom_icon_root", "export_custom_icon_pack",
-    "fixed_icon_status", "icon_source_info", "import_custom_icon_pack", "item_icon_key",
-    "normalize_icon_key", "remove_custom_icon", "resolve_icon_path", "save_custom_icon",
+    "configured_game_asset_roots", "custom_icon_count", "custom_icon_path", "custom_icon_root",
+    "export_custom_icon_pack", "fixed_icon_status", "icon_source_info", "import_custom_icon_pack",
+    "item_icon_key", "normalize_icon_key", "remove_custom_icon", "resolve_icon_path", "save_custom_icon",
 ]
 
 # Backward-compatible constant for callers that only need the conventional path.

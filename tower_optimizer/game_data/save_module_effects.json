@@ -1,0 +1,1986 @@
+{
+  "version": "1.0.0",
+  "source": "Tower Optimizer bundled catalog derived from authorized TowerSmith reference data (see NOTICE.md).",
+  "by_index": {
+    "0": {
+      "slot": "Cannon",
+      "effect_id": "attack-speed",
+      "name": "Speed",
+      "rarity": "common"
+    },
+    "1": {
+      "slot": "Cannon",
+      "effect_id": "attack-speed",
+      "name": "Speed",
+      "rarity": "common"
+    },
+    "2": {
+      "slot": "Cannon",
+      "effect_id": "attack-speed",
+      "name": "Speed",
+      "rarity": "rare"
+    },
+    "3": {
+      "slot": "Cannon",
+      "effect_id": "attack-speed",
+      "name": "Speed",
+      "rarity": "epic"
+    },
+    "4": {
+      "slot": "Cannon",
+      "effect_id": "attack-speed",
+      "name": "Speed",
+      "rarity": "legendary"
+    },
+    "5": {
+      "slot": "Cannon",
+      "effect_id": "attack-speed",
+      "name": "Speed",
+      "rarity": "mythic"
+    },
+    "6": {
+      "slot": "Cannon",
+      "effect_id": "crit-chance",
+      "name": "Chance",
+      "rarity": "common"
+    },
+    "7": {
+      "slot": "Cannon",
+      "effect_id": "crit-chance",
+      "name": "Chance",
+      "rarity": "common"
+    },
+    "8": {
+      "slot": "Cannon",
+      "effect_id": "crit-chance",
+      "name": "Chance",
+      "rarity": "rare"
+    },
+    "9": {
+      "slot": "Cannon",
+      "effect_id": "crit-chance",
+      "name": "Chance",
+      "rarity": "epic"
+    },
+    "10": {
+      "slot": "Cannon",
+      "effect_id": "crit-chance",
+      "name": "Chance",
+      "rarity": "legendary"
+    },
+    "11": {
+      "slot": "Cannon",
+      "effect_id": "crit-chance",
+      "name": "Chance",
+      "rarity": "mythic"
+    },
+    "12": {
+      "slot": "Cannon",
+      "effect_id": "crit-factor",
+      "name": "Factor",
+      "rarity": "common"
+    },
+    "13": {
+      "slot": "Cannon",
+      "effect_id": "crit-factor",
+      "name": "Factor",
+      "rarity": "common"
+    },
+    "14": {
+      "slot": "Cannon",
+      "effect_id": "crit-factor",
+      "name": "Factor",
+      "rarity": "rare"
+    },
+    "15": {
+      "slot": "Cannon",
+      "effect_id": "crit-factor",
+      "name": "Factor",
+      "rarity": "epic"
+    },
+    "16": {
+      "slot": "Cannon",
+      "effect_id": "crit-factor",
+      "name": "Factor",
+      "rarity": "legendary"
+    },
+    "17": {
+      "slot": "Cannon",
+      "effect_id": "crit-factor",
+      "name": "Factor",
+      "rarity": "mythic"
+    },
+    "18": {
+      "slot": "Cannon",
+      "effect_id": "attack-range-m",
+      "name": "Range M",
+      "rarity": "common"
+    },
+    "19": {
+      "slot": "Cannon",
+      "effect_id": "attack-range-m",
+      "name": "Range M",
+      "rarity": "common"
+    },
+    "20": {
+      "slot": "Cannon",
+      "effect_id": "attack-range-m",
+      "name": "Range M",
+      "rarity": "rare"
+    },
+    "21": {
+      "slot": "Cannon",
+      "effect_id": "attack-range-m",
+      "name": "Range M",
+      "rarity": "epic"
+    },
+    "22": {
+      "slot": "Cannon",
+      "effect_id": "attack-range-m",
+      "name": "Range M",
+      "rarity": "legendary"
+    },
+    "23": {
+      "slot": "Cannon",
+      "effect_id": "attack-range-m",
+      "name": "Range M",
+      "rarity": "mythic"
+    },
+    "24": {
+      "slot": "Cannon",
+      "effect_id": "damage-meter-m",
+      "name": "Meter M",
+      "rarity": "common"
+    },
+    "25": {
+      "slot": "Cannon",
+      "effect_id": "damage-meter-m",
+      "name": "Meter M",
+      "rarity": "common"
+    },
+    "26": {
+      "slot": "Cannon",
+      "effect_id": "damage-meter-m",
+      "name": "Meter M",
+      "rarity": "rare"
+    },
+    "27": {
+      "slot": "Cannon",
+      "effect_id": "damage-meter-m",
+      "name": "Meter M",
+      "rarity": "epic"
+    },
+    "28": {
+      "slot": "Cannon",
+      "effect_id": "damage-meter-m",
+      "name": "Meter M",
+      "rarity": "legendary"
+    },
+    "29": {
+      "slot": "Cannon",
+      "effect_id": "damage-meter-m",
+      "name": "Meter M",
+      "rarity": "mythic"
+    },
+    "30": {
+      "slot": "Cannon",
+      "effect_id": "multishot-chance",
+      "name": "Chance",
+      "rarity": "rare"
+    },
+    "31": {
+      "slot": "Cannon",
+      "effect_id": "multishot-chance",
+      "name": "Chance",
+      "rarity": "epic"
+    },
+    "32": {
+      "slot": "Cannon",
+      "effect_id": "multishot-chance",
+      "name": "Chance",
+      "rarity": "legendary"
+    },
+    "33": {
+      "slot": "Cannon",
+      "effect_id": "multishot-chance",
+      "name": "Chance",
+      "rarity": "legendary"
+    },
+    "34": {
+      "slot": "Cannon",
+      "effect_id": "multishot-chance",
+      "name": "Chance",
+      "rarity": "mythic"
+    },
+    "35": {
+      "slot": "Cannon",
+      "effect_id": "multishot-targets",
+      "name": "Targets",
+      "rarity": "epic"
+    },
+    "36": {
+      "slot": "Cannon",
+      "effect_id": "multishot-targets",
+      "name": "Targets",
+      "rarity": "legendary"
+    },
+    "37": {
+      "slot": "Cannon",
+      "effect_id": "multishot-targets",
+      "name": "Targets",
+      "rarity": "legendary"
+    },
+    "38": {
+      "slot": "Cannon",
+      "effect_id": "multishot-targets",
+      "name": "Targets",
+      "rarity": "mythic"
+    },
+    "39": {
+      "slot": "Cannon",
+      "effect_id": "rapid-fire-chance",
+      "name": "Fire Chance",
+      "rarity": "rare"
+    },
+    "40": {
+      "slot": "Cannon",
+      "effect_id": "rapid-fire-chance",
+      "name": "Fire Chance",
+      "rarity": "epic"
+    },
+    "41": {
+      "slot": "Cannon",
+      "effect_id": "rapid-fire-chance",
+      "name": "Fire Chance",
+      "rarity": "legendary"
+    },
+    "42": {
+      "slot": "Cannon",
+      "effect_id": "rapid-fire-chance",
+      "name": "Fire Chance",
+      "rarity": "legendary"
+    },
+    "43": {
+      "slot": "Cannon",
+      "effect_id": "rapid-fire-chance",
+      "name": "Fire Chance",
+      "rarity": "mythic"
+    },
+    "44": {
+      "slot": "Cannon",
+      "effect_id": "rapid-fire-duration",
+      "name": "Fire Duration",
+      "rarity": "rare"
+    },
+    "45": {
+      "slot": "Cannon",
+      "effect_id": "rapid-fire-duration",
+      "name": "Fire Duration",
+      "rarity": "epic"
+    },
+    "46": {
+      "slot": "Cannon",
+      "effect_id": "rapid-fire-duration",
+      "name": "Fire Duration",
+      "rarity": "legendary"
+    },
+    "47": {
+      "slot": "Cannon",
+      "effect_id": "rapid-fire-duration",
+      "name": "Fire Duration",
+      "rarity": "legendary"
+    },
+    "48": {
+      "slot": "Cannon",
+      "effect_id": "rapid-fire-duration",
+      "name": "Fire Duration",
+      "rarity": "mythic"
+    },
+    "49": {
+      "slot": "Cannon",
+      "effect_id": "bounce-shot-chance",
+      "name": "Shot Chance",
+      "rarity": "rare"
+    },
+    "50": {
+      "slot": "Cannon",
+      "effect_id": "bounce-shot-chance",
+      "name": "Shot Chance",
+      "rarity": "epic"
+    },
+    "51": {
+      "slot": "Cannon",
+      "effect_id": "bounce-shot-chance",
+      "name": "Shot Chance",
+      "rarity": "legendary"
+    },
+    "52": {
+      "slot": "Cannon",
+      "effect_id": "bounce-shot-chance",
+      "name": "Shot Chance",
+      "rarity": "legendary"
+    },
+    "53": {
+      "slot": "Cannon",
+      "effect_id": "bounce-shot-chance",
+      "name": "Shot Chance",
+      "rarity": "mythic"
+    },
+    "54": {
+      "slot": "Cannon",
+      "effect_id": "bounce-shot-targets",
+      "name": "Shot Targets",
+      "rarity": "epic"
+    },
+    "55": {
+      "slot": "Cannon",
+      "effect_id": "bounce-shot-targets",
+      "name": "Shot Targets",
+      "rarity": "legendary"
+    },
+    "56": {
+      "slot": "Cannon",
+      "effect_id": "bounce-shot-targets",
+      "name": "Shot Targets",
+      "rarity": "legendary"
+    },
+    "57": {
+      "slot": "Cannon",
+      "effect_id": "bounce-shot-targets",
+      "name": "Shot Targets",
+      "rarity": "mythic"
+    },
+    "58": {
+      "slot": "Cannon",
+      "effect_id": "bounce-shot-range",
+      "name": "Shot Range",
+      "rarity": "rare"
+    },
+    "59": {
+      "slot": "Cannon",
+      "effect_id": "bounce-shot-range",
+      "name": "Shot Range",
+      "rarity": "epic"
+    },
+    "60": {
+      "slot": "Cannon",
+      "effect_id": "bounce-shot-range",
+      "name": "Shot Range",
+      "rarity": "legendary"
+    },
+    "61": {
+      "slot": "Cannon",
+      "effect_id": "bounce-shot-range",
+      "name": "Shot Range",
+      "rarity": "legendary"
+    },
+    "62": {
+      "slot": "Cannon",
+      "effect_id": "bounce-shot-range",
+      "name": "Shot Range",
+      "rarity": "mythic"
+    },
+    "63": {
+      "slot": "Cannon",
+      "effect_id": "super-crit-chance",
+      "name": "Crit Chance",
+      "rarity": "epic"
+    },
+    "64": {
+      "slot": "Cannon",
+      "effect_id": "super-crit-chance",
+      "name": "Crit Chance",
+      "rarity": "legendary"
+    },
+    "65": {
+      "slot": "Cannon",
+      "effect_id": "super-crit-chance",
+      "name": "Crit Chance",
+      "rarity": "legendary"
+    },
+    "66": {
+      "slot": "Cannon",
+      "effect_id": "super-crit-chance",
+      "name": "Crit Chance",
+      "rarity": "mythic"
+    },
+    "67": {
+      "slot": "Cannon",
+      "effect_id": "super-crit-multi",
+      "name": "Crit Multi",
+      "rarity": "epic"
+    },
+    "68": {
+      "slot": "Cannon",
+      "effect_id": "super-crit-multi",
+      "name": "Crit Multi",
+      "rarity": "legendary"
+    },
+    "69": {
+      "slot": "Cannon",
+      "effect_id": "super-crit-multi",
+      "name": "Crit Multi",
+      "rarity": "legendary"
+    },
+    "70": {
+      "slot": "Cannon",
+      "effect_id": "super-crit-multi",
+      "name": "Crit Multi",
+      "rarity": "mythic"
+    },
+    "71": {
+      "slot": "Cannon",
+      "effect_id": "rend-armor-chance",
+      "name": "Armor Chance",
+      "rarity": "legendary"
+    },
+    "72": {
+      "slot": "Cannon",
+      "effect_id": "rend-armor-chance",
+      "name": "Armor Chance",
+      "rarity": "legendary"
+    },
+    "73": {
+      "slot": "Cannon",
+      "effect_id": "rend-armor-chance",
+      "name": "Armor Chance",
+      "rarity": "mythic"
+    },
+    "74": {
+      "slot": "Cannon",
+      "effect_id": "rend-armor-multi",
+      "name": "Armor Multi",
+      "rarity": "legendary"
+    },
+    "75": {
+      "slot": "Cannon",
+      "effect_id": "rend-armor-multi",
+      "name": "Armor Multi",
+      "rarity": "legendary"
+    },
+    "76": {
+      "slot": "Cannon",
+      "effect_id": "rend-armor-multi",
+      "name": "Armor Multi",
+      "rarity": "mythic"
+    },
+    "77": {
+      "slot": "Cannon",
+      "effect_id": "max-rend-armor-multi",
+      "name": "Rend Armor Multi",
+      "rarity": "legendary"
+    },
+    "78": {
+      "slot": "Cannon",
+      "effect_id": "max-rend-armor-multi",
+      "name": "Rend Armor Multi",
+      "rarity": "legendary"
+    },
+    "79": {
+      "slot": "Cannon",
+      "effect_id": "max-rend-armor-multi",
+      "name": "Rend Armor Multi",
+      "rarity": "mythic"
+    },
+    "80": {
+      "slot": "Armor",
+      "effect_id": "health-regen",
+      "name": "Regen",
+      "rarity": "common"
+    },
+    "81": {
+      "slot": "Armor",
+      "effect_id": "health-regen",
+      "name": "Regen",
+      "rarity": "common"
+    },
+    "82": {
+      "slot": "Armor",
+      "effect_id": "health-regen",
+      "name": "Regen",
+      "rarity": "rare"
+    },
+    "83": {
+      "slot": "Armor",
+      "effect_id": "health-regen",
+      "name": "Regen",
+      "rarity": "epic"
+    },
+    "84": {
+      "slot": "Armor",
+      "effect_id": "health-regen",
+      "name": "Regen",
+      "rarity": "legendary"
+    },
+    "85": {
+      "slot": "Armor",
+      "effect_id": "health-regen",
+      "name": "Regen",
+      "rarity": "mythic"
+    },
+    "86": {
+      "slot": "Armor",
+      "effect_id": "defense",
+      "name": "Defense",
+      "rarity": "common"
+    },
+    "87": {
+      "slot": "Armor",
+      "effect_id": "defense",
+      "name": "Defense",
+      "rarity": "common"
+    },
+    "88": {
+      "slot": "Armor",
+      "effect_id": "defense",
+      "name": "Defense",
+      "rarity": "rare"
+    },
+    "89": {
+      "slot": "Armor",
+      "effect_id": "defense",
+      "name": "Defense",
+      "rarity": "epic"
+    },
+    "90": {
+      "slot": "Armor",
+      "effect_id": "defense",
+      "name": "Defense",
+      "rarity": "legendary"
+    },
+    "91": {
+      "slot": "Armor",
+      "effect_id": "defense",
+      "name": "Defense",
+      "rarity": "mythic"
+    },
+    "92": {
+      "slot": "Armor",
+      "effect_id": "defense-absolute",
+      "name": "Absolute",
+      "rarity": "common"
+    },
+    "93": {
+      "slot": "Armor",
+      "effect_id": "defense-absolute",
+      "name": "Absolute",
+      "rarity": "common"
+    },
+    "94": {
+      "slot": "Armor",
+      "effect_id": "defense-absolute",
+      "name": "Absolute",
+      "rarity": "rare"
+    },
+    "95": {
+      "slot": "Armor",
+      "effect_id": "defense-absolute",
+      "name": "Absolute",
+      "rarity": "epic"
+    },
+    "96": {
+      "slot": "Armor",
+      "effect_id": "defense-absolute",
+      "name": "Absolute",
+      "rarity": "legendary"
+    },
+    "97": {
+      "slot": "Armor",
+      "effect_id": "defense-absolute",
+      "name": "Absolute",
+      "rarity": "mythic"
+    },
+    "98": {
+      "slot": "Armor",
+      "effect_id": "thorns-damage",
+      "name": "Damage",
+      "rarity": "epic"
+    },
+    "99": {
+      "slot": "Armor",
+      "effect_id": "thorns-damage",
+      "name": "Damage",
+      "rarity": "legendary"
+    },
+    "100": {
+      "slot": "Armor",
+      "effect_id": "thorns-damage",
+      "name": "Damage",
+      "rarity": "legendary"
+    },
+    "101": {
+      "slot": "Armor",
+      "effect_id": "thorns-damage",
+      "name": "Damage",
+      "rarity": "mythic"
+    },
+    "102": {
+      "slot": "Armor",
+      "effect_id": "lifesteal",
+      "name": "Lifesteal",
+      "rarity": "epic"
+    },
+    "103": {
+      "slot": "Armor",
+      "effect_id": "lifesteal",
+      "name": "Lifesteal",
+      "rarity": "legendary"
+    },
+    "104": {
+      "slot": "Armor",
+      "effect_id": "lifesteal",
+      "name": "Lifesteal",
+      "rarity": "legendary"
+    },
+    "105": {
+      "slot": "Armor",
+      "effect_id": "lifesteal",
+      "name": "Lifesteal",
+      "rarity": "mythic"
+    },
+    "106": {
+      "slot": "Armor",
+      "effect_id": "knockback-chance",
+      "name": "Chance",
+      "rarity": "epic"
+    },
+    "107": {
+      "slot": "Armor",
+      "effect_id": "knockback-chance",
+      "name": "Chance",
+      "rarity": "legendary"
+    },
+    "108": {
+      "slot": "Armor",
+      "effect_id": "knockback-chance",
+      "name": "Chance",
+      "rarity": "legendary"
+    },
+    "109": {
+      "slot": "Armor",
+      "effect_id": "knockback-chance",
+      "name": "Chance",
+      "rarity": "mythic"
+    },
+    "110": {
+      "slot": "Armor",
+      "effect_id": "knockback-force",
+      "name": "Force",
+      "rarity": "epic"
+    },
+    "111": {
+      "slot": "Armor",
+      "effect_id": "knockback-force",
+      "name": "Force",
+      "rarity": "legendary"
+    },
+    "112": {
+      "slot": "Armor",
+      "effect_id": "knockback-force",
+      "name": "Force",
+      "rarity": "legendary"
+    },
+    "113": {
+      "slot": "Armor",
+      "effect_id": "knockback-force",
+      "name": "Force",
+      "rarity": "mythic"
+    },
+    "114": {
+      "slot": "Armor",
+      "effect_id": "orb-speed",
+      "name": "Speed",
+      "rarity": "epic"
+    },
+    "115": {
+      "slot": "Armor",
+      "effect_id": "orb-speed",
+      "name": "Speed",
+      "rarity": "legendary"
+    },
+    "116": {
+      "slot": "Armor",
+      "effect_id": "orb-speed",
+      "name": "Speed",
+      "rarity": "legendary"
+    },
+    "117": {
+      "slot": "Armor",
+      "effect_id": "orb-speed",
+      "name": "Speed",
+      "rarity": "mythic"
+    },
+    "118": {
+      "slot": "Armor",
+      "effect_id": "orbs",
+      "name": "Orbs",
+      "rarity": "mythic"
+    },
+    "119": {
+      "slot": "Armor",
+      "effect_id": "orbs",
+      "name": "Orbs",
+      "rarity": "ancestral"
+    },
+    "120": {
+      "slot": "Armor",
+      "effect_id": "shockwave-size",
+      "name": "Size",
+      "rarity": "epic"
+    },
+    "121": {
+      "slot": "Armor",
+      "effect_id": "shockwave-size",
+      "name": "Size",
+      "rarity": "legendary"
+    },
+    "122": {
+      "slot": "Armor",
+      "effect_id": "shockwave-size",
+      "name": "Size",
+      "rarity": "legendary"
+    },
+    "123": {
+      "slot": "Armor",
+      "effect_id": "shockwave-size",
+      "name": "Size",
+      "rarity": "mythic"
+    },
+    "124": {
+      "slot": "Armor",
+      "effect_id": "shockwave-frequency-s",
+      "name": "Frequency S",
+      "rarity": "epic"
+    },
+    "125": {
+      "slot": "Armor",
+      "effect_id": "shockwave-frequency-s",
+      "name": "Frequency S",
+      "rarity": "legendary"
+    },
+    "126": {
+      "slot": "Armor",
+      "effect_id": "shockwave-frequency-s",
+      "name": "Frequency S",
+      "rarity": "legendary"
+    },
+    "127": {
+      "slot": "Armor",
+      "effect_id": "shockwave-frequency-s",
+      "name": "Frequency S",
+      "rarity": "mythic"
+    },
+    "128": {
+      "slot": "Armor",
+      "effect_id": "land-mine-chance",
+      "name": "Mine Chance",
+      "rarity": "rare"
+    },
+    "129": {
+      "slot": "Armor",
+      "effect_id": "land-mine-chance",
+      "name": "Mine Chance",
+      "rarity": "epic"
+    },
+    "130": {
+      "slot": "Armor",
+      "effect_id": "land-mine-chance",
+      "name": "Mine Chance",
+      "rarity": "legendary"
+    },
+    "131": {
+      "slot": "Armor",
+      "effect_id": "land-mine-chance",
+      "name": "Mine Chance",
+      "rarity": "legendary"
+    },
+    "132": {
+      "slot": "Armor",
+      "effect_id": "land-mine-chance",
+      "name": "Mine Chance",
+      "rarity": "mythic"
+    },
+    "133": {
+      "slot": "Armor",
+      "effect_id": "land-mine-damage",
+      "name": "Mine Damage",
+      "rarity": "rare"
+    },
+    "134": {
+      "slot": "Armor",
+      "effect_id": "land-mine-damage",
+      "name": "Mine Damage",
+      "rarity": "epic"
+    },
+    "135": {
+      "slot": "Armor",
+      "effect_id": "land-mine-damage",
+      "name": "Mine Damage",
+      "rarity": "legendary"
+    },
+    "136": {
+      "slot": "Armor",
+      "effect_id": "land-mine-damage",
+      "name": "Mine Damage",
+      "rarity": "legendary"
+    },
+    "137": {
+      "slot": "Armor",
+      "effect_id": "land-mine-damage",
+      "name": "Mine Damage",
+      "rarity": "mythic"
+    },
+    "138": {
+      "slot": "Armor",
+      "effect_id": "land-mine-radius",
+      "name": "Mine Radius",
+      "rarity": "rare"
+    },
+    "139": {
+      "slot": "Armor",
+      "effect_id": "land-mine-radius",
+      "name": "Mine Radius",
+      "rarity": "epic"
+    },
+    "140": {
+      "slot": "Armor",
+      "effect_id": "land-mine-radius",
+      "name": "Mine Radius",
+      "rarity": "legendary"
+    },
+    "141": {
+      "slot": "Armor",
+      "effect_id": "land-mine-radius",
+      "name": "Mine Radius",
+      "rarity": "legendary"
+    },
+    "142": {
+      "slot": "Armor",
+      "effect_id": "land-mine-radius",
+      "name": "Mine Radius",
+      "rarity": "mythic"
+    },
+    "143": {
+      "slot": "Armor",
+      "effect_id": "death-defy",
+      "name": "Defy",
+      "rarity": "legendary"
+    },
+    "144": {
+      "slot": "Armor",
+      "effect_id": "death-defy",
+      "name": "Defy",
+      "rarity": "legendary"
+    },
+    "145": {
+      "slot": "Armor",
+      "effect_id": "death-defy",
+      "name": "Defy",
+      "rarity": "mythic"
+    },
+    "146": {
+      "slot": "Armor",
+      "effect_id": "wall-health",
+      "name": "Health",
+      "rarity": "epic"
+    },
+    "147": {
+      "slot": "Armor",
+      "effect_id": "wall-health",
+      "name": "Health",
+      "rarity": "legendary"
+    },
+    "148": {
+      "slot": "Armor",
+      "effect_id": "wall-health",
+      "name": "Health",
+      "rarity": "legendary"
+    },
+    "149": {
+      "slot": "Armor",
+      "effect_id": "wall-health",
+      "name": "Health",
+      "rarity": "mythic"
+    },
+    "150": {
+      "slot": "Armor",
+      "effect_id": "wall-rebuild-s",
+      "name": "Rebuild S",
+      "rarity": "epic"
+    },
+    "151": {
+      "slot": "Armor",
+      "effect_id": "wall-rebuild-s",
+      "name": "Rebuild S",
+      "rarity": "legendary"
+    },
+    "152": {
+      "slot": "Armor",
+      "effect_id": "wall-rebuild-s",
+      "name": "Rebuild S",
+      "rarity": "legendary"
+    },
+    "153": {
+      "slot": "Armor",
+      "effect_id": "wall-rebuild-s",
+      "name": "Rebuild S",
+      "rarity": "mythic"
+    },
+    "154": {
+      "slot": "Generator",
+      "effect_id": "cash-bonus",
+      "name": "Bonus",
+      "rarity": "common"
+    },
+    "155": {
+      "slot": "Generator",
+      "effect_id": "cash-bonus",
+      "name": "Bonus",
+      "rarity": "common"
+    },
+    "156": {
+      "slot": "Generator",
+      "effect_id": "cash-bonus",
+      "name": "Bonus",
+      "rarity": "rare"
+    },
+    "157": {
+      "slot": "Generator",
+      "effect_id": "cash-bonus",
+      "name": "Bonus",
+      "rarity": "epic"
+    },
+    "158": {
+      "slot": "Generator",
+      "effect_id": "cash-bonus",
+      "name": "Bonus",
+      "rarity": "legendary"
+    },
+    "159": {
+      "slot": "Generator",
+      "effect_id": "cash-bonus",
+      "name": "Bonus",
+      "rarity": "mythic"
+    },
+    "160": {
+      "slot": "Generator",
+      "effect_id": "cash-wave",
+      "name": "Wave",
+      "rarity": "common"
+    },
+    "161": {
+      "slot": "Generator",
+      "effect_id": "cash-wave",
+      "name": "Wave",
+      "rarity": "common"
+    },
+    "162": {
+      "slot": "Generator",
+      "effect_id": "cash-wave",
+      "name": "Wave",
+      "rarity": "rare"
+    },
+    "163": {
+      "slot": "Generator",
+      "effect_id": "cash-wave",
+      "name": "Wave",
+      "rarity": "epic"
+    },
+    "164": {
+      "slot": "Generator",
+      "effect_id": "cash-wave",
+      "name": "Wave",
+      "rarity": "legendary"
+    },
+    "165": {
+      "slot": "Generator",
+      "effect_id": "cash-wave",
+      "name": "Wave",
+      "rarity": "mythic"
+    },
+    "166": {
+      "slot": "Generator",
+      "effect_id": "coins-kill-bonus",
+      "name": "Kill Bonus",
+      "rarity": "common"
+    },
+    "167": {
+      "slot": "Generator",
+      "effect_id": "coins-kill-bonus",
+      "name": "Kill Bonus",
+      "rarity": "common"
+    },
+    "168": {
+      "slot": "Generator",
+      "effect_id": "coins-kill-bonus",
+      "name": "Kill Bonus",
+      "rarity": "rare"
+    },
+    "169": {
+      "slot": "Generator",
+      "effect_id": "coins-kill-bonus",
+      "name": "Kill Bonus",
+      "rarity": "epic"
+    },
+    "170": {
+      "slot": "Generator",
+      "effect_id": "coins-kill-bonus",
+      "name": "Kill Bonus",
+      "rarity": "legendary"
+    },
+    "171": {
+      "slot": "Generator",
+      "effect_id": "coins-kill-bonus",
+      "name": "Kill Bonus",
+      "rarity": "mythic"
+    },
+    "172": {
+      "slot": "Generator",
+      "effect_id": "coins-wave",
+      "name": "Wave",
+      "rarity": "common"
+    },
+    "173": {
+      "slot": "Generator",
+      "effect_id": "coins-wave",
+      "name": "Wave",
+      "rarity": "common"
+    },
+    "174": {
+      "slot": "Generator",
+      "effect_id": "coins-wave",
+      "name": "Wave",
+      "rarity": "rare"
+    },
+    "175": {
+      "slot": "Generator",
+      "effect_id": "coins-wave",
+      "name": "Wave",
+      "rarity": "epic"
+    },
+    "176": {
+      "slot": "Generator",
+      "effect_id": "coins-wave",
+      "name": "Wave",
+      "rarity": "legendary"
+    },
+    "177": {
+      "slot": "Generator",
+      "effect_id": "coins-wave",
+      "name": "Wave",
+      "rarity": "mythic"
+    },
+    "178": {
+      "slot": "Generator",
+      "effect_id": "free-attack-upgrade",
+      "name": "Attack Upgrade",
+      "rarity": "common"
+    },
+    "179": {
+      "slot": "Generator",
+      "effect_id": "free-attack-upgrade",
+      "name": "Attack Upgrade",
+      "rarity": "common"
+    },
+    "180": {
+      "slot": "Generator",
+      "effect_id": "free-attack-upgrade",
+      "name": "Attack Upgrade",
+      "rarity": "rare"
+    },
+    "181": {
+      "slot": "Generator",
+      "effect_id": "free-attack-upgrade",
+      "name": "Attack Upgrade",
+      "rarity": "epic"
+    },
+    "182": {
+      "slot": "Generator",
+      "effect_id": "free-attack-upgrade",
+      "name": "Attack Upgrade",
+      "rarity": "legendary"
+    },
+    "183": {
+      "slot": "Generator",
+      "effect_id": "free-attack-upgrade",
+      "name": "Attack Upgrade",
+      "rarity": "mythic"
+    },
+    "184": {
+      "slot": "Generator",
+      "effect_id": "free-defense-upgrade",
+      "name": "Defense Upgrade",
+      "rarity": "common"
+    },
+    "185": {
+      "slot": "Generator",
+      "effect_id": "free-defense-upgrade",
+      "name": "Defense Upgrade",
+      "rarity": "common"
+    },
+    "186": {
+      "slot": "Generator",
+      "effect_id": "free-defense-upgrade",
+      "name": "Defense Upgrade",
+      "rarity": "rare"
+    },
+    "187": {
+      "slot": "Generator",
+      "effect_id": "free-defense-upgrade",
+      "name": "Defense Upgrade",
+      "rarity": "epic"
+    },
+    "188": {
+      "slot": "Generator",
+      "effect_id": "free-defense-upgrade",
+      "name": "Defense Upgrade",
+      "rarity": "legendary"
+    },
+    "189": {
+      "slot": "Generator",
+      "effect_id": "free-defense-upgrade",
+      "name": "Defense Upgrade",
+      "rarity": "mythic"
+    },
+    "190": {
+      "slot": "Generator",
+      "effect_id": "free-utility-upgrade",
+      "name": "Utility Upgrade",
+      "rarity": "common"
+    },
+    "191": {
+      "slot": "Generator",
+      "effect_id": "free-utility-upgrade",
+      "name": "Utility Upgrade",
+      "rarity": "common"
+    },
+    "192": {
+      "slot": "Generator",
+      "effect_id": "free-utility-upgrade",
+      "name": "Utility Upgrade",
+      "rarity": "rare"
+    },
+    "193": {
+      "slot": "Generator",
+      "effect_id": "free-utility-upgrade",
+      "name": "Utility Upgrade",
+      "rarity": "epic"
+    },
+    "194": {
+      "slot": "Generator",
+      "effect_id": "free-utility-upgrade",
+      "name": "Utility Upgrade",
+      "rarity": "legendary"
+    },
+    "195": {
+      "slot": "Generator",
+      "effect_id": "free-utility-upgrade",
+      "name": "Utility Upgrade",
+      "rarity": "mythic"
+    },
+    "196": {
+      "slot": "Generator",
+      "effect_id": "interest-wave",
+      "name": "Wave",
+      "rarity": "epic"
+    },
+    "197": {
+      "slot": "Generator",
+      "effect_id": "interest-wave",
+      "name": "Wave",
+      "rarity": "legendary"
+    },
+    "198": {
+      "slot": "Generator",
+      "effect_id": "interest-wave",
+      "name": "Wave",
+      "rarity": "legendary"
+    },
+    "199": {
+      "slot": "Generator",
+      "effect_id": "interest-wave",
+      "name": "Wave",
+      "rarity": "mythic"
+    },
+    "200": {
+      "slot": "Generator",
+      "effect_id": "recovery-amount",
+      "name": "Amount",
+      "rarity": "epic"
+    },
+    "201": {
+      "slot": "Generator",
+      "effect_id": "recovery-amount",
+      "name": "Amount",
+      "rarity": "legendary"
+    },
+    "202": {
+      "slot": "Generator",
+      "effect_id": "recovery-amount",
+      "name": "Amount",
+      "rarity": "legendary"
+    },
+    "203": {
+      "slot": "Generator",
+      "effect_id": "recovery-amount",
+      "name": "Amount",
+      "rarity": "mythic"
+    },
+    "204": {
+      "slot": "Generator",
+      "effect_id": "max-recovery",
+      "name": "Recovery",
+      "rarity": "epic"
+    },
+    "205": {
+      "slot": "Generator",
+      "effect_id": "max-recovery",
+      "name": "Recovery",
+      "rarity": "legendary"
+    },
+    "206": {
+      "slot": "Generator",
+      "effect_id": "max-recovery",
+      "name": "Recovery",
+      "rarity": "legendary"
+    },
+    "207": {
+      "slot": "Generator",
+      "effect_id": "max-recovery",
+      "name": "Recovery",
+      "rarity": "mythic"
+    },
+    "208": {
+      "slot": "Generator",
+      "effect_id": "package-chance",
+      "name": "Chance",
+      "rarity": "epic"
+    },
+    "209": {
+      "slot": "Generator",
+      "effect_id": "package-chance",
+      "name": "Chance",
+      "rarity": "legendary"
+    },
+    "210": {
+      "slot": "Generator",
+      "effect_id": "package-chance",
+      "name": "Chance",
+      "rarity": "mythic"
+    },
+    "211": {
+      "slot": "Generator",
+      "effect_id": "package-chance",
+      "name": "Chance",
+      "rarity": "ancestral"
+    },
+    "212": {
+      "slot": "Generator",
+      "effect_id": "enemy-attack-level-skip",
+      "name": "Attack Level Skip",
+      "rarity": "epic"
+    },
+    "213": {
+      "slot": "Generator",
+      "effect_id": "enemy-attack-level-skip",
+      "name": "Attack Level Skip",
+      "rarity": "legendary"
+    },
+    "214": {
+      "slot": "Generator",
+      "effect_id": "enemy-attack-level-skip",
+      "name": "Attack Level Skip",
+      "rarity": "mythic"
+    },
+    "215": {
+      "slot": "Generator",
+      "effect_id": "enemy-attack-level-skip",
+      "name": "Attack Level Skip",
+      "rarity": "ancestral"
+    },
+    "216": {
+      "slot": "Generator",
+      "effect_id": "enemy-health-level-skip",
+      "name": "Health Level Skip",
+      "rarity": "epic"
+    },
+    "217": {
+      "slot": "Generator",
+      "effect_id": "enemy-health-level-skip",
+      "name": "Health Level Skip",
+      "rarity": "legendary"
+    },
+    "218": {
+      "slot": "Generator",
+      "effect_id": "enemy-health-level-skip",
+      "name": "Health Level Skip",
+      "rarity": "mythic"
+    },
+    "219": {
+      "slot": "Generator",
+      "effect_id": "enemy-health-level-skip",
+      "name": "Health Level Skip",
+      "rarity": "ancestral"
+    },
+    "220": {
+      "slot": "Core",
+      "effect_id": "chain-lightning-damage-x",
+      "name": "Lightning Damage X",
+      "rarity": "legendary"
+    },
+    "221": {
+      "slot": "Core",
+      "effect_id": "chain-lightning-damage-x",
+      "name": "Lightning Damage X",
+      "rarity": "mythic"
+    },
+    "222": {
+      "slot": "Core",
+      "effect_id": "chain-lightning-damage-x",
+      "name": "Lightning Damage X",
+      "rarity": "ancestral"
+    },
+    "223": {
+      "slot": "Core",
+      "effect_id": "chain-lightning-damage-x",
+      "name": "Lightning Damage X",
+      "rarity": "epic"
+    },
+    "224": {
+      "slot": "Core",
+      "effect_id": "chain-lightning-damage-x",
+      "name": "Lightning Damage X",
+      "rarity": "legendary"
+    },
+    "225": {
+      "slot": "Core",
+      "effect_id": "chain-lightning-damage-x",
+      "name": "Lightning Damage X",
+      "rarity": "mythic"
+    },
+    "226": {
+      "slot": "Core",
+      "effect_id": "chain-lightning-quantity",
+      "name": "Lightning Quantity",
+      "rarity": "epic"
+    },
+    "227": {
+      "slot": "Core",
+      "effect_id": "chain-lightning-quantity",
+      "name": "Lightning Quantity",
+      "rarity": "legendary"
+    },
+    "228": {
+      "slot": "Core",
+      "effect_id": "chain-lightning-quantity",
+      "name": "Lightning Quantity",
+      "rarity": "legendary"
+    },
+    "229": {
+      "slot": "Core",
+      "effect_id": "chain-lightning-quantity",
+      "name": "Lightning Quantity",
+      "rarity": "mythic"
+    },
+    "230": {
+      "slot": "Core",
+      "effect_id": "chain-lightning-chance",
+      "name": "Lightning Chance",
+      "rarity": "legendary"
+    },
+    "231": {
+      "slot": "Core",
+      "effect_id": "chain-lightning-chance",
+      "name": "Lightning Chance",
+      "rarity": "mythic"
+    },
+    "232": {
+      "slot": "Core",
+      "effect_id": "chain-lightning-chance",
+      "name": "Lightning Chance",
+      "rarity": "ancestral"
+    },
+    "233": {
+      "slot": "Core",
+      "effect_id": "chain-lightning-chance",
+      "name": "Lightning Chance",
+      "rarity": "epic"
+    },
+    "234": {
+      "slot": "Core",
+      "effect_id": "chain-lightning-chance",
+      "name": "Lightning Chance",
+      "rarity": "legendary"
+    },
+    "235": {
+      "slot": "Core",
+      "effect_id": "chain-lightning-chance",
+      "name": "Lightning Chance",
+      "rarity": "mythic"
+    },
+    "236": {
+      "slot": "Core",
+      "effect_id": "smart-missiles-damage",
+      "name": "Missiles Damage",
+      "rarity": "legendary"
+    },
+    "237": {
+      "slot": "Core",
+      "effect_id": "smart-missiles-damage",
+      "name": "Missiles Damage",
+      "rarity": "mythic"
+    },
+    "238": {
+      "slot": "Core",
+      "effect_id": "smart-missiles-damage",
+      "name": "Missiles Damage",
+      "rarity": "ancestral"
+    },
+    "239": {
+      "slot": "Core",
+      "effect_id": "smart-missiles-damage",
+      "name": "Missiles Damage",
+      "rarity": "epic"
+    },
+    "240": {
+      "slot": "Core",
+      "effect_id": "smart-missiles-damage",
+      "name": "Missiles Damage",
+      "rarity": "legendary"
+    },
+    "241": {
+      "slot": "Core",
+      "effect_id": "smart-missiles-damage",
+      "name": "Missiles Damage",
+      "rarity": "mythic"
+    },
+    "242": {
+      "slot": "Core",
+      "effect_id": "smart-missiles-quantity",
+      "name": "Missiles Quantity",
+      "rarity": "epic"
+    },
+    "243": {
+      "slot": "Core",
+      "effect_id": "smart-missiles-quantity",
+      "name": "Missiles Quantity",
+      "rarity": "legendary"
+    },
+    "244": {
+      "slot": "Core",
+      "effect_id": "smart-missiles-quantity",
+      "name": "Missiles Quantity",
+      "rarity": "legendary"
+    },
+    "245": {
+      "slot": "Core",
+      "effect_id": "smart-missiles-quantity",
+      "name": "Missiles Quantity",
+      "rarity": "mythic"
+    },
+    "246": {
+      "slot": "Core",
+      "effect_id": "death-wave-damage-x",
+      "name": "Wave Damage X",
+      "rarity": "legendary"
+    },
+    "247": {
+      "slot": "Core",
+      "effect_id": "death-wave-damage-x",
+      "name": "Wave Damage X",
+      "rarity": "mythic"
+    },
+    "248": {
+      "slot": "Core",
+      "effect_id": "death-wave-damage-x",
+      "name": "Wave Damage X",
+      "rarity": "ancestral"
+    },
+    "249": {
+      "slot": "Core",
+      "effect_id": "death-wave-damage-x",
+      "name": "Wave Damage X",
+      "rarity": "epic"
+    },
+    "250": {
+      "slot": "Core",
+      "effect_id": "death-wave-damage-x",
+      "name": "Wave Damage X",
+      "rarity": "legendary"
+    },
+    "251": {
+      "slot": "Core",
+      "effect_id": "death-wave-damage-x",
+      "name": "Wave Damage X",
+      "rarity": "mythic"
+    },
+    "252": {
+      "slot": "Core",
+      "effect_id": "death-wave-quantity",
+      "name": "Wave Quantity",
+      "rarity": "legendary"
+    },
+    "253": {
+      "slot": "Core",
+      "effect_id": "death-wave-quantity",
+      "name": "Wave Quantity",
+      "rarity": "legendary"
+    },
+    "254": {
+      "slot": "Core",
+      "effect_id": "death-wave-quantity",
+      "name": "Wave Quantity",
+      "rarity": "mythic"
+    },
+    "255": {
+      "slot": "Core",
+      "effect_id": "smart-missiles-cooldown-s",
+      "name": "Missiles Cooldown S",
+      "rarity": "legendary"
+    },
+    "256": {
+      "slot": "Core",
+      "effect_id": "smart-missiles-cooldown-s",
+      "name": "Missiles Cooldown S",
+      "rarity": "legendary"
+    },
+    "257": {
+      "slot": "Core",
+      "effect_id": "smart-missiles-cooldown-s",
+      "name": "Missiles Cooldown S",
+      "rarity": "mythic"
+    },
+    "258": {
+      "slot": "Core",
+      "effect_id": "death-wave-cooldown-s",
+      "name": "Wave Cooldown S",
+      "rarity": "legendary"
+    },
+    "259": {
+      "slot": "Core",
+      "effect_id": "death-wave-cooldown-s",
+      "name": "Wave Cooldown S",
+      "rarity": "legendary"
+    },
+    "260": {
+      "slot": "Core",
+      "effect_id": "death-wave-cooldown-s",
+      "name": "Wave Cooldown S",
+      "rarity": "mythic"
+    },
+    "261": {
+      "slot": "Core",
+      "effect_id": "chrono-field-duration-s",
+      "name": "Field Duration S",
+      "rarity": "legendary"
+    },
+    "262": {
+      "slot": "Core",
+      "effect_id": "chrono-field-duration-s",
+      "name": "Field Duration S",
+      "rarity": "legendary"
+    },
+    "263": {
+      "slot": "Core",
+      "effect_id": "chrono-field-duration-s",
+      "name": "Field Duration S",
+      "rarity": "mythic"
+    },
+    "264": {
+      "slot": "Core",
+      "effect_id": "chrono-field-speed-reduction",
+      "name": "Field Speed Reduction",
+      "rarity": "epic"
+    },
+    "265": {
+      "slot": "Core",
+      "effect_id": "chrono-field-speed-reduction",
+      "name": "Field Speed Reduction",
+      "rarity": "legendary"
+    },
+    "266": {
+      "slot": "Core",
+      "effect_id": "chrono-field-speed-reduction",
+      "name": "Field Speed Reduction",
+      "rarity": "legendary"
+    },
+    "267": {
+      "slot": "Core",
+      "effect_id": "chrono-field-speed-reduction",
+      "name": "Field Speed Reduction",
+      "rarity": "mythic"
+    },
+    "268": {
+      "slot": "Core",
+      "effect_id": "chrono-field-cooldown-s",
+      "name": "Field Cooldown S",
+      "rarity": "legendary"
+    },
+    "269": {
+      "slot": "Core",
+      "effect_id": "chrono-field-cooldown-s",
+      "name": "Field Cooldown S",
+      "rarity": "legendary"
+    },
+    "270": {
+      "slot": "Core",
+      "effect_id": "chrono-field-cooldown-s",
+      "name": "Field Cooldown S",
+      "rarity": "mythic"
+    },
+    "271": {
+      "slot": "Core",
+      "effect_id": "inner-land-mines-damage-x",
+      "name": "Land Mines Damage X",
+      "rarity": "legendary"
+    },
+    "272": {
+      "slot": "Core",
+      "effect_id": "inner-land-mines-damage-x",
+      "name": "Land Mines Damage X",
+      "rarity": "mythic"
+    },
+    "273": {
+      "slot": "Core",
+      "effect_id": "inner-land-mines-damage-x",
+      "name": "Land Mines Damage X",
+      "rarity": "ancestral"
+    },
+    "274": {
+      "slot": "Core",
+      "effect_id": "inner-land-mines-damage-x",
+      "name": "Land Mines Damage X",
+      "rarity": "epic"
+    },
+    "275": {
+      "slot": "Core",
+      "effect_id": "inner-land-mines-damage-x",
+      "name": "Land Mines Damage X",
+      "rarity": "legendary"
+    },
+    "276": {
+      "slot": "Core",
+      "effect_id": "inner-land-mines-damage-x",
+      "name": "Land Mines Damage X",
+      "rarity": "mythic"
+    },
+    "277": {
+      "slot": "Core",
+      "effect_id": "inner-land-mines-quantity",
+      "name": "Land Mines Quantity",
+      "rarity": "legendary"
+    },
+    "278": {
+      "slot": "Core",
+      "effect_id": "inner-land-mines-quantity",
+      "name": "Land Mines Quantity",
+      "rarity": "legendary"
+    },
+    "279": {
+      "slot": "Core",
+      "effect_id": "inner-land-mines-quantity",
+      "name": "Land Mines Quantity",
+      "rarity": "mythic"
+    },
+    "280": {
+      "slot": "Core",
+      "effect_id": "golden-tower-bonus",
+      "name": "Tower Bonus",
+      "rarity": "epic"
+    },
+    "281": {
+      "slot": "Core",
+      "effect_id": "golden-tower-bonus",
+      "name": "Tower Bonus",
+      "rarity": "legendary"
+    },
+    "282": {
+      "slot": "Core",
+      "effect_id": "golden-tower-bonus",
+      "name": "Tower Bonus",
+      "rarity": "legendary"
+    },
+    "283": {
+      "slot": "Core",
+      "effect_id": "golden-tower-bonus",
+      "name": "Tower Bonus",
+      "rarity": "mythic"
+    },
+    "284": {
+      "slot": "Core",
+      "effect_id": "inner-land-mines-cooldown-s",
+      "name": "Land Mines Cooldown S",
+      "rarity": "epic"
+    },
+    "285": {
+      "slot": "Core",
+      "effect_id": "inner-land-mines-cooldown-s",
+      "name": "Land Mines Cooldown S",
+      "rarity": "legendary"
+    },
+    "286": {
+      "slot": "Core",
+      "effect_id": "inner-land-mines-cooldown-s",
+      "name": "Land Mines Cooldown S",
+      "rarity": "legendary"
+    },
+    "287": {
+      "slot": "Core",
+      "effect_id": "inner-land-mines-cooldown-s",
+      "name": "Land Mines Cooldown S",
+      "rarity": "mythic"
+    },
+    "288": {
+      "slot": "Core",
+      "effect_id": "golden-tower-duration-s",
+      "name": "Tower Duration S",
+      "rarity": "legendary"
+    },
+    "289": {
+      "slot": "Core",
+      "effect_id": "golden-tower-duration-s",
+      "name": "Tower Duration S",
+      "rarity": "legendary"
+    },
+    "290": {
+      "slot": "Core",
+      "effect_id": "golden-tower-duration-s",
+      "name": "Tower Duration S",
+      "rarity": "mythic"
+    },
+    "291": {
+      "slot": "Core",
+      "effect_id": "golden-tower-cooldown-s",
+      "name": "Tower Cooldown S",
+      "rarity": "legendary"
+    },
+    "292": {
+      "slot": "Core",
+      "effect_id": "golden-tower-cooldown-s",
+      "name": "Tower Cooldown S",
+      "rarity": "legendary"
+    },
+    "293": {
+      "slot": "Core",
+      "effect_id": "golden-tower-cooldown-s",
+      "name": "Tower Cooldown S",
+      "rarity": "mythic"
+    },
+    "294": {
+      "slot": "Core",
+      "effect_id": "poison-swamp-damage-x",
+      "name": "Swamp Damage X",
+      "rarity": "legendary"
+    },
+    "295": {
+      "slot": "Core",
+      "effect_id": "poison-swamp-damage-x",
+      "name": "Swamp Damage X",
+      "rarity": "mythic"
+    },
+    "296": {
+      "slot": "Core",
+      "effect_id": "poison-swamp-damage-x",
+      "name": "Swamp Damage X",
+      "rarity": "ancestral"
+    },
+    "297": {
+      "slot": "Core",
+      "effect_id": "poison-swamp-damage-x",
+      "name": "Swamp Damage X",
+      "rarity": "epic"
+    },
+    "298": {
+      "slot": "Core",
+      "effect_id": "poison-swamp-damage-x",
+      "name": "Swamp Damage X",
+      "rarity": "legendary"
+    },
+    "299": {
+      "slot": "Core",
+      "effect_id": "poison-swamp-damage-x",
+      "name": "Swamp Damage X",
+      "rarity": "mythic"
+    },
+    "300": {
+      "slot": "Core",
+      "effect_id": "poison-swamp-duration-s",
+      "name": "Swamp Duration S",
+      "rarity": "legendary"
+    },
+    "301": {
+      "slot": "Core",
+      "effect_id": "poison-swamp-duration-s",
+      "name": "Swamp Duration S",
+      "rarity": "legendary"
+    },
+    "302": {
+      "slot": "Core",
+      "effect_id": "poison-swamp-duration-s",
+      "name": "Swamp Duration S",
+      "rarity": "mythic"
+    },
+    "303": {
+      "slot": "Core",
+      "effect_id": "poison-swamp-cooldown-s",
+      "name": "Swamp Cooldown S",
+      "rarity": "rare"
+    },
+    "304": {
+      "slot": "Core",
+      "effect_id": "poison-swamp-cooldown-s",
+      "name": "Swamp Cooldown S",
+      "rarity": "epic"
+    },
+    "305": {
+      "slot": "Core",
+      "effect_id": "poison-swamp-cooldown-s",
+      "name": "Swamp Cooldown S",
+      "rarity": "legendary"
+    },
+    "306": {
+      "slot": "Core",
+      "effect_id": "poison-swamp-cooldown-s",
+      "name": "Swamp Cooldown S",
+      "rarity": "legendary"
+    },
+    "307": {
+      "slot": "Core",
+      "effect_id": "poison-swamp-cooldown-s",
+      "name": "Swamp Cooldown S",
+      "rarity": "mythic"
+    },
+    "308": {
+      "slot": "Core",
+      "effect_id": "black-hole-cooldown-s",
+      "name": "Hole Cooldown S",
+      "rarity": "legendary"
+    },
+    "309": {
+      "slot": "Core",
+      "effect_id": "black-hole-cooldown-s",
+      "name": "Hole Cooldown S",
+      "rarity": "legendary"
+    },
+    "310": {
+      "slot": "Core",
+      "effect_id": "black-hole-cooldown-s",
+      "name": "Hole Cooldown S",
+      "rarity": "mythic"
+    },
+    "311": {
+      "slot": "Core",
+      "effect_id": "black-hole-duration-s",
+      "name": "Hole Duration S",
+      "rarity": "legendary"
+    },
+    "312": {
+      "slot": "Core",
+      "effect_id": "black-hole-duration-s",
+      "name": "Hole Duration S",
+      "rarity": "legendary"
+    },
+    "313": {
+      "slot": "Core",
+      "effect_id": "black-hole-duration-s",
+      "name": "Hole Duration S",
+      "rarity": "mythic"
+    },
+    "314": {
+      "slot": "Core",
+      "effect_id": "black-hole-size-m",
+      "name": "Hole Size M",
+      "rarity": "legendary"
+    },
+    "315": {
+      "slot": "Core",
+      "effect_id": "black-hole-size-m",
+      "name": "Hole Size M",
+      "rarity": "mythic"
+    },
+    "316": {
+      "slot": "Core",
+      "effect_id": "black-hole-size-m",
+      "name": "Hole Size M",
+      "rarity": "ancestral"
+    },
+    "317": {
+      "slot": "Core",
+      "effect_id": "black-hole-size-m",
+      "name": "Hole Size M",
+      "rarity": "epic"
+    },
+    "318": {
+      "slot": "Core",
+      "effect_id": "black-hole-size-m",
+      "name": "Hole Size M",
+      "rarity": "legendary"
+    },
+    "319": {
+      "slot": "Core",
+      "effect_id": "black-hole-size-m",
+      "name": "Hole Size M",
+      "rarity": "mythic"
+    },
+    "320": {
+      "slot": "Core",
+      "effect_id": "spotlight-bonus",
+      "name": "Bonus",
+      "rarity": "legendary"
+    },
+    "321": {
+      "slot": "Core",
+      "effect_id": "spotlight-bonus",
+      "name": "Bonus",
+      "rarity": "mythic"
+    },
+    "322": {
+      "slot": "Core",
+      "effect_id": "spotlight-bonus",
+      "name": "Bonus",
+      "rarity": "ancestral"
+    },
+    "323": {
+      "slot": "Core",
+      "effect_id": "spotlight-bonus",
+      "name": "Bonus",
+      "rarity": "epic"
+    },
+    "324": {
+      "slot": "Core",
+      "effect_id": "spotlight-bonus",
+      "name": "Bonus",
+      "rarity": "legendary"
+    },
+    "325": {
+      "slot": "Core",
+      "effect_id": "spotlight-bonus",
+      "name": "Bonus",
+      "rarity": "mythic"
+    },
+    "326": {
+      "slot": "Core",
+      "effect_id": "spotlight-angle",
+      "name": "Angle",
+      "rarity": "epic"
+    },
+    "327": {
+      "slot": "Core",
+      "effect_id": "spotlight-angle",
+      "name": "Angle",
+      "rarity": "legendary"
+    },
+    "328": {
+      "slot": "Core",
+      "effect_id": "spotlight-angle",
+      "name": "Angle",
+      "rarity": "legendary"
+    },
+    "329": {
+      "slot": "Core",
+      "effect_id": "spotlight-angle",
+      "name": "Angle",
+      "rarity": "mythic"
+    }
+  }
+}

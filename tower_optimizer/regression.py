@@ -18,7 +18,7 @@ from .game_data_updater import active_update_health
 def bundled_data_status() -> List[Dict[str, Any]]:
     root = Path(__file__).resolve().parent / "game_data"
     rows: List[Dict[str, Any]] = []
-    for name in ["metadata.json", "workshop.json", "labs.json", "ultimate_weapons.json", "modules.json", "whole_account.json"]:
+    for name in ["metadata.json", "workshop.json", "labs.json", "ultimate_weapons.json", "modules.json", "relics.json", "uw_save_tracks.json", "save_guardians.json", "save_card_index.json", "save_themes.json", "save_module_effects.json", "whole_account.json"]:
         path = root / name
         status = "PASS"
         detail = ""

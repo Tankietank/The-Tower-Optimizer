@@ -1,0 +1,469 @@
+{
+  "version": "1.0.0",
+  "source": "Tower Optimizer bundled catalog derived from authorized TowerSmith reference data (see NOTICE.md).",
+  "index_maps": {
+    "tower": {
+      "1": {
+        "id": "tower-event-star",
+        "name": "Event Star"
+      },
+      "2": {
+        "id": "tower-event-eye-of-the-lord",
+        "name": "Event Eye Of The Lord"
+      },
+      "3": {
+        "id": "tower-event-plasma-ball",
+        "name": "Event Plasma Ball"
+      },
+      "4": {
+        "id": "tower-event-bee",
+        "name": "Event Bee"
+      },
+      "5": {
+        "id": "tower-event-north-spirit",
+        "name": "Event North Spirit"
+      },
+      "6": {
+        "id": "tower-event-alien",
+        "name": "Event Alien"
+      },
+      "7": {
+        "id": "tower-event-water-droplet",
+        "name": "Event Water Droplet"
+      },
+      "8": {
+        "id": "tower-event-cherry-blossom",
+        "name": "Event Cherry Blossom"
+      },
+      "9": {
+        "id": "tower-shuriken",
+        "name": "Shuriken"
+      },
+      "10": {
+        "id": "tower-donut",
+        "name": "Donut"
+      },
+      "11": {
+        "id": "tower-yin-yang",
+        "name": "Yin Yang"
+      },
+      "12": {
+        "id": "tower-smile",
+        "name": "Smile"
+      },
+      "13": {
+        "id": "tower-butterfly",
+        "name": "Butterfly"
+      },
+      "14": {
+        "id": "tower-sheep",
+        "name": "Sheep"
+      },
+      "15": {
+        "id": "tower-fried-egg",
+        "name": "Fried Egg"
+      },
+      "16": {
+        "id": "tower-mush-mush",
+        "name": "Mush Mush"
+      },
+      "17": {
+        "id": "tower-turtle",
+        "name": "Turtle"
+      },
+      "18": {
+        "id": "tower-cheese",
+        "name": "Cheese"
+      },
+      "19": {
+        "id": "tower-cat",
+        "name": "Cat"
+      },
+      "20": {
+        "id": "tower-skull",
+        "name": "Skull"
+      },
+      "23": {
+        "id": "tower-event-neo-turbo",
+        "name": "Event Neo Turbo"
+      },
+      "27": {
+        "id": "tower-event-spider",
+        "name": "Event Spider"
+      },
+      "28": {
+        "id": "tower-event-sentinel",
+        "name": "Event Sentinel"
+      },
+      "30": {
+        "id": "tower-event-virus",
+        "name": "Event Virus"
+      },
+      "33": {
+        "id": "tower-event-autumn-leaf",
+        "name": "Event Autumn Leaf"
+      },
+      "34": {
+        "id": "tower-event-invader",
+        "name": "Event Invader"
+      },
+      "35": {
+        "id": "tower-event-toast-glass",
+        "name": "Event Toast Glass"
+      },
+      "36": {
+        "id": "tower-event-dark-tower",
+        "name": "Event Dark Tower"
+      },
+      "37": {
+        "id": "tower-event-dive-helmet",
+        "name": "Event Dive Helmet"
+      },
+      "38": {
+        "id": "tower-event-starship",
+        "name": "Event Starship"
+      },
+      "39": {
+        "id": "tower-event-elite-tower",
+        "name": "Event Elite Tower"
+      },
+      "40": {
+        "id": "tower-event-fisherman",
+        "name": "Event Fisherman"
+      },
+      "41": {
+        "id": "tower-event-storm-eye",
+        "name": "Event Storm Eye"
+      },
+      "42": {
+        "id": "tower-event-umbrella",
+        "name": "Event Umbrella"
+      },
+      "43": {
+        "id": "tower-event-noise-tower",
+        "name": "Event Noise Tower"
+      },
+      "48": {
+        "id": "tower-event-snowman",
+        "name": "Event Snowman"
+      },
+      "49": {
+        "id": "tower-event-black-cat",
+        "name": "Event Black Cat"
+      },
+      "50": {
+        "id": "tower-event-black-hole",
+        "name": "Event Black Hole"
+      },
+      "51": {
+        "id": "tower-event-pocket-watch",
+        "name": "Event Pocket Watch"
+      },
+      "52": {
+        "id": "tower-guild-crown",
+        "name": "Guild Crown"
+      },
+      "53": {
+        "id": "tower-event-neon-pi",
+        "name": "Event Neon Pi"
+      },
+      "54": {
+        "id": "tower-guild-mech-warrior",
+        "name": "Guild Mech Warrior"
+      },
+      "55": {
+        "id": "tower-event-marshmallow",
+        "name": "Event Marshmallow"
+      },
+      "56": {
+        "id": "tower-event-cthulhu",
+        "name": "Event Cthulhu"
+      },
+      "57": {
+        "id": "tower-event-frog",
+        "name": "Event Frog"
+      },
+      "58": {
+        "id": "tower-guild-dj",
+        "name": "Guild Dj"
+      },
+      "63": {
+        "id": "tower-guild-pixel-soldier",
+        "name": "Guild Pixel Soldier"
+      },
+      "64": {
+        "id": "tower-event-flying-car",
+        "name": "Event Flying Car"
+      },
+      "65": {
+        "id": "tower-event-crystal",
+        "name": "Event Crystal"
+      },
+      "66": {
+        "id": "tower-event-balloon",
+        "name": "Event Balloon"
+      },
+      "67": {
+        "id": "tower-guild-restless-eye",
+        "name": "Guild Restless Eye"
+      },
+      "68": {
+        "id": "tower-guild-shining-star",
+        "name": "Guild Shining Star"
+      },
+      "69": {
+        "id": "tower-event-heart",
+        "name": "Event Heart"
+      },
+      "70": {
+        "id": "tower-event-glitch",
+        "name": "Event Glitch"
+      },
+      "71": {
+        "id": "tower-guild-space-telescope",
+        "name": "Guild Space Telescope"
+      },
+      "72": {
+        "id": "tower-guild-bear",
+        "name": "Guild Bear"
+      },
+      "73": {
+        "id": "tower-event-brain",
+        "name": "Event Brain"
+      },
+      "74": {
+        "id": "tower-guild-rabbit-in-hat",
+        "name": "Guild Rabbit In Hat"
+      },
+      "75": {
+        "id": "tower-event-cake",
+        "name": "Event Cake"
+      }
+    },
+    "background": {
+      "1": {
+        "id": "bg-interstellar",
+        "name": "Interstellar"
+      },
+      "2": {
+        "id": "bg-volcano",
+        "name": "Volcano"
+      },
+      "3": {
+        "id": "bg-plasma-field",
+        "name": "Plasma Field"
+      },
+      "4": {
+        "id": "bg-honeycomb",
+        "name": "Honeycomb"
+      },
+      "5": {
+        "id": "bg-aurora",
+        "name": "Aurora"
+      },
+      "6": {
+        "id": "bg-alien-ship",
+        "name": "Alien Ship"
+      },
+      "7": {
+        "id": "bg-ocean-night",
+        "name": "Ocean Night"
+      },
+      "8": {
+        "id": "bg-sakura",
+        "name": "Sakura"
+      },
+      "9": {
+        "id": "bg-easter",
+        "name": "Easter"
+      },
+      "10": {
+        "id": "bg-retrowave",
+        "name": "Retrowave"
+      },
+      "11": {
+        "id": "bg-prismatic-lines",
+        "name": "Prismatic Lines"
+      },
+      "12": {
+        "id": "bg-cobweb",
+        "name": "Cobweb"
+      },
+      "13": {
+        "id": "bg-matrix",
+        "name": "Matrix"
+      },
+      "14": {
+        "id": "bg-haunted-house",
+        "name": "Haunted House"
+      },
+      "15": {
+        "id": "bg-virus-field",
+        "name": "Virus Field"
+      },
+      "16": {
+        "id": "bg-mountain-night",
+        "name": "Mountain Night"
+      },
+      "17": {
+        "id": "bg-sandstorm",
+        "name": "Sandstorm"
+      },
+      "18": {
+        "id": "bg-autumn-forest",
+        "name": "Autumn Forest"
+      },
+      "19": {
+        "id": "bg-arcade",
+        "name": "Arcade"
+      },
+      "20": {
+        "id": "bg-new-years",
+        "name": "New Years"
+      },
+      "21": {
+        "id": "bg-dark-strands",
+        "name": "Dark Strands"
+      },
+      "22": {
+        "id": "bg-deep-sea",
+        "name": "Deep Sea"
+      },
+      "23": {
+        "id": "bg-hyper-space",
+        "name": "Hyper Space"
+      },
+      "24": {
+        "id": "bg-invasion",
+        "name": "Invasion"
+      },
+      "25": {
+        "id": "bg-sunset-river",
+        "name": "Sunset River"
+      },
+      "26": {
+        "id": "bg-hurricane",
+        "name": "Hurricane"
+      },
+      "27": {
+        "id": "bg-rainfall",
+        "name": "Rainfall"
+      },
+      "28": {
+        "id": "bg-tv-wall",
+        "name": "Tv Wall"
+      },
+      "29": {
+        "id": "bg-abduction",
+        "name": "Abduction"
+      },
+      "30": {
+        "id": "bg-snowstorm",
+        "name": "Snowstorm"
+      },
+      "31": {
+        "id": "bg-forest-of-cats",
+        "name": "Forest Of Cats"
+      },
+      "32": {
+        "id": "bg-event-horizon",
+        "name": "Event Horizon"
+      },
+      "33": {
+        "id": "bg-clock-tower",
+        "name": "Clock Tower"
+      },
+      "34": {
+        "id": "bg-pi-disk",
+        "name": "Pi Disk"
+      },
+      "36": {
+        "id": "bg-guild-mech-world",
+        "name": "Guild Mech World"
+      },
+      "37": {
+        "id": "bg-camping",
+        "name": "Camping"
+      },
+      "38": {
+        "id": "bg-cthulhu",
+        "name": "Cthulhu"
+      },
+      "39": {
+        "id": "bg-koi-pond",
+        "name": "Koi Pond"
+      },
+      "40": {
+        "id": "bg-guild-party",
+        "name": "Guild Party"
+      },
+      "41": {
+        "id": "bg-guild-pixel-alien-war",
+        "name": "Guild Pixel Alien War"
+      },
+      "42": {
+        "id": "bg-cyberpunk",
+        "name": "Cyberpunk"
+      },
+      "43": {
+        "id": "bg-crystal-cave",
+        "name": "Crystal Cave"
+      },
+      "44": {
+        "id": "bg-amusement-park",
+        "name": "Amusement Park"
+      },
+      "45": {
+        "id": "bg-guild-crimson-horror",
+        "name": "Guild Crimson Horror"
+      },
+      "46": {
+        "id": "bg-guild-cozy-cosmos",
+        "name": "Guild Cozy Cosmos"
+      },
+      "47": {
+        "id": "bg-valentine",
+        "name": "Valentine"
+      },
+      "48": {
+        "id": "bg-glitch",
+        "name": "Glitch"
+      },
+      "49": {
+        "id": "bg-guild-supernova",
+        "name": "Guild Supernova"
+      },
+      "50": {
+        "id": "bg-guild-claw-machine",
+        "name": "Guild Claw Machine"
+      },
+      "51": {
+        "id": "bg-neuron",
+        "name": "Neuron"
+      },
+      "52": {
+        "id": "bg-guild-magician",
+        "name": "Guild Magician"
+      },
+      "53": {
+        "id": "bg-5th-anniversary",
+        "name": "5th Anniversary"
+      }
+    },
+    "music": {
+      "4": {
+        "id": "music-krisu-oceans-sings",
+        "name": "Krisu Oceans Sings"
+      },
+      "5": {
+        "id": "music-krisu-hiding-himalaya",
+        "name": "Krisu Hiding Himalaya"
+      },
+      "8": {
+        "id": "music-krisu-forest-bathing",
+        "name": "Krisu Forest Bathing"
+      }
+    },
+    "guardian_skins": {}
+  }
+}

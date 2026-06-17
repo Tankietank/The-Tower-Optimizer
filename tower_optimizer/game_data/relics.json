@@ -1,0 +1,5470 @@
+{
+  "version": "1.0.0",
+  "source": "Tower Optimizer bundled catalog derived from authorized TowerSmith reference data (see NOTICE.md).",
+  "by_index": [
+    {
+      "index": 0,
+      "id": "no_spoon",
+      "name": "No Spoon",
+      "rarity": "1-Rare",
+      "bonus_type": "Defense %",
+      "value": 0.02,
+      "description": "Increase defense absolute by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 1,
+      "id": "red_pill",
+      "name": "Red Pill",
+      "rarity": "2-Epic",
+      "bonus_type": "Health",
+      "value": 0.05,
+      "description": "Increase tower health by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 2,
+      "id": "copper_badge",
+      "name": "Copper Badge",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage",
+      "value": 0.03,
+      "description": "Increase tower damage by 3%",
+      "unlock_group": "tournament"
+    },
+    {
+      "index": 3,
+      "id": "silver_badge",
+      "name": "Silver Badge",
+      "rarity": "1-Rare",
+      "bonus_type": "Coins",
+      "value": 0.05,
+      "description": "Increase coins earned by 5%",
+      "unlock_group": "tournament"
+    },
+    {
+      "index": 4,
+      "id": "gold_badge",
+      "name": "Gold Badge",
+      "rarity": "2-Epic",
+      "bonus_type": "Critical Factor",
+      "value": 0.05,
+      "description": "Increase critical factor by 5%",
+      "unlock_group": "tournament"
+    },
+    {
+      "index": 5,
+      "id": "platinum_badge",
+      "name": "Platinum Badge",
+      "rarity": "2-Epic",
+      "bonus_type": "Lab Speed",
+      "value": 0.04,
+      "description": "Increase lab speed by 4%",
+      "unlock_group": "tournament"
+    },
+    {
+      "index": 6,
+      "id": "champion_badge",
+      "name": "Champion Badge",
+      "rarity": "3-Legendary",
+      "bonus_type": "Damage / Meter",
+      "value": 0.1,
+      "description": "Increase damage/meter by 10%",
+      "unlock_group": "tournament"
+    },
+    {
+      "index": 7,
+      "id": "tower_master",
+      "name": "Tower Master",
+      "rarity": "3-Legendary",
+      "bonus_type": "Health",
+      "value": 0.1,
+      "description": "Increase tower health by 10%",
+      "unlock_group": "tournament"
+    },
+    {
+      "index": 8,
+      "id": "t_i_flux",
+      "name": "T:I Flux",
+      "rarity": "1-Rare",
+      "bonus_type": "Coins",
+      "value": 0.02,
+      "description": "Increase coins earned by 2%",
+      "unlock_group": "milestone"
+    },
+    {
+      "index": 9,
+      "id": "t_ii_lumin",
+      "name": "T:II Lumin",
+      "rarity": "1-Rare",
+      "bonus_type": "Lab Speed",
+      "value": 0.015,
+      "description": "Increase lab speed by 1.5%",
+      "unlock_group": "milestone"
+    },
+    {
+      "index": 10,
+      "id": "t_iii_pulse",
+      "name": "T:III Pulse",
+      "rarity": "1-Rare",
+      "bonus_type": "Critical Factor",
+      "value": 0.02,
+      "description": "Increase critical factor by 2%",
+      "unlock_group": "milestone"
+    },
+    {
+      "index": 11,
+      "id": "t_iv_harmonic",
+      "name": "T:IV Harmonic",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage",
+      "value": 0.02,
+      "description": "Increase tower damage by 2%",
+      "unlock_group": "milestone"
+    },
+    {
+      "index": 12,
+      "id": "t_v_ether",
+      "name": "T:V Ether",
+      "rarity": "1-Rare",
+      "bonus_type": "Health",
+      "value": 0.02,
+      "description": "Increase tower health by 2%",
+      "unlock_group": "milestone"
+    },
+    {
+      "index": 13,
+      "id": "t_vi_nova",
+      "name": "T:VI Nova",
+      "rarity": "2-Epic",
+      "bonus_type": "Defense %",
+      "value": 0.05,
+      "description": "Increase defense absolute by 5%",
+      "unlock_group": "milestone"
+    },
+    {
+      "index": 14,
+      "id": "t_vii_aether",
+      "name": "T:VII Aether",
+      "rarity": "2-Epic",
+      "bonus_type": "Coins",
+      "value": 0.05,
+      "description": "Increase coins earned by 5%",
+      "unlock_group": "milestone"
+    },
+    {
+      "index": 15,
+      "id": "t_viii_graviton",
+      "name": "T:VIII Graviton",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage / Meter",
+      "value": 0.05,
+      "description": "Increase damage/meter by 5%",
+      "unlock_group": "milestone"
+    },
+    {
+      "index": 16,
+      "id": "t_ix_fusion",
+      "name": "T:IX Fusion",
+      "rarity": "2-Epic",
+      "bonus_type": "Health",
+      "value": 0.05,
+      "description": "Increase tower health by 5%",
+      "unlock_group": "milestone"
+    },
+    {
+      "index": 17,
+      "id": "t_x_plasma",
+      "name": "T:X Plasma",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage / Meter",
+      "value": 0.05,
+      "description": "Increase damage/meter by 5%",
+      "unlock_group": "milestone"
+    },
+    {
+      "index": 18,
+      "id": "t_xi_resonance",
+      "name": "T:XI Resonance",
+      "rarity": "3-Legendary",
+      "bonus_type": "Defense %",
+      "value": 0.1,
+      "description": "Increase defense absolute by 10%",
+      "unlock_group": "milestone"
+    },
+    {
+      "index": 19,
+      "id": "t_xii_chrono",
+      "name": "T:XII Chrono",
+      "rarity": "3-Legendary",
+      "bonus_type": "Lab Speed",
+      "value": 0.1,
+      "description": "Increase lab speed by 10%",
+      "unlock_group": "milestone"
+    },
+    {
+      "index": 20,
+      "id": "t_xiii_hyper",
+      "name": "T:XIII Hyper",
+      "rarity": "3-Legendary",
+      "bonus_type": "Coins",
+      "value": 0.1,
+      "description": "Increase coins earned by 10%",
+      "unlock_group": "milestone"
+    },
+    {
+      "index": 21,
+      "id": "t_xiv_arcane",
+      "name": "T:XIV Arcane",
+      "rarity": "3-Legendary",
+      "bonus_type": "Damage",
+      "value": 0.1,
+      "description": "Increase tower damage by 10%",
+      "unlock_group": "milestone"
+    },
+    {
+      "index": 22,
+      "id": "t_xv_celestial",
+      "name": "T:XV Celestial",
+      "rarity": "3-Legendary",
+      "bonus_type": "Critical Factor",
+      "value": 0.1,
+      "description": "Increase critical factor by 10%",
+      "unlock_group": "milestone"
+    },
+    {
+      "index": 23,
+      "id": "1st_tower_birthday",
+      "name": "1st Tower Birthday",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage",
+      "value": 0.02,
+      "description": "Increase tower damage by 2%",
+      "unlock_group": "birthday"
+    },
+    {
+      "index": 24,
+      "id": "2nd_tower_birthday",
+      "name": "2nd Tower Birthday",
+      "rarity": "1-Rare",
+      "bonus_type": "Critical Factor",
+      "value": 0.02,
+      "description": "Increase critical factor by 2%",
+      "unlock_group": "birthday"
+    },
+    {
+      "index": 25,
+      "id": "3rd_tower_birthday",
+      "name": "3rd Tower Birthday",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage / Meter",
+      "value": 0.02,
+      "description": "Increase damage/meter by 2%",
+      "unlock_group": "birthday"
+    },
+    {
+      "index": 26,
+      "id": "dreamcatcher",
+      "name": "Dreamcatcher",
+      "rarity": "1-Rare",
+      "bonus_type": "Coins",
+      "value": 0.02,
+      "description": "Increase coins earned by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 27,
+      "id": "spirit_wolf",
+      "name": "Spirit Wolf",
+      "rarity": "2-Epic",
+      "bonus_type": "Critical Factor",
+      "value": 0.05,
+      "description": "Increase critical factor by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 28,
+      "id": "bacteriophage",
+      "name": "Bacteriophage",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage",
+      "value": 0.02,
+      "description": "Increase tower damage by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 29,
+      "id": "neuron",
+      "name": "Neuron",
+      "rarity": "2-Epic",
+      "bonus_type": "health",
+      "value": 0.05,
+      "description": "Increase health by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 30,
+      "id": "ionized_plasma",
+      "name": "Ionized Plasma",
+      "rarity": "1-Rare",
+      "bonus_type": "Defense %",
+      "value": 0.02,
+      "description": "Increase defense absolute by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 31,
+      "id": "plasma_arc",
+      "name": "Plasma Arc",
+      "rarity": "2-Epic",
+      "bonus_type": "Lab Speed",
+      "value": 0.04,
+      "description": "Increase lab speed by 4%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 32,
+      "id": "honey_drop",
+      "name": "Honey Drop",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage",
+      "value": 0.02,
+      "description": "Increase tower damage by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 33,
+      "id": "stinger",
+      "name": "Stinger",
+      "rarity": "2-Epic",
+      "bonus_type": "Critical Factor",
+      "value": 0.05,
+      "description": "Increase critical factor by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 34,
+      "id": "aurora_vortex",
+      "name": "Aurora Vortex",
+      "rarity": "1-Rare",
+      "bonus_type": "Health",
+      "value": 0.02,
+      "description": "Increase tower health by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 35,
+      "id": "contained_ions",
+      "name": "Contained Ions",
+      "rarity": "2-Epic",
+      "bonus_type": "Defense %",
+      "value": 0.05,
+      "description": "Increase defense absolute by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 36,
+      "id": "alien_head",
+      "name": "Alien Head",
+      "rarity": "1-Rare",
+      "bonus_type": "Coins",
+      "value": 0.02,
+      "description": "Increase coins earned by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 37,
+      "id": "alien_warp_drive",
+      "name": "Alien Warp Drive",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage / Meter",
+      "value": 0.05,
+      "description": "Increase damage/meter by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 38,
+      "id": "ancient_tome",
+      "name": "Ancient Tome",
+      "rarity": "1-Rare",
+      "bonus_type": "Lab Speed",
+      "value": 0.015,
+      "description": "Increase lab speed by 1.5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 39,
+      "id": "space_sundial",
+      "name": "Space Sundial",
+      "rarity": "2-Epic",
+      "bonus_type": "damage",
+      "value": 0.05,
+      "description": "Increase damage by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 40,
+      "id": "spooky_bat",
+      "name": "Spooky Bat",
+      "rarity": "1-Rare",
+      "bonus_type": "crit factor",
+      "value": 0.02,
+      "description": "Increase crit factor by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 41,
+      "id": "man_skull",
+      "name": "Man Skull",
+      "rarity": "2-Epic",
+      "bonus_type": "health",
+      "value": 0.05,
+      "description": "Increase health by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 42,
+      "id": "cherry",
+      "name": "Cherry",
+      "rarity": "1-Rare",
+      "bonus_type": "Defense %",
+      "value": 0.02,
+      "description": "Increase defense absolute by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 43,
+      "id": "sakura_lantern",
+      "name": "Sakura Lantern",
+      "rarity": "2-Epic",
+      "bonus_type": "coins",
+      "value": 0.05,
+      "description": "Increase coins by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 44,
+      "id": "tower_latte",
+      "name": "Tower Latte",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage / Meter",
+      "value": 0.02,
+      "description": "Increase damage/meter by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 45,
+      "id": "pumpkin",
+      "name": "Pumpkin",
+      "rarity": "2-Epic",
+      "bonus_type": "Lab Speed",
+      "value": 0.04,
+      "description": "Increase lab speed by 4%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 46,
+      "id": "holy_joystick",
+      "name": "Game Joystick",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage",
+      "value": 0.02,
+      "description": "Increase tower damage by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 47,
+      "id": "controller",
+      "name": "Controller",
+      "rarity": "2-Epic",
+      "bonus_type": "Critical Factor",
+      "value": 0.05,
+      "description": "Increase critical factor by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 48,
+      "id": "firework",
+      "name": "Firework",
+      "rarity": "1-Rare",
+      "bonus_type": "Health",
+      "value": 0.02,
+      "description": "Increase tower health by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 49,
+      "id": "champagne",
+      "name": "Champagne",
+      "rarity": "1-Rare",
+      "bonus_type": "Attack Speed",
+      "value": 0.01,
+      "description": "Increase attack speed by 1%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 50,
+      "id": "palm_tree",
+      "name": "Palm Tree",
+      "rarity": "1-Rare",
+      "bonus_type": "Lab Speed",
+      "value": 0.02,
+      "description": "Increase lab speed by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 51,
+      "id": "pixel_cube_heart",
+      "name": "Pixel Cube Heart",
+      "rarity": "2-Epic",
+      "bonus_type": "Health",
+      "value": 0.05,
+      "description": "Increase tower health by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 52,
+      "id": "dark_sight",
+      "name": "Dark Sight",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage / Meter",
+      "value": 0.02,
+      "description": "Increase damage/meter by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 53,
+      "id": "creepy_smile",
+      "name": "Creepy Smile",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage",
+      "value": 0.05,
+      "description": "Increase tower damage by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 54,
+      "id": "submarine",
+      "name": "Submarine",
+      "rarity": "1-Rare",
+      "bonus_type": "crit factor",
+      "value": 0.02,
+      "description": "Increase crit factor by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 55,
+      "id": "the_kraken",
+      "name": "The Kraken",
+      "rarity": "2-Epic",
+      "bonus_type": "Defense %",
+      "value": 0.05,
+      "description": "Increase defense absolute by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 56,
+      "id": "warp_gate",
+      "name": "Warp Gate",
+      "rarity": "1-Rare",
+      "bonus_type": "coins",
+      "value": 0.02,
+      "description": "Increase coins by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 57,
+      "id": "star_ship",
+      "name": "Star Ship",
+      "rarity": "2-Epic",
+      "bonus_type": "Lab Speed",
+      "value": 0.04,
+      "description": "Increase lab speed by 4%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 58,
+      "id": "barnacle",
+      "name": "Barnacle",
+      "rarity": "1-Rare",
+      "bonus_type": "health",
+      "value": 0.02,
+      "description": "Increase health by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 59,
+      "id": "wave",
+      "name": "Wave",
+      "rarity": "2-Epic",
+      "bonus_type": "crit factor",
+      "value": 0.05,
+      "description": "Increase crit factor by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 60,
+      "id": "pizza",
+      "name": "Pizza",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage",
+      "value": 0.02,
+      "description": "Increase tower damage by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 61,
+      "id": "illuminati",
+      "name": "Illuminati",
+      "rarity": "2-Epic",
+      "bonus_type": "defence absolute",
+      "value": 0.05,
+      "description": "Increase defence absolute by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 62,
+      "id": "prismatic_shard",
+      "name": "Prismatic Shard",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage / Meter",
+      "value": 0.05,
+      "description": "Increase damage/meter by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 63,
+      "id": "refraction_array",
+      "name": "Refraction Array",
+      "rarity": "1-Rare",
+      "bonus_type": "Coins",
+      "value": 0.02,
+      "description": "Increase Coins by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 64,
+      "id": "cobweb",
+      "name": "Cobweb",
+      "rarity": "1-Rare",
+      "bonus_type": "Health",
+      "value": 0.02,
+      "description": "Increase Tower Health by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 65,
+      "id": "the_fly",
+      "name": "The Fly",
+      "rarity": "2-Epic",
+      "bonus_type": "Defense %",
+      "value": 0.05,
+      "description": "Increase defense absolute by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 66,
+      "id": "clip_ons",
+      "name": "Clip Ons",
+      "rarity": "1-Rare",
+      "bonus_type": "Critical Factor",
+      "value": 0.02,
+      "description": "Increase Critical Factor by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 67,
+      "id": "code_stream",
+      "name": "Code Stream",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage",
+      "value": 0.05,
+      "description": "Increase tower damage by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 68,
+      "id": "summit_starlight",
+      "name": "Summit Starlight",
+      "rarity": "1-Rare",
+      "bonus_type": "Lab Speed",
+      "value": 0.02,
+      "description": "Increase lab speed by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 69,
+      "id": "mountain_goat",
+      "name": "Mountain Goat",
+      "rarity": "2-Epic",
+      "bonus_type": "Health",
+      "value": 0.05,
+      "description": "Increase Health by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 70,
+      "id": "hook",
+      "name": "Hook",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage / Meter",
+      "value": 0.02,
+      "description": "Increase Damage/Meter by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 71,
+      "id": "fish",
+      "name": "Fish",
+      "rarity": "2-Epic",
+      "bonus_type": "Defense %",
+      "value": 0.05,
+      "description": "Increase defense absolute by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 72,
+      "id": "gale_winds",
+      "name": "Gale Winds",
+      "rarity": "1-Rare",
+      "bonus_type": "Coins",
+      "value": 0.02,
+      "description": "Increase coins earned by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 73,
+      "id": "flying_house",
+      "name": "Flying House",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage",
+      "value": 0.05,
+      "description": "Increase tower damage by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 74,
+      "id": "rain_jacket",
+      "name": "Rain Jacket",
+      "rarity": "1-Rare",
+      "bonus_type": "Health",
+      "value": 0.02,
+      "description": "Increase Tower Health by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 75,
+      "id": "cloud_lightning",
+      "name": "Cloud Lightning",
+      "rarity": "2-Epic",
+      "bonus_type": "Critical Factor",
+      "value": 0.05,
+      "description": "Increase critical factor by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 76,
+      "id": "rabies",
+      "name": "Rabies",
+      "rarity": "1-Rare",
+      "bonus_type": "Lab Speed",
+      "value": 0.02,
+      "description": "Increase lab speed by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 77,
+      "id": "ebola",
+      "name": "Ebola",
+      "rarity": "2-Epic",
+      "bonus_type": "Defense %",
+      "value": 0.05,
+      "description": "Increase defense absolute by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 78,
+      "id": "anubis",
+      "name": "Anubis",
+      "rarity": "1-Rare",
+      "bonus_type": "Coins",
+      "value": 0.02,
+      "description": "Increase Coins by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 79,
+      "id": "sphinx",
+      "name": "Sphinx",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage",
+      "value": 0.05,
+      "description": "Increase tower damage by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 80,
+      "id": "4th_tower_birthday",
+      "name": "4th Tower Birthday",
+      "rarity": "1-Rare",
+      "bonus_type": "health",
+      "value": 0.02,
+      "description": "Increase health by 2%",
+      "unlock_group": "birthday"
+    },
+    {
+      "index": 81,
+      "id": "5th_tower_birthday",
+      "name": "5th Tower Birthday",
+      "rarity": "1-Rare",
+      "bonus_type": "Critical Factor",
+      "value": 0.02,
+      "description": "Increase critical factor by 2%",
+      "unlock_group": "birthday"
+    },
+    {
+      "index": 82,
+      "id": "6th_tower_birthday",
+      "name": "6th Tower Birthday",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage / Meter",
+      "value": 0.02,
+      "description": "Increase damage/meter by 2%",
+      "unlock_group": "birthday"
+    },
+    {
+      "index": 83,
+      "id": "remote_control",
+      "name": "Remote Control",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage / Meter",
+      "value": 0.02,
+      "description": "Increase Damage/Meter by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 84,
+      "id": "cathode_ray_tube",
+      "name": "Cathode Ray Tube",
+      "rarity": "2-Epic",
+      "bonus_type": "coins",
+      "value": 0.05,
+      "description": "Increase coins by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 85,
+      "id": "t_xvi_quantum",
+      "name": "T:XVI Quantum",
+      "rarity": "3-Legendary",
+      "bonus_type": "Health",
+      "value": 0.1,
+      "description": "Increase tower health by 10%",
+      "unlock_group": "milestone"
+    },
+    {
+      "index": 86,
+      "id": "t_xvii_nebula",
+      "name": "T:XVII Nebula",
+      "rarity": "3-Legendary",
+      "bonus_type": "Damage / Meter",
+      "value": 0.1,
+      "description": "Increase damage/meter by 10%",
+      "unlock_group": "milestone"
+    },
+    {
+      "index": 87,
+      "id": "t_xviii_singularity",
+      "name": "T:XVIII Singularity",
+      "rarity": "3-Legendary",
+      "bonus_type": "Lab Speed",
+      "value": 0.1,
+      "description": "Increase lab speed by 10%",
+      "unlock_group": "milestone"
+    },
+    {
+      "index": 88,
+      "id": "comet",
+      "name": "Comet",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage",
+      "value": 0.02,
+      "description": "Increase Tower Damage by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 89,
+      "id": "planetary_rings",
+      "name": "Planetary Rings",
+      "rarity": "2-Epic",
+      "bonus_type": "Critical Factor",
+      "value": 0.05,
+      "description": "Increase critical factor by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 90,
+      "id": "lava_flow",
+      "name": "Lava Flow",
+      "rarity": "1-Rare",
+      "bonus_type": "Health",
+      "value": 0.02,
+      "description": "Increase Tower Health by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 91,
+      "id": "ash_cloud",
+      "name": "Ash Cloud",
+      "rarity": "2-Epic",
+      "bonus_type": "Defense %",
+      "value": 0.05,
+      "description": "Increase defense absolute by 5%",
+      "unlock_group": "event"
+    },
+    null,
+    null,
+    {
+      "index": 94,
+      "id": "tea_ceremony",
+      "name": "Tea Ceremony",
+      "rarity": "1-Rare",
+      "bonus_type": "health",
+      "value": 0.02,
+      "description": "Increase health by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 95,
+      "id": "kimono",
+      "name": "Kimono",
+      "rarity": "2-Epic",
+      "bonus_type": "Coins",
+      "value": 0.05,
+      "description": "Increase Coin by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 96,
+      "id": "acorn",
+      "name": "Acorn",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage / Meter",
+      "value": 0.02,
+      "description": "Increase Damage/Meter by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 97,
+      "id": "scarf",
+      "name": "Scarf",
+      "rarity": "2-Epic",
+      "bonus_type": "Defense %",
+      "value": 0.05,
+      "description": "Increase defense absolute by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 98,
+      "id": "cauldron",
+      "name": "Cauldron",
+      "rarity": "1-Rare",
+      "bonus_type": "Lab Speed",
+      "value": 0.02,
+      "description": "Increase Lab Speed by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 99,
+      "id": "witch_hat",
+      "name": "Witch Hat",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage",
+      "value": 0.05,
+      "description": "Increase tower damage by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 100,
+      "id": "abduction_room",
+      "name": "Abduction Room",
+      "rarity": "1-Rare",
+      "bonus_type": "Unknown",
+      "value": 0.0,
+      "description": "Increase Tower Health 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 101,
+      "id": "crop_circle",
+      "name": "Crop Circle",
+      "rarity": "2-Epic",
+      "bonus_type": "Critical Factor",
+      "value": 0.05,
+      "description": "Increase critical factor by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 102,
+      "id": "legend_badge",
+      "name": "Legend Badge",
+      "rarity": "3-Legendary",
+      "bonus_type": "Critical Factor",
+      "value": 0.1,
+      "description": "Increase critical factor by 10%",
+      "unlock_group": "tournament"
+    },
+    {
+      "index": 103,
+      "id": "icicle",
+      "name": "Icicle",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage",
+      "value": 0.02,
+      "description": "Increase Tower Damage by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 104,
+      "id": "sleigh_bell",
+      "name": "Sleigh Bell",
+      "rarity": "2-Epic",
+      "bonus_type": "Health",
+      "value": 0.05,
+      "description": "Increase tower health by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 105,
+      "id": "koi_fish",
+      "name": "Koi Fish",
+      "rarity": "1-Rare",
+      "bonus_type": "Lab Speed",
+      "value": 0.02,
+      "description": "Increase lab speed by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 106,
+      "id": "bonsai_tree",
+      "name": "Bonsai Tree",
+      "rarity": "2-Epic",
+      "bonus_type": "Coins",
+      "value": 0.05,
+      "description": "Increase Coins by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 107,
+      "id": "power_glove",
+      "name": "Power Glove",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage",
+      "value": 0.02,
+      "description": "Increase tower damage by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 108,
+      "id": "arcade_token",
+      "name": "Arcade Token",
+      "rarity": "2-Epic",
+      "bonus_type": "bot range",
+      "value": 2.0,
+      "description": "Increase bot range by 2m",
+      "unlock_group": "event"
+    },
+    {
+      "index": 109,
+      "id": "lunar_cat_paw",
+      "name": "Lunar Cat Paw",
+      "rarity": "1-Rare",
+      "bonus_type": "critical chance",
+      "value": 0.01,
+      "description": "Increase critical chance by 1%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 110,
+      "id": "pet_cat",
+      "name": "Pet Cat",
+      "rarity": "2-Epic",
+      "bonus_type": "Attack Speed",
+      "value": 0.02,
+      "description": "Increase Attack Speed by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 111,
+      "id": "confetti_ball",
+      "name": "Confetti Ball",
+      "rarity": "1-Rare",
+      "bonus_type": "Free Attack Upgrade",
+      "value": 0.01,
+      "description": "Increase Free Attack Upgrade by 1%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 112,
+      "id": "party_mask",
+      "name": "Party Mask",
+      "rarity": "2-Epic",
+      "bonus_type": "Ultimate Damage",
+      "value": 0.05,
+      "description": "Increase ultimate damage by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 113,
+      "id": "falling_apple",
+      "name": "Falling Apple",
+      "rarity": "1-Rare",
+      "bonus_type": "free defense upgrade",
+      "value": 0.01,
+      "description": "Increase free defense upgrade by 1%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 114,
+      "id": "3_body_solution",
+      "name": "3 Body Solution",
+      "rarity": "2-Epic",
+      "bonus_type": "super critical chance",
+      "value": 0.02,
+      "description": "Increase super critical chance by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 115,
+      "id": "coral_crown",
+      "name": "Coral Crown",
+      "rarity": "1-Rare",
+      "bonus_type": "Health Regen",
+      "value": 0.02,
+      "description": "Increase health regen by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 116,
+      "id": "angler_fish",
+      "name": "Angler Fish",
+      "rarity": "2-Epic",
+      "bonus_type": "thorns",
+      "value": 0.02,
+      "description": "Increase thorns by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 117,
+      "id": "haunted_mirror",
+      "name": "Haunted Mirror",
+      "rarity": "1-Rare",
+      "bonus_type": "Unknown",
+      "value": 0.0,
+      "description": "Decrease Wall Rebuild Time by 2s",
+      "unlock_group": "event"
+    },
+    {
+      "index": 118,
+      "id": "shadow_puppet",
+      "name": "Shadow Puppet",
+      "rarity": "2-Epic",
+      "bonus_type": "super critical mult",
+      "value": 0.05,
+      "description": "Increase super critical mult by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 119,
+      "id": "temporal_rift",
+      "name": "Temporal Rift",
+      "rarity": "1-Rare",
+      "bonus_type": "cash",
+      "value": 0.02,
+      "description": "Increase cash by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 120,
+      "id": "dream_clock",
+      "name": "Dream Clock",
+      "rarity": "2-Epic",
+      "bonus_type": "orb speed",
+      "value": 0.05,
+      "description": "Increase orb speed by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 121,
+      "id": "pulsar_core",
+      "name": "Pulsar Core",
+      "rarity": "1-Rare",
+      "bonus_type": "recovery amount",
+      "value": 0.02,
+      "description": "Increase recovery amount by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 122,
+      "id": "light_speedometer",
+      "name": "Light Speedometer",
+      "rarity": "2-Epic",
+      "bonus_type": "enemy attack level skip",
+      "value": 0.02,
+      "description": "Increase enemy attack level skip by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 123,
+      "id": "ufo_beam",
+      "name": "UFO Beam",
+      "rarity": "1-Rare",
+      "bonus_type": "knockback force",
+      "value": 0.02,
+      "description": "Increase knockback force by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 124,
+      "id": "alien_egg",
+      "name": "Alien Egg",
+      "rarity": "2-Epic",
+      "bonus_type": "enemy health skip",
+      "value": 0.02,
+      "description": "Increase enemy health skip by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 125,
+      "id": "hourglass",
+      "name": "Hourglass",
+      "rarity": "1-Rare",
+      "bonus_type": "coins",
+      "value": 0.02,
+      "description": "Increase coins by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 126,
+      "id": "time_compass",
+      "name": "Time Compass",
+      "rarity": "2-Epic",
+      "bonus_type": "Attack Speed",
+      "value": 0.02,
+      "description": "Increase attack speed by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 127,
+      "id": "whispering_web",
+      "name": "Whispering Web",
+      "rarity": "1-Rare",
+      "bonus_type": "free defense upgrade",
+      "value": 0.01,
+      "description": "Increase free defense upgrade by 1%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 128,
+      "id": "cursed_candle",
+      "name": "Cursed Candle",
+      "rarity": "2-Epic",
+      "bonus_type": "super critical chance",
+      "value": 0.02,
+      "description": "Increase super critical chance by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 129,
+      "id": "quantum_drive",
+      "name": "Quantum Drive",
+      "rarity": "1-Rare",
+      "bonus_type": "Bot Range",
+      "value": 1.0,
+      "description": "Increase Bot Range by 1m",
+      "unlock_group": "event"
+    },
+    {
+      "index": 130,
+      "id": "photon_blade",
+      "name": "Photon Blade",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage",
+      "value": 0.05,
+      "description": "Increase tower damage by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 131,
+      "id": "abduction_signal",
+      "name": "Abduction Signal",
+      "rarity": "1-Rare",
+      "bonus_type": "crit factor",
+      "value": 0.02,
+      "description": "Increase crit factor by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 132,
+      "id": "monolith",
+      "name": "Monolith",
+      "rarity": "2-Epic",
+      "bonus_type": "Ultimate Damage",
+      "value": 0.05,
+      "description": "Increase ultimate damage by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 133,
+      "id": "throne",
+      "name": "Throne",
+      "rarity": "1-Rare",
+      "bonus_type": "Health",
+      "value": 0.02,
+      "description": "Increase tower health by 2%",
+      "unlock_group": "guild"
+    },
+    {
+      "index": 134,
+      "id": "crown",
+      "name": "Crown",
+      "rarity": "2-Epic",
+      "bonus_type": "Critical Factor",
+      "value": 0.05,
+      "description": "Increase critical factor by 5%",
+      "unlock_group": "guild"
+    },
+    {
+      "index": 135,
+      "id": "bloom_burst",
+      "name": "Bloom Burst",
+      "rarity": "1-Rare",
+      "bonus_type": "cash bonus",
+      "value": 0.02,
+      "description": "Increase cash bonus by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 136,
+      "id": "candy_core",
+      "name": "Candy Core",
+      "rarity": "2-Epic",
+      "bonus_type": "damage",
+      "value": 0.05,
+      "description": "Increase damage by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 137,
+      "id": "mystic_bunny_1",
+      "name": "Mystic Hair",
+      "rarity": "1-Rare",
+      "bonus_type": "Coins",
+      "value": 0.02,
+      "description": "Increase coins earned by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 138,
+      "id": "magic_egg",
+      "name": "Magic Egg",
+      "rarity": "2-Epic",
+      "bonus_type": "free attack upgrade",
+      "value": 0.02,
+      "description": "Increase free attack upgrade by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 139,
+      "id": "infinite_ruler",
+      "name": "Infinite Ruler",
+      "rarity": "1-Rare",
+      "bonus_type": "free utility upgrade",
+      "value": 0.01,
+      "description": "Increase free utility upgrade by 1%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 140,
+      "id": "do_while_true",
+      "name": "Do While True",
+      "rarity": "2-Epic",
+      "bonus_type": "orb speed",
+      "value": 0.05,
+      "description": "Increase orb speed by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 141,
+      "id": "pi_seal",
+      "name": "Pi Seal",
+      "rarity": "1-Rare",
+      "bonus_type": "Lab Speed",
+      "value": 0.02,
+      "description": "Increase lab speed by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 142,
+      "id": "psychohistorian_brain",
+      "name": "Psychohistorian Brain",
+      "rarity": "2-Epic",
+      "bonus_type": "super critical chance",
+      "value": 0.02,
+      "description": "Increase super critical chance by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 143,
+      "id": "fancy_wires",
+      "name": "Fancy Wires",
+      "rarity": "1-Rare",
+      "bonus_type": "Health Regen",
+      "value": 0.02,
+      "description": "Increase health regen by 2%",
+      "unlock_group": "guild"
+    },
+    {
+      "index": 144,
+      "id": "mech_head",
+      "name": "Mech Head",
+      "rarity": "2-Epic",
+      "bonus_type": "bot range",
+      "value": 2.0,
+      "description": "Increase bot range by 2m",
+      "unlock_group": "guild"
+    },
+    {
+      "index": 145,
+      "id": "safe_path",
+      "name": "Safe Path",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage",
+      "value": 0.02,
+      "description": "Increase tower damage by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 146,
+      "id": "shining_light",
+      "name": "Shining Light",
+      "rarity": "1-Rare",
+      "bonus_type": "critical chance",
+      "value": 0.01,
+      "description": "Increase critical chance by 1%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 147,
+      "id": "eternal_quest",
+      "name": "Eternal Quest",
+      "rarity": "2-Epic",
+      "bonus_type": "health",
+      "value": 0.05,
+      "description": "Increase health by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 148,
+      "id": "nature_s_wrath",
+      "name": "Nature's Wrath",
+      "rarity": "2-Epic",
+      "bonus_type": "orb speed",
+      "value": 0.05,
+      "description": "Increase orb speed by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 149,
+      "id": "rlyeh",
+      "name": "Rlyeh",
+      "rarity": "1-Rare",
+      "bonus_type": "free attack upgrade",
+      "value": 0.01,
+      "description": "Increase free attack upgrade by 1%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 150,
+      "id": "madness_induced",
+      "name": "Madness Induced",
+      "rarity": "1-Rare",
+      "bonus_type": "Unknown",
+      "value": 0.0,
+      "description": "Increase crit factor 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 151,
+      "id": "cosmic_freedom",
+      "name": "Cosmic Freedom",
+      "rarity": "2-Epic",
+      "bonus_type": "Health Regen",
+      "value": 0.05,
+      "description": "Increase health regen by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 152,
+      "id": "gnosis",
+      "name": "Gnosis",
+      "rarity": "1-Rare",
+      "bonus_type": "free defense upgrade",
+      "value": 0.01,
+      "description": "Increase free defense upgrade by 1%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 153,
+      "id": "honey_jar",
+      "name": "Honey Jar",
+      "rarity": "1-Rare",
+      "bonus_type": "Attack Speed",
+      "value": 0.01,
+      "description": "Increase attack speed by 1%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 154,
+      "id": "heavenly_sweet",
+      "name": "Heavenly Sweet",
+      "rarity": "1-Rare",
+      "bonus_type": "Health",
+      "value": 0.02,
+      "description": "Increase tower health by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 155,
+      "id": "honey_society",
+      "name": "Honey Society",
+      "rarity": "2-Epic",
+      "bonus_type": "knockback force",
+      "value": 0.05,
+      "description": "Increase knockback force by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 156,
+      "id": "the_queen",
+      "name": "The Queen",
+      "rarity": "2-Epic",
+      "bonus_type": "Coins",
+      "value": 0.05,
+      "description": "Increase coins earned by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 157,
+      "id": "duck",
+      "name": "Duck",
+      "rarity": "1-Rare",
+      "bonus_type": "Ultimate Damage",
+      "value": 0.02,
+      "description": "Increase ultimate damage by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 158,
+      "id": "grass",
+      "name": "Grass",
+      "rarity": "1-Rare",
+      "bonus_type": "free defense upgrade",
+      "value": 0.01,
+      "description": "Increase free defense upgrade by 1%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 159,
+      "id": "wind",
+      "name": "Wind",
+      "rarity": "2-Epic",
+      "bonus_type": "damage / meter",
+      "value": 0.05,
+      "description": "Increase damage / meter by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 160,
+      "id": "lilies",
+      "name": "Lilies",
+      "rarity": "2-Epic",
+      "bonus_type": "recovery amount",
+      "value": 0.05,
+      "description": "Increase recovery amount by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 161,
+      "id": "plasma_globe",
+      "name": "Plasma Globe",
+      "rarity": "1-Rare",
+      "bonus_type": "bot range",
+      "value": 1.0,
+      "description": "Increase bot range by 1m",
+      "unlock_group": "event"
+    },
+    {
+      "index": 162,
+      "id": "plasma_vortex",
+      "name": "Plasma Vortex",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage",
+      "value": 0.02,
+      "description": "Increase tower damage by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 163,
+      "id": "plasma_cell",
+      "name": "Plasma Cell",
+      "rarity": "2-Epic",
+      "bonus_type": "critical chance",
+      "value": 0.02,
+      "description": "Increase critical chance by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 164,
+      "id": "plasma_chamber",
+      "name": "Plasma Chamber",
+      "rarity": "2-Epic",
+      "bonus_type": "health",
+      "value": 0.05,
+      "description": "Increase health by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 165,
+      "id": "floppy_disk",
+      "name": "Floppy Disk",
+      "rarity": "1-Rare",
+      "bonus_type": "free utility upgrade",
+      "value": 0.01,
+      "description": "Increase free utility upgrade by 1%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 166,
+      "id": "magic_cube",
+      "name": "Magic Cube",
+      "rarity": "1-Rare",
+      "bonus_type": "crit factor",
+      "value": 0.02,
+      "description": "Increase crit factor by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 167,
+      "id": "retro_camera",
+      "name": "Retro Camera",
+      "rarity": "2-Epic",
+      "bonus_type": "Health Regen",
+      "value": 0.05,
+      "description": "Increase health regen by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 168,
+      "id": "night_city",
+      "name": "Night City",
+      "rarity": "2-Epic",
+      "bonus_type": "Cash",
+      "value": 0.05,
+      "description": "Increase Cash by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 169,
+      "id": "fisherman_set",
+      "name": "Fisherman Set",
+      "rarity": "1-Rare",
+      "bonus_type": "Defense %",
+      "value": 0.02,
+      "description": "Increase defense absolute by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 170,
+      "id": "sunset_boat",
+      "name": "Sunset Boat",
+      "rarity": "1-Rare",
+      "bonus_type": "Attack Speed",
+      "value": 0.01,
+      "description": "Increase attack speed by 1%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 171,
+      "id": "good_catch",
+      "name": "Good Catch",
+      "rarity": "2-Epic",
+      "bonus_type": "Thorns",
+      "value": 0.02,
+      "description": "Increase Thorns by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 172,
+      "id": "river_of_plenty",
+      "name": "River Of Plenty",
+      "rarity": "2-Epic",
+      "bonus_type": "coins",
+      "value": 0.05,
+      "description": "Increase coins by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 173,
+      "id": "model_training",
+      "name": "Model Training",
+      "rarity": "1-Rare",
+      "bonus_type": "orb speed",
+      "value": 0.02,
+      "description": "Increase orb speed by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 174,
+      "id": "gnosis",
+      "name": "Gnosis",
+      "rarity": "1-Rare",
+      "bonus_type": "free defense upgrade",
+      "value": 0.01,
+      "description": "Increase free defense upgrade by 1%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 175,
+      "id": "tower_agent",
+      "name": "Tower Agent",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage / Meter",
+      "value": 0.05,
+      "description": "Increase damage/meter by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 176,
+      "id": "fake_reality",
+      "name": "Fake Reality",
+      "rarity": "2-Epic",
+      "bonus_type": "Ultimate Damage",
+      "value": 0.05,
+      "description": "Increase ultimate damage by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 177,
+      "id": "breaking_news",
+      "name": "Breaking News",
+      "rarity": "1-Rare",
+      "bonus_type": "bot range",
+      "value": 1.0,
+      "description": "Increase bot range by 1m",
+      "unlock_group": "event"
+    },
+    {
+      "index": 178,
+      "id": "globalization",
+      "name": "Globalization",
+      "rarity": "1-Rare",
+      "bonus_type": "Unknown",
+      "value": 0.0,
+      "description": "Increase tower damage 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 179,
+      "id": "no_signal",
+      "name": "No Signal",
+      "rarity": "2-Epic",
+      "bonus_type": "crit chance",
+      "value": 0.02,
+      "description": "Increase crit chance by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 180,
+      "id": "antenna",
+      "name": "Antenna",
+      "rarity": "2-Epic",
+      "bonus_type": "health",
+      "value": 0.05,
+      "description": "Increase health by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 181,
+      "id": "brunch",
+      "name": "Brunch",
+      "rarity": "1-Rare",
+      "bonus_type": "knockback force",
+      "value": 0.02,
+      "description": "Increase knockback force by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 182,
+      "id": "dry_leaves",
+      "name": "Dry Leaves",
+      "rarity": "1-Rare",
+      "bonus_type": "free attack upgrade",
+      "value": 0.01,
+      "description": "Increase free attack upgrade by 1%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 183,
+      "id": "glowing_mushrooms",
+      "name": "Glowing Mushrooms",
+      "rarity": "2-Epic",
+      "bonus_type": "thorns",
+      "value": 0.02,
+      "description": "Increase thorns by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 184,
+      "id": "warm_clothes",
+      "name": "Warm Clothes",
+      "rarity": "2-Epic",
+      "bonus_type": "Lab Speed",
+      "value": 0.04,
+      "description": "Increase lab speed by 4%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 185,
+      "id": "let_s_mix",
+      "name": "Let's Mix",
+      "rarity": "1-Rare",
+      "bonus_type": "Coins",
+      "value": 0.02,
+      "description": "Increase coins earned by 2%",
+      "unlock_group": "guild"
+    },
+    {
+      "index": 186,
+      "id": "night_life",
+      "name": "Night Life",
+      "rarity": "2-Epic",
+      "bonus_type": "Attack Speed",
+      "value": 0.02,
+      "description": "Increase attack speed by 2%",
+      "unlock_group": "guild"
+    },
+    {
+      "index": 187,
+      "id": "t_xix_atomic",
+      "name": "T:XIX Atomic",
+      "rarity": "3-Legendary",
+      "bonus_type": "Damage",
+      "value": 0.1,
+      "description": "Increase tower damage by 10%",
+      "unlock_group": "milestone"
+    },
+    {
+      "index": 188,
+      "id": "t_xx_cyber",
+      "name": "T:XX Cyber",
+      "rarity": "3-Legendary",
+      "bonus_type": "Ultimate Damage",
+      "value": 0.08,
+      "description": "Increase ultimate damage by 8%",
+      "unlock_group": "milestone"
+    },
+    {
+      "index": 189,
+      "id": "t_xxi_eclipse",
+      "name": "T:XXI Eclipse",
+      "rarity": "3-Legendary",
+      "bonus_type": "Lab Speed",
+      "value": 0.1,
+      "description": "Increase lab speed by 10%",
+      "unlock_group": "milestone"
+    },
+    {
+      "index": 190,
+      "id": "world_domination",
+      "name": "World Domination",
+      "rarity": "1-Rare",
+      "bonus_type": "health earned",
+      "value": 0.02,
+      "description": "Increase health earned by 2%",
+      "unlock_group": "guild"
+    },
+    {
+      "index": 191,
+      "id": "brave_heroes",
+      "name": "Brave Heroes",
+      "rarity": "2-Epic",
+      "bonus_type": "crit factor",
+      "value": 0.05,
+      "description": "Increase crit factor by 5%",
+      "unlock_group": "guild"
+    },
+    {
+      "index": 192,
+      "id": "vr",
+      "name": "VR",
+      "rarity": "1-Rare",
+      "bonus_type": "thorns",
+      "value": 0.01,
+      "description": "Increase thorns by 1%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 193,
+      "id": "holographic_ads",
+      "name": "Holographic Ads",
+      "rarity": "1-Rare",
+      "bonus_type": "Lab Speed",
+      "value": 0.02,
+      "description": "Increase lab speed by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 194,
+      "id": "tech_weapon",
+      "name": "Tech Weapon",
+      "rarity": "2-Epic",
+      "bonus_type": "recovery amount",
+      "value": 0.05,
+      "description": "Increase recovery amount by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 195,
+      "id": "cybernetics",
+      "name": "Cybernetics",
+      "rarity": "2-Epic",
+      "bonus_type": "crit chance",
+      "value": 0.02,
+      "description": "Increase crit chance by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 196,
+      "id": "explorer_s_helmet",
+      "name": "Explorer's Helmet",
+      "rarity": "1-Rare",
+      "bonus_type": "Health",
+      "value": 0.02,
+      "description": "Increase tower health by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 197,
+      "id": "miner_s_tool",
+      "name": "Miner's Tool",
+      "rarity": "1-Rare",
+      "bonus_type": "defense percent",
+      "value": 0.01,
+      "description": "Increase defense percent by 1%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 198,
+      "id": "crystals_bag",
+      "name": "Crystals Bag",
+      "rarity": "2-Epic",
+      "bonus_type": "knockback force",
+      "value": 0.05,
+      "description": "Increase knockback force by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 199,
+      "id": "full_minecart",
+      "name": "Full Minecart",
+      "rarity": "2-Epic",
+      "bonus_type": "bot range",
+      "value": 2.0,
+      "description": "Increase bot range by 2m",
+      "unlock_group": "event"
+    },
+    {
+      "index": 200,
+      "id": "hapiness_balloons",
+      "name": "Happiness Balloons",
+      "rarity": "1-Rare",
+      "bonus_type": "Defense %",
+      "value": 0.02,
+      "description": "Increase defense absolute by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 201,
+      "id": "delicious_food",
+      "name": "Delicious Food",
+      "rarity": "1-Rare",
+      "bonus_type": "cash",
+      "value": 0.02,
+      "description": "Increase cash by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 202,
+      "id": "amazing_prizes",
+      "name": "Amazing Prizes",
+      "rarity": "2-Epic",
+      "bonus_type": "thorns",
+      "value": 0.02,
+      "description": "Increase thorns by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 203,
+      "id": "carousel_of_joy",
+      "name": "Carousel Of Joy",
+      "rarity": "2-Epic",
+      "bonus_type": "Coins",
+      "value": 0.05,
+      "description": "Increase coins earned by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 204,
+      "id": "bouquet",
+      "name": "Bouquet",
+      "rarity": "1-Rare",
+      "bonus_type": "Health",
+      "value": 0.02,
+      "description": "Increase tower health by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 205,
+      "id": "lovely_gift",
+      "name": "Lovely Gift",
+      "rarity": "2-Epic",
+      "bonus_type": "knockback force",
+      "value": 0.05,
+      "description": "Increase knockback force by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 206,
+      "id": "love_letter",
+      "name": "Love Letter",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage / Meter",
+      "value": 0.02,
+      "description": "Increase damage/meter by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 207,
+      "id": "pierced_heart",
+      "name": "Pierced Heart",
+      "rarity": "2-Epic",
+      "bonus_type": "Ultimate Damage",
+      "value": 0.05,
+      "description": "Increase ultimate damage by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 208,
+      "id": "good_hunting",
+      "name": "Good Hunting",
+      "rarity": "1-Rare",
+      "bonus_type": "cash",
+      "value": 0.02,
+      "description": "Increase cash by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 209,
+      "id": "spider_vision",
+      "name": "Spider Vision",
+      "rarity": "1-Rare",
+      "bonus_type": "orb speed",
+      "value": 0.02,
+      "description": "Increase orb speed by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 210,
+      "id": "spider_poison",
+      "name": "Spider Poison",
+      "rarity": "2-Epic",
+      "bonus_type": "Ultimate Damage",
+      "value": 0.05,
+      "description": "Increase ultimate damage by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 211,
+      "id": "spider_forest",
+      "name": "Spider Forest",
+      "rarity": "2-Epic",
+      "bonus_type": "Critical Factor",
+      "value": 0.05,
+      "description": "Increase critical factor by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 212,
+      "id": "pinball",
+      "name": "Pinball",
+      "rarity": "1-Rare",
+      "bonus_type": "Defense %",
+      "value": 0.02,
+      "description": "Increase defense absolute by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 213,
+      "id": "to_infinity",
+      "name": "To Infinity",
+      "rarity": "1-Rare",
+      "bonus_type": "Health Regen",
+      "value": 0.02,
+      "description": "Increase health regen by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 214,
+      "id": "let_s_play",
+      "name": "Let's Play",
+      "rarity": "2-Epic",
+      "bonus_type": "damage",
+      "value": 0.05,
+      "description": "Increase damage by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 215,
+      "id": "enemies",
+      "name": "Enemies",
+      "rarity": "2-Epic",
+      "bonus_type": "coins",
+      "value": 0.05,
+      "description": "Increase coins by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 216,
+      "id": "snow_globe",
+      "name": "Snow Globe",
+      "rarity": "1-Rare",
+      "bonus_type": "recovery amount",
+      "value": 0.02,
+      "description": "Increase recovery amount by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 217,
+      "id": "winter_gloves",
+      "name": "Winter Gloves",
+      "rarity": "1-Rare",
+      "bonus_type": "thorns",
+      "value": 0.01,
+      "description": "Increase thorns by 1%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 218,
+      "id": "snowflake",
+      "name": "Snowflake",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage / Meter",
+      "value": 0.05,
+      "description": "Increase damage/meter by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 219,
+      "id": "wreath",
+      "name": "Wreath",
+      "rarity": "2-Epic",
+      "bonus_type": "damage",
+      "value": 0.05,
+      "description": "Increase damage by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 220,
+      "id": "party_popper",
+      "name": "Party Popper",
+      "rarity": "1-Rare",
+      "bonus_type": "free attack upgrade",
+      "value": 0.01,
+      "description": "Increase free attack upgrade by 1%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 221,
+      "id": "champagne",
+      "name": "Champagne",
+      "rarity": "1-Rare",
+      "bonus_type": "Attack Speed",
+      "value": 0.01,
+      "description": "Increase attack speed by 1%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 222,
+      "id": "firework_rocket",
+      "name": "Firework Rocket",
+      "rarity": "2-Epic",
+      "bonus_type": "free utility upgrade",
+      "value": 0.02,
+      "description": "Increase free utility upgrade by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 223,
+      "id": "gift_box",
+      "name": "Gift Box",
+      "rarity": "2-Epic",
+      "bonus_type": "Lab Speed",
+      "value": 0.04,
+      "description": "Increase lab speed by 4%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 224,
+      "id": "sky_s_curtain",
+      "name": "Sky's Curtain",
+      "rarity": "1-Rare",
+      "bonus_type": "free defense upgrade",
+      "value": 0.01,
+      "description": "Increase free defense upgrade by 1%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 225,
+      "id": "solar_flare",
+      "name": "Solar Flare",
+      "rarity": "1-Rare",
+      "bonus_type": "crit chance",
+      "value": 0.01,
+      "description": "Increase crit chance by 1%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 226,
+      "id": "northern_mountains",
+      "name": "Northern Mountains",
+      "rarity": "2-Epic",
+      "bonus_type": "defense",
+      "value": 0.02,
+      "description": "Increase defense by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 227,
+      "id": "cosmic_impact",
+      "name": "Cosmic Impact",
+      "rarity": "2-Epic",
+      "bonus_type": "orb speed",
+      "value": 0.05,
+      "description": "Increase orb speed by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 228,
+      "id": "sudden_attack",
+      "name": "Sudden Attack",
+      "rarity": "1-Rare",
+      "bonus_type": "Health Regen",
+      "value": 0.02,
+      "description": "Increase health regen by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 229,
+      "id": "alien_experiment",
+      "name": "Alien Experiment",
+      "rarity": "1-Rare",
+      "bonus_type": "bot range",
+      "value": 1.0,
+      "description": "Increase bot range by 1m",
+      "unlock_group": "event"
+    },
+    {
+      "index": 230,
+      "id": "crop_circles",
+      "name": "Crop Circles",
+      "rarity": "2-Epic",
+      "bonus_type": "knockback force",
+      "value": 0.05,
+      "description": "Increase knockback force by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 231,
+      "id": "alien_implants",
+      "name": "Alien Implants",
+      "rarity": "2-Epic",
+      "bonus_type": "Ultimate Damage",
+      "value": 0.05,
+      "description": "Increase ultimate damage by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 232,
+      "id": "blood_monster",
+      "name": "Blood Monster",
+      "rarity": "1-Rare",
+      "bonus_type": "defense",
+      "value": 0.01,
+      "description": "Increase defense by 1%",
+      "unlock_group": "guild"
+    },
+    {
+      "index": 233,
+      "id": "glimpse_of_despair",
+      "name": "Glimpse Of Despair",
+      "rarity": "2-Epic",
+      "bonus_type": "crit factor",
+      "value": 0.05,
+      "description": "Increase crit factor by 5%",
+      "unlock_group": "guild"
+    },
+    {
+      "index": 234,
+      "id": "star_path",
+      "name": "Star Path",
+      "rarity": "1-Rare",
+      "bonus_type": "Unknown",
+      "value": 0.0,
+      "description": "Increase free attack upgrade 2%",
+      "unlock_group": "guild"
+    },
+    {
+      "index": 235,
+      "id": "star_planet",
+      "name": "Star Planet",
+      "rarity": "2-Epic",
+      "bonus_type": "Health Regen",
+      "value": 0.05,
+      "description": "Increase health regen by 5%",
+      "unlock_group": "guild"
+    },
+    {
+      "index": 236,
+      "id": "ancient_times",
+      "name": "Ancient Times",
+      "rarity": "1-Rare",
+      "bonus_type": "Defense %",
+      "value": 0.02,
+      "description": "Increase defense absolute by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 237,
+      "id": "space_distortion",
+      "name": "Space Distortion",
+      "rarity": "1-Rare",
+      "bonus_type": "Attack Speed",
+      "value": 0.01,
+      "description": "Increase attack speed by 1%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 238,
+      "id": "clock_tower",
+      "name": "Clock Tower",
+      "rarity": "2-Epic",
+      "bonus_type": "cash bonus",
+      "value": 0.05,
+      "description": "Increase cash bonus by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 239,
+      "id": "time_travel",
+      "name": "Time Travel",
+      "rarity": "2-Epic",
+      "bonus_type": "critical chance",
+      "value": 0.02,
+      "description": "Increase critical chance by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 240,
+      "id": "lighthouse",
+      "name": "Lighthouse",
+      "rarity": "1-Rare",
+      "bonus_type": "recovery amount",
+      "value": 0.02,
+      "description": "Increase recovery amount by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 241,
+      "id": "night_shark",
+      "name": "Night Shark",
+      "rarity": "1-Rare",
+      "bonus_type": "cash",
+      "value": 0.02,
+      "description": "Increase cash by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 242,
+      "id": "sailing_at_night",
+      "name": "Sailing At Night",
+      "rarity": "2-Epic",
+      "bonus_type": "health",
+      "value": 0.05,
+      "description": "Increase health by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 243,
+      "id": "moonlight",
+      "name": "Moonlight",
+      "rarity": "2-Epic",
+      "bonus_type": "crit factor",
+      "value": 0.05,
+      "description": "Increase crit factor by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 244,
+      "id": "festival_lanterns",
+      "name": "Festival Lanterns",
+      "rarity": "1-Rare",
+      "bonus_type": "knockback force",
+      "value": 0.02,
+      "description": "Increase knockback force by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 245,
+      "id": "ramen",
+      "name": "Ramen",
+      "rarity": "1-Rare",
+      "bonus_type": "free utility upgrade",
+      "value": 0.01,
+      "description": "Increase free utility upgrade by 1%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 246,
+      "id": "forest_temple",
+      "name": "Forest Temple",
+      "rarity": "2-Epic",
+      "bonus_type": "thorns",
+      "value": 0.02,
+      "description": "Increase thorns by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 247,
+      "id": "tori",
+      "name": "Tori",
+      "rarity": "2-Epic",
+      "bonus_type": "orb speed",
+      "value": 0.05,
+      "description": "Increase orb speed by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 248,
+      "id": "broken_security",
+      "name": "Broken Security",
+      "rarity": "1-Rare",
+      "bonus_type": "Health Regen",
+      "value": 0.02,
+      "description": "Increase health regen by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 249,
+      "id": "research_object",
+      "name": "Research Object",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage",
+      "value": 0.02,
+      "description": "Increase tower damage by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 250,
+      "id": "digital_disaster",
+      "name": "Digital Disaster",
+      "rarity": "2-Epic",
+      "bonus_type": "free defense upgrade",
+      "value": 0.02,
+      "description": "Increase free defense upgrade by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 251,
+      "id": "instability",
+      "name": "Instability",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage / Meter",
+      "value": 0.05,
+      "description": "Increase damage/meter by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 252,
+      "id": "elemental_explosion",
+      "name": "Elemental Explosion",
+      "rarity": "1-Rare",
+      "bonus_type": "rend armor mult",
+      "value": 0.02,
+      "description": "Increase rend armor mult by 2%",
+      "unlock_group": "guild"
+    },
+    {
+      "index": 253,
+      "id": "quasar",
+      "name": "Quasar",
+      "rarity": "2-Epic",
+      "bonus_type": "health",
+      "value": 0.05,
+      "description": "Increase health by 5%",
+      "unlock_group": "guild"
+    },
+    {
+      "index": 254,
+      "id": "perfect_catch",
+      "name": "Perfect Catch",
+      "rarity": "1-Rare",
+      "bonus_type": "free utility upgrade",
+      "value": 0.01,
+      "description": "Increase free utility upgrade by 1%",
+      "unlock_group": "guild"
+    },
+    {
+      "index": 255,
+      "id": "collector_s_spirit",
+      "name": "Collector's Spirit",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage",
+      "value": 0.05,
+      "description": "Increase tower damage by 5%",
+      "unlock_group": "guild"
+    },
+    {
+      "index": 256,
+      "id": "nature_s_fury",
+      "name": "Nature's Fury",
+      "rarity": "1-Rare",
+      "bonus_type": "defense percent",
+      "value": 0.01,
+      "description": "Increase defense percent by 1%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 257,
+      "id": "natural_fire",
+      "name": "Natural Fire",
+      "rarity": "2-Epic",
+      "bonus_type": "Health Regen",
+      "value": 0.05,
+      "description": "Increase health regen by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 258,
+      "id": "big_tornado",
+      "name": "Big Tornado",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage / Meter",
+      "value": 0.02,
+      "description": "Increase damage/meter by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 259,
+      "id": "storm_planet",
+      "name": "Storm Planet",
+      "rarity": "2-Epic",
+      "bonus_type": "Lab Speed",
+      "value": 0.04,
+      "description": "Increase lab speed by 4%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 260,
+      "id": "synapse",
+      "name": "Synapse",
+      "rarity": "1-Rare",
+      "bonus_type": "knockback force",
+      "value": 0.02,
+      "description": "Increase knockback force by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 261,
+      "id": "brain_net",
+      "name": "Brain Net",
+      "rarity": "2-Epic",
+      "bonus_type": "free utility upgrade",
+      "value": 0.02,
+      "description": "Increase free utility upgrade by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 262,
+      "id": "neural_network",
+      "name": "Neural Network",
+      "rarity": "1-Rare",
+      "bonus_type": "Coins",
+      "value": 0.02,
+      "description": "Increase coins earned by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 263,
+      "id": "body_control",
+      "name": "Body Control",
+      "rarity": "2-Epic",
+      "bonus_type": "Ultimate Damage",
+      "value": 0.05,
+      "description": "Increase ultimate damage by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 264,
+      "id": "viral_infection",
+      "name": "Viral Infection",
+      "rarity": "1-Rare",
+      "bonus_type": "health",
+      "value": 0.02,
+      "description": "Increase health by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 265,
+      "id": "personal_care",
+      "name": "Personal Care",
+      "rarity": "2-Epic",
+      "bonus_type": "free defense upgrade",
+      "value": 0.02,
+      "description": "Increase free defense upgrade by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 266,
+      "id": "immunization",
+      "name": "Immunization",
+      "rarity": "1-Rare",
+      "bonus_type": "critical chance",
+      "value": 0.01,
+      "description": "Increase critical chance by 1%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 267,
+      "id": "global_threat",
+      "name": "Global Threat",
+      "rarity": "2-Epic",
+      "bonus_type": "Critical Factor",
+      "value": 0.05,
+      "description": "Increase critical factor by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 268,
+      "id": "magma_river",
+      "name": "Magma River",
+      "rarity": "1-Rare",
+      "bonus_type": "cash",
+      "value": 0.02,
+      "description": "Increase cash by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 269,
+      "id": "new_island",
+      "name": "New Island",
+      "rarity": "2-Epic",
+      "bonus_type": "free attack upgrade",
+      "value": 0.02,
+      "description": "Increase free attack upgrade by 2%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 270,
+      "id": "obsidian",
+      "name": "Obsidian",
+      "rarity": "1-Rare",
+      "bonus_type": "Attack Speed",
+      "value": 0.01,
+      "description": "Increase attack speed by 1%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 271,
+      "id": "geological_activity",
+      "name": "Geological Activity",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage",
+      "value": 0.05,
+      "description": "Increase tower damage by 5%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 272,
+      "id": "magic_cards",
+      "name": "Magic Cards",
+      "rarity": "1-Rare",
+      "bonus_type": "free utility upgrade",
+      "value": 0.01,
+      "description": "Increase free utility upgrade by 1%",
+      "unlock_group": "guild"
+    },
+    {
+      "index": 273,
+      "id": "dangerous_tricks",
+      "name": "Dangerous Tricks",
+      "rarity": "2-Epic",
+      "bonus_type": "Attack Speed",
+      "value": 0.02,
+      "description": "Increase attack speed by 2%",
+      "unlock_group": "guild"
+    },
+    {
+      "index": 274,
+      "id": "big_party",
+      "name": "Big Party",
+      "rarity": "1-Rare",
+      "bonus_type": "Attack Speed",
+      "value": 0.01,
+      "description": "Increase attack speed by 1%",
+      "unlock_group": "event"
+    },
+    {
+      "index": 275,
+      "id": "celebration",
+      "name": "Celebration",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage",
+      "value": 0.05,
+      "description": "Increase tower damage by 5%",
+      "unlock_group": "event"
+    }
+  ],
+  "by_name": {
+    "No Spoon": {
+      "index": 0,
+      "id": "no_spoon",
+      "name": "No Spoon",
+      "rarity": "1-Rare",
+      "bonus_type": "Defense %",
+      "value": 0.02,
+      "description": "Increase defense absolute by 2%",
+      "unlock_group": "event"
+    },
+    "Red Pill": {
+      "index": 1,
+      "id": "red_pill",
+      "name": "Red Pill",
+      "rarity": "2-Epic",
+      "bonus_type": "Health",
+      "value": 0.05,
+      "description": "Increase tower health by 5%",
+      "unlock_group": "event"
+    },
+    "Copper Badge": {
+      "index": 2,
+      "id": "copper_badge",
+      "name": "Copper Badge",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage",
+      "value": 0.03,
+      "description": "Increase tower damage by 3%",
+      "unlock_group": "tournament"
+    },
+    "Silver Badge": {
+      "index": 3,
+      "id": "silver_badge",
+      "name": "Silver Badge",
+      "rarity": "1-Rare",
+      "bonus_type": "Coins",
+      "value": 0.05,
+      "description": "Increase coins earned by 5%",
+      "unlock_group": "tournament"
+    },
+    "Gold Badge": {
+      "index": 4,
+      "id": "gold_badge",
+      "name": "Gold Badge",
+      "rarity": "2-Epic",
+      "bonus_type": "Critical Factor",
+      "value": 0.05,
+      "description": "Increase critical factor by 5%",
+      "unlock_group": "tournament"
+    },
+    "Platinum Badge": {
+      "index": 5,
+      "id": "platinum_badge",
+      "name": "Platinum Badge",
+      "rarity": "2-Epic",
+      "bonus_type": "Lab Speed",
+      "value": 0.04,
+      "description": "Increase lab speed by 4%",
+      "unlock_group": "tournament"
+    },
+    "Champion Badge": {
+      "index": 6,
+      "id": "champion_badge",
+      "name": "Champion Badge",
+      "rarity": "3-Legendary",
+      "bonus_type": "Damage / Meter",
+      "value": 0.1,
+      "description": "Increase damage/meter by 10%",
+      "unlock_group": "tournament"
+    },
+    "Tower Master": {
+      "index": 7,
+      "id": "tower_master",
+      "name": "Tower Master",
+      "rarity": "3-Legendary",
+      "bonus_type": "Health",
+      "value": 0.1,
+      "description": "Increase tower health by 10%",
+      "unlock_group": "tournament"
+    },
+    "T:I Flux": {
+      "index": 8,
+      "id": "t_i_flux",
+      "name": "T:I Flux",
+      "rarity": "1-Rare",
+      "bonus_type": "Coins",
+      "value": 0.02,
+      "description": "Increase coins earned by 2%",
+      "unlock_group": "milestone"
+    },
+    "T:II Lumin": {
+      "index": 9,
+      "id": "t_ii_lumin",
+      "name": "T:II Lumin",
+      "rarity": "1-Rare",
+      "bonus_type": "Lab Speed",
+      "value": 0.015,
+      "description": "Increase lab speed by 1.5%",
+      "unlock_group": "milestone"
+    },
+    "T:III Pulse": {
+      "index": 10,
+      "id": "t_iii_pulse",
+      "name": "T:III Pulse",
+      "rarity": "1-Rare",
+      "bonus_type": "Critical Factor",
+      "value": 0.02,
+      "description": "Increase critical factor by 2%",
+      "unlock_group": "milestone"
+    },
+    "T:IV Harmonic": {
+      "index": 11,
+      "id": "t_iv_harmonic",
+      "name": "T:IV Harmonic",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage",
+      "value": 0.02,
+      "description": "Increase tower damage by 2%",
+      "unlock_group": "milestone"
+    },
+    "T:V Ether": {
+      "index": 12,
+      "id": "t_v_ether",
+      "name": "T:V Ether",
+      "rarity": "1-Rare",
+      "bonus_type": "Health",
+      "value": 0.02,
+      "description": "Increase tower health by 2%",
+      "unlock_group": "milestone"
+    },
+    "T:VI Nova": {
+      "index": 13,
+      "id": "t_vi_nova",
+      "name": "T:VI Nova",
+      "rarity": "2-Epic",
+      "bonus_type": "Defense %",
+      "value": 0.05,
+      "description": "Increase defense absolute by 5%",
+      "unlock_group": "milestone"
+    },
+    "T:VII Aether": {
+      "index": 14,
+      "id": "t_vii_aether",
+      "name": "T:VII Aether",
+      "rarity": "2-Epic",
+      "bonus_type": "Coins",
+      "value": 0.05,
+      "description": "Increase coins earned by 5%",
+      "unlock_group": "milestone"
+    },
+    "T:VIII Graviton": {
+      "index": 15,
+      "id": "t_viii_graviton",
+      "name": "T:VIII Graviton",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage / Meter",
+      "value": 0.05,
+      "description": "Increase damage/meter by 5%",
+      "unlock_group": "milestone"
+    },
+    "T:IX Fusion": {
+      "index": 16,
+      "id": "t_ix_fusion",
+      "name": "T:IX Fusion",
+      "rarity": "2-Epic",
+      "bonus_type": "Health",
+      "value": 0.05,
+      "description": "Increase tower health by 5%",
+      "unlock_group": "milestone"
+    },
+    "T:X Plasma": {
+      "index": 17,
+      "id": "t_x_plasma",
+      "name": "T:X Plasma",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage / Meter",
+      "value": 0.05,
+      "description": "Increase damage/meter by 5%",
+      "unlock_group": "milestone"
+    },
+    "T:XI Resonance": {
+      "index": 18,
+      "id": "t_xi_resonance",
+      "name": "T:XI Resonance",
+      "rarity": "3-Legendary",
+      "bonus_type": "Defense %",
+      "value": 0.1,
+      "description": "Increase defense absolute by 10%",
+      "unlock_group": "milestone"
+    },
+    "T:XII Chrono": {
+      "index": 19,
+      "id": "t_xii_chrono",
+      "name": "T:XII Chrono",
+      "rarity": "3-Legendary",
+      "bonus_type": "Lab Speed",
+      "value": 0.1,
+      "description": "Increase lab speed by 10%",
+      "unlock_group": "milestone"
+    },
+    "T:XIII Hyper": {
+      "index": 20,
+      "id": "t_xiii_hyper",
+      "name": "T:XIII Hyper",
+      "rarity": "3-Legendary",
+      "bonus_type": "Coins",
+      "value": 0.1,
+      "description": "Increase coins earned by 10%",
+      "unlock_group": "milestone"
+    },
+    "T:XIV Arcane": {
+      "index": 21,
+      "id": "t_xiv_arcane",
+      "name": "T:XIV Arcane",
+      "rarity": "3-Legendary",
+      "bonus_type": "Damage",
+      "value": 0.1,
+      "description": "Increase tower damage by 10%",
+      "unlock_group": "milestone"
+    },
+    "T:XV Celestial": {
+      "index": 22,
+      "id": "t_xv_celestial",
+      "name": "T:XV Celestial",
+      "rarity": "3-Legendary",
+      "bonus_type": "Critical Factor",
+      "value": 0.1,
+      "description": "Increase critical factor by 10%",
+      "unlock_group": "milestone"
+    },
+    "1st Tower Birthday": {
+      "index": 23,
+      "id": "1st_tower_birthday",
+      "name": "1st Tower Birthday",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage",
+      "value": 0.02,
+      "description": "Increase tower damage by 2%",
+      "unlock_group": "birthday"
+    },
+    "2nd Tower Birthday": {
+      "index": 24,
+      "id": "2nd_tower_birthday",
+      "name": "2nd Tower Birthday",
+      "rarity": "1-Rare",
+      "bonus_type": "Critical Factor",
+      "value": 0.02,
+      "description": "Increase critical factor by 2%",
+      "unlock_group": "birthday"
+    },
+    "3rd Tower Birthday": {
+      "index": 25,
+      "id": "3rd_tower_birthday",
+      "name": "3rd Tower Birthday",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage / Meter",
+      "value": 0.02,
+      "description": "Increase damage/meter by 2%",
+      "unlock_group": "birthday"
+    },
+    "Dreamcatcher": {
+      "index": 26,
+      "id": "dreamcatcher",
+      "name": "Dreamcatcher",
+      "rarity": "1-Rare",
+      "bonus_type": "Coins",
+      "value": 0.02,
+      "description": "Increase coins earned by 2%",
+      "unlock_group": "event"
+    },
+    "Spirit Wolf": {
+      "index": 27,
+      "id": "spirit_wolf",
+      "name": "Spirit Wolf",
+      "rarity": "2-Epic",
+      "bonus_type": "Critical Factor",
+      "value": 0.05,
+      "description": "Increase critical factor by 5%",
+      "unlock_group": "event"
+    },
+    "Bacteriophage": {
+      "index": 28,
+      "id": "bacteriophage",
+      "name": "Bacteriophage",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage",
+      "value": 0.02,
+      "description": "Increase tower damage by 2%",
+      "unlock_group": "event"
+    },
+    "Neuron": {
+      "index": 29,
+      "id": "neuron",
+      "name": "Neuron",
+      "rarity": "2-Epic",
+      "bonus_type": "health",
+      "value": 0.05,
+      "description": "Increase health by 5%",
+      "unlock_group": "event"
+    },
+    "Ionized Plasma": {
+      "index": 30,
+      "id": "ionized_plasma",
+      "name": "Ionized Plasma",
+      "rarity": "1-Rare",
+      "bonus_type": "Defense %",
+      "value": 0.02,
+      "description": "Increase defense absolute by 2%",
+      "unlock_group": "event"
+    },
+    "Plasma Arc": {
+      "index": 31,
+      "id": "plasma_arc",
+      "name": "Plasma Arc",
+      "rarity": "2-Epic",
+      "bonus_type": "Lab Speed",
+      "value": 0.04,
+      "description": "Increase lab speed by 4%",
+      "unlock_group": "event"
+    },
+    "Honey Drop": {
+      "index": 32,
+      "id": "honey_drop",
+      "name": "Honey Drop",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage",
+      "value": 0.02,
+      "description": "Increase tower damage by 2%",
+      "unlock_group": "event"
+    },
+    "Stinger": {
+      "index": 33,
+      "id": "stinger",
+      "name": "Stinger",
+      "rarity": "2-Epic",
+      "bonus_type": "Critical Factor",
+      "value": 0.05,
+      "description": "Increase critical factor by 5%",
+      "unlock_group": "event"
+    },
+    "Aurora Vortex": {
+      "index": 34,
+      "id": "aurora_vortex",
+      "name": "Aurora Vortex",
+      "rarity": "1-Rare",
+      "bonus_type": "Health",
+      "value": 0.02,
+      "description": "Increase tower health by 2%",
+      "unlock_group": "event"
+    },
+    "Contained Ions": {
+      "index": 35,
+      "id": "contained_ions",
+      "name": "Contained Ions",
+      "rarity": "2-Epic",
+      "bonus_type": "Defense %",
+      "value": 0.05,
+      "description": "Increase defense absolute by 5%",
+      "unlock_group": "event"
+    },
+    "Alien Head": {
+      "index": 36,
+      "id": "alien_head",
+      "name": "Alien Head",
+      "rarity": "1-Rare",
+      "bonus_type": "Coins",
+      "value": 0.02,
+      "description": "Increase coins earned by 2%",
+      "unlock_group": "event"
+    },
+    "Alien Warp Drive": {
+      "index": 37,
+      "id": "alien_warp_drive",
+      "name": "Alien Warp Drive",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage / Meter",
+      "value": 0.05,
+      "description": "Increase damage/meter by 5%",
+      "unlock_group": "event"
+    },
+    "Ancient Tome": {
+      "index": 38,
+      "id": "ancient_tome",
+      "name": "Ancient Tome",
+      "rarity": "1-Rare",
+      "bonus_type": "Lab Speed",
+      "value": 0.015,
+      "description": "Increase lab speed by 1.5%",
+      "unlock_group": "event"
+    },
+    "Space Sundial": {
+      "index": 39,
+      "id": "space_sundial",
+      "name": "Space Sundial",
+      "rarity": "2-Epic",
+      "bonus_type": "damage",
+      "value": 0.05,
+      "description": "Increase damage by 5%",
+      "unlock_group": "event"
+    },
+    "Spooky Bat": {
+      "index": 40,
+      "id": "spooky_bat",
+      "name": "Spooky Bat",
+      "rarity": "1-Rare",
+      "bonus_type": "crit factor",
+      "value": 0.02,
+      "description": "Increase crit factor by 2%",
+      "unlock_group": "event"
+    },
+    "Man Skull": {
+      "index": 41,
+      "id": "man_skull",
+      "name": "Man Skull",
+      "rarity": "2-Epic",
+      "bonus_type": "health",
+      "value": 0.05,
+      "description": "Increase health by 5%",
+      "unlock_group": "event"
+    },
+    "Cherry": {
+      "index": 42,
+      "id": "cherry",
+      "name": "Cherry",
+      "rarity": "1-Rare",
+      "bonus_type": "Defense %",
+      "value": 0.02,
+      "description": "Increase defense absolute by 2%",
+      "unlock_group": "event"
+    },
+    "Sakura Lantern": {
+      "index": 43,
+      "id": "sakura_lantern",
+      "name": "Sakura Lantern",
+      "rarity": "2-Epic",
+      "bonus_type": "coins",
+      "value": 0.05,
+      "description": "Increase coins by 5%",
+      "unlock_group": "event"
+    },
+    "Tower Latte": {
+      "index": 44,
+      "id": "tower_latte",
+      "name": "Tower Latte",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage / Meter",
+      "value": 0.02,
+      "description": "Increase damage/meter by 2%",
+      "unlock_group": "event"
+    },
+    "Pumpkin": {
+      "index": 45,
+      "id": "pumpkin",
+      "name": "Pumpkin",
+      "rarity": "2-Epic",
+      "bonus_type": "Lab Speed",
+      "value": 0.04,
+      "description": "Increase lab speed by 4%",
+      "unlock_group": "event"
+    },
+    "Game Joystick": {
+      "index": 46,
+      "id": "holy_joystick",
+      "name": "Game Joystick",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage",
+      "value": 0.02,
+      "description": "Increase tower damage by 2%",
+      "unlock_group": "event"
+    },
+    "Controller": {
+      "index": 47,
+      "id": "controller",
+      "name": "Controller",
+      "rarity": "2-Epic",
+      "bonus_type": "Critical Factor",
+      "value": 0.05,
+      "description": "Increase critical factor by 5%",
+      "unlock_group": "event"
+    },
+    "Firework": {
+      "index": 48,
+      "id": "firework",
+      "name": "Firework",
+      "rarity": "1-Rare",
+      "bonus_type": "Health",
+      "value": 0.02,
+      "description": "Increase tower health by 2%",
+      "unlock_group": "event"
+    },
+    "Champagne": {
+      "index": 221,
+      "id": "champagne",
+      "name": "Champagne",
+      "rarity": "1-Rare",
+      "bonus_type": "Attack Speed",
+      "value": 0.01,
+      "description": "Increase attack speed by 1%",
+      "unlock_group": "event"
+    },
+    "Palm Tree": {
+      "index": 50,
+      "id": "palm_tree",
+      "name": "Palm Tree",
+      "rarity": "1-Rare",
+      "bonus_type": "Lab Speed",
+      "value": 0.02,
+      "description": "Increase lab speed by 2%",
+      "unlock_group": "event"
+    },
+    "Pixel Cube Heart": {
+      "index": 51,
+      "id": "pixel_cube_heart",
+      "name": "Pixel Cube Heart",
+      "rarity": "2-Epic",
+      "bonus_type": "Health",
+      "value": 0.05,
+      "description": "Increase tower health by 5%",
+      "unlock_group": "event"
+    },
+    "Dark Sight": {
+      "index": 52,
+      "id": "dark_sight",
+      "name": "Dark Sight",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage / Meter",
+      "value": 0.02,
+      "description": "Increase damage/meter by 2%",
+      "unlock_group": "event"
+    },
+    "Creepy Smile": {
+      "index": 53,
+      "id": "creepy_smile",
+      "name": "Creepy Smile",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage",
+      "value": 0.05,
+      "description": "Increase tower damage by 5%",
+      "unlock_group": "event"
+    },
+    "Submarine": {
+      "index": 54,
+      "id": "submarine",
+      "name": "Submarine",
+      "rarity": "1-Rare",
+      "bonus_type": "crit factor",
+      "value": 0.02,
+      "description": "Increase crit factor by 2%",
+      "unlock_group": "event"
+    },
+    "The Kraken": {
+      "index": 55,
+      "id": "the_kraken",
+      "name": "The Kraken",
+      "rarity": "2-Epic",
+      "bonus_type": "Defense %",
+      "value": 0.05,
+      "description": "Increase defense absolute by 5%",
+      "unlock_group": "event"
+    },
+    "Warp Gate": {
+      "index": 56,
+      "id": "warp_gate",
+      "name": "Warp Gate",
+      "rarity": "1-Rare",
+      "bonus_type": "coins",
+      "value": 0.02,
+      "description": "Increase coins by 2%",
+      "unlock_group": "event"
+    },
+    "Star Ship": {
+      "index": 57,
+      "id": "star_ship",
+      "name": "Star Ship",
+      "rarity": "2-Epic",
+      "bonus_type": "Lab Speed",
+      "value": 0.04,
+      "description": "Increase lab speed by 4%",
+      "unlock_group": "event"
+    },
+    "Barnacle": {
+      "index": 58,
+      "id": "barnacle",
+      "name": "Barnacle",
+      "rarity": "1-Rare",
+      "bonus_type": "health",
+      "value": 0.02,
+      "description": "Increase health by 2%",
+      "unlock_group": "event"
+    },
+    "Wave": {
+      "index": 59,
+      "id": "wave",
+      "name": "Wave",
+      "rarity": "2-Epic",
+      "bonus_type": "crit factor",
+      "value": 0.05,
+      "description": "Increase crit factor by 5%",
+      "unlock_group": "event"
+    },
+    "Pizza": {
+      "index": 60,
+      "id": "pizza",
+      "name": "Pizza",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage",
+      "value": 0.02,
+      "description": "Increase tower damage by 2%",
+      "unlock_group": "event"
+    },
+    "Illuminati": {
+      "index": 61,
+      "id": "illuminati",
+      "name": "Illuminati",
+      "rarity": "2-Epic",
+      "bonus_type": "defence absolute",
+      "value": 0.05,
+      "description": "Increase defence absolute by 5%",
+      "unlock_group": "event"
+    },
+    "Prismatic Shard": {
+      "index": 62,
+      "id": "prismatic_shard",
+      "name": "Prismatic Shard",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage / Meter",
+      "value": 0.05,
+      "description": "Increase damage/meter by 5%",
+      "unlock_group": "event"
+    },
+    "Refraction Array": {
+      "index": 63,
+      "id": "refraction_array",
+      "name": "Refraction Array",
+      "rarity": "1-Rare",
+      "bonus_type": "Coins",
+      "value": 0.02,
+      "description": "Increase Coins by 2%",
+      "unlock_group": "event"
+    },
+    "Cobweb": {
+      "index": 64,
+      "id": "cobweb",
+      "name": "Cobweb",
+      "rarity": "1-Rare",
+      "bonus_type": "Health",
+      "value": 0.02,
+      "description": "Increase Tower Health by 2%",
+      "unlock_group": "event"
+    },
+    "The Fly": {
+      "index": 65,
+      "id": "the_fly",
+      "name": "The Fly",
+      "rarity": "2-Epic",
+      "bonus_type": "Defense %",
+      "value": 0.05,
+      "description": "Increase defense absolute by 5%",
+      "unlock_group": "event"
+    },
+    "Clip Ons": {
+      "index": 66,
+      "id": "clip_ons",
+      "name": "Clip Ons",
+      "rarity": "1-Rare",
+      "bonus_type": "Critical Factor",
+      "value": 0.02,
+      "description": "Increase Critical Factor by 2%",
+      "unlock_group": "event"
+    },
+    "Code Stream": {
+      "index": 67,
+      "id": "code_stream",
+      "name": "Code Stream",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage",
+      "value": 0.05,
+      "description": "Increase tower damage by 5%",
+      "unlock_group": "event"
+    },
+    "Summit Starlight": {
+      "index": 68,
+      "id": "summit_starlight",
+      "name": "Summit Starlight",
+      "rarity": "1-Rare",
+      "bonus_type": "Lab Speed",
+      "value": 0.02,
+      "description": "Increase lab speed by 2%",
+      "unlock_group": "event"
+    },
+    "Mountain Goat": {
+      "index": 69,
+      "id": "mountain_goat",
+      "name": "Mountain Goat",
+      "rarity": "2-Epic",
+      "bonus_type": "Health",
+      "value": 0.05,
+      "description": "Increase Health by 5%",
+      "unlock_group": "event"
+    },
+    "Hook": {
+      "index": 70,
+      "id": "hook",
+      "name": "Hook",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage / Meter",
+      "value": 0.02,
+      "description": "Increase Damage/Meter by 2%",
+      "unlock_group": "event"
+    },
+    "Fish": {
+      "index": 71,
+      "id": "fish",
+      "name": "Fish",
+      "rarity": "2-Epic",
+      "bonus_type": "Defense %",
+      "value": 0.05,
+      "description": "Increase defense absolute by 5%",
+      "unlock_group": "event"
+    },
+    "Gale Winds": {
+      "index": 72,
+      "id": "gale_winds",
+      "name": "Gale Winds",
+      "rarity": "1-Rare",
+      "bonus_type": "Coins",
+      "value": 0.02,
+      "description": "Increase coins earned by 2%",
+      "unlock_group": "event"
+    },
+    "Flying House": {
+      "index": 73,
+      "id": "flying_house",
+      "name": "Flying House",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage",
+      "value": 0.05,
+      "description": "Increase tower damage by 5%",
+      "unlock_group": "event"
+    },
+    "Rain Jacket": {
+      "index": 74,
+      "id": "rain_jacket",
+      "name": "Rain Jacket",
+      "rarity": "1-Rare",
+      "bonus_type": "Health",
+      "value": 0.02,
+      "description": "Increase Tower Health by 2%",
+      "unlock_group": "event"
+    },
+    "Cloud Lightning": {
+      "index": 75,
+      "id": "cloud_lightning",
+      "name": "Cloud Lightning",
+      "rarity": "2-Epic",
+      "bonus_type": "Critical Factor",
+      "value": 0.05,
+      "description": "Increase critical factor by 5%",
+      "unlock_group": "event"
+    },
+    "Rabies": {
+      "index": 76,
+      "id": "rabies",
+      "name": "Rabies",
+      "rarity": "1-Rare",
+      "bonus_type": "Lab Speed",
+      "value": 0.02,
+      "description": "Increase lab speed by 2%",
+      "unlock_group": "event"
+    },
+    "Ebola": {
+      "index": 77,
+      "id": "ebola",
+      "name": "Ebola",
+      "rarity": "2-Epic",
+      "bonus_type": "Defense %",
+      "value": 0.05,
+      "description": "Increase defense absolute by 5%",
+      "unlock_group": "event"
+    },
+    "Anubis": {
+      "index": 78,
+      "id": "anubis",
+      "name": "Anubis",
+      "rarity": "1-Rare",
+      "bonus_type": "Coins",
+      "value": 0.02,
+      "description": "Increase Coins by 2%",
+      "unlock_group": "event"
+    },
+    "Sphinx": {
+      "index": 79,
+      "id": "sphinx",
+      "name": "Sphinx",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage",
+      "value": 0.05,
+      "description": "Increase tower damage by 5%",
+      "unlock_group": "event"
+    },
+    "4th Tower Birthday": {
+      "index": 80,
+      "id": "4th_tower_birthday",
+      "name": "4th Tower Birthday",
+      "rarity": "1-Rare",
+      "bonus_type": "health",
+      "value": 0.02,
+      "description": "Increase health by 2%",
+      "unlock_group": "birthday"
+    },
+    "5th Tower Birthday": {
+      "index": 81,
+      "id": "5th_tower_birthday",
+      "name": "5th Tower Birthday",
+      "rarity": "1-Rare",
+      "bonus_type": "Critical Factor",
+      "value": 0.02,
+      "description": "Increase critical factor by 2%",
+      "unlock_group": "birthday"
+    },
+    "6th Tower Birthday": {
+      "index": 82,
+      "id": "6th_tower_birthday",
+      "name": "6th Tower Birthday",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage / Meter",
+      "value": 0.02,
+      "description": "Increase damage/meter by 2%",
+      "unlock_group": "birthday"
+    },
+    "Remote Control": {
+      "index": 83,
+      "id": "remote_control",
+      "name": "Remote Control",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage / Meter",
+      "value": 0.02,
+      "description": "Increase Damage/Meter by 2%",
+      "unlock_group": "event"
+    },
+    "Cathode Ray Tube": {
+      "index": 84,
+      "id": "cathode_ray_tube",
+      "name": "Cathode Ray Tube",
+      "rarity": "2-Epic",
+      "bonus_type": "coins",
+      "value": 0.05,
+      "description": "Increase coins by 5%",
+      "unlock_group": "event"
+    },
+    "T:XVI Quantum": {
+      "index": 85,
+      "id": "t_xvi_quantum",
+      "name": "T:XVI Quantum",
+      "rarity": "3-Legendary",
+      "bonus_type": "Health",
+      "value": 0.1,
+      "description": "Increase tower health by 10%",
+      "unlock_group": "milestone"
+    },
+    "T:XVII Nebula": {
+      "index": 86,
+      "id": "t_xvii_nebula",
+      "name": "T:XVII Nebula",
+      "rarity": "3-Legendary",
+      "bonus_type": "Damage / Meter",
+      "value": 0.1,
+      "description": "Increase damage/meter by 10%",
+      "unlock_group": "milestone"
+    },
+    "T:XVIII Singularity": {
+      "index": 87,
+      "id": "t_xviii_singularity",
+      "name": "T:XVIII Singularity",
+      "rarity": "3-Legendary",
+      "bonus_type": "Lab Speed",
+      "value": 0.1,
+      "description": "Increase lab speed by 10%",
+      "unlock_group": "milestone"
+    },
+    "Comet": {
+      "index": 88,
+      "id": "comet",
+      "name": "Comet",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage",
+      "value": 0.02,
+      "description": "Increase Tower Damage by 2%",
+      "unlock_group": "event"
+    },
+    "Planetary Rings": {
+      "index": 89,
+      "id": "planetary_rings",
+      "name": "Planetary Rings",
+      "rarity": "2-Epic",
+      "bonus_type": "Critical Factor",
+      "value": 0.05,
+      "description": "Increase critical factor by 5%",
+      "unlock_group": "event"
+    },
+    "Lava Flow": {
+      "index": 90,
+      "id": "lava_flow",
+      "name": "Lava Flow",
+      "rarity": "1-Rare",
+      "bonus_type": "Health",
+      "value": 0.02,
+      "description": "Increase Tower Health by 2%",
+      "unlock_group": "event"
+    },
+    "Ash Cloud": {
+      "index": 91,
+      "id": "ash_cloud",
+      "name": "Ash Cloud",
+      "rarity": "2-Epic",
+      "bonus_type": "Defense %",
+      "value": 0.05,
+      "description": "Increase defense absolute by 5%",
+      "unlock_group": "event"
+    },
+    "Tea Ceremony": {
+      "index": 94,
+      "id": "tea_ceremony",
+      "name": "Tea Ceremony",
+      "rarity": "1-Rare",
+      "bonus_type": "health",
+      "value": 0.02,
+      "description": "Increase health by 2%",
+      "unlock_group": "event"
+    },
+    "Kimono": {
+      "index": 95,
+      "id": "kimono",
+      "name": "Kimono",
+      "rarity": "2-Epic",
+      "bonus_type": "Coins",
+      "value": 0.05,
+      "description": "Increase Coin by 5%",
+      "unlock_group": "event"
+    },
+    "Acorn": {
+      "index": 96,
+      "id": "acorn",
+      "name": "Acorn",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage / Meter",
+      "value": 0.02,
+      "description": "Increase Damage/Meter by 2%",
+      "unlock_group": "event"
+    },
+    "Scarf": {
+      "index": 97,
+      "id": "scarf",
+      "name": "Scarf",
+      "rarity": "2-Epic",
+      "bonus_type": "Defense %",
+      "value": 0.05,
+      "description": "Increase defense absolute by 5%",
+      "unlock_group": "event"
+    },
+    "Cauldron": {
+      "index": 98,
+      "id": "cauldron",
+      "name": "Cauldron",
+      "rarity": "1-Rare",
+      "bonus_type": "Lab Speed",
+      "value": 0.02,
+      "description": "Increase Lab Speed by 2%",
+      "unlock_group": "event"
+    },
+    "Witch Hat": {
+      "index": 99,
+      "id": "witch_hat",
+      "name": "Witch Hat",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage",
+      "value": 0.05,
+      "description": "Increase tower damage by 5%",
+      "unlock_group": "event"
+    },
+    "Abduction Room": {
+      "index": 100,
+      "id": "abduction_room",
+      "name": "Abduction Room",
+      "rarity": "1-Rare",
+      "bonus_type": "Unknown",
+      "value": 0.0,
+      "description": "Increase Tower Health 2%",
+      "unlock_group": "event"
+    },
+    "Crop Circle": {
+      "index": 101,
+      "id": "crop_circle",
+      "name": "Crop Circle",
+      "rarity": "2-Epic",
+      "bonus_type": "Critical Factor",
+      "value": 0.05,
+      "description": "Increase critical factor by 5%",
+      "unlock_group": "event"
+    },
+    "Legend Badge": {
+      "index": 102,
+      "id": "legend_badge",
+      "name": "Legend Badge",
+      "rarity": "3-Legendary",
+      "bonus_type": "Critical Factor",
+      "value": 0.1,
+      "description": "Increase critical factor by 10%",
+      "unlock_group": "tournament"
+    },
+    "Icicle": {
+      "index": 103,
+      "id": "icicle",
+      "name": "Icicle",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage",
+      "value": 0.02,
+      "description": "Increase Tower Damage by 2%",
+      "unlock_group": "event"
+    },
+    "Sleigh Bell": {
+      "index": 104,
+      "id": "sleigh_bell",
+      "name": "Sleigh Bell",
+      "rarity": "2-Epic",
+      "bonus_type": "Health",
+      "value": 0.05,
+      "description": "Increase tower health by 5%",
+      "unlock_group": "event"
+    },
+    "Koi Fish": {
+      "index": 105,
+      "id": "koi_fish",
+      "name": "Koi Fish",
+      "rarity": "1-Rare",
+      "bonus_type": "Lab Speed",
+      "value": 0.02,
+      "description": "Increase lab speed by 2%",
+      "unlock_group": "event"
+    },
+    "Bonsai Tree": {
+      "index": 106,
+      "id": "bonsai_tree",
+      "name": "Bonsai Tree",
+      "rarity": "2-Epic",
+      "bonus_type": "Coins",
+      "value": 0.05,
+      "description": "Increase Coins by 5%",
+      "unlock_group": "event"
+    },
+    "Power Glove": {
+      "index": 107,
+      "id": "power_glove",
+      "name": "Power Glove",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage",
+      "value": 0.02,
+      "description": "Increase tower damage by 2%",
+      "unlock_group": "event"
+    },
+    "Arcade Token": {
+      "index": 108,
+      "id": "arcade_token",
+      "name": "Arcade Token",
+      "rarity": "2-Epic",
+      "bonus_type": "bot range",
+      "value": 2.0,
+      "description": "Increase bot range by 2m",
+      "unlock_group": "event"
+    },
+    "Lunar Cat Paw": {
+      "index": 109,
+      "id": "lunar_cat_paw",
+      "name": "Lunar Cat Paw",
+      "rarity": "1-Rare",
+      "bonus_type": "critical chance",
+      "value": 0.01,
+      "description": "Increase critical chance by 1%",
+      "unlock_group": "event"
+    },
+    "Pet Cat": {
+      "index": 110,
+      "id": "pet_cat",
+      "name": "Pet Cat",
+      "rarity": "2-Epic",
+      "bonus_type": "Attack Speed",
+      "value": 0.02,
+      "description": "Increase Attack Speed by 2%",
+      "unlock_group": "event"
+    },
+    "Confetti Ball": {
+      "index": 111,
+      "id": "confetti_ball",
+      "name": "Confetti Ball",
+      "rarity": "1-Rare",
+      "bonus_type": "Free Attack Upgrade",
+      "value": 0.01,
+      "description": "Increase Free Attack Upgrade by 1%",
+      "unlock_group": "event"
+    },
+    "Party Mask": {
+      "index": 112,
+      "id": "party_mask",
+      "name": "Party Mask",
+      "rarity": "2-Epic",
+      "bonus_type": "Ultimate Damage",
+      "value": 0.05,
+      "description": "Increase ultimate damage by 5%",
+      "unlock_group": "event"
+    },
+    "Falling Apple": {
+      "index": 113,
+      "id": "falling_apple",
+      "name": "Falling Apple",
+      "rarity": "1-Rare",
+      "bonus_type": "free defense upgrade",
+      "value": 0.01,
+      "description": "Increase free defense upgrade by 1%",
+      "unlock_group": "event"
+    },
+    "3 Body Solution": {
+      "index": 114,
+      "id": "3_body_solution",
+      "name": "3 Body Solution",
+      "rarity": "2-Epic",
+      "bonus_type": "super critical chance",
+      "value": 0.02,
+      "description": "Increase super critical chance by 2%",
+      "unlock_group": "event"
+    },
+    "Coral Crown": {
+      "index": 115,
+      "id": "coral_crown",
+      "name": "Coral Crown",
+      "rarity": "1-Rare",
+      "bonus_type": "Health Regen",
+      "value": 0.02,
+      "description": "Increase health regen by 2%",
+      "unlock_group": "event"
+    },
+    "Angler Fish": {
+      "index": 116,
+      "id": "angler_fish",
+      "name": "Angler Fish",
+      "rarity": "2-Epic",
+      "bonus_type": "thorns",
+      "value": 0.02,
+      "description": "Increase thorns by 2%",
+      "unlock_group": "event"
+    },
+    "Haunted Mirror": {
+      "index": 117,
+      "id": "haunted_mirror",
+      "name": "Haunted Mirror",
+      "rarity": "1-Rare",
+      "bonus_type": "Unknown",
+      "value": 0.0,
+      "description": "Decrease Wall Rebuild Time by 2s",
+      "unlock_group": "event"
+    },
+    "Shadow Puppet": {
+      "index": 118,
+      "id": "shadow_puppet",
+      "name": "Shadow Puppet",
+      "rarity": "2-Epic",
+      "bonus_type": "super critical mult",
+      "value": 0.05,
+      "description": "Increase super critical mult by 5%",
+      "unlock_group": "event"
+    },
+    "Temporal Rift": {
+      "index": 119,
+      "id": "temporal_rift",
+      "name": "Temporal Rift",
+      "rarity": "1-Rare",
+      "bonus_type": "cash",
+      "value": 0.02,
+      "description": "Increase cash by 2%",
+      "unlock_group": "event"
+    },
+    "Dream Clock": {
+      "index": 120,
+      "id": "dream_clock",
+      "name": "Dream Clock",
+      "rarity": "2-Epic",
+      "bonus_type": "orb speed",
+      "value": 0.05,
+      "description": "Increase orb speed by 5%",
+      "unlock_group": "event"
+    },
+    "Pulsar Core": {
+      "index": 121,
+      "id": "pulsar_core",
+      "name": "Pulsar Core",
+      "rarity": "1-Rare",
+      "bonus_type": "recovery amount",
+      "value": 0.02,
+      "description": "Increase recovery amount by 2%",
+      "unlock_group": "event"
+    },
+    "Light Speedometer": {
+      "index": 122,
+      "id": "light_speedometer",
+      "name": "Light Speedometer",
+      "rarity": "2-Epic",
+      "bonus_type": "enemy attack level skip",
+      "value": 0.02,
+      "description": "Increase enemy attack level skip by 2%",
+      "unlock_group": "event"
+    },
+    "UFO Beam": {
+      "index": 123,
+      "id": "ufo_beam",
+      "name": "UFO Beam",
+      "rarity": "1-Rare",
+      "bonus_type": "knockback force",
+      "value": 0.02,
+      "description": "Increase knockback force by 2%",
+      "unlock_group": "event"
+    },
+    "Alien Egg": {
+      "index": 124,
+      "id": "alien_egg",
+      "name": "Alien Egg",
+      "rarity": "2-Epic",
+      "bonus_type": "enemy health skip",
+      "value": 0.02,
+      "description": "Increase enemy health skip by 2%",
+      "unlock_group": "event"
+    },
+    "Hourglass": {
+      "index": 125,
+      "id": "hourglass",
+      "name": "Hourglass",
+      "rarity": "1-Rare",
+      "bonus_type": "coins",
+      "value": 0.02,
+      "description": "Increase coins by 2%",
+      "unlock_group": "event"
+    },
+    "Time Compass": {
+      "index": 126,
+      "id": "time_compass",
+      "name": "Time Compass",
+      "rarity": "2-Epic",
+      "bonus_type": "Attack Speed",
+      "value": 0.02,
+      "description": "Increase attack speed by 2%",
+      "unlock_group": "event"
+    },
+    "Whispering Web": {
+      "index": 127,
+      "id": "whispering_web",
+      "name": "Whispering Web",
+      "rarity": "1-Rare",
+      "bonus_type": "free defense upgrade",
+      "value": 0.01,
+      "description": "Increase free defense upgrade by 1%",
+      "unlock_group": "event"
+    },
+    "Cursed Candle": {
+      "index": 128,
+      "id": "cursed_candle",
+      "name": "Cursed Candle",
+      "rarity": "2-Epic",
+      "bonus_type": "super critical chance",
+      "value": 0.02,
+      "description": "Increase super critical chance by 2%",
+      "unlock_group": "event"
+    },
+    "Quantum Drive": {
+      "index": 129,
+      "id": "quantum_drive",
+      "name": "Quantum Drive",
+      "rarity": "1-Rare",
+      "bonus_type": "Bot Range",
+      "value": 1.0,
+      "description": "Increase Bot Range by 1m",
+      "unlock_group": "event"
+    },
+    "Photon Blade": {
+      "index": 130,
+      "id": "photon_blade",
+      "name": "Photon Blade",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage",
+      "value": 0.05,
+      "description": "Increase tower damage by 5%",
+      "unlock_group": "event"
+    },
+    "Abduction Signal": {
+      "index": 131,
+      "id": "abduction_signal",
+      "name": "Abduction Signal",
+      "rarity": "1-Rare",
+      "bonus_type": "crit factor",
+      "value": 0.02,
+      "description": "Increase crit factor by 2%",
+      "unlock_group": "event"
+    },
+    "Monolith": {
+      "index": 132,
+      "id": "monolith",
+      "name": "Monolith",
+      "rarity": "2-Epic",
+      "bonus_type": "Ultimate Damage",
+      "value": 0.05,
+      "description": "Increase ultimate damage by 5%",
+      "unlock_group": "event"
+    },
+    "Throne": {
+      "index": 133,
+      "id": "throne",
+      "name": "Throne",
+      "rarity": "1-Rare",
+      "bonus_type": "Health",
+      "value": 0.02,
+      "description": "Increase tower health by 2%",
+      "unlock_group": "guild"
+    },
+    "Crown": {
+      "index": 134,
+      "id": "crown",
+      "name": "Crown",
+      "rarity": "2-Epic",
+      "bonus_type": "Critical Factor",
+      "value": 0.05,
+      "description": "Increase critical factor by 5%",
+      "unlock_group": "guild"
+    },
+    "Bloom Burst": {
+      "index": 135,
+      "id": "bloom_burst",
+      "name": "Bloom Burst",
+      "rarity": "1-Rare",
+      "bonus_type": "cash bonus",
+      "value": 0.02,
+      "description": "Increase cash bonus by 2%",
+      "unlock_group": "event"
+    },
+    "Candy Core": {
+      "index": 136,
+      "id": "candy_core",
+      "name": "Candy Core",
+      "rarity": "2-Epic",
+      "bonus_type": "damage",
+      "value": 0.05,
+      "description": "Increase damage by 5%",
+      "unlock_group": "event"
+    },
+    "Mystic Hair": {
+      "index": 137,
+      "id": "mystic_bunny_1",
+      "name": "Mystic Hair",
+      "rarity": "1-Rare",
+      "bonus_type": "Coins",
+      "value": 0.02,
+      "description": "Increase coins earned by 2%",
+      "unlock_group": "event"
+    },
+    "Magic Egg": {
+      "index": 138,
+      "id": "magic_egg",
+      "name": "Magic Egg",
+      "rarity": "2-Epic",
+      "bonus_type": "free attack upgrade",
+      "value": 0.02,
+      "description": "Increase free attack upgrade by 2%",
+      "unlock_group": "event"
+    },
+    "Infinite Ruler": {
+      "index": 139,
+      "id": "infinite_ruler",
+      "name": "Infinite Ruler",
+      "rarity": "1-Rare",
+      "bonus_type": "free utility upgrade",
+      "value": 0.01,
+      "description": "Increase free utility upgrade by 1%",
+      "unlock_group": "event"
+    },
+    "Do While True": {
+      "index": 140,
+      "id": "do_while_true",
+      "name": "Do While True",
+      "rarity": "2-Epic",
+      "bonus_type": "orb speed",
+      "value": 0.05,
+      "description": "Increase orb speed by 5%",
+      "unlock_group": "event"
+    },
+    "Pi Seal": {
+      "index": 141,
+      "id": "pi_seal",
+      "name": "Pi Seal",
+      "rarity": "1-Rare",
+      "bonus_type": "Lab Speed",
+      "value": 0.02,
+      "description": "Increase lab speed by 2%",
+      "unlock_group": "event"
+    },
+    "Psychohistorian Brain": {
+      "index": 142,
+      "id": "psychohistorian_brain",
+      "name": "Psychohistorian Brain",
+      "rarity": "2-Epic",
+      "bonus_type": "super critical chance",
+      "value": 0.02,
+      "description": "Increase super critical chance by 2%",
+      "unlock_group": "event"
+    },
+    "Fancy Wires": {
+      "index": 143,
+      "id": "fancy_wires",
+      "name": "Fancy Wires",
+      "rarity": "1-Rare",
+      "bonus_type": "Health Regen",
+      "value": 0.02,
+      "description": "Increase health regen by 2%",
+      "unlock_group": "guild"
+    },
+    "Mech Head": {
+      "index": 144,
+      "id": "mech_head",
+      "name": "Mech Head",
+      "rarity": "2-Epic",
+      "bonus_type": "bot range",
+      "value": 2.0,
+      "description": "Increase bot range by 2m",
+      "unlock_group": "guild"
+    },
+    "Safe Path": {
+      "index": 145,
+      "id": "safe_path",
+      "name": "Safe Path",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage",
+      "value": 0.02,
+      "description": "Increase tower damage by 2%",
+      "unlock_group": "event"
+    },
+    "Shining Light": {
+      "index": 146,
+      "id": "shining_light",
+      "name": "Shining Light",
+      "rarity": "1-Rare",
+      "bonus_type": "critical chance",
+      "value": 0.01,
+      "description": "Increase critical chance by 1%",
+      "unlock_group": "event"
+    },
+    "Eternal Quest": {
+      "index": 147,
+      "id": "eternal_quest",
+      "name": "Eternal Quest",
+      "rarity": "2-Epic",
+      "bonus_type": "health",
+      "value": 0.05,
+      "description": "Increase health by 5%",
+      "unlock_group": "event"
+    },
+    "Nature's Wrath": {
+      "index": 148,
+      "id": "nature_s_wrath",
+      "name": "Nature's Wrath",
+      "rarity": "2-Epic",
+      "bonus_type": "orb speed",
+      "value": 0.05,
+      "description": "Increase orb speed by 5%",
+      "unlock_group": "event"
+    },
+    "Rlyeh": {
+      "index": 149,
+      "id": "rlyeh",
+      "name": "Rlyeh",
+      "rarity": "1-Rare",
+      "bonus_type": "free attack upgrade",
+      "value": 0.01,
+      "description": "Increase free attack upgrade by 1%",
+      "unlock_group": "event"
+    },
+    "Madness Induced": {
+      "index": 150,
+      "id": "madness_induced",
+      "name": "Madness Induced",
+      "rarity": "1-Rare",
+      "bonus_type": "Unknown",
+      "value": 0.0,
+      "description": "Increase crit factor 2%",
+      "unlock_group": "event"
+    },
+    "Cosmic Freedom": {
+      "index": 151,
+      "id": "cosmic_freedom",
+      "name": "Cosmic Freedom",
+      "rarity": "2-Epic",
+      "bonus_type": "Health Regen",
+      "value": 0.05,
+      "description": "Increase health regen by 5%",
+      "unlock_group": "event"
+    },
+    "Gnosis": {
+      "index": 174,
+      "id": "gnosis",
+      "name": "Gnosis",
+      "rarity": "1-Rare",
+      "bonus_type": "free defense upgrade",
+      "value": 0.01,
+      "description": "Increase free defense upgrade by 1%",
+      "unlock_group": "event"
+    },
+    "Honey Jar": {
+      "index": 153,
+      "id": "honey_jar",
+      "name": "Honey Jar",
+      "rarity": "1-Rare",
+      "bonus_type": "Attack Speed",
+      "value": 0.01,
+      "description": "Increase attack speed by 1%",
+      "unlock_group": "event"
+    },
+    "Heavenly Sweet": {
+      "index": 154,
+      "id": "heavenly_sweet",
+      "name": "Heavenly Sweet",
+      "rarity": "1-Rare",
+      "bonus_type": "Health",
+      "value": 0.02,
+      "description": "Increase tower health by 2%",
+      "unlock_group": "event"
+    },
+    "Honey Society": {
+      "index": 155,
+      "id": "honey_society",
+      "name": "Honey Society",
+      "rarity": "2-Epic",
+      "bonus_type": "knockback force",
+      "value": 0.05,
+      "description": "Increase knockback force by 5%",
+      "unlock_group": "event"
+    },
+    "The Queen": {
+      "index": 156,
+      "id": "the_queen",
+      "name": "The Queen",
+      "rarity": "2-Epic",
+      "bonus_type": "Coins",
+      "value": 0.05,
+      "description": "Increase coins earned by 5%",
+      "unlock_group": "event"
+    },
+    "Duck": {
+      "index": 157,
+      "id": "duck",
+      "name": "Duck",
+      "rarity": "1-Rare",
+      "bonus_type": "Ultimate Damage",
+      "value": 0.02,
+      "description": "Increase ultimate damage by 2%",
+      "unlock_group": "event"
+    },
+    "Grass": {
+      "index": 158,
+      "id": "grass",
+      "name": "Grass",
+      "rarity": "1-Rare",
+      "bonus_type": "free defense upgrade",
+      "value": 0.01,
+      "description": "Increase free defense upgrade by 1%",
+      "unlock_group": "event"
+    },
+    "Wind": {
+      "index": 159,
+      "id": "wind",
+      "name": "Wind",
+      "rarity": "2-Epic",
+      "bonus_type": "damage / meter",
+      "value": 0.05,
+      "description": "Increase damage / meter by 5%",
+      "unlock_group": "event"
+    },
+    "Lilies": {
+      "index": 160,
+      "id": "lilies",
+      "name": "Lilies",
+      "rarity": "2-Epic",
+      "bonus_type": "recovery amount",
+      "value": 0.05,
+      "description": "Increase recovery amount by 5%",
+      "unlock_group": "event"
+    },
+    "Plasma Globe": {
+      "index": 161,
+      "id": "plasma_globe",
+      "name": "Plasma Globe",
+      "rarity": "1-Rare",
+      "bonus_type": "bot range",
+      "value": 1.0,
+      "description": "Increase bot range by 1m",
+      "unlock_group": "event"
+    },
+    "Plasma Vortex": {
+      "index": 162,
+      "id": "plasma_vortex",
+      "name": "Plasma Vortex",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage",
+      "value": 0.02,
+      "description": "Increase tower damage by 2%",
+      "unlock_group": "event"
+    },
+    "Plasma Cell": {
+      "index": 163,
+      "id": "plasma_cell",
+      "name": "Plasma Cell",
+      "rarity": "2-Epic",
+      "bonus_type": "critical chance",
+      "value": 0.02,
+      "description": "Increase critical chance by 2%",
+      "unlock_group": "event"
+    },
+    "Plasma Chamber": {
+      "index": 164,
+      "id": "plasma_chamber",
+      "name": "Plasma Chamber",
+      "rarity": "2-Epic",
+      "bonus_type": "health",
+      "value": 0.05,
+      "description": "Increase health by 5%",
+      "unlock_group": "event"
+    },
+    "Floppy Disk": {
+      "index": 165,
+      "id": "floppy_disk",
+      "name": "Floppy Disk",
+      "rarity": "1-Rare",
+      "bonus_type": "free utility upgrade",
+      "value": 0.01,
+      "description": "Increase free utility upgrade by 1%",
+      "unlock_group": "event"
+    },
+    "Magic Cube": {
+      "index": 166,
+      "id": "magic_cube",
+      "name": "Magic Cube",
+      "rarity": "1-Rare",
+      "bonus_type": "crit factor",
+      "value": 0.02,
+      "description": "Increase crit factor by 2%",
+      "unlock_group": "event"
+    },
+    "Retro Camera": {
+      "index": 167,
+      "id": "retro_camera",
+      "name": "Retro Camera",
+      "rarity": "2-Epic",
+      "bonus_type": "Health Regen",
+      "value": 0.05,
+      "description": "Increase health regen by 5%",
+      "unlock_group": "event"
+    },
+    "Night City": {
+      "index": 168,
+      "id": "night_city",
+      "name": "Night City",
+      "rarity": "2-Epic",
+      "bonus_type": "Cash",
+      "value": 0.05,
+      "description": "Increase Cash by 5%",
+      "unlock_group": "event"
+    },
+    "Fisherman Set": {
+      "index": 169,
+      "id": "fisherman_set",
+      "name": "Fisherman Set",
+      "rarity": "1-Rare",
+      "bonus_type": "Defense %",
+      "value": 0.02,
+      "description": "Increase defense absolute by 2%",
+      "unlock_group": "event"
+    },
+    "Sunset Boat": {
+      "index": 170,
+      "id": "sunset_boat",
+      "name": "Sunset Boat",
+      "rarity": "1-Rare",
+      "bonus_type": "Attack Speed",
+      "value": 0.01,
+      "description": "Increase attack speed by 1%",
+      "unlock_group": "event"
+    },
+    "Good Catch": {
+      "index": 171,
+      "id": "good_catch",
+      "name": "Good Catch",
+      "rarity": "2-Epic",
+      "bonus_type": "Thorns",
+      "value": 0.02,
+      "description": "Increase Thorns by 2%",
+      "unlock_group": "event"
+    },
+    "River Of Plenty": {
+      "index": 172,
+      "id": "river_of_plenty",
+      "name": "River Of Plenty",
+      "rarity": "2-Epic",
+      "bonus_type": "coins",
+      "value": 0.05,
+      "description": "Increase coins by 5%",
+      "unlock_group": "event"
+    },
+    "Model Training": {
+      "index": 173,
+      "id": "model_training",
+      "name": "Model Training",
+      "rarity": "1-Rare",
+      "bonus_type": "orb speed",
+      "value": 0.02,
+      "description": "Increase orb speed by 2%",
+      "unlock_group": "event"
+    },
+    "Tower Agent": {
+      "index": 175,
+      "id": "tower_agent",
+      "name": "Tower Agent",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage / Meter",
+      "value": 0.05,
+      "description": "Increase damage/meter by 5%",
+      "unlock_group": "event"
+    },
+    "Fake Reality": {
+      "index": 176,
+      "id": "fake_reality",
+      "name": "Fake Reality",
+      "rarity": "2-Epic",
+      "bonus_type": "Ultimate Damage",
+      "value": 0.05,
+      "description": "Increase ultimate damage by 5%",
+      "unlock_group": "event"
+    },
+    "Breaking News": {
+      "index": 177,
+      "id": "breaking_news",
+      "name": "Breaking News",
+      "rarity": "1-Rare",
+      "bonus_type": "bot range",
+      "value": 1.0,
+      "description": "Increase bot range by 1m",
+      "unlock_group": "event"
+    },
+    "Globalization": {
+      "index": 178,
+      "id": "globalization",
+      "name": "Globalization",
+      "rarity": "1-Rare",
+      "bonus_type": "Unknown",
+      "value": 0.0,
+      "description": "Increase tower damage 2%",
+      "unlock_group": "event"
+    },
+    "No Signal": {
+      "index": 179,
+      "id": "no_signal",
+      "name": "No Signal",
+      "rarity": "2-Epic",
+      "bonus_type": "crit chance",
+      "value": 0.02,
+      "description": "Increase crit chance by 2%",
+      "unlock_group": "event"
+    },
+    "Antenna": {
+      "index": 180,
+      "id": "antenna",
+      "name": "Antenna",
+      "rarity": "2-Epic",
+      "bonus_type": "health",
+      "value": 0.05,
+      "description": "Increase health by 5%",
+      "unlock_group": "event"
+    },
+    "Brunch": {
+      "index": 181,
+      "id": "brunch",
+      "name": "Brunch",
+      "rarity": "1-Rare",
+      "bonus_type": "knockback force",
+      "value": 0.02,
+      "description": "Increase knockback force by 2%",
+      "unlock_group": "event"
+    },
+    "Dry Leaves": {
+      "index": 182,
+      "id": "dry_leaves",
+      "name": "Dry Leaves",
+      "rarity": "1-Rare",
+      "bonus_type": "free attack upgrade",
+      "value": 0.01,
+      "description": "Increase free attack upgrade by 1%",
+      "unlock_group": "event"
+    },
+    "Glowing Mushrooms": {
+      "index": 183,
+      "id": "glowing_mushrooms",
+      "name": "Glowing Mushrooms",
+      "rarity": "2-Epic",
+      "bonus_type": "thorns",
+      "value": 0.02,
+      "description": "Increase thorns by 2%",
+      "unlock_group": "event"
+    },
+    "Warm Clothes": {
+      "index": 184,
+      "id": "warm_clothes",
+      "name": "Warm Clothes",
+      "rarity": "2-Epic",
+      "bonus_type": "Lab Speed",
+      "value": 0.04,
+      "description": "Increase lab speed by 4%",
+      "unlock_group": "event"
+    },
+    "Let's Mix": {
+      "index": 185,
+      "id": "let_s_mix",
+      "name": "Let's Mix",
+      "rarity": "1-Rare",
+      "bonus_type": "Coins",
+      "value": 0.02,
+      "description": "Increase coins earned by 2%",
+      "unlock_group": "guild"
+    },
+    "Night Life": {
+      "index": 186,
+      "id": "night_life",
+      "name": "Night Life",
+      "rarity": "2-Epic",
+      "bonus_type": "Attack Speed",
+      "value": 0.02,
+      "description": "Increase attack speed by 2%",
+      "unlock_group": "guild"
+    },
+    "T:XIX Atomic": {
+      "index": 187,
+      "id": "t_xix_atomic",
+      "name": "T:XIX Atomic",
+      "rarity": "3-Legendary",
+      "bonus_type": "Damage",
+      "value": 0.1,
+      "description": "Increase tower damage by 10%",
+      "unlock_group": "milestone"
+    },
+    "T:XX Cyber": {
+      "index": 188,
+      "id": "t_xx_cyber",
+      "name": "T:XX Cyber",
+      "rarity": "3-Legendary",
+      "bonus_type": "Ultimate Damage",
+      "value": 0.08,
+      "description": "Increase ultimate damage by 8%",
+      "unlock_group": "milestone"
+    },
+    "T:XXI Eclipse": {
+      "index": 189,
+      "id": "t_xxi_eclipse",
+      "name": "T:XXI Eclipse",
+      "rarity": "3-Legendary",
+      "bonus_type": "Lab Speed",
+      "value": 0.1,
+      "description": "Increase lab speed by 10%",
+      "unlock_group": "milestone"
+    },
+    "World Domination": {
+      "index": 190,
+      "id": "world_domination",
+      "name": "World Domination",
+      "rarity": "1-Rare",
+      "bonus_type": "health earned",
+      "value": 0.02,
+      "description": "Increase health earned by 2%",
+      "unlock_group": "guild"
+    },
+    "Brave Heroes": {
+      "index": 191,
+      "id": "brave_heroes",
+      "name": "Brave Heroes",
+      "rarity": "2-Epic",
+      "bonus_type": "crit factor",
+      "value": 0.05,
+      "description": "Increase crit factor by 5%",
+      "unlock_group": "guild"
+    },
+    "VR": {
+      "index": 192,
+      "id": "vr",
+      "name": "VR",
+      "rarity": "1-Rare",
+      "bonus_type": "thorns",
+      "value": 0.01,
+      "description": "Increase thorns by 1%",
+      "unlock_group": "event"
+    },
+    "Holographic Ads": {
+      "index": 193,
+      "id": "holographic_ads",
+      "name": "Holographic Ads",
+      "rarity": "1-Rare",
+      "bonus_type": "Lab Speed",
+      "value": 0.02,
+      "description": "Increase lab speed by 2%",
+      "unlock_group": "event"
+    },
+    "Tech Weapon": {
+      "index": 194,
+      "id": "tech_weapon",
+      "name": "Tech Weapon",
+      "rarity": "2-Epic",
+      "bonus_type": "recovery amount",
+      "value": 0.05,
+      "description": "Increase recovery amount by 5%",
+      "unlock_group": "event"
+    },
+    "Cybernetics": {
+      "index": 195,
+      "id": "cybernetics",
+      "name": "Cybernetics",
+      "rarity": "2-Epic",
+      "bonus_type": "crit chance",
+      "value": 0.02,
+      "description": "Increase crit chance by 2%",
+      "unlock_group": "event"
+    },
+    "Explorer's Helmet": {
+      "index": 196,
+      "id": "explorer_s_helmet",
+      "name": "Explorer's Helmet",
+      "rarity": "1-Rare",
+      "bonus_type": "Health",
+      "value": 0.02,
+      "description": "Increase tower health by 2%",
+      "unlock_group": "event"
+    },
+    "Miner's Tool": {
+      "index": 197,
+      "id": "miner_s_tool",
+      "name": "Miner's Tool",
+      "rarity": "1-Rare",
+      "bonus_type": "defense percent",
+      "value": 0.01,
+      "description": "Increase defense percent by 1%",
+      "unlock_group": "event"
+    },
+    "Crystals Bag": {
+      "index": 198,
+      "id": "crystals_bag",
+      "name": "Crystals Bag",
+      "rarity": "2-Epic",
+      "bonus_type": "knockback force",
+      "value": 0.05,
+      "description": "Increase knockback force by 5%",
+      "unlock_group": "event"
+    },
+    "Full Minecart": {
+      "index": 199,
+      "id": "full_minecart",
+      "name": "Full Minecart",
+      "rarity": "2-Epic",
+      "bonus_type": "bot range",
+      "value": 2.0,
+      "description": "Increase bot range by 2m",
+      "unlock_group": "event"
+    },
+    "Happiness Balloons": {
+      "index": 200,
+      "id": "hapiness_balloons",
+      "name": "Happiness Balloons",
+      "rarity": "1-Rare",
+      "bonus_type": "Defense %",
+      "value": 0.02,
+      "description": "Increase defense absolute by 2%",
+      "unlock_group": "event"
+    },
+    "Delicious Food": {
+      "index": 201,
+      "id": "delicious_food",
+      "name": "Delicious Food",
+      "rarity": "1-Rare",
+      "bonus_type": "cash",
+      "value": 0.02,
+      "description": "Increase cash by 2%",
+      "unlock_group": "event"
+    },
+    "Amazing Prizes": {
+      "index": 202,
+      "id": "amazing_prizes",
+      "name": "Amazing Prizes",
+      "rarity": "2-Epic",
+      "bonus_type": "thorns",
+      "value": 0.02,
+      "description": "Increase thorns by 2%",
+      "unlock_group": "event"
+    },
+    "Carousel Of Joy": {
+      "index": 203,
+      "id": "carousel_of_joy",
+      "name": "Carousel Of Joy",
+      "rarity": "2-Epic",
+      "bonus_type": "Coins",
+      "value": 0.05,
+      "description": "Increase coins earned by 5%",
+      "unlock_group": "event"
+    },
+    "Bouquet": {
+      "index": 204,
+      "id": "bouquet",
+      "name": "Bouquet",
+      "rarity": "1-Rare",
+      "bonus_type": "Health",
+      "value": 0.02,
+      "description": "Increase tower health by 2%",
+      "unlock_group": "event"
+    },
+    "Lovely Gift": {
+      "index": 205,
+      "id": "lovely_gift",
+      "name": "Lovely Gift",
+      "rarity": "2-Epic",
+      "bonus_type": "knockback force",
+      "value": 0.05,
+      "description": "Increase knockback force by 5%",
+      "unlock_group": "event"
+    },
+    "Love Letter": {
+      "index": 206,
+      "id": "love_letter",
+      "name": "Love Letter",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage / Meter",
+      "value": 0.02,
+      "description": "Increase damage/meter by 2%",
+      "unlock_group": "event"
+    },
+    "Pierced Heart": {
+      "index": 207,
+      "id": "pierced_heart",
+      "name": "Pierced Heart",
+      "rarity": "2-Epic",
+      "bonus_type": "Ultimate Damage",
+      "value": 0.05,
+      "description": "Increase ultimate damage by 5%",
+      "unlock_group": "event"
+    },
+    "Good Hunting": {
+      "index": 208,
+      "id": "good_hunting",
+      "name": "Good Hunting",
+      "rarity": "1-Rare",
+      "bonus_type": "cash",
+      "value": 0.02,
+      "description": "Increase cash by 2%",
+      "unlock_group": "event"
+    },
+    "Spider Vision": {
+      "index": 209,
+      "id": "spider_vision",
+      "name": "Spider Vision",
+      "rarity": "1-Rare",
+      "bonus_type": "orb speed",
+      "value": 0.02,
+      "description": "Increase orb speed by 2%",
+      "unlock_group": "event"
+    },
+    "Spider Poison": {
+      "index": 210,
+      "id": "spider_poison",
+      "name": "Spider Poison",
+      "rarity": "2-Epic",
+      "bonus_type": "Ultimate Damage",
+      "value": 0.05,
+      "description": "Increase ultimate damage by 5%",
+      "unlock_group": "event"
+    },
+    "Spider Forest": {
+      "index": 211,
+      "id": "spider_forest",
+      "name": "Spider Forest",
+      "rarity": "2-Epic",
+      "bonus_type": "Critical Factor",
+      "value": 0.05,
+      "description": "Increase critical factor by 5%",
+      "unlock_group": "event"
+    },
+    "Pinball": {
+      "index": 212,
+      "id": "pinball",
+      "name": "Pinball",
+      "rarity": "1-Rare",
+      "bonus_type": "Defense %",
+      "value": 0.02,
+      "description": "Increase defense absolute by 2%",
+      "unlock_group": "event"
+    },
+    "To Infinity": {
+      "index": 213,
+      "id": "to_infinity",
+      "name": "To Infinity",
+      "rarity": "1-Rare",
+      "bonus_type": "Health Regen",
+      "value": 0.02,
+      "description": "Increase health regen by 2%",
+      "unlock_group": "event"
+    },
+    "Let's Play": {
+      "index": 214,
+      "id": "let_s_play",
+      "name": "Let's Play",
+      "rarity": "2-Epic",
+      "bonus_type": "damage",
+      "value": 0.05,
+      "description": "Increase damage by 5%",
+      "unlock_group": "event"
+    },
+    "Enemies": {
+      "index": 215,
+      "id": "enemies",
+      "name": "Enemies",
+      "rarity": "2-Epic",
+      "bonus_type": "coins",
+      "value": 0.05,
+      "description": "Increase coins by 5%",
+      "unlock_group": "event"
+    },
+    "Snow Globe": {
+      "index": 216,
+      "id": "snow_globe",
+      "name": "Snow Globe",
+      "rarity": "1-Rare",
+      "bonus_type": "recovery amount",
+      "value": 0.02,
+      "description": "Increase recovery amount by 2%",
+      "unlock_group": "event"
+    },
+    "Winter Gloves": {
+      "index": 217,
+      "id": "winter_gloves",
+      "name": "Winter Gloves",
+      "rarity": "1-Rare",
+      "bonus_type": "thorns",
+      "value": 0.01,
+      "description": "Increase thorns by 1%",
+      "unlock_group": "event"
+    },
+    "Snowflake": {
+      "index": 218,
+      "id": "snowflake",
+      "name": "Snowflake",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage / Meter",
+      "value": 0.05,
+      "description": "Increase damage/meter by 5%",
+      "unlock_group": "event"
+    },
+    "Wreath": {
+      "index": 219,
+      "id": "wreath",
+      "name": "Wreath",
+      "rarity": "2-Epic",
+      "bonus_type": "damage",
+      "value": 0.05,
+      "description": "Increase damage by 5%",
+      "unlock_group": "event"
+    },
+    "Party Popper": {
+      "index": 220,
+      "id": "party_popper",
+      "name": "Party Popper",
+      "rarity": "1-Rare",
+      "bonus_type": "free attack upgrade",
+      "value": 0.01,
+      "description": "Increase free attack upgrade by 1%",
+      "unlock_group": "event"
+    },
+    "Firework Rocket": {
+      "index": 222,
+      "id": "firework_rocket",
+      "name": "Firework Rocket",
+      "rarity": "2-Epic",
+      "bonus_type": "free utility upgrade",
+      "value": 0.02,
+      "description": "Increase free utility upgrade by 2%",
+      "unlock_group": "event"
+    },
+    "Gift Box": {
+      "index": 223,
+      "id": "gift_box",
+      "name": "Gift Box",
+      "rarity": "2-Epic",
+      "bonus_type": "Lab Speed",
+      "value": 0.04,
+      "description": "Increase lab speed by 4%",
+      "unlock_group": "event"
+    },
+    "Sky's Curtain": {
+      "index": 224,
+      "id": "sky_s_curtain",
+      "name": "Sky's Curtain",
+      "rarity": "1-Rare",
+      "bonus_type": "free defense upgrade",
+      "value": 0.01,
+      "description": "Increase free defense upgrade by 1%",
+      "unlock_group": "event"
+    },
+    "Solar Flare": {
+      "index": 225,
+      "id": "solar_flare",
+      "name": "Solar Flare",
+      "rarity": "1-Rare",
+      "bonus_type": "crit chance",
+      "value": 0.01,
+      "description": "Increase crit chance by 1%",
+      "unlock_group": "event"
+    },
+    "Northern Mountains": {
+      "index": 226,
+      "id": "northern_mountains",
+      "name": "Northern Mountains",
+      "rarity": "2-Epic",
+      "bonus_type": "defense",
+      "value": 0.02,
+      "description": "Increase defense by 2%",
+      "unlock_group": "event"
+    },
+    "Cosmic Impact": {
+      "index": 227,
+      "id": "cosmic_impact",
+      "name": "Cosmic Impact",
+      "rarity": "2-Epic",
+      "bonus_type": "orb speed",
+      "value": 0.05,
+      "description": "Increase orb speed by 5%",
+      "unlock_group": "event"
+    },
+    "Sudden Attack": {
+      "index": 228,
+      "id": "sudden_attack",
+      "name": "Sudden Attack",
+      "rarity": "1-Rare",
+      "bonus_type": "Health Regen",
+      "value": 0.02,
+      "description": "Increase health regen by 2%",
+      "unlock_group": "event"
+    },
+    "Alien Experiment": {
+      "index": 229,
+      "id": "alien_experiment",
+      "name": "Alien Experiment",
+      "rarity": "1-Rare",
+      "bonus_type": "bot range",
+      "value": 1.0,
+      "description": "Increase bot range by 1m",
+      "unlock_group": "event"
+    },
+    "Crop Circles": {
+      "index": 230,
+      "id": "crop_circles",
+      "name": "Crop Circles",
+      "rarity": "2-Epic",
+      "bonus_type": "knockback force",
+      "value": 0.05,
+      "description": "Increase knockback force by 5%",
+      "unlock_group": "event"
+    },
+    "Alien Implants": {
+      "index": 231,
+      "id": "alien_implants",
+      "name": "Alien Implants",
+      "rarity": "2-Epic",
+      "bonus_type": "Ultimate Damage",
+      "value": 0.05,
+      "description": "Increase ultimate damage by 5%",
+      "unlock_group": "event"
+    },
+    "Blood Monster": {
+      "index": 232,
+      "id": "blood_monster",
+      "name": "Blood Monster",
+      "rarity": "1-Rare",
+      "bonus_type": "defense",
+      "value": 0.01,
+      "description": "Increase defense by 1%",
+      "unlock_group": "guild"
+    },
+    "Glimpse Of Despair": {
+      "index": 233,
+      "id": "glimpse_of_despair",
+      "name": "Glimpse Of Despair",
+      "rarity": "2-Epic",
+      "bonus_type": "crit factor",
+      "value": 0.05,
+      "description": "Increase crit factor by 5%",
+      "unlock_group": "guild"
+    },
+    "Star Path": {
+      "index": 234,
+      "id": "star_path",
+      "name": "Star Path",
+      "rarity": "1-Rare",
+      "bonus_type": "Unknown",
+      "value": 0.0,
+      "description": "Increase free attack upgrade 2%",
+      "unlock_group": "guild"
+    },
+    "Star Planet": {
+      "index": 235,
+      "id": "star_planet",
+      "name": "Star Planet",
+      "rarity": "2-Epic",
+      "bonus_type": "Health Regen",
+      "value": 0.05,
+      "description": "Increase health regen by 5%",
+      "unlock_group": "guild"
+    },
+    "Ancient Times": {
+      "index": 236,
+      "id": "ancient_times",
+      "name": "Ancient Times",
+      "rarity": "1-Rare",
+      "bonus_type": "Defense %",
+      "value": 0.02,
+      "description": "Increase defense absolute by 2%",
+      "unlock_group": "event"
+    },
+    "Space Distortion": {
+      "index": 237,
+      "id": "space_distortion",
+      "name": "Space Distortion",
+      "rarity": "1-Rare",
+      "bonus_type": "Attack Speed",
+      "value": 0.01,
+      "description": "Increase attack speed by 1%",
+      "unlock_group": "event"
+    },
+    "Clock Tower": {
+      "index": 238,
+      "id": "clock_tower",
+      "name": "Clock Tower",
+      "rarity": "2-Epic",
+      "bonus_type": "cash bonus",
+      "value": 0.05,
+      "description": "Increase cash bonus by 5%",
+      "unlock_group": "event"
+    },
+    "Time Travel": {
+      "index": 239,
+      "id": "time_travel",
+      "name": "Time Travel",
+      "rarity": "2-Epic",
+      "bonus_type": "critical chance",
+      "value": 0.02,
+      "description": "Increase critical chance by 2%",
+      "unlock_group": "event"
+    },
+    "Lighthouse": {
+      "index": 240,
+      "id": "lighthouse",
+      "name": "Lighthouse",
+      "rarity": "1-Rare",
+      "bonus_type": "recovery amount",
+      "value": 0.02,
+      "description": "Increase recovery amount by 2%",
+      "unlock_group": "event"
+    },
+    "Night Shark": {
+      "index": 241,
+      "id": "night_shark",
+      "name": "Night Shark",
+      "rarity": "1-Rare",
+      "bonus_type": "cash",
+      "value": 0.02,
+      "description": "Increase cash by 2%",
+      "unlock_group": "event"
+    },
+    "Sailing At Night": {
+      "index": 242,
+      "id": "sailing_at_night",
+      "name": "Sailing At Night",
+      "rarity": "2-Epic",
+      "bonus_type": "health",
+      "value": 0.05,
+      "description": "Increase health by 5%",
+      "unlock_group": "event"
+    },
+    "Moonlight": {
+      "index": 243,
+      "id": "moonlight",
+      "name": "Moonlight",
+      "rarity": "2-Epic",
+      "bonus_type": "crit factor",
+      "value": 0.05,
+      "description": "Increase crit factor by 5%",
+      "unlock_group": "event"
+    },
+    "Festival Lanterns": {
+      "index": 244,
+      "id": "festival_lanterns",
+      "name": "Festival Lanterns",
+      "rarity": "1-Rare",
+      "bonus_type": "knockback force",
+      "value": 0.02,
+      "description": "Increase knockback force by 2%",
+      "unlock_group": "event"
+    },
+    "Ramen": {
+      "index": 245,
+      "id": "ramen",
+      "name": "Ramen",
+      "rarity": "1-Rare",
+      "bonus_type": "free utility upgrade",
+      "value": 0.01,
+      "description": "Increase free utility upgrade by 1%",
+      "unlock_group": "event"
+    },
+    "Forest Temple": {
+      "index": 246,
+      "id": "forest_temple",
+      "name": "Forest Temple",
+      "rarity": "2-Epic",
+      "bonus_type": "thorns",
+      "value": 0.02,
+      "description": "Increase thorns by 2%",
+      "unlock_group": "event"
+    },
+    "Tori": {
+      "index": 247,
+      "id": "tori",
+      "name": "Tori",
+      "rarity": "2-Epic",
+      "bonus_type": "orb speed",
+      "value": 0.05,
+      "description": "Increase orb speed by 5%",
+      "unlock_group": "event"
+    },
+    "Broken Security": {
+      "index": 248,
+      "id": "broken_security",
+      "name": "Broken Security",
+      "rarity": "1-Rare",
+      "bonus_type": "Health Regen",
+      "value": 0.02,
+      "description": "Increase health regen by 2%",
+      "unlock_group": "event"
+    },
+    "Research Object": {
+      "index": 249,
+      "id": "research_object",
+      "name": "Research Object",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage",
+      "value": 0.02,
+      "description": "Increase tower damage by 2%",
+      "unlock_group": "event"
+    },
+    "Digital Disaster": {
+      "index": 250,
+      "id": "digital_disaster",
+      "name": "Digital Disaster",
+      "rarity": "2-Epic",
+      "bonus_type": "free defense upgrade",
+      "value": 0.02,
+      "description": "Increase free defense upgrade by 2%",
+      "unlock_group": "event"
+    },
+    "Instability": {
+      "index": 251,
+      "id": "instability",
+      "name": "Instability",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage / Meter",
+      "value": 0.05,
+      "description": "Increase damage/meter by 5%",
+      "unlock_group": "event"
+    },
+    "Elemental Explosion": {
+      "index": 252,
+      "id": "elemental_explosion",
+      "name": "Elemental Explosion",
+      "rarity": "1-Rare",
+      "bonus_type": "rend armor mult",
+      "value": 0.02,
+      "description": "Increase rend armor mult by 2%",
+      "unlock_group": "guild"
+    },
+    "Quasar": {
+      "index": 253,
+      "id": "quasar",
+      "name": "Quasar",
+      "rarity": "2-Epic",
+      "bonus_type": "health",
+      "value": 0.05,
+      "description": "Increase health by 5%",
+      "unlock_group": "guild"
+    },
+    "Perfect Catch": {
+      "index": 254,
+      "id": "perfect_catch",
+      "name": "Perfect Catch",
+      "rarity": "1-Rare",
+      "bonus_type": "free utility upgrade",
+      "value": 0.01,
+      "description": "Increase free utility upgrade by 1%",
+      "unlock_group": "guild"
+    },
+    "Collector's Spirit": {
+      "index": 255,
+      "id": "collector_s_spirit",
+      "name": "Collector's Spirit",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage",
+      "value": 0.05,
+      "description": "Increase tower damage by 5%",
+      "unlock_group": "guild"
+    },
+    "Nature's Fury": {
+      "index": 256,
+      "id": "nature_s_fury",
+      "name": "Nature's Fury",
+      "rarity": "1-Rare",
+      "bonus_type": "defense percent",
+      "value": 0.01,
+      "description": "Increase defense percent by 1%",
+      "unlock_group": "event"
+    },
+    "Natural Fire": {
+      "index": 257,
+      "id": "natural_fire",
+      "name": "Natural Fire",
+      "rarity": "2-Epic",
+      "bonus_type": "Health Regen",
+      "value": 0.05,
+      "description": "Increase health regen by 5%",
+      "unlock_group": "event"
+    },
+    "Big Tornado": {
+      "index": 258,
+      "id": "big_tornado",
+      "name": "Big Tornado",
+      "rarity": "1-Rare",
+      "bonus_type": "Damage / Meter",
+      "value": 0.02,
+      "description": "Increase damage/meter by 2%",
+      "unlock_group": "event"
+    },
+    "Storm Planet": {
+      "index": 259,
+      "id": "storm_planet",
+      "name": "Storm Planet",
+      "rarity": "2-Epic",
+      "bonus_type": "Lab Speed",
+      "value": 0.04,
+      "description": "Increase lab speed by 4%",
+      "unlock_group": "event"
+    },
+    "Synapse": {
+      "index": 260,
+      "id": "synapse",
+      "name": "Synapse",
+      "rarity": "1-Rare",
+      "bonus_type": "knockback force",
+      "value": 0.02,
+      "description": "Increase knockback force by 2%",
+      "unlock_group": "event"
+    },
+    "Brain Net": {
+      "index": 261,
+      "id": "brain_net",
+      "name": "Brain Net",
+      "rarity": "2-Epic",
+      "bonus_type": "free utility upgrade",
+      "value": 0.02,
+      "description": "Increase free utility upgrade by 2%",
+      "unlock_group": "event"
+    },
+    "Neural Network": {
+      "index": 262,
+      "id": "neural_network",
+      "name": "Neural Network",
+      "rarity": "1-Rare",
+      "bonus_type": "Coins",
+      "value": 0.02,
+      "description": "Increase coins earned by 2%",
+      "unlock_group": "event"
+    },
+    "Body Control": {
+      "index": 263,
+      "id": "body_control",
+      "name": "Body Control",
+      "rarity": "2-Epic",
+      "bonus_type": "Ultimate Damage",
+      "value": 0.05,
+      "description": "Increase ultimate damage by 5%",
+      "unlock_group": "event"
+    },
+    "Viral Infection": {
+      "index": 264,
+      "id": "viral_infection",
+      "name": "Viral Infection",
+      "rarity": "1-Rare",
+      "bonus_type": "health",
+      "value": 0.02,
+      "description": "Increase health by 2%",
+      "unlock_group": "event"
+    },
+    "Personal Care": {
+      "index": 265,
+      "id": "personal_care",
+      "name": "Personal Care",
+      "rarity": "2-Epic",
+      "bonus_type": "free defense upgrade",
+      "value": 0.02,
+      "description": "Increase free defense upgrade by 2%",
+      "unlock_group": "event"
+    },
+    "Immunization": {
+      "index": 266,
+      "id": "immunization",
+      "name": "Immunization",
+      "rarity": "1-Rare",
+      "bonus_type": "critical chance",
+      "value": 0.01,
+      "description": "Increase critical chance by 1%",
+      "unlock_group": "event"
+    },
+    "Global Threat": {
+      "index": 267,
+      "id": "global_threat",
+      "name": "Global Threat",
+      "rarity": "2-Epic",
+      "bonus_type": "Critical Factor",
+      "value": 0.05,
+      "description": "Increase critical factor by 5%",
+      "unlock_group": "event"
+    },
+    "Magma River": {
+      "index": 268,
+      "id": "magma_river",
+      "name": "Magma River",
+      "rarity": "1-Rare",
+      "bonus_type": "cash",
+      "value": 0.02,
+      "description": "Increase cash by 2%",
+      "unlock_group": "event"
+    },
+    "New Island": {
+      "index": 269,
+      "id": "new_island",
+      "name": "New Island",
+      "rarity": "2-Epic",
+      "bonus_type": "free attack upgrade",
+      "value": 0.02,
+      "description": "Increase free attack upgrade by 2%",
+      "unlock_group": "event"
+    },
+    "Obsidian": {
+      "index": 270,
+      "id": "obsidian",
+      "name": "Obsidian",
+      "rarity": "1-Rare",
+      "bonus_type": "Attack Speed",
+      "value": 0.01,
+      "description": "Increase attack speed by 1%",
+      "unlock_group": "event"
+    },
+    "Geological Activity": {
+      "index": 271,
+      "id": "geological_activity",
+      "name": "Geological Activity",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage",
+      "value": 0.05,
+      "description": "Increase tower damage by 5%",
+      "unlock_group": "event"
+    },
+    "Magic Cards": {
+      "index": 272,
+      "id": "magic_cards",
+      "name": "Magic Cards",
+      "rarity": "1-Rare",
+      "bonus_type": "free utility upgrade",
+      "value": 0.01,
+      "description": "Increase free utility upgrade by 1%",
+      "unlock_group": "guild"
+    },
+    "Dangerous Tricks": {
+      "index": 273,
+      "id": "dangerous_tricks",
+      "name": "Dangerous Tricks",
+      "rarity": "2-Epic",
+      "bonus_type": "Attack Speed",
+      "value": 0.02,
+      "description": "Increase attack speed by 2%",
+      "unlock_group": "guild"
+    },
+    "Big Party": {
+      "index": 274,
+      "id": "big_party",
+      "name": "Big Party",
+      "rarity": "1-Rare",
+      "bonus_type": "Attack Speed",
+      "value": 0.01,
+      "description": "Increase attack speed by 1%",
+      "unlock_group": "event"
+    },
+    "Celebration": {
+      "index": 275,
+      "id": "celebration",
+      "name": "Celebration",
+      "rarity": "2-Epic",
+      "bonus_type": "Damage",
+      "value": 0.05,
+      "description": "Increase tower damage by 5%",
+      "unlock_group": "event"
+    }
+  }
+}

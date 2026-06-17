@@ -24,6 +24,7 @@ from .visual_models import (
 )
 from .icon_manager import (
     FIXED_ICON_SPECS,
+    configured_game_asset_roots,
     custom_icon_count,
     custom_icon_path,
     custom_icon_root,
@@ -115,8 +116,25 @@ def _path_uri(path_text: str, modified_ns: int, size: int) -> str:
     return f"data:{mime};base64,{payload}"
 
 
-def asset_uri(relative_path: str, custom_key: str | None = None, fallback_relative: str | None = None) -> str:
-    path = resolve_icon_path(relative_path, custom_key, fallback_relative)
+def asset_uri(
+    relative_path: str,
+    custom_key: str | None = None,
+    fallback_relative: str | None = None,
+    *,
+    game_category: str | None = None,
+    game_name: str | None = None,
+    relic_rarity: str = "",
+    module_slot: str = "",
+) -> str:
+    path = resolve_icon_path(
+        relative_path,
+        custom_key,
+        fallback_relative,
+        game_category=game_category,
+        game_name=game_name,
+        relic_rarity=relic_rarity,
+        module_slot=module_slot,
+    )
     if not path or not path.exists():
         return ""
     stat = path.stat()
@@ -563,6 +581,9 @@ def _module_card_html(row: Mapping[str, Any]) -> str:
         f"modules/{_slug(name)}",
         custom_key=item_icon_key("modules", name),
         fallback_relative="systems/modules.svg",
+        game_category="modules",
+        game_name=name,
+        module_slot=str(row.get("slot", "")),
     )
     return (
         f'<div class="module-card{locked}"><img src="{icon}" alt="" /><h4>{_escape(name)}</h4>'
@@ -631,11 +652,14 @@ def render_module_forge_page(profile: Dict[str, Any]) -> None:
         st.caption("The exact in-game merge recipe engine will be added only after its rules are represented as versioned game data and regression-tested. This preview focuses on inventory safety and interface behavior.")
 
 
-def _relic_asset(name: str) -> str:
+def _relic_asset(name: str, rarity: str = "") -> str:
     return asset_uri(
         f"relics/{_slug(name)}",
         custom_key=item_icon_key("relics", name),
         fallback_relative="placeholders/relic.svg",
+        game_category="relics",
+        game_name=name,
+        relic_rarity=rarity,
     )
 
 
@@ -676,7 +700,7 @@ def render_relic_gallery_page(profile: Dict[str, Any]) -> None:
         except (TypeError, ValueError):
             bonus = str(row.get("bonus_type") or "Bonus unavailable")
         blocks.append(
-            f'<div class="{cls}"><div class="relic-owned">{marker}</div><img src="{_relic_asset(str(row.get("name")))}" alt="" />'
+            f'<div class="{cls}"><div class="relic-owned">{marker}</div><img src="{_relic_asset(str(row.get("name")), str(row.get("rarity") or ""))}" alt="" />'
             f'<h4>{_escape(row.get("name"))}</h4><p>{_escape(row.get("rarity"))}</p><p>{_escape(bonus)}</p></div>'
         )
     if blocks:
@@ -732,10 +756,16 @@ def render_icon_studio_page(profile: Dict[str, Any]) -> None:
     _section("Icon Studio", "Persistent custom artwork overrides without modifying bundled assets")
     st.markdown(
         '<div class="callout"><strong>How it works:</strong> uploaded images are saved under '
-        '<code>data/custom_icons</code>. The app checks that folder first and falls back to its bundled graphics '
-        'when an override is absent. Your custom icons survive normal application upgrades.</div>',
+        '<code>data/custom_icons</code>. The app checks that folder first, then optional '
+        '<code>TOWER_GAME_ASSETS_DIR</code> or <code>TOWER_SMITH_PUBLIC_DIR</code> on your machine, '
+        'then bundled original graphics. TowerSmith artwork is used locally with the author\'s permission — see NOTICE.md.</div>',
         unsafe_allow_html=True,
     )
+    asset_roots = configured_game_asset_roots()
+    if asset_roots:
+        st.caption("Local artwork folders: " + ", ".join(str(path) for path in asset_roots))
+    else:
+        st.caption("Optional: set TOWER_SMITH_PUBLIC_DIR to a local TowerSmith public/ clone for module and relic icons.")
     status_rows = fixed_icon_status()
     fixed_custom = sum(1 for row in status_rows if row.get("source") == "custom")
     fixed_default = sum(1 for row in status_rows if row.get("source") == "default")

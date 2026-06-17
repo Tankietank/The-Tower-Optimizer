@@ -18,19 +18,31 @@ from .engines.core import (
     UW_NAMES,
     WORKSHOP_MAX_LEVELS,
 )
+from .game_catalog import (
+    load_relics_catalog,
+    load_save_mappings,
+    load_uw_save_tracks,
+    merge_relic_item,
+    module_info_entry,
+    module_rarity_label,
+    relic_entry,
+    uw_track_value,
+)
+from .save_extract import build_extended_patch, section_counts as extended_section_counts
 
 _PACKAGE_DIR = Path(__file__).resolve().parent
 _GAME_DATA_DIR = _PACKAGE_DIR / "game_data"
-_MAPPINGS_PATH = _GAME_DATA_DIR / "save_mappings.json"
 _LABS_PATH = _GAME_DATA_DIR / "labs.json"
 
 ENHANCEMENT_ATTACK = list(ENHANCEMENT_MAX_LEVELS.keys())[:6]
 ENHANCEMENT_DEFENSE = list(ENHANCEMENT_MAX_LEVELS.keys())[6:12]
 ENHANCEMENT_UTILITY = list(ENHANCEMENT_MAX_LEVELS.keys())[12:18]
 
+RELIC_UNLOCKED = 1
+
 
 def _load_mappings() -> Dict[str, Any]:
-    return json.loads(_MAPPINGS_PATH.read_text(encoding="utf-8"))
+    return load_save_mappings()
 
 
 def _load_lab_names() -> List[str]:
@@ -133,9 +145,28 @@ def _map_cards(save: Mapping[str, Any]) -> Dict[str, Any]:
     return {"slots": slots, "items": items}
 
 
+def _normalize_uw_attribute(uw_name: str, attr_name: str, raw: Any, tracks: Mapping[str, Any]) -> Any:
+    meta = UW_ATTRIBUTE_META.get(uw_name, {}).get(attr_name, {})
+    converted = uw_track_value(uw_name, attr_name, raw, tracks)
+    if converted is not None:
+        if isinstance(meta.get("max"), int) and not isinstance(meta.get("max"), bool):
+            return int(round(converted))
+        return float(converted)
+    try:
+        numeric = float(raw)
+    except (TypeError, ValueError):
+        return raw
+    if meta.get("display") == "percent" and numeric > 1.0 and numeric <= 100.0:
+        return numeric / 100.0
+    if isinstance(meta.get("max"), int) and not isinstance(meta.get("max"), bool):
+        return int(round(numeric))
+    return numeric
+
+
 def _map_uws(save: Mapping[str, Any]) -> Dict[str, Any]:
     unlocked = list(save.get("ultimateWeaponUnlocked") or [])
     levels = list(save.get("ultimateWeaponLevel") or [])
+    tracks = load_uw_save_tracks()
     output: Dict[str, Any] = {}
     cursor = 0
     for uw_index, uw_name in enumerate(UW_NAMES):
@@ -147,24 +178,17 @@ def _map_uws(save: Mapping[str, Any]) -> Dict[str, Any]:
                 break
             raw = levels[cursor]
             cursor += 1
-            meta = attrs[attr_name]
-            if isinstance(meta.get("max"), float) and meta.get("display") == "percent":
-                attributes[attr_name] = float(raw)
-            else:
-                try:
-                    attributes[attr_name] = int(round(float(raw)))
-                except (TypeError, ValueError):
-                    attributes[attr_name] = raw
+            attributes[attr_name] = _normalize_uw_attribute(uw_name, attr_name, raw, tracks)
         if owned or attributes:
             output[uw_name] = {"owned": owned, "attributes": attributes}
     return output
 
 
-def _rarity_name(index: int, mappings: Mapping[str, Any]) -> str:
-    names = list(mappings.get("module_rarity") or [])
-    if 0 <= index < len(names):
-        return names[index]
-    return f"Rarity {index}"
+def _resolve_module(info_index: int, slot_hint: Optional[str], mappings: Mapping[str, Any]) -> Tuple[str, str]:
+    entry = module_info_entry(info_index, mappings)
+    if entry:
+        return str(entry.get("slot") or slot_hint or "Unknown"), str(entry.get("name") or f"Module {info_index}")
+    return slot_hint or "Unknown", f"Module {info_index}" if info_index else ""
 
 
 def _map_modules(save: Mapping[str, Any], mappings: Mapping[str, Any]) -> Tuple[Dict[str, Any], Dict[str, Any]]:
@@ -176,11 +200,11 @@ def _map_modules(save: Mapping[str, Any], mappings: Mapping[str, Any]) -> Tuple[
     for slot_index, row in enumerate(equipped_rows):
         if not isinstance(row, dict):
             continue
-        slot = slots[slot_index] if slot_index < len(slots) else f"Slot {slot_index + 1}"
+        slot_hint = slots[slot_index] if slot_index < len(slots) else f"Slot {slot_index + 1}"
         info_index = int(row.get("infoIndex") or 0)
-        rarity = _rarity_name(int(row.get("currentRarity") or 0), mappings)
+        slot, name = _resolve_module(info_index, slot_hint, mappings)
+        rarity = module_rarity_label(int(row.get("currentRarity") or 0), mappings)
         level = int(round(float(row.get("level") or 0)))
-        name = f"Module {info_index}" if info_index else ""
         modules[slot] = {"name": name, "rarity": rarity, "level": level}
 
     counts: Dict[str, int] = {}
@@ -188,15 +212,19 @@ def _map_modules(save: Mapping[str, Any], mappings: Mapping[str, Any]) -> Tuple[
         if not isinstance(row, dict):
             continue
         info_index = int(row.get("infoIndex") or 0)
-        rarity = _rarity_name(int(row.get("rarity") or 0), mappings)
-        key = f"Index {info_index}::{rarity}"
+        slot, name = _resolve_module(info_index, None, mappings)
+        rarity = module_rarity_label(int(row.get("rarity") or 0), mappings)
+        key = f"{slot}::{name}::{rarity}" if name else f"Index {info_index}::{rarity}"
         counts[key] = counts.get(key, 0) + 1
     for key, copies in sorted(counts.items()):
-        info_index, rarity = key.split("::", 1)
-        index_value = info_index.replace("Index ", "")
+        parts = key.split("::")
+        if len(parts) == 3:
+            slot, name, rarity = parts
+        else:
+            slot, name, rarity = "Unknown", key.split("::", 1)[0], key.split("::")[-1]
         inventory[key] = {
-            "slot": "Unknown",
-            "name": f"Module {index_value}",
+            "slot": slot,
+            "name": name,
             "rarity": rarity,
             "level": 1,
             "copies": copies,
@@ -280,23 +308,38 @@ def _map_bots(save: Mapping[str, Any]) -> Dict[str, Any]:
 
 
 def _map_relics(save: Mapping[str, Any]) -> Dict[str, Any]:
+    catalog = load_relics_catalog()
     owned_ids = [int(value) for value in list(save.get("profileRelics") or []) if value is not None]
     relics_unlocked = list(save.get("relicsUnlocked") or [])
     items: Dict[str, Any] = {}
     for relic_id, owned_flag in enumerate(relics_unlocked):
         try:
-            owned = int(round(float(owned_flag))) > 0
+            owned = int(round(float(owned_flag))) >= RELIC_UNLOCKED
         except (TypeError, ValueError):
             owned = False
         if not owned and relic_id not in owned_ids:
             continue
-        items[f"Relic {relic_id}"] = {
-            "owned": owned or relic_id in owned_ids,
-            "equipped": relic_id in owned_ids,
-            "rarity": "",
-            "bonus_type": "",
-            "value": 0,
-        }
+        entry = relic_entry(relic_id, catalog)
+        if entry:
+            name = str(entry["name"])
+            items[name] = {
+                "owned": owned or relic_id in owned_ids,
+                "equipped": relic_id in owned_ids,
+                "rarity": entry.get("rarity", ""),
+                "bonus_type": entry.get("bonus_type", ""),
+                "value": entry.get("value", 0),
+                "relic_id": entry.get("id"),
+                "game_index": relic_id,
+            }
+        else:
+            items[f"Relic {relic_id}"] = {
+                "owned": owned or relic_id in owned_ids,
+                "equipped": relic_id in owned_ids,
+                "rarity": "",
+                "bonus_type": "",
+                "value": 0,
+                "game_index": relic_id,
+            }
     return {"items": items}
 
 
@@ -305,7 +348,7 @@ def build_profile_patch(save: Mapping[str, Any]) -> Dict[str, Any]:
     lab_names = _load_lab_names()
     modules, module_inventory = _map_modules(save, mappings)
     cards = _map_cards(save)
-    return {
+    base = {
         "resources": _map_resources(save),
         "player": _map_player(save),
         "workshop": _map_workshop(save, mappings),
@@ -318,31 +361,59 @@ def build_profile_patch(save: Mapping[str, Any]) -> Dict[str, Any]:
         "bots": _map_bots(save),
         "relics": _map_relics(save),
     }
+    return build_extended_patch(base, save)
+
+
+def _quality_notes(patch: Mapping[str, Any]) -> List[str]:
+    modules = patch.get("modules") or {}
+    relic_items = (patch.get("relics") or {}).get("items") or {}
+    named_modules = sum(1 for row in modules.values() if row.get("name") and not str(row.get("name", "")).startswith("Module "))
+    meta = (patch.get("save_import") or {}).get("metadata") or {}
+    return [
+        "Ultimate weapon attributes are converted from save upgrade levels to profile values.",
+        f"Modules resolved: {named_modules}/{len(modules)} equipped slots named.",
+        f"Relics resolved: {len(relic_items)} entries with catalog names and bonuses.",
+        f"Themes imported: {len((patch.get('themes') or {}).get('items') or {})} owned entries.",
+        f"Guardians imported: {sum(1 for n in (patch.get('guardians') or {}) if not str(n).startswith('__'))} chip tracks.",
+        f"Vault nodes imported: {len((patch.get('vault') or {}).get('unlocks') or {})} unlocks.",
+        f"Battle history runs imported: {len(patch.get('runs') or [])} of {meta.get('battle_history_count', '?')} saved rounds.",
+        f"Module registry rows captured: {len((patch.get('save_import') or {}).get('module_registry') or [])}.",
+        f"Raw save field inventory: {len((patch.get('save_import') or {}).get('raw_fields') or [])} top-level fields summarized.",
+        f"Save metadata: {meta.get('field_count', '?')} top-level fields decoded.",
+    ]
 
 
 def preview_player_save(payload: bytes, filename: str = "playerInfo.dat") -> Dict[str, Any]:
     save = decode_player_save_bytes(payload)
     patch = build_profile_patch(save)
+    modules = patch.get("modules") or {}
+    relic_items = (patch.get("relics") or {}).get("items") or {}
+    sections = extended_section_counts(patch)
     return {
         "filename": filename,
-        "sections": {
-            "resources": len(patch.get("resources", {})),
-            "workshop": len(patch.get("workshop", {})),
-            "labs": len(patch.get("labs", {})),
-            "enhancements": len(patch.get("enhancements", {})),
-            "uw": len(patch.get("uw", {})),
-            "cards": len(patch.get("cards", {}).get("items", {})),
-            "modules": len(patch.get("modules", {})),
-            "module_inventory": len(patch.get("module_inventory", {})),
-            "bots": len(patch.get("bots", {})),
-            "relics": len(patch.get("relics", {}).get("items", {})),
-        },
+        "sections": sections,
         "patch": patch,
-        "notes": [
-            "Ultimate weapon attribute values are imported as stored in the save file.",
-            "Module names use game infoIndex labels until a full module catalog is bundled.",
-            "Battle report history is not stored in playerInfo.dat.",
-        ],
+        "notes": _quality_notes(patch),
+        "highlights": {
+            "modules": [
+                {"slot": slot, **row}
+                for slot, row in sorted(modules.items())
+            ],
+            "relics": sorted(
+                [
+                    {
+                        "name": name,
+                        "owned": bool(item.get("owned")),
+                        "equipped": bool(item.get("equipped")),
+                        "rarity": item.get("rarity"),
+                        "bonus_type": item.get("bonus_type"),
+                    }
+                    for name, item in relic_items.items()
+                    if item.get("owned")
+                ],
+                key=lambda row: row["name"],
+            )[:12],
+        },
         "data_version": save.get("dataVersion"),
         "save_revision": save.get("saveRevision"),
     }
@@ -394,6 +465,10 @@ def apply_player_save_patch(
             entry = profile.setdefault("uw", {}).setdefault(uw_name, {"owned": False, "attributes": {}})
             entry["owned"] = bool(payload.get("owned"))
             entry.setdefault("attributes", {}).update(deepcopy(payload.get("attributes") or {}))
+            if "active" in payload:
+                entry["active"] = bool(payload.get("active"))
+            if payload.get("plus"):
+                entry["plus"] = deepcopy(payload["plus"])
         counts["uw"] = len(uw)
 
     cards = patch.get("cards") or {}
@@ -404,6 +479,10 @@ def apply_player_save_patch(
         if cards.get("slots"):
             card_target["slots"] = int(cards["slots"])
         card_target.setdefault("items", {}).update(deepcopy(cards.get("items") or {}))
+        if cards.get("presets"):
+            card_target.setdefault("presets", {}).update(deepcopy(cards.get("presets") or {}))
+        if cards.get("active_preset") is not None:
+            card_target["active_preset"] = int(cards["active_preset"])
         counts["cards"] = len(cards.get("items") or {})
 
     modules = patch.get("modules") or {}
@@ -431,8 +510,65 @@ def apply_player_save_patch(
     if relics.get("items"):
         if replace:
             profile["relics"] = {"summary": {}, "bonuses": {}, "items": {}}
-        profile.setdefault("relics", {}).setdefault("items", {}).update(deepcopy(relics["items"]))
+        target_items = profile.setdefault("relics", {}).setdefault("items", {})
+        for name, payload in relics["items"].items():
+            existing = target_items.get(name) or {}
+            target_items[name] = merge_relic_item(existing, payload)
         counts["relics"] = len(relics["items"])
+
+    themes = patch.get("themes") or {}
+    if themes.get("items") or themes.get("summary"):
+        if replace:
+            profile["themes"] = {"summary": {}, "items": {}}
+        target = profile.setdefault("themes", {"summary": {}, "items": {}})
+        target.setdefault("summary", {}).update(deepcopy(themes.get("summary") or {}))
+        target.setdefault("items", {}).update(deepcopy(themes.get("items") or {}))
+        if themes.get("selection"):
+            target["selection"] = deepcopy(themes["selection"])
+        counts["themes"] = len(themes.get("items") or {})
+
+    guardians = patch.get("guardians") or {}
+    if guardians:
+        if replace:
+            profile["guardians"] = {}
+        for name, payload in guardians.items():
+            if str(name).startswith("__"):
+                profile.setdefault("save_import", {})["guardian_meta"] = deepcopy(payload)
+                continue
+            profile.setdefault("guardians", {})[name] = deepcopy(payload)
+        counts["guardians"] = sum(1 for name in guardians if not str(name).startswith("__"))
+
+    vault = patch.get("vault") or {}
+    if vault:
+        if replace:
+            profile["vault"] = {"keys_spent": 0, "bonuses": {}, "unlocks": {}}
+        target = profile.setdefault("vault", {"keys_spent": 0, "bonuses": {}, "unlocks": {}})
+        if vault.get("keys_spent") is not None:
+            target["keys_spent"] = int(vault.get("keys_spent") or 0)
+        target.setdefault("bonuses", {}).update(deepcopy(vault.get("bonuses") or {}))
+        target.setdefault("unlocks", {}).update(deepcopy(vault.get("unlocks") or {}))
+        counts["vault"] = len(vault.get("unlocks") or {})
+
+    module_presets = patch.get("module_presets") or {}
+    if module_presets:
+        if replace:
+            profile["module_presets"] = {}
+        profile.setdefault("module_presets", {}).update(deepcopy(module_presets))
+        counts["module_presets"] = len(module_presets)
+
+    runs = patch.get("runs") or []
+    if runs:
+        from .battle_learning import import_runs
+
+        if replace:
+            profile["runs"] = []
+        result = import_runs(profile, runs, allow_duplicates=False, batch_label=source_name)
+        counts["runs"] = len(result.get("added") or [])
+
+    save_import = patch.get("save_import") or {}
+    if save_import:
+        profile.setdefault("save_import", {}).update(deepcopy(save_import))
+        counts["save_import"] = len(save_import)
 
     profile.setdefault("sources", {})["player_save"] = {
         "filename": source_name,
