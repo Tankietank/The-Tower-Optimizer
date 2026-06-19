@@ -59,6 +59,20 @@ pip install -e ".[dev]"
 
 Streamlit opens the app in the default browser. Profile data remains on the local computer under `data/`, which is excluded from Git by default.
 
+## Quick start — Docker / Unraid
+
+Optional container deployment for home servers (Unraid, NAS, Linux host):
+
+```bash
+docker compose up -d
+```
+
+Image: `ghcr.io/tankietank/the-tower-optimizer:latest` (rebuilt on each push to `main`).
+
+Open `http://<host>:8501` and mount a persistent folder to `/app/data` so profiles survive upgrades.
+
+See [Docker and Unraid](docs/DOCKER.md) for Unraid UI steps, update options, and troubleshooting.
+
 ## Quick start — other platforms
 
 ```bash

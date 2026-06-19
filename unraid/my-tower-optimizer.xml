@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Tower-Optimizer</Name>
+  <Repository>ghcr.io/tankietank/the-tower-optimizer:latest</Repository>
+  <Registry>https://ghcr.io/</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/Tankietank/The-Tower-Optimizer/issues</Support>
+  <Project>https://github.com/Tankietank/The-Tower-Optimizer</Project>
+  <Overview>Unofficial local-first planner and optimizer for The Tower - Idle Tower Defense. Web UI on port 8501; profiles persist in appdata.</Overview>
+  <Category>Tools:Utilities</Category>
+  <WebUI>http://[IP]:[PORT:8501]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/Tankietank/The-Tower-Optimizer/main/unraid/my-tower-optimizer.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/Tankietank/The-Tower-Optimizer/main/assets/brand/tower_optimizer.svg</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled/>
+  <Requires/>
+  <Config Name="Web UI Port" Target="8501" Default="8501" Mode="tcp" Description="Streamlit web interface" Type="Port" Display="always" Required="true" Mask="false">8501</Config>
+  <Config Name="Appdata" Target="/app/data" Default="/mnt/user/appdata/tower-optimizer" Mode="rw" Description="Profiles, battle history, icons, backups" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/tower-optimizer</Config>
+</Container>

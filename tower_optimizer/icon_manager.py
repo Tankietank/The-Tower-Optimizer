@@ -14,6 +14,8 @@ from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
 from typing import Any, Dict, Iterable, List, Mapping, Optional
 
+from .runtime_paths import custom_icons_dir as _custom_icons_dir
+
 ASSET_ROOT = Path(__file__).resolve().parents[1] / "assets"
 SUPPORTED_EXTENSIONS = (".png", ".webp", ".jpg", ".jpeg", ".svg")
 MODULE_SLOT_FOLDERS = {
@@ -50,8 +52,7 @@ FIXED_ICON_SPECS: tuple[dict[str, str], ...] = (
 
 
 def custom_icon_root() -> Path:
-    override = os.environ.get("TOWER_CUSTOM_ICON_DIR", "").strip()
-    return Path(override) if override else Path("data") / "custom_icons"
+    return _custom_icons_dir()
 
 
 def configured_game_asset_roots() -> List[Path]:
@@ -347,4 +348,4 @@ __all__ = [
 ]
 
 # Backward-compatible constant for callers that only need the conventional path.
-CUSTOM_ICON_ROOT = Path("data") / "custom_icons"
+CUSTOM_ICON_ROOT = _custom_icons_dir()

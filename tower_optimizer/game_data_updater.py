@@ -20,8 +20,10 @@ from .reliability import (
     workbook_compatibility,
 )
 
+from .runtime_paths import game_updates_dir
+
 UPDATE_SCHEMA_VERSION = "1.0"
-DEFAULT_UPDATE_ROOT = Path("data") / "game_updates"
+DEFAULT_UPDATE_ROOT = game_updates_dir()
 
 
 def utc_now() -> str:

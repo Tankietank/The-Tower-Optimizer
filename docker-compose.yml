@@ -1,0 +1,12 @@
+services:
+  tower-optimizer:
+    image: ghcr.io/tankietank/the-tower-optimizer:latest
+    pull_policy: always
+    container_name: tower-optimizer
+    restart: unless-stopped
+    ports:
+      - "${TOWER_OPTIMIZER_PORT:-8501}:8501"
+    environment:
+      TOWER_OPTIMIZER_DATA_DIR: /app/data
+    volumes:
+      - ${TOWER_OPTIMIZER_DATA_PATH:-./data}:/app/data

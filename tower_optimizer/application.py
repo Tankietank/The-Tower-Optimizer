@@ -48,8 +48,10 @@ APP_VERSION = "2.0.0-preview.6"
 DATA_SOURCE_VERSION = "Effective Paths v5.06.04.00"
 DATA_SOURCE_DETAIL = "Bundled standalone game data + v2 visual preview 6 + one-click multi-report importing + expandable navigation + persistent custom icon overrides + reviewed local update overlays"
 
-DATA_DIR = Path("data")
-PROFILE_DIR = DATA_DIR / "profiles"
+from .runtime_paths import data_dir, profiles_dir
+
+DATA_DIR = data_dir()
+PROFILE_DIR = profiles_dir()
 PROFILE_DIR.mkdir(parents=True, exist_ok=True)
 
 # -----------------------------------------------------------------------------
