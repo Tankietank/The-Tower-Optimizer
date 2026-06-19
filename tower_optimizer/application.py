@@ -7483,10 +7483,40 @@ def combined_display_frame(rows: list[Dict[str, Any]], limit: int = 12) -> pd.Da
         "Cost / Time", "Estimated Gain %", "Affordability", "Reference Rank",
         "Confidence", "Why",
     ]
-    frame = pd.DataFrame(rows[:limit])
+    display_rows: list[Dict[str, Any]] = []
+    for row in rows[:limit]:
+        flat = {key: value for key, value in row.items() if key != "Explanation"}
+        explanation = row.get("Explanation") if isinstance(row.get("Explanation"), dict) else {}
+        bullets = explanation.get("Why now") or []
+        if bullets:
+            flat["Why"] = " · ".join(bullets[:2])
+        display_rows.append(flat)
+    frame = pd.DataFrame(display_rows)
     if frame.empty:
         return frame
     return frame[[column for column in columns if column in frame.columns]]
+
+
+def render_recommendation_story(explanation: Mapping[str, Any], *, show_tradeoffs: bool = True) -> None:
+    headline = str(explanation.get("Headline") or explanation.get("Summary") or "")
+    if headline:
+        st.markdown(headline)
+    bullets = explanation.get("Why now") or explanation.get("Reasons") or []
+    if bullets:
+        st.markdown("**Why now**")
+        for bullet in bullets:
+            st.markdown(f"- {bullet}")
+    changes = explanation.get("What changes") or []
+    if changes:
+        with st.expander("What changes if you do this"):
+            for item in changes:
+                st.markdown(f"- {item}")
+    if show_tradeoffs:
+        tradeoffs = explanation.get("Trade-offs") or explanation.get("Caveats") or []
+        if tradeoffs:
+            with st.expander("Trade-offs & caveats"):
+                for item in tradeoffs:
+                    st.markdown(f"- {item}")
 
 # -----------------------------------------------------------------------------
 # STYLING
@@ -8412,16 +8442,21 @@ elif page == "Recommendation Dashboard":
     top_rows = combined.get("rows", [])
     if top_rows:
         top = top_rows[0]
-        st.success(
-            f"Top current priority: **{top['Upgrade']}** ({top['Domain']} · {top['Resource']}) — "
-            f"{top['Affordability']}."
+        explanation = top.get("Explanation") if isinstance(top.get("Explanation"), dict) else recommendation_explanation(
+            top, profile, analysis, combined.get("latest_death", "")
         )
-        st.caption(top.get("Why", ""))
+        st.subheader("Top priority — here's why")
+        render_recommendation_story(explanation)
+        st.caption(
+            f"Priority index {top.get('Priority Index', '—')} · "
+            f"{top.get('Domain', 'Unknown')} · {top.get('Resource', 'Unknown')} · "
+            f"{top.get('Affordability', 'Unknown')}"
+        )
     else:
         st.warning("No eligible native recommendations were generated. Check profile imports, unlocks, and Gold Boxes.")
 
     if top_rows:
-        st.subheader("Why this recommendation?")
+        st.subheader("Explain another pick")
         explanation_options = {
             f"#{index + 1} · {row.get('Upgrade')} · {row.get('Resource')}": row
             for index, row in enumerate(top_rows[:15])
@@ -8429,10 +8464,11 @@ elif page == "Recommendation Dashboard":
         selected_explanation = st.selectbox(
             "Recommendation to explain", list(explanation_options), key="combined_explanation_select"
         )
-        explanation = recommendation_explanation(
-            explanation_options[selected_explanation], profile, analysis, combined.get("latest_death", "")
+        selected_row = explanation_options[selected_explanation]
+        explanation = selected_row.get("Explanation") if isinstance(selected_row.get("Explanation"), dict) else recommendation_explanation(
+            selected_row, profile, analysis, combined.get("latest_death", "")
         )
-        st.write(explanation["Summary"])
+        render_recommendation_story(explanation, show_tradeoffs=False)
         e1, e2 = st.columns(2)
         with e1:
             st.markdown("**Inputs used**")
@@ -8441,8 +8477,8 @@ elif page == "Recommendation Dashboard":
                 use_container_width=True, hide_index=True,
             )
         with e2:
-            st.markdown("**Caveats**")
-            for caveat in explanation["Caveats"]:
+            st.markdown("**Trade-offs & caveats**")
+            for caveat in explanation.get("Trade-offs") or explanation.get("Caveats") or []:
                 st.write(f"- {caveat}")
         if explanation.get("Source explanation"):
             st.caption(explanation["Source explanation"])
@@ -8459,6 +8495,9 @@ elif page == "Recommendation Dashboard":
             f"Best {selected_account_resource} use: **{account_top.get('Upgrade')}** "
             f"({account_top.get('Domain')} · {account_top.get('Affordability')})."
         )
+        account_exp = account_top.get("Explanation") if isinstance(account_top.get("Explanation"), dict) else {}
+        for bullet in (account_exp.get("Why now") or [])[:2]:
+            st.caption(f"• {bullet}")
         st.dataframe(combined_display_frame(account_rows, 12), use_container_width=True, hide_index=True)
     else:
         st.caption(f"No eligible {selected_account_resource} recommendations were generated from the current profile.")

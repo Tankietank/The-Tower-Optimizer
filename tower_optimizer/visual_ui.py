@@ -264,6 +264,8 @@ def apply_visual_theme(profile: Mapping[str, Any]) -> None:
       .recommendation-rank {{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,var(--tower-accent),var(--tower-accent2));color:#041017;font-weight:900;font-size:1.05rem;}}
       .recommendation-card h3 {{margin:0;font-size:1rem;color:var(--tower-text);}}
       .recommendation-card p {{margin:.3rem 0 0;color:var(--tower-muted);font-size:.78rem;}}
+      .recommendation-why {{margin:.35rem 0 0;padding-left:1rem;color:var(--tower-muted);font-size:.76rem;}}
+      .recommendation-why li {{margin:.12rem 0;}}
       .recommendation-score {{text-align:right;color:var(--tower-accent);font-weight:850;font-size:.9rem;}}
       .uw-card {{text-align:center;position:relative;overflow:hidden;}}
       .uw-card img {{width:74px;height:74px;display:block;margin:0 auto .35rem;}}
@@ -360,9 +362,11 @@ def _metric_cards(items: Iterable[Mapping[str, Any]]) -> None:
 def _recommendation_cards(rows: Iterable[Mapping[str, Any]], limit: int = 5) -> None:
     blocks = []
     for index, row in enumerate(list(rows)[:limit], start=1):
-        why = str(row.get("Why") or "No explanation available")
-        if len(why) > 170:
-            why = why[:167].rstrip() + "..."
+        explanation = row.get("Explanation") if isinstance(row.get("Explanation"), Mapping) else {}
+        why_bullets = explanation.get("Why now") or _parse_why_from_row(row)
+        why_html = "".join(f"<li>{_escape(item)}</li>" for item in why_bullets[:3])
+        if not why_html:
+            why_html = f"<li>{_escape('No explanation available')}</li>"
         score = row.get("Priority Index", "—")
         try:
             score_text = f"{float(score):.1f}"
@@ -373,7 +377,8 @@ def _recommendation_cards(rows: Iterable[Mapping[str, Any]], limit: int = 5) -> 
             <div class="recommendation-card">
               <div class="recommendation-rank">{index}</div>
               <div><h3>{_escape(row.get('Upgrade', 'Recommendation'))}</h3>
-              <p>{_escape(row.get('System', ''))} · {_escape(row.get('Resource', ''))} · {_escape(row.get('Cost / Time', ''))}<br>{_escape(why)}</p></div>
+              <p>{_escape(row.get('System', ''))} · {_escape(row.get('Resource', ''))} · {_escape(row.get('Cost / Time', ''))}</p>
+              <ul class="recommendation-why">{why_html}</ul></div>
               <div class="recommendation-score">{_escape(score_text)}<br><span class="status-pill">{_escape(row.get('Confidence', ''))}</span></div>
             </div>
             """
@@ -382,6 +387,13 @@ def _recommendation_cards(rows: Iterable[Mapping[str, Any]], limit: int = 5) -> 
         st.markdown("".join(blocks), unsafe_allow_html=True)
     else:
         st.info("No recommendations are available yet. Import or enter more profile data.")
+
+
+def _parse_why_from_row(row: Mapping[str, Any]) -> list[str]:
+    text = str(row.get("Why") or "").strip()
+    if not text:
+        return []
+    return [part.strip() for part in text.split(";") if part.strip()]
 
 
 def _uw_cards(report: Mapping[str, Any]) -> None:

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from typing import Any, Dict, Mapping, Optional
+import re
+from typing import Any, Dict, Iterable, List, Mapping, MutableMapping, Optional, Sequence
 
 UW_ABBREVIATIONS = {
     "GT": "Golden Tower",
@@ -13,6 +14,13 @@ UW_ABBREVIATIONS = {
     "ILM": "Inner Land Mines",
     "PS": "Poison Swamp",
 }
+
+
+def _parse_why_text(text: str) -> List[str]:
+    if not text:
+        return []
+    parts = re.split(r"\s*;\s*", str(text).strip())
+    return [part.strip() for part in parts if part.strip()]
 
 
 def _current_value(row: Mapping[str, Any], profile: Mapping[str, Any]) -> Any:
@@ -42,6 +50,25 @@ def _current_value(row: Mapping[str, Any], profile: Mapping[str, Any]) -> Any:
     return "Unknown"
 
 
+def _format_gain(gain: Any) -> str:
+    if not isinstance(gain, (int, float)):
+        return "not modeled as a verified percent gain"
+    value = float(gain)
+    if value <= 0:
+        return "strategic priority rather than a modeled percent gain"
+    return f"about {value:.2f}% relative gain in its native path"
+
+
+def _affordability_phrase(affordability: str) -> str:
+    if affordability == "Affordable":
+        return "You can afford this with the balances entered in your profile."
+    if affordability == "Unaffordable":
+        return "This is a save-up target — it ranks highly, but costs more than your entered balance."
+    if affordability == "Balance not entered":
+        return "Enter resource balances in your profile to check affordability."
+    return "Affordability was not modeled for this action."
+
+
 def recommendation_explanation(
     row: Mapping[str, Any],
     profile: Mapping[str, Any],
@@ -58,44 +85,80 @@ def recommendation_explanation(
     system = str(row.get("System", "Native engine"))
     path_rank = row.get("Path Rank")
     gain = row.get("Estimated Gain %")
-
-    reasons = []
-    if path_rank:
-        reasons.append(f"ranked #{path_rank} inside its {row.get('Path', 'native')} path")
-    if system and system != "Native engine":
-        reasons.append(f"competes as a {system} opportunity-cost action")
-    if domain and analysis.get("weakest") == domain:
-        reasons.append("targets the profile's weakest modeled development area")
-    if latest_death and latest_death not in {"Unknown", "No report saved"}:
-        reasons.append(f"was adjusted using the latest {latest_death} death signal")
-    if reference_rank:
-        reasons.append(f"also appears at rank {reference_rank} in the imported Effective Paths reference")
-    if affordability == "Affordable":
-        reasons.append("fits the currently entered resource balance")
-    elif affordability == "Unaffordable":
-        reasons.append("is a save-up target rather than an immediate purchase")
+    upgrade = str(row.get("Upgrade", "This upgrade"))
+    next_level = row.get("Next Level", "Unknown")
+    cost = row.get("Cost / Time", "Unknown")
     learning_multiplier = row.get("Learning Multiplier")
+
+    why_now: List[str] = []
+    if path_rank:
+        why_now.append(f"Ranks #{path_rank} inside its {row.get('Path', 'native')} path before cross-category comparison.")
+    if system and system not in {"Native engine", "Native Engines"}:
+        why_now.append(f"Competes as a {system} action using your {resource} budget.")
+    if domain and analysis.get("weakest") == domain:
+        why_now.append(f"Your profile's weakest modeled area is {domain}, so improvements here reduce the biggest gap.")
+    if latest_death and latest_death not in {"Unknown", "No report saved"}:
+        why_now.append(f"Recent runs ended to {latest_death}, so {domain} upgrades were weighted accordingly.")
+    if reference_rank:
+        why_now.append(f"Also appears around rank {reference_rank} in your imported Effective Paths reference.")
+    why_now.extend(_parse_why_text(str(row.get("Why", ""))))
     if isinstance(learning_multiplier, (int, float)) and abs(float(learning_multiplier) - 1.0) > 0.0001:
         direction = "raised" if float(learning_multiplier) > 1.0 else "lowered"
-        reasons.append(f"battle-history evidence {direction} its priority by {abs(float(learning_multiplier) - 1.0) * 100:.1f}%")
+        why_now.append(
+            f"Battle history {direction} this priority by {abs(float(learning_multiplier) - 1.0) * 100:.1f}% "
+            f"(capped modifier, not proof of causation)."
+        )
+    why_now.append(_affordability_phrase(affordability))
+    why_now.append(f"Expected impact: {_format_gain(gain)}.")
 
-    caveats = [
-        "The Priority Index compares normalized ranks, not raw ROI across unlike resources.",
-        "Estimated gains are model outputs, not guaranteed wave or coin-per-hour improvements.",
+    # De-dupe while preserving order.
+    seen: set[str] = set()
+    deduped_why: List[str] = []
+    for item in why_now:
+        key = item.casefold()
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped_why.append(item)
+
+    what_changes = [
+        f"Current value: {current_value}",
+        f"Suggested next step: {next_level}",
+        f"Cost or time: {cost}",
+        f"Resource: {resource}",
+        f"System: {system}",
+    ]
+    native_roi = row.get("Native ROI")
+    if native_roi not in (None, "", "Strategic score"):
+        what_changes.append(f"Native ROI in-path: {native_roi}")
+
+    tradeoffs = [
+        "Priority scores compare normalized ranks across unlike resources — they are a shortlist, not exact game math.",
+        "Modeled gains describe relative engine output, not guaranteed wave or coins-per-hour jumps.",
     ]
     if not reference_rank and not str(row.get("Path Key", "")).startswith("account_"):
-        caveats.append("No matching Effective Paths reference rank was available for this recommendation.")
+        tradeoffs.append("No matching Effective Paths reference row was found for this pick.")
     if str(row.get("Path Key", "")).startswith("account_"):
-        caveats.append("This system uses transparent strategic benchmarks where a verified exact cost curve is not bundled.")
+        tradeoffs.append("This uses transparent strategic benchmarks where a verified in-game cost curve is not bundled.")
     if current_value == "Unknown":
-        caveats.append("The current value could not be resolved from the profile, which lowers practical confidence.")
+        tradeoffs.append("The current level could not be read from your profile, which lowers practical confidence.")
     if not profile.get("runs"):
-        caveats.append("No recent Battle Report is available for death-cause calibration.")
+        tradeoffs.append("Import battle history or save runs for stronger death-cause calibration.")
+
+    headline = (
+        f"Do **{upgrade}** next — it targets **{domain}** via **{resource}** "
+        f"({affordability.lower()})."
+    )
+    summary = (
+        f"{upgrade} is prioritized because "
+        + (deduped_why[0].lower() if deduped_why else "it is one of the strongest eligible candidates")
+        + "."
+    )
 
     inputs = {
         "Current value": current_value,
-        "Recommended next level/value": row.get("Next Level", "Unknown"),
-        "Cost or time": row.get("Cost / Time", "Unknown"),
+        "Recommended next level/value": next_level,
+        "Cost or time": cost,
         "System": system,
         "Resource": resource,
         "Affordability": affordability,
@@ -103,18 +166,63 @@ def recommendation_explanation(
         "Native ROI": row.get("Native ROI", "Unknown"),
         "Reference rank": reference_rank if reference_rank is not None else "Not available",
         "Model confidence": confidence,
-        "Battle-learning multiplier": f"{float(learning_multiplier):.4f}×" if isinstance(learning_multiplier, (int, float)) else "Not applied",
+        "Battle-learning multiplier": (
+            f"{float(learning_multiplier):.4f}×" if isinstance(learning_multiplier, (int, float)) else "Not applied"
+        ),
     }
 
-    summary = (
-        f"{row.get('Upgrade', 'This upgrade')} is prioritized because it "
-        + (", ".join(reasons) if reasons else "is one of the strongest eligible native-engine candidates")
-        + "."
-    )
     return {
+        "Headline": headline,
+        "Why now": deduped_why,
+        "What changes": what_changes,
+        "Trade-offs": tradeoffs,
         "Summary": summary,
         "Inputs": inputs,
-        "Reasons": reasons,
-        "Caveats": caveats,
+        "Reasons": deduped_why,
+        "Caveats": tradeoffs,
         "Source explanation": row.get("Why", ""),
     }
+
+
+def attach_explanations(
+    profile: Mapping[str, Any],
+    rows: Sequence[Mapping[str, Any]],
+    *,
+    analysis: Optional[Mapping[str, Any]] = None,
+    latest_death: str = "",
+) -> List[Dict[str, Any]]:
+    enriched: List[Dict[str, Any]] = []
+    for source in rows:
+        row = dict(source)
+        row["Explanation"] = recommendation_explanation(row, profile, analysis, latest_death)
+        enriched.append(row)
+    return enriched
+
+
+def enrich_recommendation_payload(
+    profile: MutableMapping[str, Any],
+    payload: MutableMapping[str, Any],
+) -> MutableMapping[str, Any]:
+    analysis = payload.get("analysis") if isinstance(payload.get("analysis"), Mapping) else {}
+    latest_death = str(payload.get("latest_death") or "No report saved")
+    rows = payload.get("rows") if isinstance(payload.get("rows"), list) else []
+    payload["rows"] = attach_explanations(profile, rows, analysis=analysis, latest_death=latest_death)
+    for key in ("affordable", "long_term", "unpriced", "bottleneck"):
+        section = payload.get(key)
+        if isinstance(section, list):
+            payload[key] = attach_explanations(profile, section, analysis=analysis, latest_death=latest_death)
+    by_resource = payload.get("by_resource")
+    if isinstance(by_resource, dict):
+        payload["by_resource"] = {
+            resource: attach_explanations(profile, items, analysis=analysis, latest_death=latest_death)
+            for resource, items in by_resource.items()
+            if isinstance(items, list)
+        }
+    by_system = payload.get("by_system")
+    if isinstance(by_system, dict):
+        payload["by_system"] = {
+            system: attach_explanations(profile, items, analysis=analysis, latest_death=latest_death)
+            for system, items in by_system.items()
+            if isinstance(items, list)
+        }
+    return payload

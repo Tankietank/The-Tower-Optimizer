@@ -17,6 +17,7 @@ from .core import (
     native_number,
 )
 from ..battle_learning import feedback_modifiers
+from ..explanations import enrich_recommendation_payload
 
 
 MODULE_RARITY_MAX_LEVELS = {
@@ -670,7 +671,7 @@ def build_combined_recommendations(
     if "vampire" in latest_death.casefold():
         favored = [row for row in rows if row.get("Domain") in {"Regen / Recovery", "Survivability"}]
         bottleneck = _dedupe_rows([*bottleneck, *favored])
-    return {
+    payload = {
         **native,
         "rows": rows,
         "by_resource": by_resource,
@@ -687,6 +688,7 @@ def build_combined_recommendations(
             "Moderate/high-confidence battle observations may apply a small capped priority modifier when enabled."
         ).strip(),
     }
+    return enrich_recommendation_payload(profile_data, payload)
 
 
 __all__ = [
