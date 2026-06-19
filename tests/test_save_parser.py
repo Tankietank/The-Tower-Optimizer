@@ -50,6 +50,8 @@ def test_build_profile_patch_counts(decoded_save):
     assert "Attack" in patch.get("guardians", {})
     assert len(patch.get("vault", {}).get("unlocks", {})) >= 0
     assert len(patch.get("runs", [])) > 0
+    assert any(run.get("battle_date") for run in patch["runs"])
+    assert any(str(run.get("killed_by") or "") in {"Fast", "Basic", "Boss", "Ray"} for run in patch["runs"])
     assert patch.get("save_import", {}).get("metadata", {}).get("field_count", 0) > 100
     assert len(patch.get("save_import", {}).get("raw_fields") or []) > 100
     assert len(patch.get("save_import", {}).get("module_registry") or []) > 0
@@ -94,3 +96,11 @@ def test_apply_player_save_patch_merges(decoded_save):
     assert profile["sources"]["player_save"]["filename"] == "test.dat"
     assert profile["workshop"]["Damage"] == patch["workshop"]["Damage"]
     assert profile["modules"]["Generator"]["name"] == "Galaxy Compressor"
+    assert counts.get("runs", 0) > 0
+    assert len(profile.get("runs") or []) > 0
+    assert profile["runs"][0].get("imported_from_save") is True
+    assert profile["runs"][0].get("battle_date")
+    # Re-importing the same save refreshes save-sourced runs instead of deduping to zero.
+    counts_again = apply_player_save_patch(profile, patch, source_name="test.dat")
+    assert counts_again.get("runs", 0) > 0
+    assert len(profile.get("runs") or []) > 0

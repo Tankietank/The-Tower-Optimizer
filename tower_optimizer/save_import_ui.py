@@ -5,8 +5,6 @@ import html
 import re
 from typing import Any, Callable, Dict, MutableMapping
 
-from copy import deepcopy
-
 import streamlit as st
 
 from .icon_manager import item_icon_key
@@ -76,6 +74,7 @@ def render_player_save_import(
     st.subheader("Game save import")
     st.caption(
         "Upload a tower backup `playerInfo.dat` file from the in-game account menu. "
+        "Recent battle history from the save (up to 30 runs) is imported into Battle Learning automatically. "
         "The file stays on this computer and is not uploaded anywhere else."
     )
     upload = st.file_uploader(
@@ -114,6 +113,23 @@ def render_player_save_import(
         hide_index=True,
     )
     _render_preview_gallery(preview)
+    run_rows = (preview.get("highlights") or {}).get("runs") or []
+    if run_rows:
+        st.markdown("#### Recent battle history from save")
+        st.dataframe(
+            [
+                {
+                    "Date": row.get("battle_date") or "—",
+                    "Tier": row.get("tier"),
+                    "Wave": row.get("wave"),
+                    "Killed By": row.get("killed_by"),
+                    "Coins": row.get("coins_earned"),
+                }
+                for row in run_rows
+            ],
+            use_container_width=True,
+            hide_index=True,
+        )
     for note in preview.get("notes", []):
         st.caption(f"- {note}")
 
@@ -134,19 +150,12 @@ def render_player_save_import(
         value=False,
         key=f"{key_prefix}_replace",
     )
-    import_runs = st.checkbox(
-        "Import battle history from save (up to 30 runs)",
-        value=True,
-        key=f"{key_prefix}_import_runs",
-    )
     if st.button("Apply game save", type="primary", key=f"{key_prefix}_apply"):
-        patch = deepcopy(preview["patch"])
-        if not import_runs:
-            patch.pop("runs", None)
         counts = apply_player_save_patch(
             profile,
-            patch,
+            preview["patch"],
             replace=replace,
+            import_battle_history=True,
             source_name=str(preview.get("filename") or "playerInfo.dat"),
         )
         save_profile(profile["name"], profile)

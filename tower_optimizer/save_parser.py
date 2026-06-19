@@ -28,7 +28,11 @@ from .game_catalog import (
     relic_entry,
     uw_track_value,
 )
-from .save_extract import build_extended_patch, section_counts as extended_section_counts
+from .save_extract import (
+    SAVE_BATTLE_HISTORY_SOURCE,
+    build_extended_patch,
+    section_counts as extended_section_counts,
+)
 
 _PACKAGE_DIR = Path(__file__).resolve().parent
 _GAME_DATA_DIR = _PACKAGE_DIR / "game_data"
@@ -413,10 +417,31 @@ def preview_player_save(payload: bytes, filename: str = "playerInfo.dat") -> Dic
                 ],
                 key=lambda row: row["name"],
             )[:12],
+            "runs": sorted(
+                [
+                    {
+                        "tier": row.get("tier"),
+                        "wave": row.get("wave"),
+                        "killed_by": row.get("killed_by"),
+                        "battle_date": row.get("battle_date"),
+                        "coins_earned": row.get("coins_earned"),
+                    }
+                    for row in (patch.get("runs") or [])
+                ],
+                key=lambda row: (row.get("tier") or 0, row.get("wave") or 0),
+                reverse=True,
+            )[:8],
         },
         "data_version": save.get("dataVersion"),
         "save_revision": save.get("saveRevision"),
     }
+
+
+def _is_save_sourced_run(run: Mapping[str, Any], *, source_name: str = SAVE_BATTLE_HISTORY_SOURCE) -> bool:
+    if run.get("imported_from_save"):
+        return True
+    source = str(run.get("source") or "").casefold()
+    return source in {SAVE_BATTLE_HISTORY_SOURCE.casefold(), str(source_name or "").casefold()}
 
 
 def apply_player_save_patch(
@@ -424,6 +449,7 @@ def apply_player_save_patch(
     patch: Mapping[str, Any],
     *,
     replace: bool = False,
+    import_battle_history: bool = True,
     source_name: str = "playerInfo.dat",
 ) -> Dict[str, int]:
     """Merge a save-derived patch into a profile. Returns per-section counts."""
@@ -557,11 +583,15 @@ def apply_player_save_patch(
         counts["module_presets"] = len(module_presets)
 
     runs = patch.get("runs") or []
-    if runs:
-        from .battle_learning import import_runs
+    if runs and import_battle_history:
+        from .battle_learning import import_runs, normalize_profile_runs
 
+        normalize_profile_runs(profile)
+        existing = list(profile.get("runs") or [])
         if replace:
             profile["runs"] = []
+        else:
+            profile["runs"] = [run for run in existing if not _is_save_sourced_run(run, source_name=source_name)]
         result = import_runs(profile, runs, allow_duplicates=False, batch_label=source_name)
         counts["runs"] = len(result.get("added") or [])
 

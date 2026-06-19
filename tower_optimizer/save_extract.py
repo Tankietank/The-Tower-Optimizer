@@ -70,6 +70,24 @@ PROFILE_SECTION_KEYS = (
     "runs",
 )
 
+SAVE_BATTLE_HISTORY_SOURCE = "playerInfo.dat"
+KILLED_BY_NAMES = {
+    0: "Unknown",
+    1: "Basic",
+    2: "Fast",
+    3: "Tank",
+    4: "Ranged",
+    5: "Boss",
+    6: "Ray",
+    7: "Vampire",
+    8: "Scatter",
+    9: "Protector",
+    10: "Saboteur",
+    11: "Commander",
+    12: "Overcharge",
+    99: "Unknown",
+}
+
 
 @lru_cache(maxsize=1)
 def _load_json(name: str) -> Dict[str, Any]:
@@ -78,21 +96,37 @@ def _load_json(name: str) -> Dict[str, Any]:
 
 def save_datetime(value: Any) -> Optional[str]:
     try:
-        ticks = int(value)
+        raw = int(value)
     except (TypeError, ValueError):
         return None
-    if ticks <= 0:
+    if raw <= 0:
         return None
-    if ticks > DOTNET_EPOCH_TICKS:
+    kind_mask = raw & 0xC000000000000000
+    if kind_mask in (0x4000000000000000, 0x8000000000000000):
+        ticks = raw & 0x3FFFFFFFFFFFFFFF
         seconds = (ticks - DOTNET_EPOCH_TICKS) / 10_000_000.0
-    elif ticks > 10_000_000_000:
-        seconds = ticks / 1000.0
+    elif raw > DOTNET_EPOCH_TICKS:
+        seconds = (raw - DOTNET_EPOCH_TICKS) / 10_000_000.0
+    elif raw > 10_000_000_000:
+        seconds = raw / 1000.0
     else:
-        seconds = float(ticks)
+        seconds = float(raw)
     try:
-        return datetime.fromtimestamp(seconds, tz=timezone.utc).isoformat()
+        stamp = datetime.fromtimestamp(seconds, tz=timezone.utc)
+        return stamp.strftime("%Y-%m-%d %H:%M")
     except (OverflowError, OSError, ValueError):
         return None
+
+
+def resolve_killed_by(row: Mapping[str, Any]) -> str:
+    raw = row.get("killedBy")
+    if isinstance(raw, str) and raw.strip() and not raw.strip().isdigit():
+        return raw.strip()
+    try:
+        index = int(raw)
+    except (TypeError, ValueError):
+        return "Unknown"
+    return KILLED_BY_NAMES.get(index, f"Enemy {index}")
 
 
 def _bool(value: Any) -> bool:
@@ -484,18 +518,19 @@ def map_battle_history(save: Mapping[str, Any], *, limit: int = 30) -> List[Dict
         runs.append(
             {
                 "id": uuid.uuid4().hex[:20],
-                "source": "playerInfo.dat",
+                "source": SAVE_BATTLE_HISTORY_SOURCE,
+                "imported_from_save": True,
                 "battle_date": save_datetime(row.get("battleDate")),
                 "tier": tier,
                 "wave": wave,
-                "killed_by": str(row.get("killedBy", "Unknown")),
+                "killed_by": resolve_killed_by(row),
                 "real_seconds": int(round(real_seconds)),
                 "game_seconds": int(round(game_seconds)),
                 "coins_earned": coins,
                 "cells_earned": cells,
                 "coins_per_hour": coins / hours if hours > 0 else 0.0,
                 "cells_per_hour": cells / hours if hours > 0 else 0.0,
-                "run_type": "Tournament" if _bool(row.get("isTournament")) else "Normal",
+                "run_type": "Tournament" if _bool(row.get("isTournament")) else "Auto",
                 "play_style": "Auto",
                 "metrics": {
                     "damage_dealt": _float(row.get("damageDealt")),
