@@ -34,7 +34,9 @@ def test_recommendation_explanation_uses_profile_context():
     explanation = recommendation_explanation(row, profile, combined.get("analysis"), combined.get("latest_death", ""))
     assert "Why now" in explanation
     assert any("weakest" in item.casefold() or "rank" in item.casefold() for item in explanation["Why now"])
-    assert explanation["Inputs"]["Current value"] != "Unknown" or "Unknown" in str(explanation["Trade-offs"])
+    current = explanation["Inputs"]["Current value"]
+    tradeoffs_text = " ".join(explanation.get("Trade-offs") or []).casefold()
+    assert current != "Unknown" or "could not be read" in tradeoffs_text
 
 
 def test_attach_explanations_preserves_row_fields():
