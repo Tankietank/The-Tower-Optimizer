@@ -10,6 +10,26 @@ ghcr.io/tankietank/the-tower-optimizer:latest
 
 Profiles, battle history, custom icons, and backups persist in a mounted **`/app/data`** volume.
 
+## One-liner (Unraid terminal)
+
+Paste into **Unraid → Terminal** (or any host with Docker). Creates appdata, pulls `latest`, and starts the container:
+
+```bash
+mkdir -p /mnt/user/appdata/tower-optimizer && docker pull ghcr.io/tankietank/the-tower-optimizer:latest && docker rm -f tower-optimizer 2>/dev/null; docker run -d --name tower-optimizer --restart unless-stopped -p 8501:8501 -v /mnt/user/appdata/tower-optimizer:/app/data -e TOWER_OPTIMIZER_DATA_DIR=/app/data --label 'net.unraid.docker.webui=http://[IP]:[PORT:8501]/' --label 'net.unraid.docker.icon=https://raw.githubusercontent.com/Tankietank/The-Tower-Optimizer/main/assets/brand/tower_optimizer.svg' ghcr.io/tankietank/the-tower-optimizer:latest
+```
+
+Open `http://<unraid-ip>:8501`. Unraid will also show a **WebUI** link on the Docker tab when those labels are present.
+
+If the page does not load, check the container log:
+
+```bash
+docker logs tower-optimizer --tail 50
+```
+
+Re-run the same command anytime to pull an update and recreate the container (your data in appdata is kept).
+
+**Different port** — change both `-p` values, e.g. `-p 8502:8501` for port 8502 on the host.
+
 ## Quick start (Docker Compose)
 
 On any machine with Docker:
@@ -95,3 +115,5 @@ Same as the desktop app: nothing is sent to the cloud. All profile and import da
 | Permission errors writing profiles | Ensure `/mnt/user/appdata/tower-optimizer` is writable by the container user. On Unraid, `chmod -R 777` on the appdata folder is a common quick fix. |
 | Old version after update | Pull `latest` again and recreate the container. Streamlit ships inside the image; only `data/` is mounted. |
 | GHCR pull denied | The package must be **public** on GitHub (Packages → the-tower-optimizer → Package settings → Change visibility). |
+| Container exits immediately / no WebUI | Run `docker logs tower-optimizer`. A broken entrypoint (Windows line endings) prevents Streamlit from starting — pull the latest image after the fix, or recreate with the updated one-liner above. |
+| No WebUI link in Unraid Docker tab | Add the `net.unraid.docker.webui` label (included in the one-liner) or open `http://<unraid-ip>:8501` manually. |

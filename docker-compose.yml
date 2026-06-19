@@ -4,6 +4,9 @@ services:
     pull_policy: always
     container_name: tower-optimizer
     restart: unless-stopped
+    labels:
+      net.unraid.docker.webui: "http://[IP]:[PORT:8501]/"
+      net.unraid.docker.icon: "https://raw.githubusercontent.com/Tankietank/The-Tower-Optimizer/main/assets/brand/tower_optimizer.svg"
     ports:
       - "${TOWER_OPTIMIZER_PORT:-8501}:8501"
     environment:
