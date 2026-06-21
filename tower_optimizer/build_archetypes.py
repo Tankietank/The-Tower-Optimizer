@@ -738,6 +738,35 @@ def _score_module(record: Mapping[str, Any], archetype: Mapping[str, Any], slot:
     return score
 
 
+def _module_candidates_for_slot(
+    profile: Mapping[str, Any],
+    slot: str,
+    *,
+    preset_keys: Optional[Sequence[str]] = None,
+) -> List[Mapping[str, Any]]:
+    """Owned module rows for a slot: imported inventory plus equipped fallback."""
+    candidates: List[Mapping[str, Any]] = []
+    seen: set[str] = set()
+    for record in _inventory_modules(profile, slot):
+        name = str(record.get("name") or "").strip()
+        if not name or name in seen:
+            continue
+        seen.add(name)
+        candidates.append(record)
+    equipped = _equipped_module_name(profile, slot, preset_keys)
+    if equipped and equipped not in seen:
+        record = _module_inventory_record(profile, slot, equipped)
+        if record:
+            candidates.append({**record, "name": equipped})
+        else:
+            slot_module = profile.get("modules", {}).get(slot, {}) if isinstance(profile.get("modules"), Mapping) else {}
+            if isinstance(slot_module, Mapping) and str(slot_module.get("name") or "").strip() == equipped:
+                candidates.append({**slot_module, "name": equipped, "slot": slot})
+            else:
+                candidates.append({"name": equipped, "slot": slot, "rarity": "Unknown", "level": 0})
+    return candidates
+
+
 def _pick_module(
     profile: Mapping[str, Any],
     archetype: Mapping[str, Any],
@@ -745,17 +774,17 @@ def _pick_module(
     *,
     module_preset_keys: Optional[Sequence[str]] = None,
 ) -> Dict[str, Any]:
-    inventory = _inventory_modules(profile, slot)
     prefs = archetype.get("module_preferences", {}).get(slot, []) if isinstance(archetype.get("module_preferences"), Mapping) else []
     preset_keys = list(module_preset_keys or DEFAULT_MODULE_PRESET_KEYS["farming"])
     equipped = _equipped_module_name(profile, slot, preset_keys)
-    if inventory:
-        best = max(inventory, key=lambda item: _score_module(item, archetype, slot))
+    candidates = _module_candidates_for_slot(profile, slot, preset_keys=preset_keys)
+    if candidates:
+        best = max(candidates, key=lambda item: _score_module(item, archetype, slot))
         best_name = str(best.get("name") or "")
         status = "Equipped" if best_name == equipped else "Swap recommended"
-        reason = "Best match in your imported inventory for this build."
+        reason = "Best owned module for this build."
         if best_name in prefs:
-            reason = f"Preferred {slot.lower()} module for this build."
+            reason = f"Preferred {slot.lower()} module you own for this build."
         if equipped and best_name != equipped:
             reason = f"Your {preset_keys[0]} preset uses {equipped}, but {best_name} fits this build better."
         return {
@@ -766,6 +795,7 @@ def _pick_module(
             "level": int(_clean_number(best.get("level"))),
             "status": status,
             "reason": reason,
+            "owned": True,
             "preset": preset_keys[0],
         }
     target = str(prefs[0]) if prefs else "Set a named module"
@@ -775,8 +805,12 @@ def _pick_module(
         "equipped": equipped or "Not set",
         "rarity": "Unknown",
         "level": 0,
-        "status": "Import inventory" if not equipped else "Review manually",
-        "reason": "No imported inventory row for this slot — target module is a build template.",
+        "status": "Not owned",
+        "reason": (
+            f"Build target — '{target}' is not in your profile yet. "
+            "Import your save or add the module to your inventory before equipping."
+        ),
+        "owned": False,
         "preset": preset_keys[0],
     }
 
@@ -857,7 +891,7 @@ def _build_context_blueprint(
         "modules": {
             "preset": module_preset_keys[0],
             "rows": module_rows,
-            "summary": f"Primary modules for your {module_preset_keys[0]} workshop preset.",
+            "summary": f"Primary modules for your {module_preset_keys[0]} workshop preset. Recommendations only include modules in your profile.",
         },
     }
 
