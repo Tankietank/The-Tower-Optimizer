@@ -8479,6 +8479,73 @@ elif page == "Build Analyzer":
     st.progress(min(1.0, max(0.0, float(report["fit_score"]) / 100.0)))
     st.write(report["tagline"])
 
+    blueprint = report.get("blueprint") or {}
+    cards_bp = blueprint.get("cards") or {}
+    modules_bp = blueprint.get("modules") or {}
+    research_bp = blueprint.get("research") or {}
+
+    st.subheader(f"Recommended {report['label']} loadout")
+    st.caption("Concrete equip and research targets based on what is in your profile today.")
+    loadout_tabs = st.tabs(["Cards to equip", "Modules to equip", "Research priority"])
+
+    with loadout_tabs[0]:
+        st.markdown(f"**{cards_bp.get('summary', 'Equip these cards in order for this build.')}**")
+        if cards_bp.get("rows"):
+            st.dataframe(pd.DataFrame(cards_bp["rows"]), use_container_width=True, hide_index=True)
+        preset = cards_bp.get("current_preset") or []
+        if preset:
+            overlap = cards_bp.get("preset_overlap", 0)
+            st.caption(f"Your current preset has {overlap}/{len(cards_bp.get('recommended') or [])} recommended cards equipped.")
+            if overlap < len(cards_bp.get("recommended") or []):
+                st.code("\n".join(cards_bp.get("recommended") or []), language=None)
+        if cards_bp.get("swap_out"):
+            st.warning(f"Swap out for this build: {', '.join(cards_bp['swap_out'])}")
+        if cards_bp.get("missing"):
+            st.info(f"Work toward these cards: {', '.join(cards_bp['missing'])}")
+
+    with loadout_tabs[1]:
+        st.markdown(f"**{modules_bp.get('summary', 'Use these primary modules in Farming unless a tournament preset needs a swap.')}**")
+        module_rows = modules_bp.get("rows") or []
+        if module_rows:
+            st.dataframe(
+                pd.DataFrame([
+                    {
+                        "Slot": row.get("slot"),
+                        "Equip": row.get("recommended"),
+                        "Currently": row.get("equipped"),
+                        "Rarity": row.get("rarity"),
+                        "Level": row.get("level"),
+                        "Status": row.get("status"),
+                        "Why": row.get("reason"),
+                    }
+                    for row in module_rows
+                ]),
+                use_container_width=True,
+                hide_index=True,
+            )
+
+    with loadout_tabs[2]:
+        st.markdown(f"**{research_bp.get('summary', 'Research in this order.')}**")
+        lab_col, ws_col = st.columns(2)
+        with lab_col:
+            st.markdown("**Labs to research**")
+            if research_bp.get("labs"):
+                st.dataframe(pd.DataFrame(research_bp["labs"]), use_container_width=True, hide_index=True)
+        with ws_col:
+            st.markdown("**Workshop to upgrade**")
+            if research_bp.get("workshop"):
+                st.dataframe(pd.DataFrame(research_bp["workshop"]), use_container_width=True, hide_index=True)
+        enh_col, uw_col = st.columns(2)
+        with enh_col:
+            st.markdown("**Enhancements**")
+            if research_bp.get("enhancements"):
+                st.dataframe(pd.DataFrame(research_bp["enhancements"]), use_container_width=True, hide_index=True)
+        with uw_col:
+            st.markdown("**UW-linked labs**")
+            if research_bp.get("uw_labs"):
+                st.dataframe(pd.DataFrame(research_bp["uw_labs"]), use_container_width=True, hide_index=True)
+
+    st.divider()
     gap_col, target_col = st.columns(2)
     with gap_col:
         st.markdown("**Gaps vs this build**")

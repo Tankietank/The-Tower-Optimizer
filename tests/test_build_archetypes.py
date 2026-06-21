@@ -22,6 +22,18 @@ def test_all_archetypes_generate_reports():
         assert report["fit_score"] >= 0
         assert report["next_steps"]
         assert report["gaps"]
+        blueprint = report.get("blueprint") or {}
+        assert blueprint.get("cards", {}).get("recommended")
+        assert len(blueprint.get("modules", {}).get("rows", [])) == 4
+        assert blueprint.get("research", {}).get("labs")
+
+
+def test_glass_cannon_blueprint_recommends_damage_cards():
+    report = build_archetype_report(load_profile(), "glass_cannon", steps=3, top_n=5)
+    cards = report["blueprint"]["cards"]["recommended"]
+    assert "Damage" in cards
+    assert "Attack Speed" in cards
+    assert "Health" not in cards or "Health" in report["blueprint"]["cards"].get("avoid", [])
 
 
 def test_glass_cannon_prioritizes_damage_focus():
