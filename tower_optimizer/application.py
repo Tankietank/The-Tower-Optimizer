@@ -7701,6 +7701,7 @@ from .engines.combined import build_combined_recommendations, build_progression_
 from .regression import run_engine_health, bundled_data_status
 from .calibration import build_calibration_report, calibration_snapshot, compare_snapshots, PATH_LABELS
 from .quality import profile_quality_report, apply_safe_fixes as apply_quality_safe_fixes
+from .build_archetypes import ARCHETYPE_IDS, ARCHETYPES, archetype_display_rows, build_all_archetype_reports
 from .explanations import recommendation_explanation
 from .module_substats import format_substats_for_editor, parse_substats_from_editor
 from .battle_ui import render_battle_learning_page
@@ -8438,6 +8439,79 @@ elif page == "Build Analyzer":
         column_config={"Score": st.column_config.ProgressColumn(min_value=0, max_value=100, format="%.1f")},
     )
     st.info(analysis["method"] + " Scores compare progression within each category; they do not estimate waves or calculate true ROI yet.")
+
+    st.divider()
+    st.subheader("Optimal builds for your account")
+    st.caption(
+        "Each archetype uses your imported workshop, labs, cards, modules, and UWs to score fit, "
+        "list gaps, and rank the best next upgrades for that playstyle."
+    )
+    with st.spinner("Evaluating build archetypes..."):
+        archetype_payload = build_all_archetype_reports(profile, steps=10, candidates_per_path=3, top_n=8)
+
+    st.success(
+        f"Closest current fit: **{archetype_payload['best_match_label']}** "
+        f"({archetype_payload['best_match_score']:.0f}/100)"
+    )
+    st.dataframe(
+        pd.DataFrame([
+            {"Build": item["label"], "Fit score": item["fit_score"], "Focus": item["focus"], "Status": item["fit_label"]}
+            for item in archetype_payload["archetypes"]
+        ]).sort_values("Fit score", ascending=False),
+        use_container_width=True,
+        hide_index=True,
+        column_config={"Fit score": st.column_config.ProgressColumn(min_value=0, max_value=100, format="%.0f")},
+    )
+
+    label_to_id = {ARCHETYPES[arch_id]["label"]: arch_id for arch_id in ARCHETYPE_IDS}
+    selected_label = st.selectbox(
+        "Build to explore",
+        list(label_to_id.keys()),
+        index=list(label_to_id.keys()).index(ARCHETYPES[archetype_payload["best_match_id"]]["label"]),
+        key="build_archetype_select",
+    )
+    report = next(item for item in archetype_payload["archetypes"] if item["id"] == label_to_id[selected_label])
+
+    c1, c2, c3 = st.columns(3)
+    c1.metric("Build fit", f"{report['fit_score']:.0f}/100", report["fit_label"])
+    c2.metric("Engine focus", report["focus"])
+    c3.metric("Latest death", report.get("latest_death", "No report saved"))
+    st.progress(min(1.0, max(0.0, float(report["fit_score"]) / 100.0)))
+    st.write(report["tagline"])
+
+    gap_col, target_col = st.columns(2)
+    with gap_col:
+        st.markdown("**Gaps vs this build**")
+        for gap in report.get("gaps", []):
+            st.markdown(f"- {gap}")
+    with target_col:
+        st.markdown("**Priority cards**")
+        st.caption(", ".join(report.get("priority_cards", [])))
+        st.markdown("**Priority labs**")
+        st.caption(", ".join(report.get("priority_labs", [])))
+        st.markdown("**Module focus**")
+        module_focus = report.get("module_focus", {})
+        if module_focus:
+            for slot, note in module_focus.items():
+                st.caption(f"{slot}: {note}")
+        else:
+            st.caption("Balanced module development across slots.")
+
+    st.markdown("**Best next upgrades for this build**")
+    st.dataframe(
+        pd.DataFrame(archetype_display_rows(report.get("next_steps", []))),
+        use_container_width=True,
+        hide_index=True,
+        column_config={"Build score": st.column_config.NumberColumn(format="%.1f")},
+    )
+
+    top = (report.get("next_steps") or [None])[0]
+    if isinstance(top, dict):
+        explanation = top.get("Explanation") if isinstance(top.get("Explanation"), dict) else recommendation_explanation(
+            top, profile, analysis, report.get("latest_death", "")
+        )
+        with st.expander("Why the #1 pick for this build?", expanded=True):
+            render_recommendation_story(explanation, show_tradeoffs=True)
 
 elif page == "Recommendation Dashboard":
     st.header("Recommendation Dashboard")
