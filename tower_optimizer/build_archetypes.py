@@ -171,6 +171,68 @@ ARCHETYPES: Dict[str, Dict[str, Any]] = {
         "uw_priorities": ["Damage", "Health", "Coins / Kill Bonus", "Golden Tower Bonus", "Black Hole Coin Bonus"],
         "enhancement_priorities": ["Damage +", "Health +", "Coin Bonus +"],
     },
+    "cells_farmer": {
+        "label": "Cells / Hour Farmer",
+        "tagline": "Maximize cells per hour with kill speed, wave pace, and efficient farming runs.",
+        "focus": "Damage",
+        "domain_weights": {
+            "Damage": 0.46,
+            "Economy": 0.24,
+            "Survivability": 0.18,
+            "Regen / Recovery": 0.12,
+        },
+        "priority_cards": ["Attack Speed", "Damage", "Wave Skip", "Enemy Balance", "Berserker", "Plasma Cannon"],
+        "priority_workshop": ["Damage", "Attack Speed", "Critical Factor", "Coin / Kill Bonus", "Health"],
+        "priority_labs": ["Damage", "Attack Speed", "Critical Factor", "Labs Speed", "Coins / Kill Bonus", "Shock Multiplier"],
+        "priority_systems": ["Laboratory", "Workshop / Enhancements", "Cards", "Modules", "Ultimate Weapons"],
+        "module_focus": {"Cannon": "kill speed", "Core": "crit or multishot", "Generator": "secondary economy"},
+        "module_preferences": {
+            "Cannon": ["Death Penalty", "Havoc Bringer", "Astral Deliverance", "Amplifying Strike"],
+            "Core": ["Multiverse Nexus", "Primordial Collapse", "Harmony Conductor"],
+            "Armor": ["Anti-Cube Portal", "Wormhole Redirector", "Sharp Fortitude"],
+            "Generator": ["Pulsar Harvester", "Black Hole Digestor", "Project Funding"],
+        },
+        "substat_keywords": ["attack speed", "damage", "crit", "multishot", "coin", "wave"],
+        "card_loadout": {
+            "core": ["Attack Speed", "Damage", "Wave Skip", "Enemy Balance", "Berserker", "Plasma Cannon"],
+            "support": ["Critical Chance", "Ultimate Crit", "Super Tower", "Coins"],
+            "flex": ["Free Upgrades", "Area of Effect", "Health"],
+        },
+        "avoid_cards": ["Fortress", "Energy Shield", "Health Regen"],
+        "uw_priorities": ["Damage", "Attack Speed", "Black Hole Damage", "Spotlight", "Chain Lightning"],
+        "enhancement_priorities": ["Damage +", "Attack Speed +", "Critical Factor +"],
+    },
+    "tournament_specialist": {
+        "label": "Tournament Specialist",
+        "tagline": "Optimize for tournament placement — burst damage, control, and targeted survivability.",
+        "focus": "Damage",
+        "domain_weights": {
+            "Damage": 0.50,
+            "Survivability": 0.26,
+            "Regen / Recovery": 0.14,
+            "Economy": 0.10,
+        },
+        "priority_cards": ["Damage", "Attack Speed", "Berserker", "Plasma Cannon", "Ultimate Crit", "Second Wind"],
+        "priority_workshop": ["Damage", "Attack Speed", "Critical Factor", "Health", "Defense %", "Recovery Amount"],
+        "priority_labs": ["Damage", "Attack Speed", "Critical Factor", "Health", "Recovery Package Chance", "Shock Multiplier"],
+        "priority_systems": ["Cards", "Laboratory", "Modules", "Workshop / Enhancements", "Ultimate Weapons", "Guardians"],
+        "module_focus": {"Cannon": "burst damage", "Core": "crit chains", "Armor": "just enough eHP"},
+        "module_preferences": {
+            "Cannon": ["Death Penalty", "Havoc Bringer", "Amplifying Strike", "Astral Deliverance"],
+            "Core": ["Multiverse Nexus", "Primordial Collapse", "Harmony Conductor"],
+            "Armor": ["Wormhole Redirector", "Space Displacer", "Sharp Fortitude"],
+            "Generator": ["Pulsar Harvester", "Singularity Harness"],
+        },
+        "substat_keywords": ["damage", "attack speed", "crit", "super crit", "health", "recovery"],
+        "card_loadout": {
+            "core": ["Damage", "Attack Speed", "Berserker", "Plasma Cannon", "Ultimate Crit", "Second Wind"],
+            "support": ["Critical Chance", "Super Tower", "Energy Shield", "Extra Defense"],
+            "flex": ["Death Ray", "Area of Effect", "Demon Mode", "Nuke"],
+        },
+        "avoid_cards": ["Coins", "Wave Skip", "Cash", "Wave Accelerator", "Critical Coin", "Enemy Balance"],
+        "uw_priorities": ["Damage", "Attack Speed", "Spotlight", "Black Hole Damage", "Critical Factor"],
+        "enhancement_priorities": ["Damage +", "Attack Speed +", "Health +"],
+    },
 }
 
 
@@ -268,6 +330,27 @@ SUBSTAT_TARGETS: Dict[str, Dict[str, List[Dict[str, Any]]]] = {
             {"label": "Economy effect", "keywords": ["coin", "cash", "golden tower"], "min_rarity": "Rare"},
         ],
     },
+    "cells_farmer": {
+        "Cannon": [
+            {"label": "Attack Speed", "keywords": ["speed", "attack-speed"], "min_rarity": "Epic"},
+            {"label": "Critical Factor", "keywords": ["factor", "crit-factor"], "min_rarity": "Rare"},
+        ],
+        "Core": [
+            {"label": "Multishot / clear", "keywords": ["multishot", "super crit"], "min_rarity": "Rare"},
+        ],
+    },
+    "tournament_specialist": {
+        "Cannon": [
+            {"label": "Attack Speed", "keywords": ["speed", "attack-speed"], "min_rarity": "Epic"},
+            {"label": "Critical Factor", "keywords": ["factor", "crit-factor"], "min_rarity": "Epic"},
+        ],
+        "Core": [
+            {"label": "Burst crit", "keywords": ["super crit", "crit"], "min_rarity": "Epic"},
+        ],
+        "Armor": [
+            {"label": "Tournament eHP", "keywords": ["health", "defense", "recovery"], "min_rarity": "Rare"},
+        ],
+    },
 }
 
 PLAYSTYLE_PRESETS: Dict[str, Dict[str, Dict[str, Any]]] = {
@@ -350,6 +433,50 @@ PLAYSTYLE_PRESETS: Dict[str, Dict[str, Dict[str, Any]]] = {
                 "core": ["Damage", "Attack Speed", "Health", "Extra Defense", "Plasma Cannon", "Critical Chance"],
                 "support": ["Berserker", "Recovery Package Chance", "Super Tower", "Ultimate Crit"],
                 "flex": ["Free Upgrades", "Second Wind"],
+            },
+        },
+    },
+    "cells_farmer": {
+        "farming": {
+            "note": "Cells/hour farming — fast waves and kill speed first.",
+            "card_loadout": {
+                "core": ["Attack Speed", "Damage", "Wave Skip", "Enemy Balance", "Berserker", "Plasma Cannon"],
+                "support": ["Critical Chance", "Coins", "Ultimate Crit", "Super Tower"],
+                "flex": ["Free Upgrades", "Health"],
+            },
+        },
+        "tournament": {
+            "note": "Trim economy; push clear speed for shorter tournament runs.",
+            "card_loadout": {
+                "core": ["Damage", "Attack Speed", "Berserker", "Plasma Cannon", "Ultimate Crit", "Critical Chance"],
+                "support": ["Super Tower", "Area of Effect", "Second Wind"],
+                "flex": ["Free Upgrades", "Energy Shield"],
+            },
+        },
+    },
+    "tournament_specialist": {
+        "farming": {
+            "note": "Light farming between tournaments — minimal economy, keep damage online.",
+            "card_loadout": {
+                "core": ["Damage", "Attack Speed", "Plasma Cannon", "Health", "Berserker", "Extra Defense"],
+                "support": ["Ultimate Crit", "Second Wind", "Super Tower"],
+                "flex": ["Free Upgrades", "Critical Chance"],
+            },
+        },
+        "pushing": {
+            "note": "Tournament pushing — same core as your Tourney preset.",
+            "card_loadout": {
+                "core": ["Damage", "Attack Speed", "Berserker", "Plasma Cannon", "Ultimate Crit", "Second Wind"],
+                "support": ["Critical Chance", "Super Tower", "Energy Shield", "Extra Defense"],
+                "flex": ["Death Ray", "Area of Effect", "Demon Mode"],
+            },
+        },
+        "tournament": {
+            "note": "Primary tournament preset — zero economy cards, max burst.",
+            "card_loadout": {
+                "core": ["Damage", "Attack Speed", "Berserker", "Plasma Cannon", "Ultimate Crit", "Second Wind"],
+                "support": ["Super Tower", "Death Ray", "Area of Effect", "Demon Mode", "Nuke"],
+                "flex": ["Energy Shield", "Extra Defense", "Free Upgrades"],
             },
         },
     },

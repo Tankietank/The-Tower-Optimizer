@@ -7702,6 +7702,7 @@ from .regression import run_engine_health, bundled_data_status
 from .calibration import build_calibration_report, calibration_snapshot, compare_snapshots, PATH_LABELS
 from .quality import profile_quality_report, apply_safe_fixes as apply_quality_safe_fixes
 from .build_archetypes import ARCHETYPE_IDS, ARCHETYPES, PRESET_CONTEXT_IDS, PRESET_CONTEXTS, archetype_display_rows, build_all_archetype_reports
+from .playbook_export import format_playbook_plaintext, playbook_export_bundle
 from .explanations import recommendation_explanation
 from .module_substats import format_substats_for_editor, parse_substats_from_editor
 from .battle_ui import render_battle_learning_page
@@ -8635,6 +8636,57 @@ elif page == "Build Analyzer":
         st.caption(beast.get("vault", {}).get("summary", ""))
         if beast.get("vault", {}).get("rows"):
             st.dataframe(pd.DataFrame(beast["vault"]["rows"]), use_container_width=True, hide_index=True)
+
+    st.markdown("### Export playbook")
+    st.caption("Download or copy the full Beast Mode playbook for this build.")
+    profile_label = str(profile.get("name") or "Tower Optimizer profile")
+    export_bundle = playbook_export_bundle(report, profile_name=profile_label)
+    export_names = export_bundle["filenames"]
+    exp1, exp2, exp3, exp4 = st.columns(4)
+    exp1.download_button(
+        "Markdown (.md)",
+        data=export_bundle["markdown"],
+        file_name=export_names["markdown"],
+        mime="text/markdown",
+        key=f"playbook_md_{report['id']}",
+    )
+    exp2.download_button(
+        "Plain text (.txt)",
+        data=export_bundle["plaintext"],
+        file_name=export_names["plaintext"],
+        mime="text/plain",
+        key=f"playbook_txt_{report['id']}",
+    )
+    exp3.download_button(
+        "HTML (.html)",
+        data=export_bundle["html"],
+        file_name=export_names["html"],
+        mime="text/html",
+        key=f"playbook_html_{report['id']}",
+    )
+    try:
+        if export_bundle.get("pdf"):
+            exp4.download_button(
+                "PDF (.pdf)",
+                data=export_bundle["pdf"],
+                file_name=export_names["pdf"],
+                mime="application/pdf",
+                key=f"playbook_pdf_{report['id']}",
+            )
+        else:
+            exp4.caption("PDF unavailable")
+            if export_bundle.get("pdf_error"):
+                st.warning(export_bundle["pdf_error"])
+    except RuntimeError as exc:
+        st.warning(str(exc))
+    with st.expander("Copy-friendly playbook text", expanded=False):
+        st.text_area(
+            "Plain text preview",
+            value=format_playbook_plaintext(report, profile_name=profile_label),
+            height=320,
+            key=f"playbook_copy_{report['id']}",
+        )
+        st.caption("Select all and copy, or use the download buttons above.")
 
     st.divider()
     gap_col, target_col = st.columns(2)

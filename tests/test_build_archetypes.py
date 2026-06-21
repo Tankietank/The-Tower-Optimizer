@@ -76,3 +76,24 @@ def test_economy_farmer_has_economy_priorities():
     report = build_archetype_report(load_profile(), "economy_farmer", steps=3, top_n=5)
     assert "Enemy Balance" in report["priority_cards"]
     assert report["focus"] == "Economy"
+
+
+def test_cells_farmer_prioritizes_kill_speed():
+    report = build_archetype_report(load_profile(), "cells_farmer", steps=3, top_n=5)
+    assert report["focus"] == "Damage"
+    assert "Wave Skip" in report["priority_cards"]
+    cards = report["blueprint"]["cards"]["recommended"]
+    assert "Attack Speed" in cards
+    assert "Damage" in cards
+
+
+def test_tournament_specialist_avoids_economy_cards():
+    report = build_archetype_report(load_profile(), "tournament_specialist", steps=3, top_n=5)
+    tournament_cards = report["blueprint"]["presets"]["tournament"]["cards"]["recommended"]
+    assert "Coins" not in tournament_cards
+    assert "Wave Skip" not in tournament_cards
+    assert "Cash" not in tournament_cards
+    assert "Damage" in tournament_cards
+    beast = report["blueprint"]["beast"]
+    assert beast.get("bots", {}).get("rows")
+    assert beast.get("ultimate_weapons", {}).get("rows") is not None

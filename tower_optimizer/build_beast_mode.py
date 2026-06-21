@@ -87,6 +87,32 @@ BEAST_ARCHETYPE_CONFIG: Dict[str, Dict[str, Any]] = {
         ],
         "assist_notes": "Assist modules should complement primaries — economy on Generator, damage on Cannon.",
     },
+    "cells_farmer": {
+        "bots": ["Flame Bot", "Amplify Bot", "Golden Bot"],
+        "guardians": ["Attack", "Bounty"],
+        "relic_bonus_types": ["Damage", "Attack Speed", "Critical Factor", "Cells"],
+        "mastery_cards": ["Attack Speed", "Damage", "Berserker", "Plasma Cannon", "Wave Skip"],
+        "vault_nodes": ["Attack Speed", "Damage", "Ultimate Weapon Damage"],
+        "uw_focus": ["Spotlight", "Chain Lightning", "Black Hole", "Golden Tower"],
+        "uw_notes": [
+            "Cells scale with run speed — prioritize kill speed labs over coin labs once baseline economy exists.",
+            "Spotlight and Chain Lightning are high-value for wave clear and cells/hour.",
+        ],
+        "assist_notes": "Assist Cannons should add attack speed or crit; Generator assist can stay economic.",
+    },
+    "tournament_specialist": {
+        "bots": ["Flame Bot", "Amplify Bot", "Thunder Bot"],
+        "guardians": ["Attack", "Ally", "Bounty"],
+        "relic_bonus_types": ["Damage", "Attack Speed", "Critical Factor", "Health"],
+        "mastery_cards": ["Damage", "Attack Speed", "Berserker", "Plasma Cannon", "Ultimate Crit", "Second Wind"],
+        "vault_nodes": ["Ultimate Weapon Damage", "Attack Speed", "Additional Card Slot"],
+        "uw_focus": ["Spotlight", "Chain Lightning", "Black Hole", "Smart Missiles"],
+        "uw_notes": [
+            "Tournament runs favor burst windows — sync UWs with your Tourney module preset.",
+            "Invest just enough eHP labs to survive your current league's burst checks.",
+        ],
+        "assist_notes": "Tourney assist slots should mirror primaries: damage on Cannon/Core, minimal economy.",
+    },
 }
 
 DEATH_TWEAKS: Dict[str, Dict[str, Any]] = {
