@@ -30,6 +30,8 @@ def test_all_archetypes_generate_reports():
         assert len(blueprint.get("modules", {}).get("rows", [])) == 4
         assert blueprint.get("research", {}).get("labs")
         assert "rows" in blueprint.get("substats", {})
+        assert blueprint.get("beast")
+        assert blueprint.get("master_checklist")
 
 
 def test_glass_cannon_tournament_drops_economy_cards():

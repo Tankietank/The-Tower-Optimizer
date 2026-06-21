@@ -8410,6 +8410,7 @@ elif page == "Battle Learning":
 
 elif page == "Build Analyzer":
     st.header("Build Analyzer")
+    st.caption("Beast Mode playbook — full loadouts, presets, and a prioritized checklist for your account.")
     analysis = build_analysis(profile)
     scores = analysis["scores"]
     c1, c2, c3, c4 = st.columns(4)
@@ -8483,9 +8484,33 @@ elif page == "Build Analyzer":
     preset_payload = blueprint.get("presets") or {}
     research_bp = blueprint.get("research") or {}
     substats_bp = blueprint.get("substats") or {}
+    beast = blueprint.get("beast") or {}
+    readiness = float(blueprint.get("readiness_score") or 0.0)
+    checklist = blueprint.get("master_checklist") or []
 
-    st.subheader(f"Recommended {report['label']} loadout")
-    st.caption("Farming, pushing, and tournament presets plus sub-effect reroll targets from your profile.")
+    st.subheader("Beast Mode Playbook")
+    st.caption("Full-account loadouts: presets, bots, guardians, relics, UWs, assist modules, masteries, vault, and death tweaks.")
+    c_ready, c_check, c_subs = st.columns(3)
+    c_ready.metric("Build readiness", f"{readiness:.0f}/100")
+    c_check.metric("Checklist items", len(checklist))
+    c_subs.metric("Open sub-effect targets", int(substats_bp.get("open_targets") or 0))
+    st.progress(min(1.0, readiness / 100.0))
+
+    if checklist:
+        with st.expander("Master checklist — do these first", expanded=True):
+            st.dataframe(pd.DataFrame(checklist), use_container_width=True, hide_index=True)
+
+    death_bp = beast.get("death") or {}
+    if death_bp.get("matched"):
+        st.info(f"**Death tweak ({death_bp['matched']}):** {death_bp.get('summary', '')}")
+        if death_bp.get("add_cards"):
+            st.caption(f"Consider adding: {', '.join(death_bp['add_cards'])}")
+        if death_bp.get("add_labs"):
+            st.caption(f"Priority labs: {', '.join(death_bp['add_labs'])}")
+        if death_bp.get("add_modules_note"):
+            st.caption(death_bp["add_modules_note"])
+
+    st.markdown(f"### {report['label']} preset loadouts")
 
     context_tabs = st.tabs([
         PRESET_CONTEXTS[key]["label"] for key in PRESET_CONTEXT_IDS
@@ -8563,6 +8588,53 @@ elif page == "Build Analyzer":
                     st.markdown("**UW-linked labs**")
                     if research_bp.get("uw_labs"):
                         st.dataframe(pd.DataFrame(research_bp["uw_labs"]), use_container_width=True, hide_index=True)
+
+    st.markdown("### Full account systems")
+    beast_tabs = st.tabs([
+        "Bots", "Guardians", "Relics & Themes", "Ultimate Weapons",
+        "Assist Modules", "Masteries", "Vault",
+    ])
+    with beast_tabs[0]:
+        st.caption(beast.get("bots", {}).get("summary", ""))
+        if beast.get("bots", {}).get("rows"):
+            st.dataframe(pd.DataFrame(beast["bots"]["rows"]), use_container_width=True, hide_index=True)
+    with beast_tabs[1]:
+        st.caption(beast.get("guardians", {}).get("summary", ""))
+        if beast.get("guardians", {}).get("rows"):
+            st.dataframe(pd.DataFrame(beast["guardians"]["rows"]), use_container_width=True, hide_index=True)
+    with beast_tabs[2]:
+        relics = beast.get("relics", {})
+        st.caption(relics.get("summary", ""))
+        if relics.get("owned_relics"):
+            st.markdown("**Owned build relics**")
+            st.dataframe(pd.DataFrame(relics["owned_relics"]), use_container_width=True, hide_index=True)
+        if relics.get("missing_relics"):
+            st.markdown("**Missing relic targets**")
+            st.dataframe(pd.DataFrame(relics["missing_relics"]), use_container_width=True, hide_index=True)
+        if relics.get("missing_themes"):
+            st.markdown("**Missing themes / cosmetics**")
+            st.dataframe(pd.DataFrame(relics["missing_themes"]), use_container_width=True, hide_index=True)
+    with beast_tabs[3]:
+        uw = beast.get("ultimate_weapons", {})
+        st.caption(uw.get("summary", ""))
+        sync_text = "Yes" if uw.get("gt_bh_synced") else "No / Unknown"
+        st.caption(f"GT/BH sync: {sync_text} · Black Holes: {uw.get('bh_quantity', '—')}")
+        for note in uw.get("notes", []):
+            st.markdown(f"- {note}")
+        if uw.get("rows"):
+            st.dataframe(pd.DataFrame(uw["rows"]), use_container_width=True, hide_index=True)
+    with beast_tabs[4]:
+        st.caption(beast.get("assist", {}).get("summary", ""))
+        if beast.get("assist", {}).get("rows"):
+            st.dataframe(pd.DataFrame(beast["assist"]["rows"]), use_container_width=True, hide_index=True)
+    with beast_tabs[5]:
+        st.caption(beast.get("masteries", {}).get("summary", ""))
+        if beast.get("masteries", {}).get("rows"):
+            st.dataframe(pd.DataFrame(beast["masteries"]["rows"]), use_container_width=True, hide_index=True)
+    with beast_tabs[6]:
+        st.caption(beast.get("vault", {}).get("summary", ""))
+        if beast.get("vault", {}).get("rows"):
+            st.dataframe(pd.DataFrame(beast["vault"]["rows"]), use_container_width=True, hide_index=True)
 
     st.divider()
     gap_col, target_col = st.columns(2)

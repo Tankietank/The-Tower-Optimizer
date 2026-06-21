@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Mapping, Optional, Sequence
 
+from .build_beast_mode import enrich_blueprint_beast_mode
 from .engines.combined import build_combined_recommendations
 from .engines.core import LAB_MAX_LEVELS, WORKSHOP_MAX_LEVELS, build_analysis, ratio
 from .engines.whole_account import CARD_DOMAIN, RARITY_RANK
@@ -777,6 +778,7 @@ def build_archetype_blueprint(
     archetype: Mapping[str, Any],
     *,
     archetype_id: str = "",
+    latest_death: str = "",
 ) -> Dict[str, Any]:
     archetype = {**archetype, "_id": archetype_id or archetype.get("_id", "")}
     presets = {
@@ -790,7 +792,7 @@ def build_archetype_blueprint(
             _evaluate_substat_targets(profile, str(archetype.get("_id")), pushing_modules.get(slot, ""), slot)
         )
 
-    return {
+    payload = {
         "presets": presets,
         "cards": presets["pushing"]["cards"],
         "modules": presets["pushing"]["modules"],
@@ -807,6 +809,12 @@ def build_archetype_blueprint(
             "summary": "Research these labs and workshop stats in order; strong entries can be maintained while you catch up elsewhere.",
         },
     }
+    return enrich_blueprint_beast_mode(
+        profile,
+        str(archetype.get("_id")),
+        payload,
+        latest_death=latest_death,
+    )
 
 
 def _profile_gaps(profile: Mapping[str, Any], archetype: Mapping[str, Any]) -> List[str]:
@@ -912,7 +920,9 @@ def build_archetype_report(
         focus=str(archetype.get("focus", "Balanced")),
     )
     ranked = _rerank_rows(combined.get("rows", []), archetype)
-    blueprint = build_archetype_blueprint(profile, archetype, archetype_id=archetype_id)
+    blueprint = build_archetype_blueprint(
+        profile, archetype, archetype_id=archetype_id, latest_death=str(combined.get("latest_death") or ""),
+    )
     return {
         "id": archetype_id,
         "label": archetype["label"],
