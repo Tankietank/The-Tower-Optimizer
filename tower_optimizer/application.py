@@ -5941,6 +5941,46 @@ def native_vault_active_bonus(profile_data: Dict[str, Any], name: str) -> float:
     return native_number(record, 0.0)
 
 
+def format_substat_line(sub: Any) -> str:
+    if isinstance(sub, str):
+        return sub.strip()
+    if not isinstance(sub, Mapping):
+        return str(sub).strip()
+    label = str(sub.get("display") or sub.get("name") or "Unnamed").strip()
+    rarity = str(sub.get("rarity") or "").strip()
+    value = sub.get("value")
+    parts = [label]
+    if rarity and rarity.lower() not in {"none", "unknown"}:
+        parts.append(f"({rarity})")
+    if value not in (None, ""):
+        parts.append(f"= {value}")
+    if sub.get("locked"):
+        parts.append("[locked]")
+    return " ".join(parts).strip()
+
+
+def format_substats_for_editor(substats: Any) -> str:
+    if not isinstance(substats, list):
+        return str(substats or "")
+    return "\n".join(line for line in (format_substat_line(item) for item in substats) if line)
+
+
+def parse_substats_from_editor(text: str, previous: Optional[list[Any]] = None) -> list[Dict[str, Any]]:
+    previous = previous if isinstance(previous, list) else []
+    lines = [line.strip() for line in str(text or "").splitlines() if line.strip()]
+    parsed: list[Dict[str, Any]] = []
+    for index, line in enumerate(lines):
+        if index < len(previous) and isinstance(previous[index], Mapping):
+            merged = dict(previous[index])
+            merged.setdefault("display", line)
+            if not merged.get("name"):
+                merged["name"] = line.split("(")[0].strip() or line
+            parsed.append(merged)
+        else:
+            parsed.append({"name": line, "display": line})
+    return parsed
+
+
 def native_primary_module_record(profile_data: Dict[str, Any], slot: str, preset: str = "Farming") -> Dict[str, Any]:
     preset_data = profile_data.get("module_presets", {}).get(preset, {}).get(slot, {})
     name = preset_data.get("primary") if isinstance(preset_data, dict) else None
@@ -7662,6 +7702,7 @@ from .regression import run_engine_health, bundled_data_status
 from .calibration import build_calibration_report, calibration_snapshot, compare_snapshots, PATH_LABELS
 from .quality import profile_quality_report, apply_safe_fixes as apply_quality_safe_fixes
 from .explanations import recommendation_explanation
+from .module_substats import format_substats_for_editor, parse_substats_from_editor
 from .battle_ui import render_battle_learning_page
 from .planner import (
     GOAL_OPTIONS, GOAL_FOCUS, ensure_planner_state, effective_income_rates,
@@ -9653,7 +9694,14 @@ elif page == "Modules":
                 rarity = st.selectbox(f"{slot} Rarity", RARITY_OPTIONS, index=RARITY_OPTIONS.index(current_rarity), key=f"module_rarity_{slot}_{revision}", disabled=gold)
                 mod["rarity"] = rarity; cap = MODULE_RARITY_MAX_LEVELS[rarity]
                 mod["level"] = int(st.number_input(f"{slot} Level (max {cap})", min_value=0, max_value=cap, value=min(int(mod.get("level", 0) or 0), cap), step=1, key=f"module_level_{slot}_{revision}", disabled=gold))
-                mod["substats"] = st.text_area(f"{slot} sub-effects (one per line)", value="\n".join(mod.get("substats", [])) if isinstance(mod.get("substats", []), list) else str(mod.get("substats", "")), key=f"module_substats_{slot}_{revision}", height=100).splitlines()
+                previous_substats = mod.get("substats", [])
+                substats_text = st.text_area(
+                    f"{slot} sub-effects (one per line)",
+                    value=format_substats_for_editor(previous_substats),
+                    key=f"module_substats_{slot}_{revision}",
+                    height=100,
+                )
+                mod["substats"] = parse_substats_from_editor(substats_text, previous_substats)
     with inventory_tab:
         inventory = profile.get("module_inventory", {})
         rows = []
