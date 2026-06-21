@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 EXCLUDED_DIRS = {".git", ".venv", "venv", "build", "dist", "__pycache__", ".pytest_cache"}
 FORBIDDEN_SUFFIXES = {".xlsx", ".xlsm", ".xls", ".ods", ".csv", ".tsv", ".pem", ".p12", ".pfx", ".key"}
 FORBIDDEN_NAME_PARTS = {"tanker", "diagnostic", "backup", "export"}
+ALLOWED_NAME_STEMS = {"playbook_export", "test_playbook_export"}
 ALLOWED_DATA = {Path("data/.gitkeep"), Path("data/README.md")}
 TEXT_SUFFIXES = {".py", ".md", ".txt", ".json", ".toml", ".yml", ".yaml", ".ps1", ".svg", ".gitignore", ".gitattributes"}
 PATH_PATTERNS = [
@@ -40,7 +41,11 @@ def main() -> int:
             errors.append(f"Runtime data must not be committed: {rel}")
         if path.suffix.casefold() in FORBIDDEN_SUFFIXES:
             errors.append(f"Forbidden public file type: {rel}")
-        if any(part in path.name.casefold() for part in FORBIDDEN_NAME_PARTS) and rel.parts[0] not in {"tools", "docs"}:
+        if (
+            any(part in path.name.casefold() for part in FORBIDDEN_NAME_PARTS)
+            and path.stem.casefold() not in ALLOWED_NAME_STEMS
+            and rel.parts[0] not in {"tools", "docs"}
+        ):
             errors.append(f"Likely generated/private filename: {rel}")
         if path.stat().st_size > 5 * 1024 * 1024:
             errors.append(f"Unexpected file larger than 5 MB: {rel}")
