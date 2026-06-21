@@ -8548,6 +8548,7 @@ elif page == "Build Analyzer":
                             {
                                 "Slot": row.get("slot"),
                                 "Equip": row.get("recommended"),
+                                "Owned": "Yes" if row.get("owned", True) else "No — work toward",
                                 "Currently": row.get("equipped"),
                                 "Preset": row.get("preset"),
                                 "Rarity": row.get("rarity"),

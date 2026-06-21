@@ -97,3 +97,23 @@ def test_tournament_specialist_avoids_economy_cards():
     beast = report["blueprint"]["beast"]
     assert beast.get("bots", {}).get("rows")
     assert beast.get("ultimate_weapons", {}).get("rows") is not None
+
+
+def test_module_pick_prefers_owned_equipped_armor():
+    profile = load_profile()
+    report = build_archetype_report(profile, "glass_cannon", steps=3, top_n=5)
+    armor = next(row for row in report["blueprint"]["modules"]["rows"] if row["slot"] == "Armor")
+    assert armor["recommended"] == profile["modules"]["Armor"]["name"]
+    assert armor.get("owned") is True
+
+
+def test_module_pick_marks_unowned_template_target():
+    profile = load_profile()
+    profile["modules"]["Armor"] = {"name": "", "rarity": "", "level": 0}
+    profile["module_inventory"] = {
+        key: value for key, value in profile["module_inventory"].items() if not key.startswith("Armor::")
+    }
+    report = build_archetype_report(profile, "glass_cannon", steps=3, top_n=5)
+    armor = next(row for row in report["blueprint"]["modules"]["rows"] if row["slot"] == "Armor")
+    assert armor["status"] == "Not owned"
+    assert armor.get("owned") is False
