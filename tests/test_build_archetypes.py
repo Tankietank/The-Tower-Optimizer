@@ -3,6 +3,7 @@ from pathlib import Path
 
 from tower_optimizer.build_archetypes import (
     ARCHETYPE_IDS,
+    PRESET_CONTEXT_IDS,
     build_all_archetype_reports,
     build_archetype_report,
 )
@@ -23,9 +24,36 @@ def test_all_archetypes_generate_reports():
         assert report["next_steps"]
         assert report["gaps"]
         blueprint = report.get("blueprint") or {}
+        assert blueprint.get("presets")
+        assert len(blueprint["presets"]) == len(PRESET_CONTEXT_IDS)
         assert blueprint.get("cards", {}).get("recommended")
         assert len(blueprint.get("modules", {}).get("rows", [])) == 4
         assert blueprint.get("research", {}).get("labs")
+        assert "rows" in blueprint.get("substats", {})
+
+
+def test_glass_cannon_tournament_drops_economy_cards():
+    report = build_archetype_report(load_profile(), "glass_cannon", steps=3, top_n=5)
+    tournament_cards = report["blueprint"]["presets"]["tournament"]["cards"]["recommended"]
+    assert "Coins" not in tournament_cards
+    assert "Wave Skip" not in tournament_cards
+    assert "Damage" in tournament_cards
+
+
+def test_glass_cannon_substat_targets_present():
+    report = build_archetype_report(load_profile(), "glass_cannon", steps=3, top_n=5)
+    rows = report["blueprint"]["substats"]["rows"]
+    assert rows
+    assert any(row.get("Slot") == "Cannon" for row in rows)
+    assert any("Attack Speed" in str(row.get("Target")) for row in rows)
+
+
+def test_farming_and_tournament_presets_differ_for_glass_cannon():
+    report = build_archetype_report(load_profile(), "glass_cannon", steps=3, top_n=5)
+    farming = report["blueprint"]["presets"]["farming"]["cards"]["recommended"]
+    tournament = report["blueprint"]["presets"]["tournament"]["cards"]["recommended"]
+    assert farming != tournament
+    assert "Coins" in farming
 
 
 def test_glass_cannon_blueprint_recommends_damage_cards():

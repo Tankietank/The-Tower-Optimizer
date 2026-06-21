@@ -7701,7 +7701,7 @@ from .engines.combined import build_combined_recommendations, build_progression_
 from .regression import run_engine_health, bundled_data_status
 from .calibration import build_calibration_report, calibration_snapshot, compare_snapshots, PATH_LABELS
 from .quality import profile_quality_report, apply_safe_fixes as apply_quality_safe_fixes
-from .build_archetypes import ARCHETYPE_IDS, ARCHETYPES, archetype_display_rows, build_all_archetype_reports
+from .build_archetypes import ARCHETYPE_IDS, ARCHETYPES, PRESET_CONTEXT_IDS, PRESET_CONTEXTS, archetype_display_rows, build_all_archetype_reports
 from .explanations import recommendation_explanation
 from .module_substats import format_substats_for_editor, parse_substats_from_editor
 from .battle_ui import render_battle_learning_page
@@ -8480,70 +8480,89 @@ elif page == "Build Analyzer":
     st.write(report["tagline"])
 
     blueprint = report.get("blueprint") or {}
-    cards_bp = blueprint.get("cards") or {}
-    modules_bp = blueprint.get("modules") or {}
+    preset_payload = blueprint.get("presets") or {}
     research_bp = blueprint.get("research") or {}
+    substats_bp = blueprint.get("substats") or {}
 
     st.subheader(f"Recommended {report['label']} loadout")
-    st.caption("Concrete equip and research targets based on what is in your profile today.")
-    loadout_tabs = st.tabs(["Cards to equip", "Modules to equip", "Research priority"])
+    st.caption("Farming, pushing, and tournament presets plus sub-effect reroll targets from your profile.")
 
-    with loadout_tabs[0]:
-        st.markdown(f"**{cards_bp.get('summary', 'Equip these cards in order for this build.')}**")
-        if cards_bp.get("rows"):
-            st.dataframe(pd.DataFrame(cards_bp["rows"]), use_container_width=True, hide_index=True)
-        preset = cards_bp.get("current_preset") or []
-        if preset:
-            overlap = cards_bp.get("preset_overlap", 0)
-            st.caption(f"Your current preset has {overlap}/{len(cards_bp.get('recommended') or [])} recommended cards equipped.")
-            if overlap < len(cards_bp.get("recommended") or []):
-                st.code("\n".join(cards_bp.get("recommended") or []), language=None)
-        if cards_bp.get("swap_out"):
-            st.warning(f"Swap out for this build: {', '.join(cards_bp['swap_out'])}")
-        if cards_bp.get("missing"):
-            st.info(f"Work toward these cards: {', '.join(cards_bp['missing'])}")
-
-    with loadout_tabs[1]:
-        st.markdown(f"**{modules_bp.get('summary', 'Use these primary modules in Farming unless a tournament preset needs a swap.')}**")
-        module_rows = modules_bp.get("rows") or []
-        if module_rows:
-            st.dataframe(
-                pd.DataFrame([
-                    {
-                        "Slot": row.get("slot"),
-                        "Equip": row.get("recommended"),
-                        "Currently": row.get("equipped"),
-                        "Rarity": row.get("rarity"),
-                        "Level": row.get("level"),
-                        "Status": row.get("status"),
-                        "Why": row.get("reason"),
-                    }
-                    for row in module_rows
-                ]),
-                use_container_width=True,
-                hide_index=True,
-            )
-
-    with loadout_tabs[2]:
-        st.markdown(f"**{research_bp.get('summary', 'Research in this order.')}**")
-        lab_col, ws_col = st.columns(2)
-        with lab_col:
-            st.markdown("**Labs to research**")
-            if research_bp.get("labs"):
-                st.dataframe(pd.DataFrame(research_bp["labs"]), use_container_width=True, hide_index=True)
-        with ws_col:
-            st.markdown("**Workshop to upgrade**")
-            if research_bp.get("workshop"):
-                st.dataframe(pd.DataFrame(research_bp["workshop"]), use_container_width=True, hide_index=True)
-        enh_col, uw_col = st.columns(2)
-        with enh_col:
-            st.markdown("**Enhancements**")
-            if research_bp.get("enhancements"):
-                st.dataframe(pd.DataFrame(research_bp["enhancements"]), use_container_width=True, hide_index=True)
-        with uw_col:
-            st.markdown("**UW-linked labs**")
-            if research_bp.get("uw_labs"):
-                st.dataframe(pd.DataFrame(research_bp["uw_labs"]), use_container_width=True, hide_index=True)
+    context_tabs = st.tabs([
+        PRESET_CONTEXTS[key]["label"] for key in PRESET_CONTEXT_IDS
+    ])
+    for context_tab, context_id in zip(context_tabs, PRESET_CONTEXT_IDS):
+        with context_tab:
+            context = preset_payload.get(context_id) or {}
+            cards_bp = context.get("cards") or {}
+            modules_bp = context.get("modules") or {}
+            st.markdown(f"**{cards_bp.get('note', PRESET_CONTEXTS[context_id]['summary'])}**")
+            detail_tabs = st.tabs(["Cards", "Modules", "Sub-effects", "Research"])
+            with detail_tabs[0]:
+                if cards_bp.get("rows"):
+                    st.dataframe(pd.DataFrame(cards_bp["rows"]), use_container_width=True, hide_index=True)
+                preset = cards_bp.get("current_preset") or []
+                if preset:
+                    overlap = cards_bp.get("preset_overlap", 0)
+                    st.caption(
+                        f"Your `{cards_bp.get('preset_name', 'preset')}` has "
+                        f"{overlap}/{len(cards_bp.get('recommended') or [])} recommended cards."
+                    )
+                    if overlap < len(cards_bp.get("recommended") or []):
+                        st.code("\n".join(cards_bp.get("recommended") or []), language=None)
+                if cards_bp.get("swap_out"):
+                    st.warning(f"Swap out for this preset: {', '.join(cards_bp['swap_out'])}")
+                if cards_bp.get("missing"):
+                    st.info(f"Work toward: {', '.join(cards_bp['missing'])}")
+            with detail_tabs[1]:
+                st.caption(modules_bp.get("summary", ""))
+                module_rows = modules_bp.get("rows") or []
+                if module_rows:
+                    st.dataframe(
+                        pd.DataFrame([
+                            {
+                                "Slot": row.get("slot"),
+                                "Equip": row.get("recommended"),
+                                "Currently": row.get("equipped"),
+                                "Preset": row.get("preset"),
+                                "Rarity": row.get("rarity"),
+                                "Level": row.get("level"),
+                                "Status": row.get("status"),
+                                "Why": row.get("reason"),
+                            }
+                            for row in module_rows
+                        ]),
+                        use_container_width=True,
+                        hide_index=True,
+                    )
+            with detail_tabs[2]:
+                st.markdown(f"**{substats_bp.get('summary', 'Sub-effect reroll targets')}**")
+                if substats_bp.get("rows"):
+                    st.dataframe(pd.DataFrame(substats_bp["rows"]), use_container_width=True, hide_index=True)
+                open_targets = int(substats_bp.get("open_targets") or 0)
+                if open_targets:
+                    st.warning(f"{open_targets} sub-effect target(s) still need rerolls or upgrades.")
+                else:
+                    st.success("All tracked sub-effect targets are met on the recommended modules.")
+            with detail_tabs[3]:
+                st.markdown(f"**{research_bp.get('summary', 'Research in this order.')}**")
+                lab_col, ws_col = st.columns(2)
+                with lab_col:
+                    st.markdown("**Labs**")
+                    if research_bp.get("labs"):
+                        st.dataframe(pd.DataFrame(research_bp["labs"]), use_container_width=True, hide_index=True)
+                with ws_col:
+                    st.markdown("**Workshop**")
+                    if research_bp.get("workshop"):
+                        st.dataframe(pd.DataFrame(research_bp["workshop"]), use_container_width=True, hide_index=True)
+                enh_col, uw_col = st.columns(2)
+                with enh_col:
+                    st.markdown("**Enhancements**")
+                    if research_bp.get("enhancements"):
+                        st.dataframe(pd.DataFrame(research_bp["enhancements"]), use_container_width=True, hide_index=True)
+                with uw_col:
+                    st.markdown("**UW-linked labs**")
+                    if research_bp.get("uw_labs"):
+                        st.dataframe(pd.DataFrame(research_bp["uw_labs"]), use_container_width=True, hide_index=True)
 
     st.divider()
     gap_col, target_col = st.columns(2)

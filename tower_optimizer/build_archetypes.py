@@ -175,6 +175,185 @@ ARCHETYPES: Dict[str, Dict[str, Any]] = {
 
 ARCHETYPE_IDS = tuple(ARCHETYPES.keys())
 
+PRESET_CONTEXT_IDS = ("farming", "pushing", "tournament")
+
+PRESET_CONTEXTS: Dict[str, Dict[str, str]] = {
+    "farming": {
+        "label": "Farming preset",
+        "summary": "Daily farming — enough clear speed without sacrificing your build's main goal.",
+    },
+    "pushing": {
+        "label": "Pushing preset",
+        "summary": "Tier and wave pushes — lean into the build's core power spikes.",
+    },
+    "tournament": {
+        "label": "Tournament preset",
+        "summary": "Tournament runs — burst damage and targeted survival, minimal economy cards.",
+    },
+}
+
+DEFAULT_CARD_PRESET_KEYS: Dict[str, List[str]] = {
+    "farming": ["Farming", "Preset 1"],
+    "pushing": ["Pushing", "Preset 2"],
+    "tournament": ["Tourney", "Preset 2", "Pushing"],
+}
+
+DEFAULT_MODULE_PRESET_KEYS: Dict[str, List[str]] = {
+    "farming": ["Farming", "Preset 1"],
+    "pushing": ["Pushing", "Preset 2"],
+    "tournament": ["Tourney", "Preset 2"],
+}
+
+TOURNAMENT_DROP_CARDS = {
+    "Coins", "Wave Skip", "Cash", "Wave Accelerator", "Enemy Balance", "Critical Coin",
+}
+
+SUBSTAT_TARGETS: Dict[str, Dict[str, List[Dict[str, Any]]]] = {
+    "economy_farmer": {
+        "Generator": [
+            {"label": "Golden Tower bonus", "keywords": ["golden tower", "gt"], "min_rarity": "Epic"},
+            {"label": "Black Hole bonus", "keywords": ["black hole", "bh"], "min_rarity": "Epic"},
+            {"label": "Cash / coin effect", "keywords": ["coin", "cash"], "min_rarity": "Rare"},
+        ],
+        "Cannon": [
+            {"label": "Attack Speed", "keywords": ["speed", "attack-speed"], "min_rarity": "Rare"},
+        ],
+        "Core": [
+            {"label": "Wave skip / economy utility", "keywords": ["wave", "coin", "cash"], "min_rarity": "Rare"},
+        ],
+    },
+    "glass_cannon": {
+        "Cannon": [
+            {"label": "Attack Speed", "keywords": ["speed", "attack-speed"], "min_rarity": "Epic"},
+            {"label": "Critical Chance", "keywords": ["chance", "crit-chance"], "min_rarity": "Rare"},
+            {"label": "Critical Factor", "keywords": ["factor", "crit-factor"], "min_rarity": "Rare"},
+        ],
+        "Core": [
+            {"label": "Super Crit / burst", "keywords": ["super crit", "super-crit", "multishot"], "min_rarity": "Epic"},
+            {"label": "Damage / meter", "keywords": ["damage", "damage-meter"], "min_rarity": "Rare"},
+        ],
+        "Armor": [
+            {"label": "Minimal defense", "keywords": ["defense", "health", "damage reduction"], "min_rarity": "Rare"},
+        ],
+    },
+    "ehp_tank": {
+        "Armor": [
+            {"label": "Health", "keywords": ["health", "hp"], "min_rarity": "Epic"},
+            {"label": "Defense %", "keywords": ["defense", "damage reduction"], "min_rarity": "Epic"},
+            {"label": "Recovery / package", "keywords": ["recovery", "package"], "min_rarity": "Rare"},
+        ],
+        "Core": [
+            {"label": "Health / shield", "keywords": ["health", "shield"], "min_rarity": "Rare"},
+        ],
+    },
+    "recovery_sustain": {
+        "Armor": [
+            {"label": "Health Regen", "keywords": ["regen", "health regen"], "min_rarity": "Epic"},
+            {"label": "Recovery Package", "keywords": ["recovery", "package"], "min_rarity": "Epic"},
+        ],
+        "Generator": [
+            {"label": "Secondary sustain", "keywords": ["health", "regen", "recovery"], "min_rarity": "Rare"},
+        ],
+    },
+    "balanced": {
+        "Cannon": [
+            {"label": "Attack Speed", "keywords": ["speed", "attack-speed"], "min_rarity": "Rare"},
+            {"label": "Critical Factor", "keywords": ["factor", "crit-factor"], "min_rarity": "Rare"},
+        ],
+        "Armor": [
+            {"label": "Health / defense", "keywords": ["health", "defense"], "min_rarity": "Rare"},
+        ],
+        "Generator": [
+            {"label": "Economy effect", "keywords": ["coin", "cash", "golden tower"], "min_rarity": "Rare"},
+        ],
+    },
+}
+
+PLAYSTYLE_PRESETS: Dict[str, Dict[str, Dict[str, Any]]] = {
+    "economy_farmer": {
+        "farming": {
+            "note": "Full economy stack for coins/hour.",
+            "card_loadout": {
+                "core": ["Enemy Balance", "Coins", "Critical Coin", "Wave Skip", "Wave Accelerator", "Cash"],
+                "support": ["Attack Speed", "Damage", "Plasma Cannon", "Free Upgrades"],
+                "flex": ["Super Tower", "Health"],
+            },
+        },
+        "tournament": {
+            "note": "Tournament variant — keep damage online, trim pure farming cards.",
+            "card_loadout": {
+                "core": ["Damage", "Attack Speed", "Plasma Cannon", "Health", "Critical Chance", "Berserker"],
+                "support": ["Super Tower", "Ultimate Crit", "Extra Defense"],
+                "flex": ["Free Upgrades", "Second Wind"],
+            },
+        },
+    },
+    "glass_cannon": {
+        "farming": {
+            "note": "Farm fast enough while running a damage-first account.",
+            "card_loadout": {
+                "core": ["Damage", "Attack Speed", "Coins", "Wave Skip", "Critical Chance", "Plasma Cannon"],
+                "support": ["Berserker", "Ultimate Crit", "Enemy Balance", "Super Tower"],
+                "flex": ["Free Upgrades", "Nuke"],
+            },
+        },
+        "tournament": {
+            "note": "Pure burst — drop economy cards and stack damage.",
+            "card_loadout": {
+                "core": ["Damage", "Attack Speed", "Berserker", "Plasma Cannon", "Ultimate Crit", "Critical Chance"],
+                "support": ["Super Tower", "Death Ray", "Area of Effect", "Demon Mode"],
+                "flex": ["Nuke", "Free Upgrades"],
+            },
+        },
+    },
+    "ehp_tank": {
+        "farming": {
+            "note": "Safer farming with sustain online.",
+            "card_loadout": {
+                "core": ["Health", "Extra Defense", "Enemy Balance", "Coins", "Attack Speed", "Recovery Package Chance"],
+                "support": ["Fortress", "Energy Shield", "Damage", "Wave Skip"],
+                "flex": ["Free Upgrades", "Plasma Cannon"],
+            },
+        },
+        "tournament": {
+            "note": "Tournament survivability — packages and burst defense first.",
+            "card_loadout": {
+                "core": ["Health", "Extra Defense", "Fortress", "Energy Shield", "Second Wind", "Damage"],
+                "support": ["Attack Speed", "Recovery Package Chance", "Plasma Cannon", "Ultimate Crit"],
+                "flex": ["Berserker", "Free Upgrades"],
+            },
+        },
+    },
+    "recovery_sustain": {
+        "farming": {
+            "note": "Outlast chip damage while farming.",
+            "card_loadout": {
+                "core": ["Health Regen", "Recovery Package Chance", "Health", "Enemy Balance", "Attack Speed", "Coins"],
+                "support": ["Second Wind", "Extra Defense", "Damage", "Wave Skip"],
+                "flex": ["Free Upgrades", "Plasma Cannon"],
+            },
+        },
+        "tournament": {
+            "note": "Tournament sustain — packages and regen over economy.",
+            "card_loadout": {
+                "core": ["Health Regen", "Recovery Package Chance", "Second Wind", "Health", "Extra Defense", "Damage"],
+                "support": ["Attack Speed", "Fortress", "Plasma Cannon", "Energy Shield"],
+                "flex": ["Ultimate Crit", "Free Upgrades"],
+            },
+        },
+    },
+    "balanced": {
+        "tournament": {
+            "note": "Flexible tournament preset without heavy economy.",
+            "card_loadout": {
+                "core": ["Damage", "Attack Speed", "Health", "Extra Defense", "Plasma Cannon", "Critical Chance"],
+                "support": ["Berserker", "Recovery Package Chance", "Super Tower", "Ultimate Crit"],
+                "flex": ["Free Upgrades", "Second Wind"],
+            },
+        },
+    },
+}
+
 ENHANCEMENT_CAPS: Dict[str, int] = {
     "Damage +": 400,
     "Attack Speed +": 75,
@@ -240,32 +419,54 @@ def _card_level(profile: Mapping[str, Any], name: str) -> int:
     return int(_clean_number(record.get("level"))) if record else 0
 
 
-def _ideal_card_order(archetype: Mapping[str, Any]) -> List[str]:
+def _ideal_card_order(
+    archetype: Mapping[str, Any],
+    *,
+    context_id: str = "pushing",
+    loadout_override: Optional[Mapping[str, Any]] = None,
+) -> List[str]:
     avoid = set(archetype.get("avoid_cards", []))
-    loadout = archetype.get("card_loadout", {}) if isinstance(archetype.get("card_loadout"), Mapping) else {}
+    loadout = loadout_override
+    if loadout is None:
+        playstyle = PLAYSTYLE_PRESETS.get(str(archetype.get("_id", "")), {})
+        context_cfg = playstyle.get(context_id, {}) if isinstance(playstyle, Mapping) else {}
+        loadout = context_cfg.get("card_loadout")
+    if loadout is None:
+        loadout = archetype.get("card_loadout", {})
     ordered: List[str] = []
     for bucket in ("core", "support", "flex"):
-        for card in loadout.get(bucket, []) if isinstance(loadout.get(bucket), list) else []:
+        for card in loadout.get(bucket, []) if isinstance(loadout, Mapping) and isinstance(loadout.get(bucket), list) else []:
             if card not in ordered and card not in avoid:
                 ordered.append(str(card))
+    if context_id == "tournament":
+        ordered = [card for card in ordered if card not in TOURNAMENT_DROP_CARDS]
     for card in archetype.get("priority_cards", []):
-        if card not in ordered and card not in avoid:
+        if card not in ordered and card not in avoid and card not in TOURNAMENT_DROP_CARDS:
             ordered.append(str(card))
+    if context_id == "farming" and str(archetype.get("focus")) != "Economy":
+        prefer = [card for card in ordered if card in {"Coins", "Enemy Balance", "Wave Skip", "Critical Coin", "Cash"}]
+        rest = [card for card in ordered if card not in prefer]
+        ordered = prefer + rest
     return ordered
 
 
-def _current_card_preset(profile: Mapping[str, Any]) -> List[str]:
+def _resolve_card_preset(profile: Mapping[str, Any], preset_keys: Sequence[str]) -> tuple[List[str], str]:
     presets = profile.get("cards", {}).get("presets", {}) if isinstance(profile.get("cards"), Mapping) else {}
     if not isinstance(presets, Mapping):
-        return []
-    for key in ("Farming", "Preset 1", "Pushing", "Preset 2"):
+        return [], "None"
+    for key in preset_keys:
         value = presets.get(key)
         if isinstance(value, list) and value:
-            return [str(item) for item in value]
+            return [str(item) for item in value], str(key)
     for value in presets.values():
         if isinstance(value, list) and value:
-            return [str(item) for item in value]
-    return []
+            return [str(item) for item in value], "Imported preset"
+    return [], "None"
+
+
+def _current_card_preset(profile: Mapping[str, Any], context_id: str = "farming") -> List[str]:
+    cards, _ = _resolve_card_preset(profile, DEFAULT_CARD_PRESET_KEYS.get(context_id, ["Farming", "Preset 1"]))
+    return cards
 
 
 def _inventory_modules(profile: Mapping[str, Any], slot: str) -> List[Mapping[str, Any]]:
@@ -282,16 +483,110 @@ def _inventory_modules(profile: Mapping[str, Any], slot: str) -> List[Mapping[st
     return rows
 
 
-def _equipped_module_name(profile: Mapping[str, Any], slot: str, preset: str = "Farming") -> str:
+def _equipped_module_name(profile: Mapping[str, Any], slot: str, preset_keys: Optional[Sequence[str]] = None) -> str:
+    keys = list(preset_keys or DEFAULT_MODULE_PRESET_KEYS["farming"])
     presets = profile.get("module_presets", {}) if isinstance(profile.get("module_presets"), Mapping) else {}
-    preset_data = presets.get(preset, {}) if isinstance(presets.get(preset, {}), Mapping) else {}
-    slot_data = preset_data.get(slot, {}) if isinstance(preset_data.get(slot, {}), Mapping) else {}
-    name = str(slot_data.get("primary") or "").strip()
-    if name and name != "Any Other":
-        return name
+    for preset in keys:
+        preset_data = presets.get(preset, {}) if isinstance(presets.get(preset, {}), Mapping) else {}
+        slot_data = preset_data.get(slot, {}) if isinstance(preset_data.get(slot, {}), Mapping) else {}
+        name = str(slot_data.get("primary") or "").strip()
+        if name and name != "Any Other":
+            return name
     modules = profile.get("modules", {}) if isinstance(profile.get("modules"), Mapping) else {}
     fallback = modules.get(slot, {}) if isinstance(modules.get(slot, {}), Mapping) else {}
     return str(fallback.get("name") or "").strip()
+
+
+def _module_inventory_record(profile: Mapping[str, Any], slot: str, module_name: str) -> Mapping[str, Any]:
+    if not module_name:
+        return {}
+    inventory = profile.get("module_inventory", {}) if isinstance(profile.get("module_inventory"), Mapping) else {}
+    if not isinstance(inventory, Mapping):
+        return {}
+    record = inventory.get(f"{slot}::{module_name}")
+    return record if isinstance(record, Mapping) else {}
+
+
+def _normalize_rarity(value: Any) -> str:
+    text = str(value or "None").strip()
+    if not text:
+        return "None"
+    lowered = text.casefold()
+    if lowered in RARITY_RANK:
+        return text if text in RARITY_RANK else lowered.title()
+    replacements = {
+        "common": "Common", "rare": "Rare", "rare+": "Rare+", "epic": "Epic", "epic+": "Epic+",
+        "legendary": "Legendary", "legendary+": "Legendary+", "mythic": "Mythic", "mythic+": "Mythic+",
+        "ancestral": "Ancestral",
+    }
+    return replacements.get(lowered, text)
+
+
+def _rarity_rank(value: Any) -> int:
+    return int(RARITY_RANK.get(_normalize_rarity(value), 0))
+
+
+def _substat_label(sub: Mapping[str, Any]) -> str:
+    return str(sub.get("display") or sub.get("name") or sub.get("effect_id") or "Unnamed").strip()
+
+
+def _substat_matches_target(sub: Mapping[str, Any], target: Mapping[str, Any]) -> bool:
+    label = _substat_label(sub).casefold()
+    effect_id = str(sub.get("effect_id") or "").casefold()
+    for keyword in target.get("keywords", []):
+        token = str(keyword).casefold()
+        if token and (token in label or token in effect_id):
+            return True
+    return False
+
+
+def _evaluate_substat_targets(
+    profile: Mapping[str, Any],
+    archetype_id: str,
+    module_name: str,
+    slot: str,
+) -> List[Dict[str, Any]]:
+    targets = SUBSTAT_TARGETS.get(archetype_id, {}).get(slot, [])
+    record = _module_inventory_record(profile, slot, module_name)
+    substats = record.get("substats", []) if isinstance(record.get("substats"), list) else []
+    rows: List[Dict[str, Any]] = []
+    for target in targets:
+        min_rank = _rarity_rank(target.get("min_rarity", "Rare"))
+        best_match: Optional[Mapping[str, Any]] = None
+        for sub in substats:
+            if isinstance(sub, Mapping) and _substat_matches_target(sub, target):
+                if best_match is None or _rarity_rank(sub.get("rarity")) > _rarity_rank(best_match.get("rarity")):
+                    best_match = sub
+        if best_match is None:
+            rows.append({
+                "Slot": slot,
+                "Module": module_name or "—",
+                "Target": target.get("label"),
+                "Current": "Missing",
+                "Goal": f"{target.get('min_rarity')}+",
+                "Status": "Reroll target",
+                "Advice": f"Reroll {slot.lower()} until you hit {target.get('label')} at {target.get('min_rarity')} or better.",
+            })
+            continue
+        current_rank = _rarity_rank(best_match.get("rarity"))
+        current_label = _substat_label(best_match)
+        current_rarity = _normalize_rarity(best_match.get("rarity"))
+        if current_rank >= min_rank:
+            status = "Met"
+            advice = "Keep this sub-effect locked."
+        else:
+            status = "Below target"
+            advice = f"Reroll until {target.get('label')} is {target.get('min_rarity')}+ (currently {current_rarity})."
+        rows.append({
+            "Slot": slot,
+            "Module": module_name or "—",
+            "Target": target.get("label"),
+            "Current": f"{current_label} ({current_rarity})",
+            "Goal": f"{target.get('min_rarity')}+",
+            "Status": status,
+            "Advice": advice,
+        })
+    return rows
 
 
 def _score_module(record: Mapping[str, Any], archetype: Mapping[str, Any], slot: str) -> float:
@@ -315,10 +610,17 @@ def _score_module(record: Mapping[str, Any], archetype: Mapping[str, Any], slot:
     return score
 
 
-def _pick_module(profile: Mapping[str, Any], archetype: Mapping[str, Any], slot: str) -> Dict[str, Any]:
+def _pick_module(
+    profile: Mapping[str, Any],
+    archetype: Mapping[str, Any],
+    slot: str,
+    *,
+    module_preset_keys: Optional[Sequence[str]] = None,
+) -> Dict[str, Any]:
     inventory = _inventory_modules(profile, slot)
     prefs = archetype.get("module_preferences", {}).get(slot, []) if isinstance(archetype.get("module_preferences"), Mapping) else []
-    equipped = _equipped_module_name(profile, slot)
+    preset_keys = list(module_preset_keys or DEFAULT_MODULE_PRESET_KEYS["farming"])
+    equipped = _equipped_module_name(profile, slot, preset_keys)
     if inventory:
         best = max(inventory, key=lambda item: _score_module(item, archetype, slot))
         best_name = str(best.get("name") or "")
@@ -327,7 +629,7 @@ def _pick_module(profile: Mapping[str, Any], archetype: Mapping[str, Any], slot:
         if best_name in prefs:
             reason = f"Preferred {slot.lower()} module for this build."
         if equipped and best_name != equipped:
-            reason = f"Your equipped {equipped} is outscored by {best_name} for this build."
+            reason = f"Your {preset_keys[0]} preset uses {equipped}, but {best_name} fits this build better."
         return {
             "slot": slot,
             "recommended": best_name,
@@ -336,6 +638,7 @@ def _pick_module(profile: Mapping[str, Any], archetype: Mapping[str, Any], slot:
             "level": int(_clean_number(best.get("level"))),
             "status": status,
             "reason": reason,
+            "preset": preset_keys[0],
         }
     target = str(prefs[0]) if prefs else "Set a named module"
     return {
@@ -346,6 +649,88 @@ def _pick_module(profile: Mapping[str, Any], archetype: Mapping[str, Any], slot:
         "level": 0,
         "status": "Import inventory" if not equipped else "Review manually",
         "reason": "No imported inventory row for this slot — target module is a build template.",
+        "preset": preset_keys[0],
+    }
+
+
+def _build_card_blueprint(
+    profile: Mapping[str, Any],
+    archetype: Mapping[str, Any],
+    *,
+    context_id: str,
+) -> Dict[str, Any]:
+    slots = int(_clean_number(profile.get("cards", {}).get("slots"))) or 10
+    preset_keys = DEFAULT_CARD_PRESET_KEYS.get(context_id, ["Farming", "Preset 1"])
+    ideal_cards = _ideal_card_order(archetype, context_id=context_id)[:slots]
+    current_preset, preset_name = _resolve_card_preset(profile, preset_keys)
+    avoid = set(archetype.get("avoid_cards", []))
+
+    card_rows: List[Dict[str, Any]] = []
+    missing_cards: List[str] = []
+    for index, card in enumerate(ideal_cards, start=1):
+        level = _card_level(profile, card)
+        if level <= 0:
+            missing_cards.append(card)
+            status = "Missing — pull when able"
+        elif level < 5:
+            status = "Owned — level up soon"
+        elif level < 7:
+            status = "Owned — finish leveling"
+        else:
+            status = "Ready"
+        card_rows.append({
+            "Slot": index,
+            "Equip": card,
+            "Your level": f"{level}/7" if level else "—",
+            "Status": status,
+            "Domain": CARD_DOMAIN.get(card, "Utility"),
+        })
+
+    swap_out = [card for card in current_preset if card in avoid]
+    overlap = len(set(ideal_cards) & set(current_preset))
+    playstyle = PLAYSTYLE_PRESETS.get(str(archetype.get("_id", "")), {})
+    note = (playstyle.get(context_id, {}) or {}).get("note") if isinstance(playstyle, Mapping) else None
+    if not note:
+        note = PRESET_CONTEXTS.get(context_id, {}).get("summary", "")
+
+    return {
+        "context": context_id,
+        "label": PRESET_CONTEXTS.get(context_id, {}).get("label", context_id.title()),
+        "note": note,
+        "preset_name": preset_name,
+        "slot_count": slots,
+        "recommended": ideal_cards,
+        "rows": card_rows,
+        "missing": missing_cards,
+        "avoid": sorted(avoid),
+        "swap_out": swap_out,
+        "current_preset": current_preset,
+        "preset_overlap": overlap,
+        "summary": (
+            f"Equip {len(ideal_cards)} cards for {PRESET_CONTEXTS.get(context_id, {}).get('label', context_id)}. "
+            f"{len(missing_cards)} priority cards are not in your profile yet."
+        ),
+    }
+
+
+def _build_context_blueprint(
+    profile: Mapping[str, Any],
+    archetype: Mapping[str, Any],
+    *,
+    context_id: str,
+) -> Dict[str, Any]:
+    module_preset_keys = DEFAULT_MODULE_PRESET_KEYS.get(context_id, ["Farming", "Preset 1"])
+    module_rows = [
+        _pick_module(profile, archetype, slot, module_preset_keys=module_preset_keys)
+        for slot in ["Cannon", "Armor", "Generator", "Core"]
+    ]
+    return {
+        "cards": _build_card_blueprint(profile, archetype, context_id=context_id),
+        "modules": {
+            "preset": module_preset_keys[0],
+            "rows": module_rows,
+            "summary": f"Primary modules for your {module_preset_keys[0]} workshop preset.",
+        },
     }
 
 
@@ -387,56 +772,32 @@ def _research_rows(profile: Mapping[str, Any], section: str, names: Sequence[str
     return rows
 
 
-def build_archetype_blueprint(profile: Mapping[str, Any], archetype: Mapping[str, Any]) -> Dict[str, Any]:
-    slots = int(_clean_number(profile.get("cards", {}).get("slots"))) or 10
-    ideal_cards = _ideal_card_order(archetype)[:slots]
-    current_preset = _current_card_preset(profile)
-    avoid = set(archetype.get("avoid_cards", []))
-
-    card_rows: List[Dict[str, Any]] = []
-    missing_cards: List[str] = []
-    for index, card in enumerate(ideal_cards, start=1):
-        level = _card_level(profile, card)
-        if level <= 0:
-            missing_cards.append(card)
-            status = "Missing — pull when able"
-        elif level < 5:
-            status = "Owned — level up soon"
-        elif level < 7:
-            status = "Owned — finish leveling"
-        else:
-            status = "Ready"
-        card_rows.append({
-            "Slot": index,
-            "Equip": card,
-            "Your level": f"{level}/7" if level else "—",
-            "Status": status,
-            "Domain": CARD_DOMAIN.get(card, "Utility"),
-        })
-
-    swap_out = [card for card in current_preset if card in avoid]
-    overlap = len(set(ideal_cards) & set(current_preset))
-
-    module_rows = [_pick_module(profile, archetype, slot) for slot in ["Cannon", "Armor", "Generator", "Core"]]
+def build_archetype_blueprint(
+    profile: Mapping[str, Any],
+    archetype: Mapping[str, Any],
+    *,
+    archetype_id: str = "",
+) -> Dict[str, Any]:
+    archetype = {**archetype, "_id": archetype_id or archetype.get("_id", "")}
+    presets = {
+        context_id: _build_context_blueprint(profile, archetype, context_id=context_id)
+        for context_id in PRESET_CONTEXT_IDS
+    }
+    substat_rows: List[Dict[str, Any]] = []
+    pushing_modules = {row["slot"]: row["recommended"] for row in presets["pushing"]["modules"]["rows"]}
+    for slot in ["Cannon", "Armor", "Generator", "Core"]:
+        substat_rows.extend(
+            _evaluate_substat_targets(profile, str(archetype.get("_id")), pushing_modules.get(slot, ""), slot)
+        )
 
     return {
-        "cards": {
-            "slot_count": slots,
-            "recommended": ideal_cards,
-            "rows": card_rows,
-            "missing": missing_cards,
-            "avoid": sorted(avoid),
-            "swap_out": swap_out,
-            "current_preset": current_preset,
-            "preset_overlap": overlap,
-            "summary": (
-                f"Equip {len(ideal_cards)} cards in this order. "
-                f"{len(missing_cards)} priority cards are not in your profile yet."
-            ),
-        },
-        "modules": {
-            "rows": module_rows,
-            "summary": "Use these primary modules in your Farming preset unless a tournament preset needs a swap.",
+        "presets": presets,
+        "cards": presets["pushing"]["cards"],
+        "modules": presets["pushing"]["modules"],
+        "substats": {
+            "rows": substat_rows,
+            "summary": "Reroll targets for the recommended pushing modules. Lock effects that are met; reroll weak or missing ones.",
+            "open_targets": sum(1 for row in substat_rows if row.get("Status") != "Met"),
         },
         "research": {
             "labs": _research_rows(profile, "labs", archetype.get("priority_labs", [])),
@@ -551,7 +912,7 @@ def build_archetype_report(
         focus=str(archetype.get("focus", "Balanced")),
     )
     ranked = _rerank_rows(combined.get("rows", []), archetype)
-    blueprint = build_archetype_blueprint(profile, archetype)
+    blueprint = build_archetype_blueprint(profile, archetype, archetype_id=archetype_id)
     return {
         "id": archetype_id,
         "label": archetype["label"],
