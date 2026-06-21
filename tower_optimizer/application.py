@@ -5,7 +5,7 @@ import re
 import warnings
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Mapping, Optional
 
 import streamlit as st
 import pandas as pd
