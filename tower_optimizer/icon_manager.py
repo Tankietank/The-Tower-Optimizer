@@ -11,12 +11,16 @@ import os
 import re
 import zipfile
 from datetime import datetime, timezone
+from functools import lru_cache
 from pathlib import Path, PurePosixPath
 from typing import Any, Dict, Iterable, List, Mapping, Optional
+from urllib.parse import unquote
 
 from .runtime_paths import custom_icons_dir as _custom_icons_dir
 
 ASSET_ROOT = Path(__file__).resolve().parents[1] / "assets"
+GAME_DATA_ROOT = Path(__file__).resolve().parent / "game_data"
+TOWERSMITH_ICON_PATHS_FILE = GAME_DATA_ROOT / "towersmith_icon_paths.json"
 SUPPORTED_EXTENSIONS = (".png", ".webp", ".jpg", ".jpeg", ".svg")
 MODULE_SLOT_FOLDERS = {
     "cannon": "cannon",
@@ -35,6 +39,18 @@ RELIC_RARITY_FOLDERS = {
 UPLOAD_EXTENSIONS = (".png", ".webp", ".jpg", ".jpeg")
 MAX_ICON_BYTES = 8 * 1024 * 1024
 MAX_PACK_BYTES = 64 * 1024 * 1024
+
+UW_NAME_TO_WORKSHOP_ID = {
+    "Chain Lightning": "chainLightning",
+    "Smart Missiles": "smartMissiles",
+    "Death Wave": "deathWave",
+    "Chrono Field": "chronoField",
+    "Inner Land Mines": "innerLandMines",
+    "Golden Tower": "goldenTower",
+    "Poison Swamp": "poisonSwamp",
+    "Black Hole": "blackHole",
+    "Spotlight": "spotlight",
+}
 
 FIXED_ICON_SPECS: tuple[dict[str, str], ...] = (
     {"key": "brand/tower_optimizer", "label": "Tower Optimizer logo", "category": "Brand", "default": "brand/tower_optimizer.svg"},
@@ -82,12 +98,123 @@ def _first_existing(paths: Iterable[Path]) -> Optional[Path]:
     return None
 
 
+def _decode_relative_path(relative: str) -> Path:
+    parts = [unquote(part) for part in str(relative).replace("\\", "/").strip("/").split("/") if part]
+    return Path(*parts)
+
+
+@lru_cache(maxsize=1)
+def _towersmith_icon_paths() -> Dict[str, Any]:
+    if not TOWERSMITH_ICON_PATHS_FILE.is_file():
+        return {}
+    try:
+        payload = json.loads(TOWERSMITH_ICON_PATHS_FILE.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    return payload if isinstance(payload, Mapping) else {}
+
+
+@lru_cache(maxsize=1)
+def _module_name_to_workshop_id() -> Dict[str, str]:
+    mapping_path = GAME_DATA_ROOT / "save_mappings.json"
+    if not mapping_path.is_file():
+        return {}
+    try:
+        payload = json.loads(mapping_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    rows = payload.get("module_workshop_id_to_name") if isinstance(payload, Mapping) else {}
+    if not isinstance(rows, Mapping):
+        return {}
+    return {str(name).casefold(): str(workshop_id) for workshop_id, name in rows.items()}
+
+
+@lru_cache(maxsize=1)
+def _relic_name_to_catalog_id() -> Dict[str, str]:
+    mapping_path = GAME_DATA_ROOT / "relics.json"
+    if not mapping_path.is_file():
+        return {}
+    try:
+        payload = json.loads(mapping_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    rows = payload.get("by_index") if isinstance(payload, Mapping) else []
+    if not isinstance(rows, list):
+        return {}
+    result: Dict[str, str] = {}
+    for row in rows:
+        if not isinstance(row, Mapping):
+            continue
+        name = str(row.get("name") or "").strip()
+        relic_id = str(row.get("id") or "").strip()
+        if name and relic_id:
+            result[name.casefold()] = relic_id
+    return result
+
+
+def _module_slot_key(module_slot: str) -> str:
+    return MODULE_SLOT_FOLDERS.get(_slug(module_slot), _slug(module_slot))
+
+
+def _towersmith_mapped_relatives(
+    category: str,
+    name: str,
+    *,
+    relic_rarity: str = "",
+    module_slot: str = "",
+) -> Iterable[str]:
+    payload = _towersmith_icon_paths()
+    title = str(name).strip()
+    if not title:
+        return
+    category_key = _slug(category).replace("-", "_")
+    if category_key in {"modules", "module"}:
+        slot = _module_slot_key(module_slot)
+        workshop_id = _module_name_to_workshop_id().get(title.casefold(), "")
+        if not workshop_id:
+            return
+        slot_map = payload.get("modules") if isinstance(payload.get("modules"), Mapping) else {}
+        if slot and isinstance(slot_map.get(slot), Mapping):
+            relative = slot_map[slot].get(workshop_id)
+            if relative:
+                yield f"modules/{relative}"
+        for slot_name, modules in slot_map.items():
+            if isinstance(modules, Mapping) and workshop_id in modules:
+                yield f"modules/{modules[workshop_id]}"
+                break
+    elif category_key in {"relics", "relic"}:
+        relic_id = _relic_name_to_catalog_id().get(title.casefold(), "")
+        relic_map = payload.get("relics") if isinstance(payload.get("relics"), Mapping) else {}
+        if relic_id and relic_id in relic_map:
+            yield f"relics/{relic_map[relic_id]}"
+    elif category_key in {"ultimate_weapons", "ultimate_weapon", "uw"}:
+        weapon_id = UW_NAME_TO_WORKSHOP_ID.get(title)
+        weapon_map = payload.get("ultimate_weapons") if isinstance(payload.get("ultimate_weapons"), Mapping) else {}
+        if weapon_id and weapon_id in weapon_map:
+            yield str(weapon_map[weapon_id])
+    elif category_key == "cards":
+        underscored = re.sub(r"\s+", "_", title)
+        yield f"cards/{underscored}.webp"
+        yield f"cards/{title}.webp"
+
+
+def _paths_under_game_roots(relative_paths: Iterable[str]) -> Iterable[Path]:
+    roots = configured_game_asset_roots()
+    for relative in relative_paths:
+        decoded = _decode_relative_path(relative)
+        for root in roots:
+            yield root / decoded
+
+
 def _game_asset_candidates(category: str, name: str, *, relic_rarity: str = "", module_slot: str = "") -> Iterable[Path]:
     slug = _slug(name)
     title = str(name).strip()
+    yield from _paths_under_game_roots(
+        _towersmith_mapped_relatives(category, name, relic_rarity=relic_rarity, module_slot=module_slot)
+    )
     roots = configured_game_asset_roots()
     if category in {"modules", "module"} and module_slot:
-        folder = MODULE_SLOT_FOLDERS.get(_slug(module_slot), _slug(module_slot))
+        folder = _module_slot_key(module_slot)
         for root in roots:
             base = root / "modules" / folder
             yield from _candidate_paths(base, title)
@@ -101,6 +228,17 @@ def _game_asset_candidates(category: str, name: str, *, relic_rarity: str = "", 
                 yield from _candidate_paths(root / "relics" / rarity_folder, title)
             yield from _candidate_paths(root / "relics" / "unmapped", slug)
             yield from _candidate_paths(root / "relics", slug)
+    if category in {"ultimate_weapons", "ultimate_weapon", "uw"}:
+        weapon_id = UW_NAME_TO_WORKSHOP_ID.get(title, "")
+        for root in roots:
+            if weapon_id:
+                yield from _candidate_paths(root / "ultimate_weapons", f"weapon_{weapon_id}")
+            yield from _candidate_paths(root / "ultimate_weapons", slug)
+            yield from _candidate_paths(root / "ultimate_weapons", title.replace(" ", "_"))
+    if category in {"cards", "card"}:
+        for root in roots:
+            yield from _candidate_paths(root / "cards", title.replace(" ", "_"))
+            yield from _candidate_paths(root / "cards", slug)
     for root in roots:
         yield from _candidate_paths(root / category, slug)
         yield from _candidate_paths(root / category, title)
@@ -198,14 +336,51 @@ def resolve_icon_path(
     return None
 
 
-def icon_source_info(default_relative: str, custom_key: Optional[str] = None, fallback_relative: Optional[str] = None) -> Dict[str, Any]:
+def _path_under_root(path: Path, root: Path) -> bool:
+    try:
+        path.resolve().relative_to(root.resolve())
+        return True
+    except ValueError:
+        return False
+
+
+def _icon_source_label(resolved: Optional[Path], custom: Optional[Path]) -> str:
+    if not resolved:
+        return "missing"
+    if custom and resolved == custom:
+        return "custom"
+    if _path_under_root(resolved, ASSET_ROOT):
+        return "default"
+    for root in configured_game_asset_roots():
+        if _path_under_root(resolved, root):
+            return "external"
+    return "default"
+
+
+def icon_source_info(
+    default_relative: str,
+    custom_key: Optional[str] = None,
+    fallback_relative: Optional[str] = None,
+    *,
+    game_category: Optional[str] = None,
+    game_name: Optional[str] = None,
+    relic_rarity: str = "",
+    module_slot: str = "",
+) -> Dict[str, Any]:
     key = normalize_icon_key(custom_key or default_relative)
     custom = custom_icon_path(key)
-    resolved = resolve_icon_path(default_relative, key, fallback_relative)
-    source = "custom" if custom and resolved == custom else ("default" if resolved else "missing")
+    resolved = resolve_icon_path(
+        default_relative,
+        key,
+        fallback_relative,
+        game_category=game_category,
+        game_name=game_name,
+        relic_rarity=relic_rarity,
+        module_slot=module_slot,
+    )
     return {
         "key": key,
-        "source": source,
+        "source": _icon_source_label(resolved, custom),
         "path": str(resolved) if resolved else "",
         "custom_path": str(custom) if custom else "",
         "exists": bool(resolved),
@@ -340,11 +515,16 @@ def custom_icon_count() -> int:
     return sum(1 for path in root.rglob("*") if path.is_file() and path.suffix.casefold() in UPLOAD_EXTENSIONS)
 
 
+def towersmith_icon_paths_loaded() -> bool:
+    return bool(_towersmith_icon_paths())
+
+
 __all__ = [
-    "ASSET_ROOT", "CUSTOM_ICON_ROOT", "FIXED_ICON_SPECS", "SUPPORTED_EXTENSIONS", "UPLOAD_EXTENSIONS",
-    "configured_game_asset_roots", "custom_icon_count", "custom_icon_path", "custom_icon_root",
-    "export_custom_icon_pack", "fixed_icon_status", "icon_source_info", "import_custom_icon_pack",
-    "item_icon_key", "normalize_icon_key", "remove_custom_icon", "resolve_icon_path", "save_custom_icon",
+    "ASSET_ROOT", "CUSTOM_ICON_ROOT", "FIXED_ICON_SPECS", "GAME_DATA_ROOT", "SUPPORTED_EXTENSIONS",
+    "UPLOAD_EXTENSIONS", "UW_NAME_TO_WORKSHOP_ID", "configured_game_asset_roots", "custom_icon_count",
+    "custom_icon_path", "custom_icon_root", "export_custom_icon_pack", "fixed_icon_status", "icon_source_info",
+    "import_custom_icon_pack", "item_icon_key", "normalize_icon_key", "remove_custom_icon", "resolve_icon_path",
+    "save_custom_icon", "towersmith_icon_paths_loaded",
 ]
 
 # Backward-compatible constant for callers that only need the conventional path.

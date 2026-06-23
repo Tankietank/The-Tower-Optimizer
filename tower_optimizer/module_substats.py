@@ -27,6 +27,16 @@ def format_substats_for_editor(substats: Any) -> str:
     return "\n".join(line for line in (format_substat_line(item) for item in substats) if line)
 
 
+def format_substats_summary(substats: Any, *, separator: str = "; ", limit: int = 8) -> str:
+    if not isinstance(substats, list) or not substats:
+        return ""
+    lines = [line for line in (format_substat_line(item) for item in substats[:limit]) if line]
+    summary = separator.join(lines)
+    if len(substats) > limit:
+        summary = f"{summary} (+{len(substats) - limit} more)" if summary else f"+{len(substats) - limit} more"
+    return summary
+
+
 def parse_substats_from_editor(text: str, previous: Any = None) -> List[Dict[str, Any]]:
     previous_list = previous if isinstance(previous, list) else []
     lines = [line.strip() for line in str(text or "").splitlines() if line.strip()]

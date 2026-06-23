@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Mapping, Optional, Sequence
 
-from .engines.core import build_analysis
+from .engines.core import build_analysis, resolve_module_record
 from .engines.whole_account import (
     BOT_DOMAIN,
     BOT_TARGETS,
@@ -345,7 +345,6 @@ def _assist_module_blueprint(
     assist_notes: str,
 ) -> Dict[str, Any]:
     presets = profile.get("module_presets", {}) if isinstance(profile.get("module_presets"), Mapping) else {}
-    inventory = profile.get("module_inventory", {}) if isinstance(profile.get("module_inventory"), Mapping) else {}
     rows: List[Dict[str, Any]] = []
     for preset_key in module_preset_keys:
         preset = presets.get(preset_key, {}) if isinstance(presets.get(preset_key), Mapping) else {}
@@ -365,15 +364,15 @@ def _assist_module_blueprint(
                     "Why": assist_notes,
                 })
                 continue
-            record = inventory.get(f"{slot}::{assist}", {}) if isinstance(inventory, Mapping) else {}
+            record = resolve_module_record(dict(profile), slot, assist)
             rows.append({
                 "Preset": preset_key,
                 "Slot": slot,
                 "Primary": primary or "—",
                 "Assist": assist,
-                "Rarity": record.get("rarity", "Unknown") if isinstance(record, Mapping) else "Unknown",
-                "Level": record.get("level", "—") if isinstance(record, Mapping) else "—",
-                "Status": "Review substats" if isinstance(record, Mapping) else "Import inventory",
+                "Rarity": record.get("rarity", "Unknown") if record else "Unknown",
+                "Level": record.get("level", "—") if record else "—",
+                "Status": "Review substats" if record else "Import inventory",
                 "Why": assist_notes,
             })
         if rows:

@@ -117,3 +117,27 @@ def test_module_pick_marks_unowned_template_target():
     armor = next(row for row in report["blueprint"]["modules"]["rows"] if row["slot"] == "Armor")
     assert armor["status"] == "Not owned"
     assert armor.get("owned") is False
+
+
+def test_substat_targets_read_profile_modules_substats():
+    profile_path = ROOT / "validation_fixtures" / "dabes_validation" / "dabes_profile.json"
+    profile = json.loads(profile_path.read_text(encoding="utf-8"))
+    report = build_archetype_report(profile, "glass_cannon", steps=3, top_n=5)
+    rows = report["blueprint"]["substats"]["rows"]
+    chance = next(row for row in rows if row.get("Slot") == "Cannon" and row.get("Target") == "Critical Chance")
+    assert chance["Status"] == "Met"
+    assert "Chance" in str(chance["Current"])
+    factor = next(row for row in rows if row.get("Slot") == "Cannon" and row.get("Target") == "Critical Factor")
+    assert factor["Status"] == "Met"
+    assert "Factor" in str(factor["Current"])
+
+
+def test_module_rows_include_substat_summary_from_equipped_modules():
+    profile_path = ROOT / "validation_fixtures" / "dabes_validation" / "dabes_profile.json"
+    profile = json.loads(profile_path.read_text(encoding="utf-8"))
+    report = build_archetype_report(profile, "glass_cannon", steps=3, top_n=5)
+    cannon = next(row for row in report["blueprint"]["modules"]["rows"] if row["slot"] == "Cannon")
+    assert cannon.get("substats_summary")
+    assert cannon["substats_summary"] != "—"
+    assert "Chance" in cannon["substats_summary"]
+    assert "Crit Multi" in cannon["substats_summary"]

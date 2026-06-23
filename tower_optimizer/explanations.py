@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import re
-from typing import Any, Dict, Iterable, List, Mapping, MutableMapping, Optional, Sequence
+from typing import Any, Callable, Dict, Iterable, List, Mapping, MutableMapping, Optional, Sequence, Tuple
+
+UpgradeGuidanceFn = Callable[[Mapping[str, Any], Mapping[str, Any]], Tuple[List[str], List[str]]]
 
 UW_ABBREVIATIONS = {
     "GT": "Golden Tower",
@@ -69,6 +71,105 @@ def _affordability_phrase(affordability: str) -> str:
     return "Affordability was not modeled for this action."
 
 
+def _int_level(profile: Mapping[str, Any], section: str, name: str) -> int:
+    bucket = profile.get(section, {})
+    if not isinstance(bucket, Mapping):
+        return 0
+    try:
+        return int(bucket.get(name, 0) or 0)
+    except (TypeError, ValueError):
+        return 0
+
+
+def _defense_absolute_totals(profile: Mapping[str, Any]) -> Tuple[int, int, int]:
+    return (
+        _int_level(profile, "workshop", "Defense Absolute"),
+        _int_level(profile, "labs", "Defense Absolute"),
+        _int_level(profile, "enhancements", "Defense Absolute +"),
+    )
+
+
+def _defense_absolute_is_early(profile: Mapping[str, Any]) -> bool:
+    ws, lab, enh = _defense_absolute_totals(profile)
+    return ws < 50 and lab < 10 and enh < 15
+
+
+def _guidance_defense_absolute(profile: Mapping[str, Any], row: Mapping[str, Any]) -> Tuple[List[str], List[str]]:
+    ws, lab, enh = _defense_absolute_totals(profile)
+    why: List[str] = []
+    tradeoffs: List[str] = []
+    if _defense_absolute_is_early(profile):
+        why.append(
+            "At very low Defense Absolute totals, flat damage reduction still trims meaningful chip "
+            "damage before percentage mitigation and Health pools dominate survivability."
+        )
+    else:
+        tradeoffs.extend([
+            "Defense Absolute is flat reduction — as enemy attack scales with tiers, each level buys "
+            "less effective eHP than Defense %, Health, or Wall Health in the same coin/lab budget.",
+            "The native eHP model weights Defense Absolute lightly because its impact shrinks relative "
+            "to percentage mitigation once workshop and lab totals leave the early game.",
+        ])
+        if ws >= 100 or lab >= 20 or enh >= 50:
+            tradeoffs.append(
+                "With Defense Absolute already at mid levels, most accounts get stronger survivability "
+                "returns from Defense % labs, Health enhancements, or Recovery Package paths."
+            )
+    return why, tradeoffs
+
+
+def _guidance_defense_percent(profile: Mapping[str, Any], row: Mapping[str, Any]) -> Tuple[List[str], List[str]]:
+    del profile, row
+    return (
+        [
+            "Defense % multiplies with Health in the eHP formula — percentage mitigation stays "
+            "efficient deep into late game, unlike flat Defense Absolute."
+        ],
+        [],
+    )
+
+
+def _guidance_health(profile: Mapping[str, Any], row: Mapping[str, Any]) -> Tuple[List[str], List[str]]:
+    del row
+    ws_health = _int_level(profile, "workshop", "Health")
+    lab_health = _int_level(profile, "labs", "Health")
+    if ws_health >= 4000 and lab_health >= 80:
+        return (
+            [],
+            [
+                "Health is already high — marginal eHP per coin may trail Recovery Package, "
+                "Defense %, or Wall Health until those paths catch up."
+            ],
+        )
+    return (
+        [
+            "Raw Health scales the entire eHP pool and pairs with Defense % mitigation — "
+            "it remains a core survivability lever at most progression stages."
+        ],
+        [],
+    )
+
+
+UPGRADE_GUIDANCE: Dict[str, UpgradeGuidanceFn] = {
+    "Defense Absolute": _guidance_defense_absolute,
+    "Defense Absolute +": _guidance_defense_absolute,
+    "Defense %": _guidance_defense_percent,
+    "Health": _guidance_health,
+    "Health +": _guidance_health,
+}
+
+
+def _upgrade_specific_guidance(
+    upgrade: str,
+    profile: Mapping[str, Any],
+    row: Mapping[str, Any],
+) -> Tuple[List[str], List[str]]:
+    handler = UPGRADE_GUIDANCE.get(upgrade.strip())
+    if handler is None:
+        return [], []
+    return handler(profile, row)
+
+
 def recommendation_explanation(
     row: Mapping[str, Any],
     profile: Mapping[str, Any],
@@ -111,6 +212,9 @@ def recommendation_explanation(
     why_now.append(_affordability_phrase(affordability))
     why_now.append(f"Expected impact: {_format_gain(gain)}.")
 
+    guidance_why, guidance_tradeoffs = _upgrade_specific_guidance(upgrade, profile, row)
+    why_now.extend(guidance_why)
+
     # De-dupe while preserving order.
     seen: set[str] = set()
     deduped_why: List[str] = []
@@ -144,6 +248,18 @@ def recommendation_explanation(
         tradeoffs.append("The current level could not be read from your profile, which lowers practical confidence.")
     if not profile.get("runs"):
         tradeoffs.append("Import battle history or save runs for stronger death-cause calibration.")
+    tradeoffs.extend(guidance_tradeoffs)
+
+    # De-dupe trade-offs while preserving order.
+    seen_tradeoffs: set[str] = set()
+    deduped_tradeoffs: List[str] = []
+    for item in tradeoffs:
+        key = item.casefold()
+        if key in seen_tradeoffs:
+            continue
+        seen_tradeoffs.add(key)
+        deduped_tradeoffs.append(item)
+    tradeoffs = deduped_tradeoffs
 
     headline = (
         f"Do **{upgrade}** next — it targets **{domain}** via **{resource}** "
@@ -180,6 +296,7 @@ def recommendation_explanation(
         "Inputs": inputs,
         "Reasons": deduped_why,
         "Caveats": tradeoffs,
+        "Upgrade guidance": guidance_why + guidance_tradeoffs,
         "Source explanation": row.get("Why", ""),
     }
 
