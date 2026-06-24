@@ -14,6 +14,12 @@ import traceback
 import webbrowser
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any, Optional
+from urllib.error import URLError
+from urllib.request import urlopen
+
+# Bundled Streamlit cold starts on Windows can exceed 3 minutes on slower machines.
+STARTUP_WAIT_SECONDS = 600.0
 
 
 def _bundle_root() -> Path:
@@ -116,7 +122,13 @@ def _show_error(title: str, message: str) -> None:
         pass
 
 
-def _show_splash(message: str):
+def _format_elapsed(seconds: float) -> str:
+    total = max(0, int(seconds))
+    minutes, secs = divmod(total, 60)
+    return f"{minutes}:{secs:02d}"
+
+
+def _create_splash() -> Optional[dict[str, Any]]:
     try:
         import tkinter as tk
 
@@ -126,17 +138,57 @@ def _show_splash(message: str):
         root.attributes("-topmost", True)
         frame = tk.Frame(root, padx=24, pady=20)
         frame.pack()
-        tk.Label(frame, text=message, font=("Segoe UI", 11)).pack()
+        title = tk.Label(frame, text="Starting Tower Optimizer…", font=("Segoe UI", 12, "bold"))
+        title.pack(anchor="w")
+        detail = tk.Label(
+            frame,
+            text=(
+                "First launch can take several minutes on some PCs.\n"
+                "Please keep this window open — your browser will open automatically."
+            ),
+            font=("Segoe UI", 10),
+            justify="left",
+        )
+        detail.pack(anchor="w", pady=(8, 0))
+        elapsed = tk.Label(frame, text="Elapsed: 0:00", font=("Segoe UI", 10))
+        elapsed.pack(anchor="w", pady=(10, 0))
+        hint = tk.Label(
+            frame,
+            text="Later launches are usually much faster.",
+            font=("Segoe UI", 9),
+            fg="#555555",
+        )
+        hint.pack(anchor="w", pady=(6, 0))
         root.update_idletasks()
-        width = max(root.winfo_reqwidth(), 320)
+        width = max(root.winfo_reqwidth(), 420)
         height = root.winfo_reqheight()
         screen_w = root.winfo_screenwidth()
         screen_h = root.winfo_screenheight()
         root.geometry(f"{width}x{height}+{(screen_w - width) // 2}+{(screen_h - height) // 2}")
         root.update()
-        return root
+        return {"root": root, "elapsed": elapsed, "started": time.monotonic()}
     except Exception:
         return None
+
+
+def _splash_tick(splash: Optional[dict[str, Any]]) -> None:
+    if not splash:
+        return
+    try:
+        elapsed_label = splash["elapsed"]
+        elapsed_label.config(text=f"Elapsed: {_format_elapsed(time.monotonic() - splash['started'])}")
+        splash["root"].update()
+    except Exception:
+        pass
+
+
+def _destroy_splash(splash: Optional[dict[str, Any]]) -> None:
+    if not splash:
+        return
+    try:
+        splash["root"].destroy()
+    except Exception:
+        pass
 
 
 def _pick_port() -> int:
@@ -149,25 +201,22 @@ def _port_from_url(url: str) -> int:
     return int(url.rsplit(":", 1)[-1])
 
 
-def _server_ready(port: int, timeout_seconds: float = 0.4) -> bool:
+def _streamlit_ready(port: int, timeout_seconds: float = 0.75) -> bool:
     try:
-        with socket.create_connection(("127.0.0.1", port), timeout=timeout_seconds):
-            return True
-    except OSError:
+        with urlopen(f"http://127.0.0.1:{port}/_stcore/health", timeout=timeout_seconds) as response:
+            return response.read().decode("utf-8", errors="replace").strip().lower() == "ok"
+    except (URLError, OSError, ValueError, TimeoutError):
         return False
 
 
-def _open_browser_when_ready(url: str, splash, timeout_seconds: float = 180.0) -> None:
+def _open_browser_when_ready(url: str, splash: Optional[dict[str, Any]], timeout_seconds: float = STARTUP_WAIT_SECONDS) -> None:
     port = _port_from_url(url)
     deadline = time.monotonic() + timeout_seconds
     opened = False
     while time.monotonic() < deadline:
-        if _server_ready(port):
-            if splash is not None:
-                try:
-                    splash.destroy()
-                except Exception:
-                    pass
+        _splash_tick(splash)
+        if _streamlit_ready(port):
+            _destroy_splash(splash)
             if not opened:
                 try:
                     opened = bool(webbrowser.open(url))
@@ -176,13 +225,13 @@ def _open_browser_when_ready(url: str, splash, timeout_seconds: float = 180.0) -
                 if not opened:
                     print(f"Open this URL in your browser: {url}")
             return
-        time.sleep(0.35)
-    if splash is not None:
-        try:
-            splash.destroy()
-        except Exception:
-            pass
-    print(f"Timed out waiting for the app to start. Try opening: {url}", file=sys.stderr)
+        time.sleep(0.5)
+    _destroy_splash(splash)
+    print(
+        f"Timed out after {int(timeout_seconds)}s waiting for the app to start. "
+        f"If TowerOptimizer.exe is still running, try opening: {url}",
+        file=sys.stderr,
+    )
 
 
 def main() -> int:
@@ -207,16 +256,13 @@ def main() -> int:
             _show_error("Tower Optimizer", msg)
             return 1
 
-        splash = _show_splash(
-            "Starting Tower Optimizer...\n"
-            "First launch often takes 1–2 minutes.\n"
-            "Later launches are usually faster."
-        )
+        splash = _create_splash()
 
         port = _pick_port()
         url = f"http://127.0.0.1:{port}"
         print(f"Using data folder: {data_dir}")
         print(f"App URL: {url}")
+        print(f"Startup wait budget: {int(STARTUP_WAIT_SECONDS)}s")
         threading.Thread(target=_open_browser_when_ready, args=(url, splash), daemon=True).start()
 
         sys.argv = [
@@ -234,11 +280,7 @@ def main() -> int:
 
         return int(stcli.main() or 0)
     except Exception as exc:
-        if splash is not None:
-            try:
-                splash.destroy()
-            except Exception:
-                pass
+        _destroy_splash(splash)
         detail = "".join(traceback.format_exception(type(exc), exc, exc.__traceback__))
         print(detail, file=sys.stderr)
         _show_error(
