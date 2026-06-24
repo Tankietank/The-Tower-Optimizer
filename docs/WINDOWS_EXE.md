@@ -2,12 +2,16 @@
 
 Tower Optimizer can be packaged as a folder-style Windows build so players do not need Python or PowerShell.
 
+**End-user instructions:** share **[Getting started](GETTING_STARTED.md)** (or the `START_HERE.txt` / `README.txt` inside the zip). This document is mainly for maintainers who build the zip.
+
 ## What users get
 
-After building, distribute the entire `dist/TowerOptimizer/` folder (zip it for download). Users can start the app in either of these ways:
+After building, **zip the entire `dist/TowerOptimizer/` folder** and distribute that zip. Tell users:
 
-- Double-click **`TowerOptimizer.exe`**
-- Double-click **`run_tower_optimizer.bat`** (same result; some users prefer a `.bat` shortcut)
+1. **Extract All** — do not run from inside the zip.
+2. Double-click **`TowerOptimizer.exe`** or **`run_tower_optimizer.bat`**.
+3. Wait up to **30 seconds** for the “Starting…” window.
+4. Use the browser tab that opens — that **is** the app.
 
 What happens on launch:
 
@@ -17,6 +21,8 @@ What happens on launch:
 4. Profiles, backups, and custom icons are saved to a writable folder (see below).
 
 No console window is shown. Errors are written to **`launcher.log`** in the data folder and, for fatal startup failures, a Windows message box appears.
+
+**Do not** instruct users to copy only `TowerOptimizer.exe` — the `_internal` folder and bundled files must stay together.
 
 ## Where your data lives
 
