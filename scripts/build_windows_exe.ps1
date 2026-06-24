@@ -20,7 +20,7 @@ $addData = @(
     "$(Join-Path $PWD 'app.py');.",
     "$(Join-Path $PWD '.streamlit\config.toml');.streamlit",
     "$(Join-Path $PWD 'assets');assets",
-    "$(Join-Path $PWD 'tower_optimizer\game_data');tower_optimizer\game_data",
+    "$(Join-Path $PWD 'tower_optimizer');tower_optimizer",
     "$(Join-Path $PWD 'data\README.md');data"
 )
 
@@ -30,9 +30,10 @@ $pyArgs = @(
     "--clean",
     "--name", "TowerOptimizer",
     "--onedir",
-    "--console",
+    "--noconsole",
     "--distpath", (Join-Path $PWD "dist"),
     "--workpath", (Join-Path $PWD "build"),
+    "--paths", $PWD,
     "--collect-all", "streamlit",
     "--collect-all", "altair",
     "--collect-all", "pandas",
@@ -40,7 +41,8 @@ $pyArgs = @(
     "--hidden-import", "streamlit.runtime.scriptrunner.magic_funcs",
     "--hidden-import", "PIL",
     "--hidden-import", "openpyxl",
-    "--hidden-import", "nrbf"
+    "--hidden-import", "nrbf",
+    "--hidden-import", "tkinter"
 )
 foreach ($pair in $addData) {
     $pyArgs += @("--add-data", $pair)
@@ -48,18 +50,48 @@ foreach ($pair in $addData) {
 $pyArgs += (Join-Path $PWD "scripts\windows_launcher.py")
 
 Write-Host "Running PyInstaller..."
-& $venvPython @pyArgs
-if ($LASTEXITCODE -ne 0) { throw "PyInstaller failed with exit code $LASTEXITCODE" }
+$prevEap = $ErrorActionPreference
+$ErrorActionPreference = "Continue"
+& $venvPython @pyArgs 2>&1 | ForEach-Object { Write-Host $_ }
+$pyExit = $LASTEXITCODE
+$ErrorActionPreference = $prevEap
+if ($pyExit -ne 0) { throw "PyInstaller failed with exit code $pyExit" }
+
+$bat = @"
+@echo off
+rem Launch Tower Optimizer (same folder as this file).
+cd /d "%~dp0"
+start "" "%~dp0TowerOptimizer.exe"
+"@
+Set-Content -Path (Join-Path $distRoot "run_tower_optimizer.bat") -Value $bat -Encoding ASCII
 
 $readme = @"
 Tower Optimizer (portable Windows build)
 
-1. Double-click TowerOptimizer.exe
-2. Your browser opens automatically at http://127.0.0.1:<port>
-3. Profiles and custom icons are stored under:
-   %LOCALAPPDATA%\TowerOptimizer
+Quick start
+-----------
+1. Double-click TowerOptimizer.exe (or run_tower_optimizer.bat)
+2. Wait for the "Starting..." window — first launch can take 10–30 seconds
+3. Your browser opens automatically at http://127.0.0.1:<port>
 
-Set TOWER_OPTIMIZER_DATA_DIR before launch to use a different folder.
+Your data (profiles, backups, custom icons)
+-------------------------------------------
+Default location:
+  %LOCALAPPDATA%\TowerOptimizer
+
+Portable mode (keep data beside this folder):
+  Create an empty file named portable.txt next to TowerOptimizer.exe
+  OR set environment variable TOWER_OPTIMIZER_PORTABLE=1 before launch
+  Data will be stored in the data\ folder here.
+
+Logs and troubleshooting
+------------------------
+If the app fails to start, open:
+  %LOCALAPPDATA%\TowerOptimizer\launcher.log
+(or data\launcher.log in portable mode)
+
+Share launcher.log when asking for help.
+
 See docs/WINDOWS_EXE.md in the source repository for maintainer notes.
 "@
 Set-Content -Path (Join-Path $distRoot "README.txt") -Value $readme -Encoding UTF8
