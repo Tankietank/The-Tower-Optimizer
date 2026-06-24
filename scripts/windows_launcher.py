@@ -166,7 +166,7 @@ def _create_splash() -> Optional[dict[str, Any]]:
         screen_h = root.winfo_screenheight()
         root.geometry(f"{width}x{height}+{(screen_w - width) // 2}+{(screen_h - height) // 2}")
         root.update()
-        return {"root": root, "elapsed": elapsed, "started": time.monotonic()}
+        return {"root": root, "elapsed": elapsed, "detail": detail, "started": time.monotonic()}
     except Exception:
         return None
 
@@ -175,9 +175,7 @@ def _splash_tick(splash: Optional[dict[str, Any]]) -> None:
     if not splash:
         return
     try:
-        elapsed_label = splash["elapsed"]
-        elapsed_label.config(text=f"Elapsed: {_format_elapsed(time.monotonic() - splash['started'])}")
-        splash["root"].update()
+        splash["elapsed"].config(text=f"Elapsed: {_format_elapsed(time.monotonic() - splash['started'])}")
     except Exception:
         pass
 
@@ -197,10 +195,6 @@ def _pick_port() -> int:
         return int(sock.getsockname()[1])
 
 
-def _port_from_url(url: str) -> int:
-    return int(url.rsplit(":", 1)[-1])
-
-
 def _streamlit_ready(port: int, timeout_seconds: float = 0.75) -> bool:
     try:
         with urlopen(f"http://127.0.0.1:{port}/_stcore/health", timeout=timeout_seconds) as response:
@@ -209,29 +203,82 @@ def _streamlit_ready(port: int, timeout_seconds: float = 0.75) -> bool:
         return False
 
 
-def _open_browser_when_ready(url: str, splash: Optional[dict[str, Any]], timeout_seconds: float = STARTUP_WAIT_SECONDS) -> None:
-    port = _port_from_url(url)
-    deadline = time.monotonic() + timeout_seconds
-    opened = False
-    while time.monotonic() < deadline:
+def _run_streamlit(app_path: Path, port: int, outcome: dict[str, Any]) -> None:
+    try:
+        sys.argv = [
+            "streamlit",
+            "run",
+            str(app_path),
+            "--server.headless=true",
+            "--server.address=127.0.0.1",
+            f"--server.port={port}",
+            "--browser.gatherUsageStats=false",
+            "--global.developmentMode=false",
+        ]
+        from streamlit.web import cli as stcli
+
+        outcome["code"] = int(stcli.main() or 0)
+    except Exception as exc:
+        outcome["error"] = exc
+        outcome["code"] = 1
+
+
+def _wait_for_startup_with_splash(splash: dict[str, Any], port: int, url: str) -> bool:
+    """Run tkinter on the main thread while Streamlit starts in the background."""
+    state = {"ready": False}
+
+    def poll() -> None:
         _splash_tick(splash)
         if _streamlit_ready(port):
-            _destroy_splash(splash)
-            if not opened:
-                try:
-                    opened = bool(webbrowser.open(url))
-                except Exception as exc:
-                    print(f"Could not open browser automatically: {exc}", file=sys.stderr)
-                if not opened:
+            state["ready"] = True
+            try:
+                splash["detail"].config(text="Opening your browser…")
+                splash["root"].update_idletasks()
+            except Exception:
+                pass
+            try:
+                if not webbrowser.open(url):
                     print(f"Open this URL in your browser: {url}")
+            except Exception as exc:
+                print(f"Could not open browser automatically: {exc}", file=sys.stderr)
+                print(f"Open this URL in your browser: {url}")
+            _destroy_splash(splash)
             return
+
+        if time.monotonic() - splash["started"] >= STARTUP_WAIT_SECONDS:
+            print(
+                f"Timed out after {int(STARTUP_WAIT_SECONDS)}s waiting for the app to start. "
+                f"If TowerOptimizer.exe is still running, try opening: {url}",
+                file=sys.stderr,
+            )
+            _destroy_splash(splash)
+            return
+
+        splash["root"].after(500, poll)
+
+    splash["root"].after(500, poll)
+    splash["root"].mainloop()
+    return state["ready"]
+
+
+def _wait_for_startup_without_splash(port: int, url: str) -> bool:
+    deadline = time.monotonic() + STARTUP_WAIT_SECONDS
+    while time.monotonic() < deadline:
+        if _streamlit_ready(port):
+            try:
+                if not webbrowser.open(url):
+                    print(f"Open this URL in your browser: {url}")
+            except Exception as exc:
+                print(f"Could not open browser automatically: {exc}", file=sys.stderr)
+                print(f"Open this URL in your browser: {url}")
+            return True
         time.sleep(0.5)
-    _destroy_splash(splash)
     print(
-        f"Timed out after {int(timeout_seconds)}s waiting for the app to start. "
+        f"Timed out after {int(STARTUP_WAIT_SECONDS)}s waiting for the app to start. "
         f"If TowerOptimizer.exe is still running, try opening: {url}",
         file=sys.stderr,
     )
+    return False
 
 
 def main() -> int:
@@ -256,29 +303,31 @@ def main() -> int:
             _show_error("Tower Optimizer", msg)
             return 1
 
-        splash = _create_splash()
-
         port = _pick_port()
         url = f"http://127.0.0.1:{port}"
         print(f"Using data folder: {data_dir}")
         print(f"App URL: {url}")
         print(f"Startup wait budget: {int(STARTUP_WAIT_SECONDS)}s")
-        threading.Thread(target=_open_browser_when_ready, args=(url, splash), daemon=True).start()
 
-        sys.argv = [
-            "streamlit",
-            "run",
-            str(app_path),
-            "--server.headless=true",
-            "--server.address=127.0.0.1",
-            f"--server.port={port}",
-            "--browser.gatherUsageStats=false",
-            "--global.developmentMode=false",
-        ]
+        outcome: dict[str, Any] = {}
+        streamlit_thread = threading.Thread(
+            target=_run_streamlit,
+            args=(app_path, port, outcome),
+            name="streamlit",
+            daemon=False,
+        )
+        streamlit_thread.start()
 
-        from streamlit.web import cli as stcli
+        splash = _create_splash()
+        if splash is not None:
+            _wait_for_startup_with_splash(splash, port, url)
+        else:
+            _wait_for_startup_without_splash(port, url)
 
-        return int(stcli.main() or 0)
+        streamlit_thread.join()
+        if outcome.get("error") is not None:
+            raise outcome["error"]
+        return int(outcome.get("code", 0))
     except Exception as exc:
         _destroy_splash(splash)
         detail = "".join(traceback.format_exception(type(exc), exc, exc.__traceback__))
