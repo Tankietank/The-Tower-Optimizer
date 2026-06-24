@@ -30,7 +30,7 @@ Screenshots will be added after the interface and bundled artwork are finalized.
 
 **Players:** download **one zip file** — no Python, no terminal.
 
-1. Download **`TowerOptimizer-*-Windows.zip`** from releases (or from whoever shared it).
+1. Download **`TowerOptimizer-*-Windows.zip`** from **[GitHub Releases](https://github.com/Tankietank/The-Tower-Optimizer/releases)** (the zip is built by CI — it is not stored in the source repo).
 2. Right-click → **Extract All**
 3. Open the **`TowerOptimizer`** folder → double-click **`TowerOptimizer.exe`**
 4. Wait ~30 seconds → browser opens = app is running
@@ -206,6 +206,8 @@ pytest -q
 ```
 
 Output: **`dist\TowerOptimizer-2.0.0-preview.6-Windows.zip`** — ship that single file. Optional single-exe build: `.\scripts\build_windows_exe.ps1 -SingleExe`. See [Portable Windows executable](docs/WINDOWS_EXE.md).
+
+**Publishing to GitHub:** push a version tag (e.g. `v2.0.0-preview.6`). The [Build Windows executable](.github/workflows/windows-release.yml) workflow builds the zip and attaches it to a **pre-release** on the Releases page. You can also run that workflow manually from the Actions tab.
 
 ## License
 
