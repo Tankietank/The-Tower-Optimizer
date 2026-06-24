@@ -4,6 +4,12 @@ All notable changes to Tower Optimizer will be documented here.
 
 The project follows semantic versioning where practical. Preview releases may still include profile-schema or interface changes.
 
+## [2.0.0-preview.8] - 2026-06-24
+
+### Changed
+
+- Windows launcher waits up to 10 minutes, polls Streamlit health before opening the browser, and shows a live elapsed timer during slow first launches
+
 ## [2.0.0-preview.7] - 2026-06-24
 
 ### Changed

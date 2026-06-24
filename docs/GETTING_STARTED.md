@@ -10,7 +10,7 @@ You get **one zip file**. No Python. No terminal. No install wizard.
 
 ### What you download
 
-**`TowerOptimizer-2.0.0-preview.7-Windows.zip`** (name may vary by version)
+**`TowerOptimizer-2.0.0-preview.8-Windows.zip`** (name may vary by version)
 
 ### Step 1 — Extract (one time only)
 
@@ -23,7 +23,7 @@ You get **one zip file**. No Python. No terminal. No install wizard.
 ### Step 2 — Run (every time)
 
 1. Double-click **`TowerOptimizer.exe`**
-2. Wait for **“Starting Tower Optimizer…”** — **first launch often takes 1–2 minutes** (later launches are faster)
+2. Wait for **“Starting Tower Optimizer…”** — **first launch can take several minutes** (up to ~5 on slower PCs). An elapsed timer shows progress. Later launches are faster.
 3. Your browser opens — **that tab is the app**
 
 **Done.** Pin the exe to your taskbar or desktop if you like. You do not repeat Step 1 unless you download a new version.
@@ -34,7 +34,7 @@ If you received **`TowerOptimizer.exe`** alone (single-file build):
 
 1. Put it anywhere (Desktop is fine)
 2. Double-click it
-3. First launch may take **1–2 minutes** while it unpacks internally
+3. First launch may take **several minutes** while it unpacks and starts Streamlit
 
 Profiles still save under `%LOCALAPPDATA%\TowerOptimizer` — not next to the exe.
 
@@ -66,7 +66,7 @@ To open the default folder quickly: press **Win + R**, paste `%LOCALAPPDATA%\Tow
 
 | Problem | Fix |
 | --- | --- |
-| Nothing happens after double-click | Wait **2 minutes** on first launch. Check **`launcher.log`** in `%LOCALAPPDATA%\TowerOptimizer` (or `data\launcher.log` in portable mode). |
+| Nothing happens after double-click | Wait **5 minutes** on first launch. The splash shows elapsed time. Check **`launcher.log`** in `%LOCALAPPDATA%\TowerOptimizer` (or `data\launcher.log` in portable mode). |
 | Browser never opened | Open **`launcher.log`**, find a line like `http://127.0.0.1:xxxxx`, paste that address into your browser. |
 | “Missing module” or instant crash | Re-download a fresh zip; do not run a lone `.exe` without its folder. |
 | Antivirus removed the app | Restore from quarantine and allow **`TowerOptimizer.exe`**. PyInstaller builds are sometimes flagged by mistake. |

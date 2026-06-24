@@ -10,12 +10,12 @@ After building, **zip the entire `dist/TowerOptimizer/` folder** and distribute 
 
 1. **Extract All** — do not run from inside the zip.
 2. Double-click **`TowerOptimizer.exe`** or **`run_tower_optimizer.bat`**.
-3. Wait up to **2 minutes** on first launch for the “Starting…” window (usually faster later).
+3. Wait **several minutes** on first launch for the “Starting…” window (usually faster later).
 4. Use the browser tab that opens — that **is** the app.
 
 What happens on launch:
 
-1. A small **“Starting Tower Optimizer…”** window appears (**first launch often takes 1–2 minutes**; later launches are faster).
+1. A small **“Starting Tower Optimizer…”** window appears with an **elapsed timer** (**first launch can take several minutes** on slower PCs; later launches are faster).
 2. Streamlit starts on `127.0.0.1` with a free local port.
 3. The default browser opens automatically.
 4. Profiles, backups, and custom icons are saved to a writable folder (see below).
@@ -50,7 +50,7 @@ The install directory stays read-only; nothing is written beside the executable 
 
 | Symptom | What to try |
 | --- | --- |
-| Nothing seems to happen | Wait **2 minutes** on first launch; check `launcher.log` in your data folder |
+| Nothing seems to happen | Wait **5 minutes** on first launch; the splash shows elapsed time. Then check `launcher.log` in your data folder |
 | Browser never opens | Open the URL shown in `launcher.log` manually (e.g. `http://127.0.0.1:xxxxx`) |
 | Windows SmartScreen warning | Click **More info → Run anyway** (unsigned build) or use a signed release when available |
 | Antivirus blocked the app | Allow `TowerOptimizer.exe`; PyInstaller builds are sometimes flagged heuristically |
@@ -115,7 +115,7 @@ PyInstaller uses **onedir** mode (not one-file) because Streamlit pulls many run
 
 ## Known limitations
 
-- First cold start often takes **1–2 minutes** while Streamlit and bundled dependencies initialize. Later launches are usually faster.
+- First cold start can take **several minutes** (sometimes 3–5+) while PyInstaller and Streamlit initialize. Later launches are usually faster. The launcher waits up to **10 minutes** before timing out.
 - Antivirus heuristics may flag fresh PyInstaller builds; code-signing and CI builds will help.
 - No auto-update channel yet; users replace the folder or download a new zip.
 - Effective Paths `.xlsx` imports still require the user to browse to their own workbook files.
