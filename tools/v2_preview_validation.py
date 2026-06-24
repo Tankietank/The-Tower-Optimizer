@@ -143,7 +143,7 @@ def validate_custom_icons() -> dict:
 
 
 def main() -> int:
-    assert __version__ == "2.0.0-preview.6"
+    assert __version__ == "2.0.0-preview.7"
     pages = navigation_pages()
     assert len(NAVIGATION_SECTIONS) == 7
     assert len(pages) == 41

@@ -4,6 +4,12 @@ All notable changes to Tower Optimizer will be documented here.
 
 The project follows semantic versioning where practical. Preview releases may still include profile-schema or interface changes.
 
+## [2.0.0-preview.7] - 2026-06-24
+
+### Changed
+
+- Windows portable launcher and docs now set honest first-launch expectations (often 1–2 minutes) and extend the browser startup timeout
+
 ## [2.0.0-preview.6] - 2026-06-15
 
 ### Added

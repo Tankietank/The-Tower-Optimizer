@@ -9,7 +9,7 @@ param(
 $ErrorActionPreference = "Stop"
 Set-Location $PSScriptRoot\..
 
-$appVersion = "2.0.0-preview.6"
+$appVersion = "2.0.0-preview.7"
 $venvPython = Join-Path $PWD ".venv\Scripts\python.exe"
 if (-not (Test-Path $venvPython)) {
     throw "Create and activate a venv first: python -m venv .venv ; .\.venv\Scripts\Activate.ps1 ; pip install -e `".[dev]`""
@@ -74,7 +74,7 @@ title Tower Optimizer
 cd /d "%~dp0"
 echo.
 echo  Tower Optimizer - starting...
-echo  Please wait up to 30 seconds. Your browser will open automatically.
+echo  Please wait — first launch often takes 1-2 minutes.
 echo.
 start "" "%~dp0TowerOptimizer.exe"
 "@
@@ -92,7 +92,8 @@ HOW TO RUN (2 STEPS)
   1. Double-click  TowerOptimizer.exe
      (inside this folder — do not copy only the exe elsewhere)
 
-  2. Wait for the "Starting Tower Optimizer..." window (up to 30 sec).
+  2. Wait for the "Starting Tower Optimizer..." window.
+     FIRST LAUNCH: often 1-2 minutes. Later launches are faster.
      Your web browser will open - that page IS the app.
 
   You only unzip/download once. After that, always use the same exe.
@@ -129,7 +130,7 @@ WHERE YOUR PROFILES ARE SAVED
 SOMETHING WRONG?
 ----------------
 
-  - Wait 30 seconds before assuming it failed.
+  - Wait 2 minutes on first launch before assuming it failed.
   - Open launcher.log in the folder above (or data\launcher.log if portable).
   - If the browser did not open, copy the http://127.0.0.1:... address from
     launcher.log into Chrome or Edge.
@@ -160,7 +161,7 @@ Copy-Item (Join-Path $distRoot "START_HERE.txt") (Join-Path $distRoot "README.tx
 HOW TO RUN
 ----------
   Double-click TowerOptimizer.exe
-  Wait up to 30-60 seconds on first launch (it unpacks in the background).
+  Wait up to 1-2 minutes on first launch (it unpacks in the background).
   Your browser opens - that page IS the app.
 
   You can move this ONE file to Desktop or Downloads - no folder needed.

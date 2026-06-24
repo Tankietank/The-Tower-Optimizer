@@ -157,7 +157,7 @@ def _server_ready(port: int, timeout_seconds: float = 0.4) -> bool:
         return False
 
 
-def _open_browser_when_ready(url: str, splash, timeout_seconds: float = 120.0) -> None:
+def _open_browser_when_ready(url: str, splash, timeout_seconds: float = 180.0) -> None:
     port = _port_from_url(url)
     deadline = time.monotonic() + timeout_seconds
     opened = False
@@ -207,7 +207,11 @@ def main() -> int:
             _show_error("Tower Optimizer", msg)
             return 1
 
-        splash = _show_splash("Starting Tower Optimizer...\nThis can take 10–30 seconds on first launch.")
+        splash = _show_splash(
+            "Starting Tower Optimizer...\n"
+            "First launch often takes 1–2 minutes.\n"
+            "Later launches are usually faster."
+        )
 
         port = _pick_port()
         url = f"http://127.0.0.1:{port}"
