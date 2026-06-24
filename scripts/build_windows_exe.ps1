@@ -9,7 +9,7 @@ param(
 $ErrorActionPreference = "Stop"
 Set-Location $PSScriptRoot\..
 
-$appVersion = "2.0.0-preview.8"
+$appVersion = "2.0.0-preview.9"
 $venvPython = Join-Path $PWD ".venv\Scripts\python.exe"
 if (-not (Test-Path $venvPython)) {
     throw "Create and activate a venv first: python -m venv .venv ; .\.venv\Scripts\Activate.ps1 ; pip install -e `".[dev]`""

@@ -67,7 +67,7 @@ def main() -> int:
         print("\n".join(missing))
         return 1
 
-    assert __version__ == "2.0.0-preview.8"
+    assert __version__ == "2.0.0-preview.9"
     pages = navigation_pages()
     assert len(NAVIGATION_SECTIONS) == 7
     assert len(pages) == 41
