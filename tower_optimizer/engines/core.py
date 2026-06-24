@@ -450,6 +450,42 @@ def native_vault_active_bonus(profile_data: Dict[str, Any], name: str) -> float:
         return native_number(record.get('active'), 0.0)
     return native_number(record, 0.0)
 
+def resolve_module_record(profile_data: Dict[str, Any], slot: str, module_name: Optional[str] = None) -> Dict[str, Any]:
+    """Resolve a module record, preferring equipped profile.modules (save substats) over inventory."""
+    name = str(module_name or '').strip()
+    if not name or name == 'Any Other':
+        return {}
+    record: Dict[str, Any] = {}
+    modules = profile_data.get('modules', {})
+    equipped = modules.get(slot, {}) if isinstance(modules, dict) else {}
+    if isinstance(equipped, dict) and str(equipped.get('name') or '').strip() == name:
+        record = {**equipped, 'slot': slot, 'name': name}
+    inventory = profile_data.get('module_inventory', {})
+    inv_record: Dict[str, Any] = {}
+    if isinstance(inventory, dict):
+        direct = inventory.get(f'{slot}::{name}')
+        if isinstance(direct, dict):
+            inv_record = direct
+        else:
+            for key, candidate in inventory.items():
+                if not isinstance(candidate, dict):
+                    continue
+                cand_slot = str(candidate.get('slot') or str(key).split('::', 1)[0])
+                cand_name = str(candidate.get('name') or '')
+                if cand_slot == slot and (cand_name == name or str(key).startswith(f'{slot}::{name}::')):
+                    inv_record = candidate
+                    break
+    if not record and inv_record:
+        return {**inv_record, 'slot': slot, 'name': name}
+    if record and inv_record:
+        for key, value in inv_record.items():
+            if key == 'substats':
+                if not record.get('substats'):
+                    record['substats'] = value
+            elif value not in (None, '', []) and key not in record:
+                record[key] = value
+    return record
+
 def native_primary_module_record(profile_data: Dict[str, Any], slot: str, preset: str='Farming') -> Dict[str, Any]:
     preset_data = profile_data.get('module_presets', {}).get(preset, {}).get(slot, {})
     name = preset_data.get('primary') if isinstance(preset_data, dict) else None
@@ -458,7 +494,7 @@ def native_primary_module_record(profile_data: Dict[str, Any], slot: str, preset
         name = configured.get('name') if isinstance(configured, dict) else None
     if not name or name == 'Any Other':
         return {}
-    return profile_data.get('module_inventory', {}).get(f'{slot}::{name}', {}) or {}
+    return resolve_module_record(profile_data, slot, str(name))
 
 def native_module_substat_bonus(profile_data: Dict[str, Any], names: list[str], preset: str='Farming') -> float:
     aliases = {str(name).casefold().replace('/', ' ').replace('%', '').strip() for name in names}

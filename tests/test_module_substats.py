@@ -1,6 +1,7 @@
 from tower_optimizer.module_substats import (
     format_substat_line,
     format_substats_for_editor,
+    format_substats_summary,
     parse_substats_from_editor,
 )
 
@@ -19,6 +20,17 @@ def test_format_substats_for_editor_joins_dict_rows():
     text = format_substats_for_editor(substats)
     assert "Damage (Rare)" in text
     assert "Coin Bonus" in text
+
+
+def test_format_substats_summary_joins_effects():
+    substats = [
+        {"name": "Chance", "rarity": "legendary", "locked": True},
+        {"name": "Factor", "rarity": "epic"},
+    ]
+    summary = format_substats_summary(substats)
+    assert "Chance (legendary) [locked]" in summary
+    assert "Factor (epic)" in summary
+    assert format_substats_summary([]) == ""
 
 
 def test_parse_substats_from_editor_preserves_imported_metadata():

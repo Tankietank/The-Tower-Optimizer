@@ -46,3 +46,57 @@ def test_attach_explanations_preserves_row_fields():
     enriched = attach_explanations(profile, [source], analysis=combined.get("analysis"), latest_death=combined.get("latest_death", ""))
     assert enriched[0]["Upgrade"] == source["Upgrade"]
     assert "Explanation" in enriched[0]
+
+
+def test_defense_absolute_mid_game_adds_diminishing_returns_caveats():
+    profile = load_profile()
+    profile.setdefault("workshop", {})["Defense Absolute"] = 250
+    profile.setdefault("labs", {})["Defense Absolute"] = 35
+    profile.setdefault("enhancements", {})["Defense Absolute +"] = 60
+    row = {
+        "Upgrade": "Defense Absolute",
+        "Path": "native_health_lab",
+        "Path Key": "native_health_lab",
+        "Path Rank": 8,
+        "Domain": "Survivability",
+        "Resource": "Labs",
+        "System": "Laboratory",
+        "Confidence": "Medium",
+        "Affordability": "Affordable",
+        "Estimated Gain %": 0.42,
+        "Next Level": 36,
+        "Cost / Time": "12h",
+        "Why": "Estimated 0.420% eHP gain per lab step.",
+    }
+    explanation = recommendation_explanation(row, profile, {"weakest": "Survivability"}, "")
+    tradeoffs_text = " ".join(explanation.get("Trade-offs") or []).casefold()
+    assert "flat reduction" in tradeoffs_text
+    assert "defense absolute" in tradeoffs_text
+    assert "defense %" in tradeoffs_text
+
+
+def test_defense_absolute_early_game_adds_context_not_caveats():
+    profile = load_profile()
+    profile.setdefault("workshop", {})["Defense Absolute"] = 12
+    profile.setdefault("labs", {})["Defense Absolute"] = 2
+    profile.setdefault("enhancements", {})["Defense Absolute +"] = 0
+    row = {
+        "Upgrade": "Defense Absolute +",
+        "Path": "native_health_coin",
+        "Path Key": "native_health_coin",
+        "Path Rank": 3,
+        "Domain": "Survivability",
+        "Resource": "Coins",
+        "System": "Workshop / Enhancements",
+        "Confidence": "Medium",
+        "Affordability": "Affordable",
+        "Estimated Gain %": 0.55,
+        "Next Level": 1,
+        "Cost / Time": "1.2B",
+        "Why": "Estimated 0.550% eHP gain per enhancement step.",
+    }
+    explanation = recommendation_explanation(row, profile, {}, "")
+    why_text = " ".join(explanation.get("Why now") or []).casefold()
+    tradeoffs_text = " ".join(explanation.get("Trade-offs") or []).casefold()
+    assert "very low defense absolute" in why_text
+    assert "flat reduction" not in tradeoffs_text

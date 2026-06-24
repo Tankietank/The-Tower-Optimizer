@@ -111,7 +111,8 @@ Same as the desktop app: nothing is sent to the cloud. All profile and import da
 
 | Issue | Fix |
 |-------|-----|
-| Blank page / connection refused | Confirm host port maps to container `8501` and the container is running. |
+| Blank page / connection refused | Confirm host port maps to container `8501` and the container is running. Check `docker logs tower-optimizer`. After a failed IDS/EP import, refresh — if an error screen appears, note the traceback. |
+| Data resets on browser refresh | Mount `/app/data` (Unraid: `/mnt/user/appdata/tower-optimizer`). **Save your profile** after imports — the app restores the last saved profile on the next visit. Unsaved session-only changes are still lost on refresh. |
 | Permission errors writing profiles | Ensure `/mnt/user/appdata/tower-optimizer` is writable by the container user. On Unraid, `chmod -R 777` on the appdata folder is a common quick fix. |
 | Old version after update | Pull `latest` again and recreate the container. Streamlit ships inside the image; only `data/` is mounted. |
 | GHCR pull denied | The package must be **public** on GitHub (Packages → the-tower-optimizer → Package settings → Change visibility). |

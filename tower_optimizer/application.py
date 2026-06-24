@@ -1063,6 +1063,8 @@ def save_profile(profile_name: str, data: Dict[str, Any]) -> None:
     data.setdefault("metadata", {})["app_version"] = APP_VERSION
     path = PROFILE_DIR / f"{clean_name}.json"
     atomic_save_json(path, data, PROFILE_DIR)
+    from .profile_session import remember_active_profile
+    remember_active_profile(clean_name)
 
 
 def load_profile(profile_name: str) -> Dict[str, Any]:
@@ -5982,6 +5984,8 @@ def parse_substats_from_editor(text: str, previous: Optional[list[Any]] = None) 
 
 
 def native_primary_module_record(profile_data: Dict[str, Any], slot: str, preset: str = "Farming") -> Dict[str, Any]:
+    from tower_optimizer.engines.core import resolve_module_record
+
     preset_data = profile_data.get("module_presets", {}).get(preset, {}).get(slot, {})
     name = preset_data.get("primary") if isinstance(preset_data, dict) else None
     if not name:
@@ -5989,7 +5993,7 @@ def native_primary_module_record(profile_data: Dict[str, Any], slot: str, preset
         name = configured.get("name") if isinstance(configured, dict) else None
     if not name or name == "Any Other":
         return {}
-    return profile_data.get("module_inventory", {}).get(f"{slot}::{name}", {}) or {}
+    return resolve_module_record(profile_data, slot, str(name))
 
 
 def native_module_substat_bonus(profile_data: Dict[str, Any], names: list[str], preset: str = "Farming") -> float:
@@ -7684,7 +7688,12 @@ def uw_attribute_input(uw_name: str, attribute: str) -> None:
 # -----------------------------------------------------------------------------
 
 if "profile" not in st.session_state:
-    st.session_state.profile = default_profile()
+    from .profile_session import load_startup_profile
+    st.session_state.profile = load_startup_profile(
+        default_profile=default_profile,
+        load_profile=load_profile,
+        safe_profile_filename=safe_profile_filename,
+    )
 else:
     st.session_state.profile = ensure_profile_shape(st.session_state.profile)
 if "profile_revision" not in st.session_state:
@@ -7699,6 +7708,7 @@ from .engines.health import native_health_settings, native_health_components, bu
 from .engines.regen import native_regen_components
 from .engines.combined import build_combined_recommendations, build_progression_recommendations
 from .regression import run_engine_health, bundled_data_status
+from .calculation_help import render_calculation_help
 from .calibration import build_calibration_report, calibration_snapshot, compare_snapshots, PATH_LABELS
 from .quality import profile_quality_report, apply_safe_fixes as apply_quality_safe_fixes
 from .build_archetypes import ARCHETYPE_IDS, ARCHETYPES, PRESET_CONTEXT_IDS, PRESET_CONTEXTS, archetype_display_rows, build_all_archetype_reports
@@ -7739,6 +7749,7 @@ profile["settings"]["show_only_incomplete"] = st.sidebar.checkbox(
     "Show only incomplete entries", value=bool(profile["settings"].get("show_only_incomplete", False))
 )
 st.sidebar.divider()
+st.sidebar.caption(f"Data folder: `{DATA_DIR}`")
 if st.sidebar.button("Save current profile", use_container_width=True):
     save_profile(profile["name"], profile)
     st.sidebar.success("Profile saved.")
@@ -7880,14 +7891,36 @@ elif page == "Setup Wizard":
                     disabled=Path(wizard_ep.name).suffix.lower() != ".xlsx", key="wizard_apply_ep_reference",
                 )
                 if st.button("Apply selected Effective Paths data", type="primary", key="wizard_apply_ep"):
-                    if import_ep_inputs:
-                        apply_import(ep_inputs, replace=False)
-                    if import_ep_reference:
-                        reference = parse_effective_paths_roi_reference(wizard_ep)
-                        apply_roi_reference(reference)
-                    profile["setup_wizard"]["last_step"] = "Resources & Goal"
-                    save_profile(profile["name"], profile)
-                    bump_revision(); st.rerun()
+                    try:
+                        with st.spinner("Importing Effective Paths — large workbooks can take 1–2 minutes…"):
+                            ep_bytes = wizard_ep.getvalue()
+                            if import_ep_inputs:
+                                if Path(wizard_ep.name).suffix.lower() == ".csv":
+                                    apply_import(parse_uploaded_effective_paths(wizard_ep), replace=False)
+                                else:
+                                    workbook = load_workbook(io.BytesIO(ep_bytes), read_only=True, data_only=True)
+                                    if "Master Sheet" not in workbook.sheetnames:
+                                        raise ValueError("The workbook does not contain a 'Master Sheet' tab.")
+                                    sheet = workbook["Master Sheet"]
+                                    rows = [list(row) for row in sheet.iter_rows(values_only=True)]
+                                    workbook.close()
+                                    apply_import(parse_master_rows(rows), replace=False)
+                            if import_ep_reference:
+                                from .roi_reference import parse_effective_paths_roi_reference_bytes
+                                reference = parse_effective_paths_roi_reference_bytes(
+                                    ep_bytes, filename=wizard_ep.name
+                                )
+                                apply_roi_reference(reference)
+                        profile["setup_wizard"]["last_step"] = "Resources & Goal"
+                        save_profile(profile["name"], profile)
+                        bump_revision()
+                        st.rerun()
+                    except Exception as exc:
+                        st.error(f"Effective Paths import failed: {exc}")
+                        st.caption(
+                            "If the page went blank before, the workbook may be too large for one step. "
+                            "Try importing IDS first, save the profile, then import EP ROI reference separately."
+                        )
             except Exception as exc:
                 st.error(f"Could not parse Effective Paths: {exc}")
 
@@ -8037,6 +8070,7 @@ elif page == "Import / Export":
             "v0.9 reads the spreadsheet's calculated outputs; it does not yet claim that every formula has been independently recreated in Python. "
             "These saved paths are the regression target for the native engine."
         )
+        render_calculation_help("import_roi_reference")
         roi_upload = st.file_uploader("Filled Effective Paths workbook", type=["xlsx"], key="roi_reference_upload")
         if roi_upload is not None:
             try:
@@ -8060,10 +8094,14 @@ elif page == "Import / Export":
                 for warning in reference["warnings"]:
                     st.warning(warning)
             if st.button("Apply ROI reference", type="primary", key="apply_roi_reference"):
-                apply_roi_reference(reference)
-                save_profile(profile["name"], profile)
-                st.session_state.pop("roi_reference_preview", None)
-                bump_revision(); st.rerun()
+                try:
+                    apply_roi_reference(reference)
+                    save_profile(profile["name"], profile)
+                    st.session_state.pop("roi_reference_preview", None)
+                    bump_revision()
+                    st.rerun()
+                except Exception as exc:
+                    st.error(f"Could not apply ROI reference: {exc}")
         current_reference = profile.get("roi_reference", {})
         if current_reference.get("imported_at"):
             st.subheader("Current saved reference")
@@ -8412,6 +8450,7 @@ elif page == "Battle Learning":
 elif page == "Build Analyzer":
     st.header("Build Analyzer")
     st.caption("Beast Mode playbook — full loadouts, presets, and a prioritized checklist for your account.")
+    render_calculation_help("build_analyzer")
     analysis = build_analysis(profile)
     scores = analysis["scores"]
     c1, c2, c3, c4 = st.columns(4)
@@ -8553,6 +8592,7 @@ elif page == "Build Analyzer":
                                 "Preset": row.get("preset"),
                                 "Rarity": row.get("rarity"),
                                 "Level": row.get("level"),
+                                "Sub-effects": row.get("substats_summary") or "—",
                                 "Status": row.get("status"),
                                 "Why": row.get("reason"),
                             }
@@ -8729,6 +8769,7 @@ elif page == "Recommendation Dashboard":
     st.caption(
         "This is the everyday decision screen. It combines native economy, damage, eHP, and regen paths without pretending their raw ROI units are directly interchangeable."
     )
+    render_calculation_help("recommendation_dashboard")
 
     settings = profile.setdefault("combined_recommendations", {}).setdefault("settings", {})
     with st.expander("Priority controls", expanded=False):
@@ -9256,6 +9297,7 @@ elif page == "Whole Account":
         "Compares cards, modules, relics, themes, bots, guardians, and Vault choices. "
         "Exact cost curves are used only where verified; other rows are clearly labeled strategic recommendations."
     )
+    render_calculation_help("whole_account")
     account_settings = profile.setdefault("combined_recommendations", {}).setdefault("settings", {})
     focus_options = ["Balanced", "Economy", "Damage", "Survival", "Recovery", "Modules"]
     current_focus = str(account_settings.get("focus", "Balanced"))
@@ -9328,6 +9370,7 @@ elif page == "Whole Account":
 elif page == "Calibration Center":
     st.header("Calibration Center")
     st.caption("Compares standalone native-engine rankings with an imported Effective Paths ROI reference. Name aliases and close rank matches are handled explicitly.")
+    render_calculation_help("calibration_center")
 
     calibration_steps = st.slider("Ranks to compare per path", 5, 30, 15, key="calibration_steps")
     with st.spinner("Running native engines and comparing paths..."):
@@ -9420,6 +9463,7 @@ elif page == "Native eEcon":
         "This page calculates economy paths in Python from the canonical profile. "
         "It does not require Effective Paths at runtime. The imported ROI reference is used only for regression comparison."
     )
+    render_calculation_help("native_econ")
 
     settings = profile.setdefault("native_econ", {}).setdefault("settings", {})
     with st.expander("Model assumptions and controls", expanded=False):
@@ -9539,6 +9583,7 @@ elif page == "Native eDamage":
         "Standalone damage-upgrade paths using exact source cost tables and a transparent relative-damage model. "
         "Effective Paths remains the regression reference while coverage is expanded."
     )
+    render_calculation_help("native_damage")
 
     settings = native_damage_settings(profile)
     with st.expander("Damage model settings", expanded=False):
@@ -9634,6 +9679,8 @@ elif page == "Native eHP":
         "Standalone effective-health upgrade paths using the canonical profile. Exact lab cost/time tables are embedded; "
         "the survivability score is relative and is not a guaranteed wave prediction."
     )
+    render_calculation_help("native_ehp")
+
     settings = native_health_settings(profile)
     with st.expander("Model assumptions and controls", expanded=False):
         c1, c2 = st.columns(2)
@@ -9746,6 +9793,8 @@ elif page == "Native eRegen":
         "Standalone tower, wall, and recovery-package sustain paths. Exact lab costs and durations are embedded; "
         "the sustain index is relative."
     )
+    render_calculation_help("native_regen")
+
     settings = native_health_settings(profile)
     with st.expander("Model assumptions and controls", expanded=False):
         settings["regen_wall_weight"] = st.number_input(
@@ -9813,6 +9862,7 @@ elif page == "Native eRegen":
 
 elif page == "ROI Paths":
     st.header("Effective Paths ROI Reference")
+    render_calculation_help("roi_paths")
     reference = profile.get("roi_reference", {})
     paths = reference.get("paths", {}) if isinstance(reference, dict) else {}
     if not paths:
@@ -10071,6 +10121,7 @@ elif page == "Vault":
 
 elif page == "Optimizer":
     st.header("Optimizer")
+    render_calculation_help("optimizer")
     reference = profile.get("roi_reference", {})
     paths = reference.get("paths", {}) if isinstance(reference, dict) else {}
     native_paths = build_native_econ_paths(profile, 50)

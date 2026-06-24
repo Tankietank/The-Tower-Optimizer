@@ -15,6 +15,7 @@ from .core import (
     build_combined_recommendations as build_native_combined_recommendations,
     native_latest_death,
     native_number,
+    resolve_module_record,
 )
 from ..battle_learning import feedback_modifiers
 from ..explanations import enrich_recommendation_payload
@@ -297,8 +298,7 @@ def _equipped_module(profile: Mapping[str, Any], slot: str, preset: str = "Farmi
     if not name or name == "Any Other":
         fallback = profile.get("modules", {}).get(slot, {}) if isinstance(profile.get("modules", {}), Mapping) else {}
         name = str(fallback.get("name") or "").strip()
-    inventory = profile.get("module_inventory", {}) if isinstance(profile.get("module_inventory", {}), Mapping) else {}
-    record = inventory.get(f"{slot}::{name}", {}) if name else {}
+    record = resolve_module_record(dict(profile), slot, name) if name else {}
     return name, record if isinstance(record, Mapping) else {}
 
 

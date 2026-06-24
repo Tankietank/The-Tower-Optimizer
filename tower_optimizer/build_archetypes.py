@@ -5,7 +5,8 @@ from typing import Any, Dict, List, Mapping, Optional, Sequence
 
 from .build_beast_mode import enrich_blueprint_beast_mode
 from .engines.combined import build_combined_recommendations
-from .engines.core import LAB_MAX_LEVELS, WORKSHOP_MAX_LEVELS, build_analysis, ratio
+from .engines.core import LAB_MAX_LEVELS, WORKSHOP_MAX_LEVELS, build_analysis, ratio, resolve_module_record
+from .module_substats import format_substats_summary
 from .engines.whole_account import CARD_DOMAIN, RARITY_RANK
 
 
@@ -602,12 +603,20 @@ def _inventory_modules(profile: Mapping[str, Any], slot: str) -> List[Mapping[st
     rows: List[Mapping[str, Any]] = []
     if not isinstance(inventory, Mapping):
         return rows
+    seen_names: set[str] = set()
     for key, record in inventory.items():
         if not isinstance(record, Mapping):
             continue
         if str(record.get("slot") or key.split("::", 1)[0]) != slot:
             continue
-        rows.append({**record, "inventory_key": key})
+        name = str(record.get("name") or "").strip()
+        if not name and "::" in str(key):
+            name = str(key).split("::", 1)[1].split("::", 1)[0].strip()
+        if not name or name in seen_names:
+            continue
+        seen_names.add(name)
+        resolved = resolve_module_record(dict(profile), slot, name)
+        rows.append({**(resolved or record), "inventory_key": key, "name": name})
     return rows
 
 
@@ -628,10 +637,7 @@ def _equipped_module_name(profile: Mapping[str, Any], slot: str, preset_keys: Op
 def _module_inventory_record(profile: Mapping[str, Any], slot: str, module_name: str) -> Mapping[str, Any]:
     if not module_name:
         return {}
-    inventory = profile.get("module_inventory", {}) if isinstance(profile.get("module_inventory"), Mapping) else {}
-    if not isinstance(inventory, Mapping):
-        return {}
-    record = inventory.get(f"{slot}::{module_name}")
+    record = resolve_module_record(dict(profile), slot, module_name)
     return record if isinstance(record, Mapping) else {}
 
 
@@ -764,6 +770,7 @@ def _module_candidates_for_slot(
                 candidates.append({**slot_module, "name": equipped, "slot": slot})
             else:
                 candidates.append({"name": equipped, "slot": slot, "rarity": "Unknown", "level": 0})
+        seen.add(equipped)
     return candidates
 
 
@@ -787,6 +794,7 @@ def _pick_module(
             reason = f"Preferred {slot.lower()} module you own for this build."
         if equipped and best_name != equipped:
             reason = f"Your {preset_keys[0]} preset uses {equipped}, but {best_name} fits this build better."
+        substats = best.get("substats", []) if isinstance(best.get("substats"), list) else []
         return {
             "slot": slot,
             "recommended": best_name,
@@ -797,6 +805,7 @@ def _pick_module(
             "reason": reason,
             "owned": True,
             "preset": preset_keys[0],
+            "substats_summary": format_substats_summary(substats) or "—",
         }
     target = str(prefs[0]) if prefs else "Set a named module"
     return {
@@ -812,6 +821,7 @@ def _pick_module(
         ),
         "owned": False,
         "preset": preset_keys[0],
+        "substats_summary": "—",
     }
 
 

@@ -30,11 +30,13 @@ from .icon_manager import (
     custom_icon_root,
     export_custom_icon_pack,
     fixed_icon_status,
+    icon_source_info,
     import_custom_icon_pack,
     item_icon_key,
     remove_custom_icon,
     resolve_icon_path,
     save_custom_icon,
+    towersmith_icon_paths_loaded,
 )
 
 ASSET_ROOT = Path(__file__).resolve().parents[1] / "assets"
@@ -281,6 +283,7 @@ def apply_visual_theme(profile: Mapping[str, Any]) -> None:
       .timeline-marker.start {{transform:none;left:0!important;background:var(--tower-gold);}}
       .slot-grid {{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:.55rem;}}
       .slot-tile {{min-height:72px;border:1px dashed var(--tower-line);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--tower-muted);background:color-mix(in srgb,var(--tower-panel) 88%,transparent);}}
+      .slot-tile img {{width:34px;height:34px;object-fit:contain;margin-bottom:.2rem;}}
       .slot-tile.active {{border-style:solid;border-color:color-mix(in srgb,var(--tower-accent) 55%,var(--tower-line));background:linear-gradient(145deg,color-mix(in srgb,var(--tower-accent) 13%,var(--tower-panel)),var(--tower-panel2));color:var(--tower-text);}}
       .slot-tile strong {{font-size:.78rem;}}
       .slot-tile small {{font-size:.62rem;color:var(--tower-muted);}}
@@ -396,12 +399,23 @@ def _parse_why_from_row(row: Mapping[str, Any]) -> list[str]:
     return [part.strip() for part in text.split(";") if part.strip()]
 
 
-def _uw_cards(report: Mapping[str, Any]) -> None:
-    paths = {
+def _uw_icon(name: str) -> str:
+    bundled = {
         "Golden Tower": "ultimate_weapons/golden_tower.svg",
         "Black Hole": "ultimate_weapons/black_hole.svg",
         "Death Wave": "ultimate_weapons/death_wave.svg",
     }
+    default = bundled.get(name, f"ultimate_weapons/{_slug(name).replace('-', '_')}.svg")
+    return asset_uri(
+        default,
+        custom_key=item_icon_key("ultimate_weapons", name),
+        fallback_relative="systems/modules.svg",
+        game_category="ultimate_weapons",
+        game_name=name,
+    )
+
+
+def _uw_cards(report: Mapping[str, Any]) -> None:
     blocks = []
     for name, row in report.get("weapons", {}).items():
         owned = bool(row.get("owned"))
@@ -409,7 +423,7 @@ def _uw_cards(report: Mapping[str, Any]) -> None:
         cooldown = format_duration(row.get("cooldown_seconds")) if row.get("cooldown_seconds") else "Not set"
         duration = f"Duration {row.get('duration'):g}s" if row.get("duration") else "No duration value"
         blocks.append(
-            f"""<div class="{css_class}"><img src="{asset_uri(paths.get(name,''))}" alt="{_escape(name)}" />
+            f"""<div class="{css_class}"><img src="{_uw_icon(str(name))}" alt="{_escape(name)}" />
             <h3>{_escape(name)}</h3><div class="cooldown">{_escape(cooldown)}</div><div class="duration">{_escape(duration)}</div></div>"""
         )
     st.markdown(f'<div class="visual-grid">{"".join(blocks)}</div>', unsafe_allow_html=True)
@@ -538,7 +552,19 @@ def _slot_grid(slots: int, target: int, selected_cards: Iterable[str] = ()) -> N
         active = index < slots
         name = selected[index] if index < len(selected) else ("Unlocked" if active else "Planned")
         cls = "slot-tile active" if active else "slot-tile"
-        blocks.append(f'<div class="{cls}"><strong>Slot {index + 1}</strong><small>{_escape(name)}</small></div>')
+        icon_html = ""
+        if index < len(selected):
+            icon = asset_uri(
+                f"cards/{_slug(name)}",
+                custom_key=item_icon_key("cards", name),
+                fallback_relative="systems/cards.svg",
+                game_category="cards",
+                game_name=name,
+            )
+            icon_html = f'<img src="{icon}" alt="" />'
+        blocks.append(
+            f'<div class="{cls}">{icon_html}<strong>Slot {index + 1}</strong><small>{_escape(name)}</small></div>'
+        )
     st.markdown(f'<div class="slot-grid">{"".join(blocks)}</div>', unsafe_allow_html=True)
 
 
@@ -577,12 +603,29 @@ def render_card_deck_page(profile: Dict[str, Any]) -> None:
     _section("Collection", "Levels and mastery imported from the Cards workbook")
     search = st.text_input("Search cards", key="v2_card_search").casefold().strip()
     rows = []
+    card_blocks = []
     for name, value in cards["items"].items():
         if search and search not in name.casefold():
             continue
         if not isinstance(value, Mapping):
             continue
-        rows.append({"Card": name, "Level": int(value.get("level", 0) or 0), "Mastery": int(value.get("mastery", 0) or 0)})
+        level = int(value.get("level", 0) or 0)
+        mastery = int(value.get("mastery", 0) or 0)
+        rows.append({"Card": name, "Level": level, "Mastery": mastery})
+        icon = asset_uri(
+            f"cards/{_slug(name)}",
+            custom_key=item_icon_key("cards", name),
+            fallback_relative="systems/cards.svg",
+            game_category="cards",
+            game_name=name,
+        )
+        card_blocks.append(
+            f'<div class="module-card"><img src="{icon}" alt="" /><h4>{_escape(name)}</h4>'
+            f'<div class="module-stats"><span class="module-chip">Level {level}</span>'
+            f'<span class="module-chip">Mastery {mastery}</span></div></div>'
+        )
+    if card_blocks:
+        st.markdown(f'<div class="visual-grid">{"".join(card_blocks[:48])}</div>', unsafe_allow_html=True)
     st.dataframe(rows, use_container_width=True, hide_index=True, height=min(650, 38 + max(1, len(rows)) * 35))
 
 
@@ -719,7 +762,7 @@ def render_relic_gallery_page(profile: Dict[str, Any]) -> None:
         st.markdown(f'<div class="relic-grid">{"".join(blocks)}</div>', unsafe_allow_html=True)
     else:
         st.info("No relics match the current filters.")
-    st.caption("Place future artwork in assets/relics using a lowercase hyphenated filename. The gallery automatically falls back to the original placeholder graphic.")
+    st.caption("Place future artwork in assets/relics using a lowercase hyphenated filename, or point TOWER_SMITH_PUBLIC_DIR at a local TowerSmith clone for game artwork.")
 
 
 def _icon_status_cards(rows: Iterable[Mapping[str, Any]]) -> None:
@@ -728,7 +771,13 @@ def _icon_status_cards(rows: Iterable[Mapping[str, Any]]) -> None:
         uri = asset_uri(str(row.get("default", "")), custom_key=str(row.get("key", "")))
         source = str(row.get("source", "missing"))
         css = "icon-source-card custom" if source == "custom" else "icon-source-card"
-        source_label = "Custom override" if source == "custom" else ("Bundled fallback" if source == "default" else "Missing")
+        if source == "external":
+            css += " custom"
+        source_label = {
+            "custom": "Custom override",
+            "external": "Local game artwork",
+            "default": "Bundled fallback",
+        }.get(source, "Missing")
         blocks.append(
             f'<div class="{css}"><img src="{uri}" alt="" /><div><strong>{_escape(row.get("label"))}</strong>'
             f'<small>{_escape(source_label)}<br>{_escape(row.get("key"))}</small></div></div>'
@@ -776,6 +825,11 @@ def render_icon_studio_page(profile: Dict[str, Any]) -> None:
     asset_roots = configured_game_asset_roots()
     if asset_roots:
         st.caption("Local artwork folders: " + ", ".join(str(path) for path in asset_roots))
+    elif towersmith_icon_paths_loaded():
+        st.caption(
+            "Optional: clone TowerSmith and set TOWER_SMITH_PUBLIC_DIR to its public/ folder "
+            "(for example C:\\path\\to\\tower-smith\\public) to load in-game module, relic, card, and UW artwork."
+        )
     else:
         st.caption("Optional: set TOWER_SMITH_PUBLIC_DIR to a local TowerSmith public/ clone for module and relic icons.")
     status_rows = fixed_icon_status()
@@ -837,12 +891,30 @@ def render_icon_studio_page(profile: Dict[str, Any]) -> None:
         icon_key = item_icon_key(storage_category, item_name) if item_name.strip() else ""
         fallback = _dynamic_icon_fallback(category)
         if icon_key:
-            current_uri = asset_uri(icon_key, custom_key=icon_key, fallback_relative=fallback)
+            current_uri = asset_uri(
+                icon_key,
+                custom_key=icon_key,
+                fallback_relative=fallback,
+                game_category=storage_category,
+                game_name=item_name,
+            )
+            source = icon_source_info(
+                icon_key,
+                icon_key,
+                fallback,
+                game_category=storage_category,
+                game_name=item_name,
+            ).get("source", "default")
+            source_text = {
+                "custom": "Custom override",
+                "external": "Local game artwork",
+                "default": "Bundled fallback",
+            }.get(str(source), "Fallback")
             d1, d2 = st.columns([1, 2])
             with d1:
                 st.markdown(
                     f'<div class="relic-card"><img src="{current_uri}" alt="" /><h4>{_escape(item_name)}</h4>'
-                    f'<p>{"Custom" if custom_icon_path(icon_key) else "Fallback"}</p></div>',
+                    f'<p>{_escape(source_text)}</p></div>',
                     unsafe_allow_html=True,
                 )
             with d2:
