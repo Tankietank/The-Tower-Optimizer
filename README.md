@@ -26,38 +26,30 @@ Tower Optimizer combines account data, upgrade paths, battle reports, resource b
 
 Screenshots will be added after the interface and bundled artwork are finalized. Contributors should use synthetic profiles when capturing images for the repository.
 
-## Quick start — Windows
+## Getting started (Windows)
 
-1. Install Python 3.11 or 3.12.
-2. Clone the repository:
+**Players:** download **one zip file** — no Python, no terminal.
+
+1. Download **`TowerOptimizer-*-Windows.zip`** from releases (or from whoever shared it).
+2. Right-click → **Extract All**
+3. Open the **`TowerOptimizer`** folder → double-click **`TowerOptimizer.exe`**
+4. Wait ~30 seconds → browser opens = app is running
+
+After the first extract, you only ever double-click the exe again. Full guide: **[Getting started](docs/GETTING_STARTED.md)**.
+
+### Developers (Python from source)
 
 ```powershell
 git clone https://github.com/Tankietank/The-Tower-Optimizer.git
 cd The-Tower-Optimizer
-```
-
-3. Create an isolated environment and install the project:
-
-```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 pip install -e ".[dev]"
-```
-
-4. Run the checks:
-
-```powershell
-.\run_public_checks.ps1
-```
-
-5. Start the application:
-
-```powershell
 .\run_optimizer.ps1
 ```
 
-Streamlit opens the app in the default browser. Profile data remains on the local computer under `data/`, which is excluded from Git by default.
+Run checks with `.\run_public_checks.ps1`. Build a shareable Windows zip with `.\scripts\build_windows_exe.ps1` (see [Portable Windows executable](docs/WINDOWS_EXE.md)).
 
 ## Quick start — Docker / Unraid
 
@@ -205,15 +197,15 @@ pytest -q
 
 ## Releases
 
-The initial public release should be published as a GitHub **pre-release**. Source users can clone the repository and run `.\run_optimizer.ps1`.
+**Players (Windows):** download **`TowerOptimizer-*-Windows.zip`**, extract once, double-click **`TowerOptimizer.exe`**. See **[Getting started](docs/GETTING_STARTED.md)**.
 
-Maintainers can produce a portable Windows folder build (double-click launcher, profiles under `%LOCALAPPDATA%\TowerOptimizer`) with:
+**Developers:** build the release zip with:
 
 ```powershell
 .\scripts\build_windows_exe.ps1
 ```
 
-See [Portable Windows executable](docs/WINDOWS_EXE.md) for prerequisites, smoke tests, and known MVP limits. A GitHub Actions release workflow is still planned.
+Output: **`dist\TowerOptimizer-2.0.0-preview.6-Windows.zip`** — ship that single file. Optional single-exe build: `.\scripts\build_windows_exe.ps1 -SingleExe`. See [Portable Windows executable](docs/WINDOWS_EXE.md).
 
 ## License
 
