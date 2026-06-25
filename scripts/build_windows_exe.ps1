@@ -9,7 +9,7 @@ param(
 $ErrorActionPreference = "Stop"
 Set-Location $PSScriptRoot\..
 
-$appVersion = "2.0.0-preview.10"
+$appVersion = "2.0.0-preview.11"
 $venvPython = Join-Path $PWD ".venv\Scripts\python.exe"
 if (-not (Test-Path $venvPython)) {
     throw "Create and activate a venv first: python -m venv .venv ; .\.venv\Scripts\Activate.ps1 ; pip install -e `".[dev]`""
@@ -198,5 +198,5 @@ if ($SingleExe) {
     Write-Host "Share dist\$zipName (one exe inside) OR the exe alone."
 } else {
     Write-Host "Build complete: $distRoot"
-    Write-Host "Share dist\TowerOptimizer-$appVersion-Windows.zip — users extract once, then double-click TowerOptimizer.exe"
+    Write-Host "Share dist\TowerOptimizer-$appVersion-Windows.zip - users extract once, then double-click TowerOptimizer.exe"
 }

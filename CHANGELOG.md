@@ -4,6 +4,17 @@ All notable changes to Tower Optimizer will be documented here.
 
 The project follows semantic versioning where practical. Preview releases may still include profile-schema or interface changes.
 
+## [2.0.0-preview.11] - 2026-06-25
+
+### Fixed
+
+- Windows launcher log tee accepts bytes from Streamlit stdout (fixes `write() argument must be str, not bytes` on startup)
+- Dev-mode splash subprocess passes the launcher script path correctly on Windows
+
+### Added
+
+- `tools/test_windows_launcher.py` — local smoke test for dev and packaged Windows builds
+
 ## [2.0.0-preview.10] - 2026-06-24
 
 ### Fixed
