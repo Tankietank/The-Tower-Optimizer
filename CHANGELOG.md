@@ -4,6 +4,12 @@ All notable changes to Tower Optimizer will be documented here.
 
 The project follows semantic versioning where practical. Preview releases may still include profile-schema or interface changes.
 
+## [2.0.0-preview.10] - 2026-06-24
+
+### Fixed
+
+- Windows launcher runs Streamlit on the main thread again (fixes `signal only works in main thread`) while the splash timer runs in a separate subprocess
+
 ## [2.0.0-preview.9] - 2026-06-24
 
 ### Fixed
