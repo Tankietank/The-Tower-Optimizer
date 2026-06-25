@@ -44,7 +44,7 @@ warnings.filterwarnings("ignore", category=UserWarning, module="openpyxl")
 
 st.set_page_config(page_title="Tower Optimizer", layout="wide")
 
-APP_VERSION = "2.0.0-preview.10"
+APP_VERSION = "2.0.0-preview.11"
 DATA_SOURCE_VERSION = "Effective Paths v5.06.04.00"
 DATA_SOURCE_DETAIL = "Bundled standalone game data + v2 visual preview 6 + one-click multi-report importing + expandable navigation + persistent custom icon overrides + reviewed local update overlays"
 

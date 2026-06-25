@@ -4,7 +4,7 @@ An unofficial, open-source planning and analysis tool for **The Tower – Idle T
 
 Tower Optimizer combines account data, upgrade paths, battle reports, resource balances, and transparent heuristics to help players decide what to research, buy, save for, and test next.
 
-> **Preview software:** `v2.0.0-preview.10` is suitable for testing and contribution, but profiles should still be backed up before upgrades. Calculations marked **strategic** or **heuristic** are not claimed to be exact game formulas.
+> **Preview software:** `v2.0.0-preview.11` is suitable for testing and contribution, but profiles should still be backed up before upgrades. Calculations marked **strategic** or **heuristic** are not claimed to be exact game formulas.
 
 ## Current features
 
@@ -205,7 +205,7 @@ pytest -q
 .\scripts\build_windows_exe.ps1
 ```
 
-Output: **`dist\TowerOptimizer-2.0.0-preview.10-Windows.zip`** — ship that single file. Optional single-exe build: `.\scripts\build_windows_exe.ps1 -SingleExe`. See [Portable Windows executable](docs/WINDOWS_EXE.md).
+Output: **`dist\TowerOptimizer-2.0.0-preview.11-Windows.zip`** — ship that single file. Optional single-exe build: `.\scripts\build_windows_exe.ps1 -SingleExe`. See [Portable Windows executable](docs/WINDOWS_EXE.md).
 
 **Publishing to GitHub:** push a version tag (e.g. `v2.0.0-preview.7`). The [Build Windows executable](.github/workflows/windows-release.yml) workflow builds the zip and attaches it to a **pre-release** on the Releases page. You can also run that workflow manually from the Actions tab.
 
