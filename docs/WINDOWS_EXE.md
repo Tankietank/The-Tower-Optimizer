@@ -88,20 +88,29 @@ Output: `dist/TowerOptimizer/` containing `TowerOptimizer.exe`, `run_tower_optim
 ### Smoke-test the launcher without PyInstaller
 
 ```powershell
-$env:TOWER_OPTIMIZER_DATA_DIR = "$env:LOCALAPPDATA\TowerOptimizer-dev"
-python scripts\windows_launcher.py
+$env:TOWER_OPTIMIZER_DATA_DIR = "$env:TEMP\TowerOptimizer-dev"
+python tools\test_windows_launcher.py
 ```
 
+Waits for Streamlit health on a random port and prints how long startup took. Use `--timeout 600` on slower machines.
+
 ### Smoke-test the packaged build
+
+```powershell
+.\scripts\build_windows_exe.ps1
+python tools\test_windows_launcher.py --packaged dist\TowerOptimizer\TowerOptimizer.exe --timeout 600
+```
+
+Copy the build outside the repo before testing so editable-install paths do not mask missing bundles.
+
+### Manual packaged test
 
 ```powershell
 $dest = "$env:TEMP\TowerOptimizer-smoke"
 Copy-Item dist\TowerOptimizer $dest -Recurse -Force
 Start-Process "$dest\TowerOptimizer.exe" -WorkingDirectory $dest
-# Wait ~30s, then open http://127.0.0.1:<port>/_stcore/health — should return "ok"
+# Wait, then open http://127.0.0.1:<port>/_stcore/health — should return "ok"
 ```
-
-Copy the build outside the repo before testing so editable-install paths do not mask missing bundles.
 
 ## Architecture
 

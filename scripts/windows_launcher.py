@@ -88,18 +88,30 @@ def _setup_logging(data_dir: Path) -> Path:
             self._stream = stream
             self._log_file = log_file
 
-        def write(self, data: str) -> int:
-            if data:
+        def _normalize(self, data) -> str:
+            if isinstance(data, str):
+                return data
+            if isinstance(data, (bytes, bytearray, memoryview)):
+                return bytes(data).decode("utf-8", errors="replace")
+            return str(data)
+
+        def write(self, data) -> int:
+            text = self._normalize(data)
+            if text:
                 stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
-                self._log_file.write(f"[{stamp}] {data}")
+                self._log_file.write(f"[{stamp}] {text}")
                 self._log_file.flush()
                 if self._stream is not None:
                     try:
-                        self._stream.write(data)
+                        self._stream.write(text)
                         self._stream.flush()
                     except OSError:
                         pass
-            return len(data)
+            return len(text)
+
+        def writelines(self, lines) -> None:
+            for line in lines:
+                self.write(line)
 
         def flush(self) -> None:
             self._log_file.flush()
@@ -177,10 +189,18 @@ def _run_splash_window(started_at: float) -> None:
         pass
 
 
+def _splash_command(exe_dir: Path) -> list[str]:
+    started = str(time.monotonic())
+    if getattr(sys, "frozen", False):
+        return [sys.executable, _SPLASH_ARG, started]
+    launcher_script = Path(__file__).resolve()
+    return [sys.executable, str(launcher_script), _SPLASH_ARG, started]
+
+
 def _start_splash_process(exe_dir: Path) -> Optional[subprocess.Popen[Any]]:
     try:
         return subprocess.Popen(
-            [sys.executable, _SPLASH_ARG, str(time.monotonic())],
+            _splash_command(exe_dir),
             cwd=str(exe_dir),
             env=os.environ.copy(),
         )
