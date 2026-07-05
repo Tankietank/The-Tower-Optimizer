@@ -3,6 +3,12 @@ from __future__ import annotations
 import re
 from typing import Any, Callable, Dict, Iterable, List, Mapping, MutableMapping, Optional, Sequence, Tuple
 
+from tower_optimizer.community_guidance import (
+    build_hint_lines,
+    community_guidance_for_explanation,
+    format_community_guidance_line,
+)
+
 UpgradeGuidanceFn = Callable[[Mapping[str, Any], Mapping[str, Any]], Tuple[List[str], List[str]]]
 
 UW_ABBREVIATIONS = {
@@ -138,13 +144,13 @@ def _guidance_health(profile: Mapping[str, Any], row: Mapping[str, Any]) -> Tupl
             [],
             [
                 "Health is already high — marginal eHP per coin may trail Recovery Package, "
-                "Defense %, or Wall Health until those paths catch up."
+                "Defense %, or Wall Health until those paths catch up.",
             ],
         )
     return (
         [
             "Raw Health scales the entire eHP pool and pairs with Defense % mitigation — "
-            "it remains a core survivability lever at most progression stages."
+            "it remains a core survivability lever at most progression stages.",
         ],
         [],
     )
@@ -215,6 +221,11 @@ def recommendation_explanation(
     guidance_why, guidance_tradeoffs = _upgrade_specific_guidance(upgrade, profile, row)
     why_now.extend(guidance_why)
 
+    community_lines, community_entries = community_guidance_for_explanation(profile, upgrade, row)
+    build_hints = build_hint_lines(profile)
+    if build_hints:
+        community_lines = community_lines + build_hints
+
     # De-dupe while preserving order.
     seen: set[str] = set()
     deduped_why: List[str] = []
@@ -249,6 +260,10 @@ def recommendation_explanation(
     if not profile.get("runs"):
         tradeoffs.append("Import battle history or save runs for stronger death-cause calibration.")
     tradeoffs.extend(guidance_tradeoffs)
+    for entry in community_entries:
+        severity = str(entry.get("severity", "info")).casefold()
+        if severity in {"warning", "caution"}:
+            tradeoffs.append(format_community_guidance_line(entry))
 
     # De-dupe trade-offs while preserving order.
     seen_tradeoffs: set[str] = set()
@@ -292,6 +307,8 @@ def recommendation_explanation(
         "Why now": deduped_why,
         "What changes": what_changes,
         "Trade-offs": tradeoffs,
+        "Community guidance": community_lines,
+        "Build hints": build_hints,
         "Summary": summary,
         "Inputs": inputs,
         "Reasons": deduped_why,
