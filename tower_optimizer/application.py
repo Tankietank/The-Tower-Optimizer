@@ -7561,6 +7561,17 @@ def render_recommendation_story(explanation: Mapping[str, Any], *, show_tradeoff
             with st.expander("Trade-offs & caveats"):
                 for item in tradeoffs:
                     st.markdown(f"- {item}")
+    community = explanation.get("Community guidance") or []
+    build_hints = explanation.get("Build hints") or []
+    wiki_lines = list(community)
+    for hint in build_hints:
+        if hint not in wiki_lines:
+            wiki_lines.append(hint)
+    if wiki_lines:
+        with st.expander("Community guide (Fandom wiki)"):
+            st.caption("Strategic notes from player guides — not verified game math.")
+            for item in wiki_lines:
+                st.markdown(f"- {item}")
 
 # -----------------------------------------------------------------------------
 # STYLING

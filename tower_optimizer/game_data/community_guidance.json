@@ -1,0 +1,128 @@
+{
+  "schema_version": "1.0",
+  "bundle_version": "2026.07.05",
+  "sources": {
+    "Footguns": "https://the-tower-idle-tower-defense.fandom.com/wiki/Footguns",
+    "Guides": "https://the-tower-idle-tower-defense.fandom.com/wiki/Guides",
+    "Coin Guide": "https://the-tower-idle-tower-defense.fandom.com/wiki/Coin_Guide_-_Basics"
+  },
+  "footguns": [
+    {
+      "id": "bh_cooldown_before_gt_sync",
+      "severity": "warning",
+      "summary": "Lowering Black Hole cooldown before Golden Tower is synced makes a 1:1 GT/BH sync more expensive.",
+      "detail": "Community guides recommend saving stones and dropping GT cooldown to match BH (often 3:20 / 200s) in one session rather than upgrading BH cooldown alone.",
+      "applies_to": ["BH | Cooldown", "Black Hole Cooldown", "*bh*cooldown*"],
+      "when": {
+        "owns_uw": ["Golden Tower", "Black Hole"],
+        "missing_sync": "gt_bh",
+        "recommending_cooldown": true
+      },
+      "source": "Footguns",
+      "source_url": "https://the-tower-idle-tower-defense.fandom.com/wiki/Footguns"
+    },
+    {
+      "id": "uw_cooldown_desync_general",
+      "severity": "caution",
+      "summary": "Changing any ultimate weapon cooldown can break strategies that rely on UW timing.",
+      "detail": "Several farming and devo strategies require specific GT/BH/DW/SM sync ratios. Review target syncs before spending stones on cooldown.",
+      "applies_to": ["* | Cooldown", "*Cooldown*"],
+      "when": {
+        "recommending_cooldown": true,
+        "missing_sync": "gt_bh"
+      },
+      "source": "Footguns",
+      "source_url": "https://the-tower-idle-tower-defense.fandom.com/wiki/Footguns"
+    },
+    {
+      "id": "gt_bh_natural_sync_priority",
+      "severity": "info",
+      "summary": "Prioritize natural GT/BH sync (often 200s / 3:20) instead of relying on Multiverse Nexus long term.",
+      "detail": "MVN averages cooldowns and can reduce UW uptime until later module levels. Community guides still push toward natural sync even while MVN is equipped.",
+      "applies_to": ["GT | Cooldown", "BH | Cooldown", "Golden Tower Cooldown", "Black Hole Cooldown"],
+      "when": {
+        "owns_uw": ["Golden Tower", "Black Hole"],
+        "missing_sync": "gt_bh",
+        "gt_bh_not_at_natural_sync": true
+      },
+      "source": "Footguns",
+      "source_url": "https://the-tower-idle-tower-defense.fandom.com/wiki/Footguns"
+    },
+    {
+      "id": "bot_cooldown_desync",
+      "severity": "caution",
+      "summary": "Bot cooldown lab upgrades are permanent — desyncing bots from Golden Tower hurts farming synergies.",
+      "detail": "Guides suggest syncing bots (excluding Flame Bot) to UW cooldowns, often at half of GT/DW sync CD in 5–10 second steps.",
+      "applies_to": ["Golden Bot - Cooldown", "Thunder Bot - Cooldown", "Amplify Bot - Cooldown", "Bot Bot - Cooldown", "*Bot - Cooldown*"],
+      "when": {
+        "owns_bot": ["Golden Bot"],
+        "owns_uw": ["Golden Tower"],
+        "missing_sync": "bot_gt"
+      },
+      "source": "Footguns",
+      "source_url": "https://the-tower-idle-tower-defense.fandom.com/wiki/Footguns"
+    },
+    {
+      "id": "defense_absolute_late_game",
+      "severity": "caution",
+      "summary": "Defense Absolute is flat reduction — past early game, Defense %, Health, and Wall Health usually outperform it per coin.",
+      "detail": "Flat reduction trims less relative damage as enemy attack scales with tiers, so marginal eHP per coin often trails percentage mitigation paths.",
+      "applies_to": ["Defense Absolute", "Defense Absolute +"],
+      "when": {
+        "defense_absolute_late": true
+      },
+      "source": "Guides",
+      "source_url": "https://the-tower-idle-tower-defense.fandom.com/wiki/Guides"
+    },
+    {
+      "id": "chrono_field_range_cph",
+      "severity": "info",
+      "summary": "Chrono Field Range zooms the camera out, slightly lowering CPH because enemies spawn farther away.",
+      "detail": "The CPH trade-off is usually small and tournament benefits often outweigh it; most accounts still max the lab eventually.",
+      "applies_to": ["Chrono Field Range"],
+      "when": {},
+      "source": "Footguns",
+      "source_url": "https://the-tower-idle-tower-defense.fandom.com/wiki/Footguns"
+    }
+  ],
+  "build_archetypes": [
+    {
+      "id": "health_build",
+      "severity": "info",
+      "summary": "Health build focuses on HP scaling for early-to-mid progression.",
+      "detail": "Best for newer and mid-game accounts still climbing tiers; pair Health with Defense % for efficient eHP.",
+      "requirements": [
+        {"type": "workshop_max", "stat": "Health", "max": 5000},
+        {"type": "tier_max_wave_below", "tier": 8, "wave": 5000}
+      ],
+      "source": "Guides",
+      "source_url": "https://the-tower-idle-tower-defense.fandom.com/wiki/Guides"
+    },
+    {
+      "id": "orb_devo",
+      "severity": "info",
+      "summary": "Orb Devo needs GT/BH sync and BH Size of at least 38m.",
+      "detail": "Community Orb Devo guides assume synchronized Golden Tower and Black Hole with sufficient BH Size for devo placement.",
+      "requirements": [
+        {"type": "uw_owned", "uw": ["Golden Tower", "Black Hole"]},
+        {"type": "gt_bh_synced"},
+        {"type": "uw_attribute_min", "uw": "Black Hole", "attribute": "Size", "min": 38}
+      ],
+      "source": "Guides",
+      "source_url": "https://the-tower-idle-tower-defense.fandom.com/wiki/Guides"
+    },
+    {
+      "id": "smax_devo",
+      "severity": "info",
+      "summary": "SMAX Devo expects GT/BH/Smart Missiles cooldown sync.",
+      "detail": "Mid-game SMAX guides rely on Smart Missiles timing with GT and BH for devo setups.",
+      "requirements": [
+        {"type": "uw_owned", "uw": ["Golden Tower", "Black Hole", "Smart Missiles"]},
+        {"type": "gt_bh_synced"},
+        {"type": "uw_owned", "uw": ["Smart Missiles"]}
+      ],
+      "source": "Guides",
+      "source_url": "https://the-tower-idle-tower-defense.fandom.com/wiki/Guides"
+    }
+  ]
+}
