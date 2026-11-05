@@ -10,7 +10,6 @@ from typing import Any, Dict, List, Mapping, MutableMapping, Optional, Tuple
 
 from .engines.core import (
     BOT_NAMES,
-    CARD_NAMES,
     ENHANCEMENT_MAX_LEVELS,
     LAB_ALIASES,
     LAB_MAX_LEVELS,
@@ -29,6 +28,7 @@ from .game_catalog import (
     uw_track_value,
 )
 from .save_extract import (
+    _load_json,
     SAVE_BATTLE_HISTORY_SOURCE,
     build_extended_patch,
     section_counts as extended_section_counts,
@@ -172,7 +172,8 @@ def _map_cards(save: Mapping[str, Any]) -> Dict[str, Any]:
     unlocked = list(save.get("cardUnlocked") or [])
     active = list(save.get("cardActive") or [])
     items: Dict[str, Dict[str, int]] = {}
-    for index, name in enumerate(CARD_NAMES):
+    index_to_name = {int(k): v for k, v in _load_json("save_card_index.json").get("save_index_to_name", {}).items()}
+    for index, name in sorted(index_to_name.items()):
         if index >= len(levels):
             break
         try:

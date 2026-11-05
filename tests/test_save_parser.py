@@ -131,3 +131,17 @@ def test_tool_export_json_is_decoded_like_player_save():
     patch = build_profile_patch(decode_player_save_bytes(payload))
     assert patch["resources"]["stones"] == 7
     assert patch["player"]["farming_tier"] == 3
+
+
+def test_card_levels_use_save_index_not_compact_order():
+    from tower_optimizer.save_parser import _map_cards
+
+    levels = [1] * 40
+    unlocked = [False] * 40
+    for idx in (0, 11, 18):  # Damage, Enemy Balance, Plasma Cannon
+        levels[idx] = 7
+        unlocked[idx] = True
+    cards = _map_cards({"cardLevel": levels, "cardUnlocked": unlocked})
+    assert cards["items"]["Damage"]["level"] == 7
+    assert cards["items"]["Enemy Balance"]["level"] == 7
+    assert cards["items"]["Plasma Cannon"]["level"] == 7
