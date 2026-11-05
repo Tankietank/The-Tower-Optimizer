@@ -145,3 +145,10 @@ def test_card_levels_use_save_index_not_compact_order():
     assert cards["items"]["Damage"]["level"] == 7
     assert cards["items"]["Enemy Balance"]["level"] == 7
     assert cards["items"]["Plasma Cannon"]["level"] == 7
+
+
+def test_card_slots_follow_slots_unlocked_not_active_flags():
+    from tower_optimizer.save_parser import _map_cards
+
+    cards = _map_cards({"cardLevel": [7] * 5, "cardUnlocked": [True] * 5, "cardActive": [True] * 3, "slotsUnlocked": 12})
+    assert cards["slots"] == 12

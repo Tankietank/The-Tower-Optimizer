@@ -184,7 +184,12 @@ def _map_cards(save: Mapping[str, Any]) -> Dict[str, Any]:
         if level <= 0 and not is_unlocked:
             continue
         items[name] = {"level": max(level, 0), "mastery": 0}
-    slots = sum(1 for flag in active if flag)
+    try:
+        slots = int(save.get("slotsUnlocked") or 0)
+    except (TypeError, ValueError):
+        slots = 0
+    if slots <= 0:
+        slots = sum(1 for flag in active if flag)
     if slots <= 0:
         slots = sum(1 for item in items.values() if item.get("level", 0) > 0)
     return {"slots": slots, "items": items}
