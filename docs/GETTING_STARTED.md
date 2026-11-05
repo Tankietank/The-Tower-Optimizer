@@ -58,7 +58,7 @@ To open the default folder quickly: press **Win + R**, paste `%LOCALAPPDATA%\Tow
 
 ### First-time setup in the app
 
-1. **Import / Export** → upload your in-game backup **`playerInfo.dat`**, **or** enter stats manually.
+1. **Import / Export** → upload your in-game backup **`playerInfo.dat`** (or the **`tool_export.json`** export), **or** enter stats manually.
 2. Open **Recommendation Dashboard** for upgrade suggestions.
 3. Optional: import Effective Paths only if you use calibration (not required for normal play).
 

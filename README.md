@@ -80,7 +80,7 @@ python -m streamlit run app.py
 Users can build a profile through:
 
 - Manual entry
-- In-game tower backup (`playerInfo.dat`)
+- In-game tower backup (`playerInfo.dat`) or the game's `tool_export.json` export
 - IDS companion workbook bundle
 - Optional Effective Paths workbook reference
 - Tower Optimizer profile JSON
