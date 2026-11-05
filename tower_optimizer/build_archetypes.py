@@ -825,6 +825,28 @@ def _pick_module(
     }
 
 
+def _fill_card_slots(
+    profile: Mapping[str, Any],
+    archetype: Mapping[str, Any],
+    ideal: List[str],
+    slots: int,
+    context_id: str,
+) -> List[str]:
+    """Pad the curated loadout with owned cards so every unlocked slot gets a recommendation."""
+    if len(ideal) >= slots:
+        return ideal
+    avoid = set(archetype.get("avoid_cards", []))
+    weights = archetype.get("domain_weights", {}) or {}
+    items = profile.get("cards", {}).get("items", {}) if isinstance(profile.get("cards"), Mapping) else {}
+    candidates = [
+        name for name in (items if isinstance(items, Mapping) else {})
+        if name not in ideal and name not in avoid and _card_level(profile, name) > 0
+        and not (context_id == "tournament" and name in TOURNAMENT_DROP_CARDS)
+    ]
+    candidates.sort(key=lambda n: (-float(weights.get(CARD_DOMAIN.get(n, "Utility"), 0.0)), -_card_level(profile, n), n))
+    return ideal + candidates[: slots - len(ideal)]
+
+
 def _build_card_blueprint(
     profile: Mapping[str, Any],
     archetype: Mapping[str, Any],
@@ -833,9 +855,11 @@ def _build_card_blueprint(
 ) -> Dict[str, Any]:
     slots = int(_clean_number(profile.get("cards", {}).get("slots"))) or 10
     preset_keys = DEFAULT_CARD_PRESET_KEYS.get(context_id, ["Farming", "Preset 1"])
-    ideal_cards = _ideal_card_order(archetype, context_id=context_id)[:slots]
     current_preset, preset_name = _resolve_card_preset(profile, preset_keys)
     avoid = set(archetype.get("avoid_cards", []))
+    ideal_cards = _fill_card_slots(
+        profile, archetype, _ideal_card_order(archetype, context_id=context_id)[:slots], slots, context_id
+    )
 
     card_rows: List[Dict[str, Any]] = []
     missing_cards: List[str] = []
