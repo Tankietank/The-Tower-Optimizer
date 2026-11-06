@@ -73,13 +73,13 @@ def render_player_save_import(
 ) -> None:
     st.subheader("Game save import")
     st.caption(
-        "Upload a tower backup `playerInfo.dat` file from the in-game account menu. "
+        "Upload a tower backup `playerInfo.dat` file, or the `tool_export.json` file exported by the game. "
         "Recent battle history from the save (up to 30 runs) is imported into Battle Learning automatically. "
         "The file stays on this computer and is not uploaded anywhere else."
     )
     upload = st.file_uploader(
-        "playerInfo.dat",
-        type=["dat"],
+        "playerInfo.dat or tool_export.json",
+        type=["dat", "data", "json"],
         key=f"{key_prefix}_upload",
     )
     preview_key = f"{key_prefix}_preview"

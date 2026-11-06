@@ -1,4 +1,4 @@
-"""Parse The Tower playerInfo.dat saves into Tower Optimizer profile patches."""
+"""Parse The Tower playerInfo.dat / tool_export.json saves into Tower Optimizer profile patches."""
 from __future__ import annotations
 
 import gzip
@@ -10,7 +10,6 @@ from typing import Any, Dict, List, Mapping, MutableMapping, Optional, Tuple
 
 from .engines.core import (
     BOT_NAMES,
-    CARD_NAMES,
     ENHANCEMENT_MAX_LEVELS,
     LAB_ALIASES,
     LAB_MAX_LEVELS,
@@ -29,6 +28,7 @@ from .game_catalog import (
     uw_track_value,
 )
 from .save_extract import (
+    _load_json,
     SAVE_BATTLE_HISTORY_SOURCE,
     build_extended_patch,
     section_counts as extended_section_counts,
@@ -54,12 +54,52 @@ def _load_lab_names() -> List[str]:
     return [str(row["name"]) for row in payload.get("stats", [])]
 
 
-def decode_player_save_bytes(payload: bytes) -> Dict[str, Any]:
-    """Decode gzip-wrapped or raw NRBF player save bytes."""
-    import nrbf
+def _lower_first(key: Any) -> Any:
+    if isinstance(key, str) and key[:1].isupper():
+        return key[:1].lower() + key[1:]
+    return key
 
+
+def _camelize(value: Any) -> Any:
+    """Recursively lower-case the first letter of every dict key (PascalCase -> camelCase)."""
+    if isinstance(value, dict):
+        return {_lower_first(k): _camelize(v) for k, v in value.items()}
+    if isinstance(value, list):
+        return [_camelize(v) for v in value]
+    return value
+
+
+def normalize_tool_export(raw: Mapping[str, Any]) -> Dict[str, Any]:
+    """Convert a ``tool_export.json`` document to the playerInfo.dat field layout.
+
+    The JSON export carries the same fields with PascalCase names, but no
+    ``moduleRecords`` history; the module inventory stands in for it.
+    """
+    data = _camelize(dict(raw))
+    if "moduleRecords" not in data and isinstance(data.get("moduleInventory"), list):
+        data["moduleRecords"] = [
+            {"infoIndex": row.get("infoIndex"), "rarity": row.get("currentRarity")}
+            for row in data["moduleInventory"]
+            if isinstance(row, dict)
+        ]
+    return data
+
+
+def is_tool_export_bytes(payload: bytes) -> bool:
+    return payload.lstrip(b"\xef\xbb\xbf \t\r\n")[:1] == b"{"
+
+
+def decode_player_save_bytes(payload: bytes) -> Dict[str, Any]:
+    """Decode a tool_export.json, or a gzip-wrapped / raw NRBF playerInfo.dat save."""
     if payload[:2] == b"\x1f\x8b":
         payload = gzip.decompress(payload)
+    if is_tool_export_bytes(payload):
+        data = json.loads(payload.decode("utf-8-sig"))
+        if not isinstance(data, dict):
+            raise ValueError("tool_export.json is not a JSON object.")
+        return normalize_tool_export(data)
+    import nrbf
+
     data = nrbf.loads(payload)
     if not isinstance(data, dict):
         raise ValueError("Decoded player save is not the expected SaveLoad+PlayerData object.")
@@ -132,7 +172,8 @@ def _map_cards(save: Mapping[str, Any]) -> Dict[str, Any]:
     unlocked = list(save.get("cardUnlocked") or [])
     active = list(save.get("cardActive") or [])
     items: Dict[str, Dict[str, int]] = {}
-    for index, name in enumerate(CARD_NAMES):
+    index_to_name = {int(k): v for k, v in _load_json("save_card_index.json").get("save_index_to_name", {}).items()}
+    for index, name in sorted(index_to_name.items()):
         if index >= len(levels):
             break
         try:
@@ -143,7 +184,12 @@ def _map_cards(save: Mapping[str, Any]) -> Dict[str, Any]:
         if level <= 0 and not is_unlocked:
             continue
         items[name] = {"level": max(level, 0), "mastery": 0}
-    slots = sum(1 for flag in active if flag)
+    try:
+        slots = int(save.get("slotsUnlocked") or 0)
+    except (TypeError, ValueError):
+        slots = 0
+    if slots <= 0:
+        slots = sum(1 for flag in active if flag)
     if slots <= 0:
         slots = sum(1 for item in items.values() if item.get("level", 0) > 0)
     return {"slots": slots, "items": items}
@@ -651,6 +697,7 @@ def _mark_profile_caps(profile: MutableMapping[str, Any]) -> None:
 __all__ = [
     "decode_player_save_bytes",
     "decode_player_save_file",
+    "normalize_tool_export",
     "build_profile_patch",
     "preview_player_save",
     "apply_player_save_patch",

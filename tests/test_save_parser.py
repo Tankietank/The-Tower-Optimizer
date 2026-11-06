@@ -104,3 +104,51 @@ def test_apply_player_save_patch_merges(decoded_save):
     counts_again = apply_player_save_patch(profile, patch, source_name="test.dat")
     assert counts_again.get("runs", 0) > 0
     assert len(profile.get("runs") or []) > 0
+
+
+def test_tool_export_json_is_decoded_like_player_save():
+    import json
+
+    from tower_optimizer.save_parser import decode_player_save_bytes
+
+    export = {
+        "ExportVersion": 1,
+        "Coins": 1234.5,
+        "Stones": 7,
+        "CurrentTier": 3,
+        "UpgradeWorkshopLevel": [10, 20],
+        "ModuleInventory": [{"InfoIndex": 8, "CurrentRarity": 10, "Level": 0}],
+        "BattleHistory": [{"Tier": 3, "Wave": 100}],
+    }
+    payload = json.dumps(export).encode("utf-8")
+    for blob in (payload, b"\xef\xbb\xbf" + payload, gzip.compress(payload)):
+        save = decode_player_save_bytes(blob)
+        assert save["coins"] == 1234.5
+        assert save["upgradeWorkshopLevel"] == [10, 20]
+        assert save["battleHistory"][0]["wave"] == 100
+        assert save["moduleRecords"] == [{"infoIndex": 8, "rarity": 10}]
+
+    patch = build_profile_patch(decode_player_save_bytes(payload))
+    assert patch["resources"]["stones"] == 7
+    assert patch["player"]["farming_tier"] == 3
+
+
+def test_card_levels_use_save_index_not_compact_order():
+    from tower_optimizer.save_parser import _map_cards
+
+    levels = [1] * 40
+    unlocked = [False] * 40
+    for idx in (0, 11, 18):  # Damage, Enemy Balance, Plasma Cannon
+        levels[idx] = 7
+        unlocked[idx] = True
+    cards = _map_cards({"cardLevel": levels, "cardUnlocked": unlocked})
+    assert cards["items"]["Damage"]["level"] == 7
+    assert cards["items"]["Enemy Balance"]["level"] == 7
+    assert cards["items"]["Plasma Cannon"]["level"] == 7
+
+
+def test_card_slots_follow_slots_unlocked_not_active_flags():
+    from tower_optimizer.save_parser import _map_cards
+
+    cards = _map_cards({"cardLevel": [7] * 5, "cardUnlocked": [True] * 5, "cardActive": [True] * 3, "slotsUnlocked": 12})
+    assert cards["slots"] == 12

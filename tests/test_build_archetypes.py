@@ -141,3 +141,17 @@ def test_module_rows_include_substat_summary_from_equipped_modules():
     assert cannon["substats_summary"] != "—"
     assert "Chance" in cannon["substats_summary"]
     assert "Crit Multi" in cannon["substats_summary"]
+
+
+def test_card_blueprint_fills_all_unlocked_slots():
+    from tower_optimizer.build_archetypes import ARCHETYPES, _build_card_blueprint
+    from tower_optimizer.engines.core import CARD_NAMES
+
+    profile = {"cards": {"slots": 18, "items": {n: {"level": 7} for n in CARD_NAMES}, "presets": {}}}
+    archetype = dict(ARCHETYPES["economy_farmer"], _id="economy_farmer") if "economy_farmer" in ARCHETYPES else None
+    if archetype is None:
+        archetype = dict(next(iter(ARCHETYPES.values())))
+    bp = _build_card_blueprint(profile, archetype, context_id="farming")
+    assert len(bp["recommended"]) == 18
+    assert len(set(bp["recommended"])) == 18
+    assert not set(bp["recommended"]) & set(archetype.get("avoid_cards", []))
