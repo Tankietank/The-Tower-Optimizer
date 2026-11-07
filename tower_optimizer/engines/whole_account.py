@@ -19,14 +19,16 @@ from .core import (
 )
 from ..battle_learning import feedback_modifiers
 from ..explanations import enrich_recommendation_payload
+from ..module_slot_costs import SLOT_MAX_LEVEL, next_slot_level_cost
 
 
-MODULE_RARITY_MAX_LEVELS = {
-    "Common": 20, "Rare": 30, "Rare+": 40, "Epic": 60, "Epic+": 80,
-    "Legendary": 100, "Legendary+": 120, "Mythic": 140, "Mythic+": 160,
-    "Ancestral": 200, "Ancestral 1*": 220, "Ancestral 2*": 240,
-    "Ancestral 3*": 260, "Ancestral 4*": 280, "Ancestral 5*": 300,
-}
+def _short(value: float) -> str:
+    value = float(value)
+    for limit, suffix in ((1e18, "Q"), (1e15, "q"), (1e12, "T"), (1e9, "B"), (1e6, "M"), (1e3, "K")):
+        if abs(value) >= limit:
+            return f"{value / limit:.2f}{suffix}"
+    return f"{value:.0f}"
+
 
 RESOURCE_KEYS = {
     "Coins": "coins",
@@ -319,17 +321,32 @@ def _module_rows(profile: Mapping[str, Any], focus: str, analysis: Mapping[str, 
             continue
         rarity = str(record.get("rarity") or "None")
         level = int(_clean_number(record.get("level")))
-        cap = int(MODULE_RARITY_MAX_LEVELS.get(rarity, max(level, 0)))
+        # Since game v29 levels belong to the slot; costs follow the slot level table.
+        cap = SLOT_MAX_LEVEL
         if level < cap:
             gap_ratio = (cap - level) / max(cap, 1)
-            rows.append(_row(
+            need_shards, need_coins = next_slot_level_cost(level)
+            resources = profile.get("resources", {}) if isinstance(profile.get("resources", {}), Mapping) else {}
+            by_slot = resources.get("module_shards_by_slot", {}) if isinstance(resources.get("module_shards_by_slot", {}), Mapping) else {}
+            shard_balance = by_slot.get(slot.lower())
+            coin_balance = resources.get("coins")
+            row = _row(
                 profile, priority=67.0 + 24.0 * gap_ratio, domain=slot_domain[slot],
-                resource="Module Shards", system="Modules", upgrade=f"Level {name}",
-                next_level=min(cap, level + max(1, min(10, (cap - level) // 4 or 1))),
-                cost_text="Use the in-game module level cost", confidence="High strategic",
-                why=[f"equipped Farming {slot} is level {level}/{cap}", "module base-stat gains affect every run"],
+                resource="Module Shards", system="Modules", upgrade=f"Level {slot} slot ({name})",
+                next_level=level + 1,
+                cost_text=f"{_short(need_shards)} {slot} shards + {_short(need_coins)} coins (before lab discounts)",
+                cost_numeric=float(need_shards), confidence="High strategic",
+                why=[f"{slot} slot is level {level}/{cap}", "module base-stat gains affect every run"],
                 focus=focus, analysis=analysis, death=death,
-            ))
+            )
+            if shard_balance is not None and coin_balance is not None:
+                ok = _clean_number(shard_balance) >= need_shards and _clean_number(coin_balance) >= need_coins
+                row["Affordable Bool"] = ok
+                row["Affordability"] = "Affordable" if ok else "Unaffordable"
+                if not ok:
+                    row["Priority Index"] = round(row["Priority Index"] * 0.85, 4)
+                    row["Why"] += "; save-up target"
+            rows.append(row)
         substats = record.get("substats", []) if isinstance(record.get("substats", []), list) else []
         weak_substats = []
         module_rank = RARITY_RANK.get(rarity, 0)

@@ -12,6 +12,7 @@ from .engines.core import (
     UW_NAMES,
     WORKSHOP_MAX_LEVELS,
 )
+from .module_slot_costs import SLOT_MAX_LEVEL
 from .reliability import SUPPORTED_WORKBOOK_VERSIONS, compare_versions, parse_version
 
 
@@ -23,18 +24,6 @@ WORKSHOP_ALIASES: Dict[str, str] = {
     "Coins / Wave": "Coin / Wave",
     "Max Recovery": "Max Amount",
     "Recovery Package Chance": "Package Chance",
-}
-
-MODULE_RARITY_MAX_LEVELS: Dict[str, int] = {
-    "Common": 20,
-    "Rare": 40,
-    "Epic": 60,
-    "Epic+": 60,
-    "Legendary": 80,
-    "Legendary+": 80,
-    "Mythic": 100,
-    "Mythic+": 100,
-    "Ancestral": 200,
 }
 
 SECTION_WORKBOOK_KIND = {
@@ -258,10 +247,9 @@ def profile_quality_report(profile: Mapping[str, Any]) -> Dict[str, Any]:
         if not isinstance(module, Mapping):
             issues.append(_issue("Error", "Modules", str(slot), "Module entry is not a mapping.", "Re-import Modules."))
             continue
-        rarity = str(module.get("rarity", ""))
         level = _numeric(module.get("level", 0))
-        if level is not None and rarity in MODULE_RARITY_MAX_LEVELS and level > MODULE_RARITY_MAX_LEVELS[rarity]:
-            issues.append(_issue("Error", "Modules", str(slot), f"Level {level:g} exceeds the {rarity} cap of {MODULE_RARITY_MAX_LEVELS[rarity]}.", "Verify rarity and level."))
+        if level is not None and level > SLOT_MAX_LEVEL:
+            issues.append(_issue("Error", "Modules", str(slot), f"Slot level {level:g} exceeds the slot cap of {SLOT_MAX_LEVEL}.", "Verify the slot level (levels live on module slots since game v29)."))
 
     for card, data in profile.get("cards", {}).get("items", {}).items():
         if not isinstance(data, Mapping):

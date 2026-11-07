@@ -152,3 +152,30 @@ def test_card_slots_follow_slots_unlocked_not_active_flags():
 
     cards = _map_cards({"cardLevel": [7] * 5, "cardUnlocked": [True] * 5, "cardActive": [True] * 3, "slotsUnlocked": 12})
     assert cards["slots"] == 12
+
+
+def test_module_level_comes_from_slot_levels_since_v29():
+    import json
+
+    from tower_optimizer.save_parser import decode_player_save_bytes
+
+    export = {
+        "ModuleEquipped": [
+            {"InfoIndex": 7, "CurrentRarity": 9, "Level": 0},
+            {"InfoIndex": 17, "CurrentRarity": 12, "Level": 0},
+        ],
+        "SlotLevels": [126, 125, 124, 125],
+    }
+    patch = build_profile_patch(decode_player_save_bytes(json.dumps(export).encode("utf-8")))
+    levels = [m["level"] for m in patch["modules"].values()]
+    assert levels == [126, 125]
+
+
+def test_slot_level_costs_match_wiki_and_real_save():
+    from tower_optimizer.module_slot_costs import slot_level_cost
+
+    assert slot_level_cost(126) == (1800, 32e9)
+    assert slot_level_cost(131) == (2500, 32e9)
+    assert slot_level_cost(162) == (5125, 60e12)
+    # Cumulative shards 47,395 at level 121 + 5 levels of 1,800 == 56,395 spent at level 126.
+    assert 47395 + sum(slot_level_cost(lv)[0] for lv in range(122, 127)) == 56395

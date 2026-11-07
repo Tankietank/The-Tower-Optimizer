@@ -244,6 +244,7 @@ def _resolve_module(info_index: int, slot_hint: Optional[str], mappings: Mapping
 def _map_modules(save: Mapping[str, Any], mappings: Mapping[str, Any]) -> Tuple[Dict[str, Any], Dict[str, Any]]:
     slots = list(mappings.get("module_slots") or [])
     equipped_rows = list(save.get("moduleEquipped") or [])
+    slot_levels = list(save.get("slotLevels") or [])
     modules: Dict[str, Any] = {}
     inventory: Dict[str, Any] = {}
 
@@ -254,7 +255,11 @@ def _map_modules(save: Mapping[str, Any], mappings: Mapping[str, Any]) -> Tuple[
         info_index = int(row.get("infoIndex") or 0)
         slot, name = _resolve_module(info_index, slot_hint, mappings)
         rarity = module_rarity_label(int(row.get("currentRarity") or 0), mappings)
-        level = int(round(float(row.get("level") or 0)))
+        # Since game v29 the level lives on the module slot (slotLevels), not on the module itself.
+        if slot_index < len(slot_levels):
+            level = int(round(float(slot_levels[slot_index] or 0)))
+        else:
+            level = int(round(float(row.get("level") or 0)))
         modules[slot] = {"name": name, "rarity": rarity, "level": level}
 
     counts: Dict[str, int] = {}
