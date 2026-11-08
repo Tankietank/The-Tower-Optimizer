@@ -95,6 +95,14 @@ def _load_json(name: str) -> Dict[str, Any]:
 
 
 def save_datetime(value: Any) -> Optional[str]:
+    if isinstance(value, str) and not value.strip().lstrip("-").isdigit():
+        try:
+            stamp = datetime.fromisoformat(value.strip().replace("Z", "+00:00"))
+        except ValueError:
+            return None
+        if stamp.tzinfo is None:
+            stamp = stamp.replace(tzinfo=timezone.utc)
+        return stamp.astimezone(timezone.utc).strftime("%Y-%m-%d %H:%M")
     try:
         raw = int(value)
     except (TypeError, ValueError):

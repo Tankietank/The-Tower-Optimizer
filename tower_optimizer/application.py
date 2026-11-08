@@ -5914,13 +5914,22 @@ def native_latest_run(profile_data: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def native_latest_death(profile_data: Dict[str, Any]) -> str:
-    run = native_latest_run(profile_data)
-    value = str(run.get("killed_by", "") or "").strip()
-    if value and value.casefold() != "unknown":
-        return value
-    raw = str(run.get("raw_text", "") or "")
-    match = re.search(r"(?im)^Killed By\s+(.+?)\s*$", raw)
-    return match.group(1).strip() if match else "Unknown"
+    """Cause of death of the most recent run that actually recorded one.
+
+    Runs ended manually (save KilledBy 99 / 0) read "Unknown" and are skipped.
+    """
+    runs = profile_data.get("runs", [])
+    for run in reversed(runs if isinstance(runs, list) else []):
+        if not isinstance(run, dict):
+            continue
+        value = str(run.get("killed_by", "") or "").strip()
+        if value and value.casefold() != "unknown":
+            return value
+        raw = str(run.get("raw_text", "") or "")
+        match = re.search(r"(?im)^Killed By\s+(.+?)\s*$", raw)
+        if match and match.group(1).strip().casefold() != "unknown":
+            return match.group(1).strip()
+    return "Unknown"
 
 
 def native_vault_active_bonus(profile_data: Dict[str, Any], name: str) -> float:
