@@ -4,6 +4,13 @@ All notable changes to Tower Optimizer will be documented here.
 
 The project follows semantic versioning where practical. Preview releases may still include profile-schema or interface changes.
 
+## [Unreleased]
+
+### Changed
+
+- Module levels now follow game v29: the level belongs to the module slot (`SlotLevels` in saves), not to the module. Imports, validation, the Modules page and recommendations all use the slot level (cap 300).
+- Module slot level-ups are priced from the wiki cost table (shards of the slot type plus coins, before lab discounts) and checked against your balances.
+
 ## [2.0.0-preview.11] - 2026-06-25
 
 ### Fixed

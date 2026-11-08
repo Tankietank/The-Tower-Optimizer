@@ -11,6 +11,7 @@ import streamlit as st
 import pandas as pd
 from openpyxl import load_workbook
 
+from .module_slot_costs import SLOT_COST_STEPS, SLOT_MAX_LEVEL
 from .battle_learning import (
     ensure_battle_learning_state, normalize_profile_runs, build_battle_learning_report,
     import_runs, prepare_import_batch,
@@ -741,24 +742,10 @@ MODULE_OPTIONS_BY_SLOT = {
     ],
 }
 
-MODULE_RARITY_MAX_LEVELS = {
-    "Common": 20,
-    "Rare": 30,
-    "Rare+": 40,
-    "Epic": 60,
-    "Epic+": 80,
-    "Legendary": 100,
-    "Legendary+": 120,
-    "Mythic": 140,
-    "Mythic+": 160,
-    "Ancestral": 200,
-    "Ancestral 1*": 220,
-    "Ancestral 2*": 240,
-    "Ancestral 3*": 260,
-    "Ancestral 4*": 280,
-    "Ancestral 5*": 300,
-}
-RARITY_OPTIONS = list(MODULE_RARITY_MAX_LEVELS.keys())
+RARITY_OPTIONS = [
+    "Common", "Rare", "Rare+", "Epic", "Epic+", "Legendary", "Legendary+", "Mythic", "Mythic+",
+    "Ancestral", "Ancestral 1*", "Ancestral 2*", "Ancestral 3*", "Ancestral 4*", "Ancestral 5*",
+]
 
 
 CARD_NAMES = [
@@ -5927,13 +5914,22 @@ def native_latest_run(profile_data: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def native_latest_death(profile_data: Dict[str, Any]) -> str:
-    run = native_latest_run(profile_data)
-    value = str(run.get("killed_by", "") or "").strip()
-    if value and value.casefold() != "unknown":
-        return value
-    raw = str(run.get("raw_text", "") or "")
-    match = re.search(r"(?im)^Killed By\s+(.+?)\s*$", raw)
-    return match.group(1).strip() if match else "Unknown"
+    """Cause of death of the most recent run that actually recorded one.
+
+    Runs ended manually (save KilledBy 99 / 0) read "Unknown" and are skipped.
+    """
+    runs = profile_data.get("runs", [])
+    for run in reversed(runs if isinstance(runs, list) else []):
+        if not isinstance(run, dict):
+            continue
+        value = str(run.get("killed_by", "") or "").strip()
+        if value and value.casefold() != "unknown":
+            return value
+        raw = str(run.get("raw_text", "") or "")
+        match = re.search(r"(?im)^Killed By\s+(.+?)\s*$", raw)
+        if match and match.group(1).strip().casefold() != "unknown":
+            return match.group(1).strip()
+    return "Unknown"
 
 
 def native_vault_active_bonus(profile_data: Dict[str, Any], name: str) -> float:
@@ -7079,10 +7075,9 @@ def profile_audit(profile: Dict[str, Any]) -> list[Dict[str, str]]:
 
     # Modules.
     for slot, mod in profile.get("modules", {}).items():
-        rarity = mod.get("rarity", "")
         level = int(mod.get("level", 0) or 0)
-        if rarity and rarity in MODULE_RARITY_MAX_LEVELS and level > MODULE_RARITY_MAX_LEVELS[rarity]:
-            add("Error", "Modules", slot, f"Level {level} exceeds {rarity}'s cap of {MODULE_RARITY_MAX_LEVELS[rarity]}.")
+        if level > SLOT_MAX_LEVEL:
+            add("Error", "Modules", slot, f"Slot level {level} exceeds the slot cap of {SLOT_MAX_LEVEL}.")
         if not mod.get("name"):
             add("Info", "Modules", slot, "No equipped module selected.", "Choose the active module or import Modules.")
 
@@ -10027,8 +10022,8 @@ elif page == "Modules":
                 profile["maxed"]["modules"][slot] = gold
                 if gold: current_rarity = "Ancestral 5*"; mod["rarity"] = current_rarity; mod["level"] = 300
                 rarity = st.selectbox(f"{slot} Rarity", RARITY_OPTIONS, index=RARITY_OPTIONS.index(current_rarity), key=f"module_rarity_{slot}_{revision}", disabled=gold)
-                mod["rarity"] = rarity; cap = MODULE_RARITY_MAX_LEVELS[rarity]
-                mod["level"] = int(st.number_input(f"{slot} Level (max {cap})", min_value=0, max_value=cap, value=min(int(mod.get("level", 0) or 0), cap), step=1, key=f"module_level_{slot}_{revision}", disabled=gold))
+                mod["rarity"] = rarity; cap = SLOT_MAX_LEVEL
+                mod["level"] = int(st.number_input(f"{slot} slot level (max {cap}; levels belong to the slot since v29)", min_value=0, max_value=cap, value=min(int(mod.get("level", 0) or 0), cap), step=1, key=f"module_level_{slot}_{revision}", disabled=gold))
                 previous_substats = mod.get("substats", [])
                 substats_text = st.text_area(
                     f"{slot} sub-effects (one per line)",
@@ -10258,7 +10253,7 @@ elif page == "Game Data":
             for attr, meta in attrs.items(): rows.append({"Ultimate Weapon": uw, "Attribute": attr, "Maximum": meta["max"]})
         st.dataframe(rows, use_container_width=True, hide_index=True)
     with tabs[4]:
-        st.dataframe([{"Rarity": k, "Max Level": v} for k, v in MODULE_RARITY_MAX_LEVELS.items()], use_container_width=True, hide_index=True)
+        st.dataframe([{"From slot level": start, "Shards / level": shards, "Coins / level": coins} for start, shards, coins in SLOT_COST_STEPS], use_container_width=True, hide_index=True)
         for slot, names in MODULE_OPTIONS_BY_SLOT.items(): st.write(f"**{slot}:** {', '.join(n for n in names if n)}")
     with tabs[5]: st.dataframe([{"Card": name, "Max Level": 7, "Max Mastery": 9} for name in CARD_NAMES], use_container_width=True, hide_index=True)
     with tabs[6]:

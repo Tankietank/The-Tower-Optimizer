@@ -386,7 +386,12 @@
     null,
     null,
     null,
-    null,
+    {
+      "info_index": 17,
+      "workshop_id": "wormholeRedirector",
+      "slot": "Armor",
+      "name": "Wormhole Redirector"
+    },
     {
       "info_index": 18,
       "workshop_id": "negativeMassProjector",
